@@ -164,4 +164,11 @@ export default function App() {
               <span className="text-gray-600">Already have an account? </span>
               <a href="#" className="text-blue-600 hover:underline">
                 Sign in
-             
+              </a>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
