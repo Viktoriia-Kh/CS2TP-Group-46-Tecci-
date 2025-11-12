@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; // enables me to use database queries
 
 class LoginController extends Controller
 {
@@ -19,9 +20,10 @@ class LoginController extends Controller
         // this will show any error messages if something goes wrong during the login (e.g., wrong password)
         $error_messages[] = '';
 
+        // this will check if the form has been submitted by the user
         if ($request->isMethod('post')) {
-            $email_address = $request->input('email_address');
-            $password = $request->input('password');
+            $email_address = $request->input('email_address'); // this takes the inputted user email address
+            $password = $request->input('password'); // thi takes the inputted user password
 
             // check if the email address field is empty
             if ($email_address == '') {
@@ -31,6 +33,11 @@ class LoginController extends Controller
             // check if the password field is empty
             if ($password == '') {
                 $error_messages[] = "Please enter your password.";
+            }
+
+            // check if there are no errors during the login process
+            if (empty($error_messages)) {
+                $user = DB::table('users')->where('email', $email_address)->first(); // checks if the user exists in the database
             }
 
         }
