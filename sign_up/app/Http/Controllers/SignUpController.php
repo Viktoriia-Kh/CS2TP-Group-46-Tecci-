@@ -40,4 +40,4 @@ class SignUpController extends Controller
         return redirect('/login')->with('success', 'Account created successfully.');
     }
 }
-use App\Http\Controllers\SignUpController;
+
