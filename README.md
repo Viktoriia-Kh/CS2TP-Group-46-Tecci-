@@ -1,1 +1,0 @@
-# CS2TP-Group-46-Tecci-
