@@ -3,11 +3,38 @@
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
-        <link rel="stylesheet" href="{{asset('css/ style.css') }}"> <!-- created a link to the stylesheet once created so styling applies to the page -->
+        <link rel="stylesheet" href="{{asset('css/style.css') }}"> <!-- created a link to the stylesheet once created so styling applies to the page -->
     </head>
     <body>
         <section class="section-form">
             <h2>Login</h2>
+            {{-- This will display error messages to the user--}}
+            @if ($errors->any())
+                <ul style="color: red;">  {{-- the error message will be red--}}
+                    @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+
+            <!-- adding the login form here for the user to fill in-->
+            <form method="POST" action="{{route('login')}}"> <!-- once the form is submitted by the user it is sent to the login route-->
+                @csrf {{-- this token is added for security of the form--}}
+
+                <div>
+                    <!-- this is where the user will enter the email address-->
+                    <label for="email_address">Email address:</label>
+                    <input type="email" name="email_address" id="email_address">
+                </div>
+
+                <div>
+                    <!-- this is where the user will enter their password-->
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+
+
+            </form>
+
+                </ul>
 
         </section>
 

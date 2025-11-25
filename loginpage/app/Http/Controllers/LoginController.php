@@ -47,6 +47,6 @@ class LoginController extends Controller
             }
 
         }
-        return view('login', ['error_messages' => $error_messages]); // if the login was unsuccessful the user sees the login page with the error message
+        return view('login', ['error_messages' => $error_messages]); // if the login was unsuccessful the login page refreshes with the error message
     }
 }
