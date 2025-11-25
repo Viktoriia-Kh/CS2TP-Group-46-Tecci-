@@ -28,10 +28,31 @@
 </header>
 
     <main>
+        <section class="product-detail">
+            <h1 class="product-name">Lorem Ipsum Dolor Sit Amet</h1>
+            
+            <div class="product-container">
+                <div class="product-image-box">
+                    <img src="{{asset('images/laptop.jpg')}}" alt="Product Image" class="product-image">
+                </div>
+                
+                <div class="product-info-box">
+                    <div class="product-price-box">
+                        <span class="price-label">Price:</span>
+                        <span class="price-value">€999.99</span>
+                    </div>
+                    
+                    <div class="product-description-box">
+                        <h3>Description</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                    
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </section>
     </main>
-</body>
-</html>
-    </main>
+
     <footer>
         <p>&copy; 2025 Tecci. All Rights Reserved.</p>
     </footer>
