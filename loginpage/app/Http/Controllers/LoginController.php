@@ -15,12 +15,12 @@ class LoginController extends Controller
         // assigning variables
         $email_address = ''; // this will hold the email address which the user enters when logging in
         $password = ''; // this will hold the password entered by the user when they log in
-        $error_messages = []; // this will show any error messages if something goes wrong during the login (e.g., wrong password)
+        $error_messages = []; // this will show any error messages if something goes wrong
 
         // this will check if the form has been submitted by the user
         if ($request->isMethod('post')) {
             $email_address = $request->input('email_address'); // this takes the inputted user email address
-            $password = $request->input('password'); // thi takes the inputted user password
+            $password = $request->input('password'); // this takes the inputted user password
 
             // check if the email address field is empty
             if ($email_address == '') {
@@ -41,12 +41,12 @@ class LoginController extends Controller
                     $request->session()->regenerate(); // the session ID is reset for security purposes
                     return redirect()->intended('/homepage'); // this will redirect the user to the homepage
                 } else {
-                    $error_messages[] = "Please login with the correct details."; // the user will get this message if the login does not work
+                    $error_messages[] = "Please login with the correct details."; // user gets this message if the login does not work
                 }
 
             }
 
         }
-        return view('login', ['error_messages' => $error_messages]); // if the login was unsuccessful the login page refreshes with the error message
+        return view('login', ['error_messages' => $error_messages]); // login page refreshes with the error message showing
     }
 }
