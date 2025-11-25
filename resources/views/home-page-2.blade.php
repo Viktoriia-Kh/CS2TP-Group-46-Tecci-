@@ -67,6 +67,34 @@
       </ul>
     </div>
 
+    <div class="footer-col">
+      <h4>Contact Info</h4>
+      <ul class="contact-list">
+        <li>
+          <i class="fa-solid fa-location-dot"></i> <!--fa-loocation-dot is a Location Icon linked from Font Awesome-->
+          <span>Lorem Ipsum Blah</span><br><br>
+        </li>
+        <li>
+          <i class="fa-solid fa-phone"></i> <!--fa-phone is a Phone Icon linked from Font Awesome-->
+          <span>Lorem Ipsum Blah 2</span><br><br>
+        </li>
+        <li>
+          <i class="fa-regular fa-envelope"></i> <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
+        </li>
+      </ul>
+    </div> 
+  </div> <!--Closes <div class="container footer-inner"-->
+  <div class="footer-bottom">
+    <p>&copy; 2025 Tecci. All rights reserved.</p>
+  </div>
+</footer>
+    
+    </body>
+</html>
+  
+
+
+
 
 
 
