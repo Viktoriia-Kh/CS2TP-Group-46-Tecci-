@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class SignUpController extends Controller
 {
@@ -21,19 +22,25 @@ class SignUpController extends Controller
         $validated = $request->validate([
             'name'     => ['required', 'string', 'max:255'],
             'email'    => ['required', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'], // uses password_confirmation
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        // 2) create user in DB
-        User::create([
+        // 2) create user and store in variable
+        $user = User::create([
             'name'     => $validated['name'],
             'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
 
-        // 3) redirect back with success message
+        // 3) log them in (email verification requires logged-in user)
+        Auth::login($user);
+
+        // 4) send the verification email
+        $user->sendEmailVerificationNotification();
+
+        // 5) redirect to the verification notice page
         return redirect()
-            ->route('signup.form')
-            ->with('success', 'Account created successfully!');
+            ->route('verification.notice')
+            ->with('success', 'Account created! Please check your email to verify your address.');
     }
 }
