@@ -22,6 +22,17 @@
       <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
       <span class="logo-text">TECCI</span> <!--Is an inline element used for short text-->
     </a>
+    
+    <!--Navigation Menu-->
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li> <!--class="active" marks the Current Page-->
+        <li><a href="about.html">About</a></li>
+        <li><a href="NewContact.html">Contact</a></li>
+        <li><a href="products.html">Products</a></li>
+      </ul>
+    </nav>
+
 
 
 
