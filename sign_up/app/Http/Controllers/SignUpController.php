@@ -2,42 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
-
 
 class SignUpController extends Controller
 {
-    /**
-     * Show the sign up page
-     */
+    // show the signup form
     public function showForm()
     {
-        return view('signup'); // this will load resources/views/signup.blade.php
+        return view('signup'); // resources/views/signup.blade.php
     }
 
-    /**
-     * Handle the sign up POST request
-     */
-    public function register(Request $request)
+    // handle form submission
+    public function submit(Request $request)
     {
-        //  Validate the form input
-        $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed', 
+        // 1) validate input
+        $validated = $request->validate([
+            'name'     => ['required', 'string', 'max:255'],
+            'email'    => ['required', 'email', 'max:255', 'unique:users,email'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'], // uses password_confirmation
         ]);
 
-        //  Create new user
+        // 2) create user in DB
         User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => Hash::make($request->password), // secure hashing
+            'name'     => $validated['name'],
+            'email'    => $validated['email'],
+            'password' => Hash::make($validated['password']),
         ]);
 
-        // Redirect wherever you want
-        return redirect('/login')->with('success', 'Account created successfully.');
+        // 3) redirect back with success message
+        return redirect()
+            ->route('signup.form')
+            ->with('success', 'Account created successfully!');
     }
 }
-
