@@ -33,6 +33,16 @@
       </ul>
     </nav>
 
+    <!--Icons-->
+    <div class="nav-icons">
+      <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a> <!--fa-heart is a Heart Icon linked from Font Awesome-->
+      <a href="basket.html"><i class="fa-solid fa-cart-shopping"></i></a> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
+      <a href="account.html"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
+    </div>
+  </div>
+</header>
+
+
 
 
 
