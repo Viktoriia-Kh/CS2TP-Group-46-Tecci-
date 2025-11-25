@@ -43,6 +43,35 @@
 </header>
 
 
+<!--FOOTER-->
+<footer class="site-footer">
+  <div class="container footer-inner"> <!--footer-inner used to create multi-column layout-->
+    <div class="footer-col">
+      <h3>TECCI</h3>
+      <p>
+        Lorem Ipsum Lorem Ipsum Lorem<br>
+        Ipsum Lorem Ipsum
+      </p>
+    
+    </div>
+                
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="basket.html">Basket</a></li>
+        <li><a href="account.html">My Account</a></li>
+      </ul>
+    </div>
+
+
+
+
+
+
 
 
 
