@@ -1,0 +1,261 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* Header and Navigation */
+header {
+    font-size: larger;
+}
+
+.header-top {
+    background-color: white;
+    padding: 0.2rem 1rem;
+    display: flex;                 
+    justify-content: space-between;  
+    align-items: center;
+}
+
+/* Icons in header */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Adds space between icons */
+}
+
+/* Tecci Logo */
+.logo {
+    height: 100px;
+    width: auto;
+}
+
+/* User Icon & Trolley Icon */
+.img {
+    height: 65px;
+    width: auto;
+}
+
+nav {
+    background-color: #26639f; /* Tecci logo blue colour */
+    padding: 0.5rem 2rem;
+    font-weight: bold;
+}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    justify-content: right;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 0 1rem;
+    transition: color 0.3s ease;
+    font-size: 1.2rem;
+    white-space: nowrap;
+}
+
+nav ul li a:hover {
+    color: #ddd;
+}   
+
+/* Hero Section */
+.hero {
+    background-color: black;
+    padding: 4rem 2rem;
+}
+
+.hero-content-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.hero-text-content{
+    flex: 1;
+    text-align: left;
+}
+
+.hero-image-container{
+    flex: 1;
+    text-align: right;
+}
+
+.hero-image-container img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+.hero h2{
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+/* Product Detail Section */
+.product-detail {
+    background-color: rgb(255, 255, 255);
+    padding: 4rem 2rem;
+}
+
+.product-name {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #000000;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product-container {
+    display: flex;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.product-image-box {
+    flex: 1;
+    background-color: #d6d6d6;
+    padding: 2rem;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-info-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.product-price-box {
+    background-color: #26639f;
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.price-label {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.price-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.product-description-box {
+    background-color: #d6d6d6;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.product-description-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #26639f;
+}
+
+.product-description-box p {
+    line-height: 1.8;
+    color: #000000;
+}
+
+.add-to-cart-btn {
+    background-color: #26639f;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #1d4a78;
+}
+
+/* --- Media Queries --- */
+
+@media (max-width: 768px) {
+
+    /* Adds more top & bottom padding to the nav bar */
+    nav {
+        padding: 1rem 2rem;
+    }
+
+    nav ul {
+        flex-direction: column;  /* Stacks links vertically */
+        align-items: center;   /* Centers the stack horizontally */
+        gap: 1rem;             /* Adds space between each link */
+    }
+
+    /* Product Detail Responsive */
+    .product-name {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .product-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .product-image-box {
+        order: 2;
+    }
+
+    .product-info-box {
+        order: 3;
+    }
+}
+
+
+/* Footer */
+footer {
+    background-color: #26639f;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
