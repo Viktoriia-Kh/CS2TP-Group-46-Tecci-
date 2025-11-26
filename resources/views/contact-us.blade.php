@@ -68,7 +68,8 @@
                 <!--id in this case is used by the 'label for="firstName"' for accessibility-->
                 <!--name is the key used in the data that is sent to the server-->
                 <!--required is a validation attribute which means the field cannot be left empty-->
-                <p class="error-message" id="firstNameError"></p> <!--This is reserved for the error text message which is initially empty-->
+                <p class="error-message" id="firstNameError"></p>
+                <!--This is reserved for the error text message which is initially empty-->
               </div>
 
               <!--Last Name-->
@@ -79,7 +80,8 @@
                 <!--id in this case is used by the 'label for="lastName"' for accessibility-->
                 <!--name is the key used in the data that is sent to the server-->
                 <!--required is a validation attribute which means the field cannot be left empty-->
-                <p class="error-message" id="lastNameError"></p> <!--This is reserved for the error text message which is initially empty-->
+                <p class="error-message" id="lastNameError"></p>
+                <!--This is reserved for the error text message which is initially empty-->
               </div>
 
               <!--Phone Number-->
@@ -90,7 +92,8 @@
                 <!--id in this case is used by the 'label for="phone"' for accessibility-->
                 <!--name is the key used in the data that is sent to the server-->
                 <!--required is a validation attribute which means the field cannot be left empty-->
-                <p class="error-message" id="phoneError"></p> <!--This is reserved for the error text message which is initially empty-->
+                <p class="error-message" id="phoneError"></p>
+                <!--This is reserved for the error text message which is initially empty-->
               </div>
 
               <!--Email Address-->
@@ -101,7 +104,8 @@
                 <!--id in this case is used by the 'label for="phone"' for accessibility-->
                 <!--name is the key used in the data that is sent to the server-->
                 <!--required is a validation attribute which means the field cannot be left empty-->
-                <p class="error-message" id="emailError"></p> <!--This is reserved for the error text message which is initially empty-->
+                <p class="error-message" id="emailError"></p>
+                <!--This is reserved for the error text message which is initially empty-->
               </div>
 
               <!--Message-->
@@ -112,7 +116,8 @@
                 <!--name is the key used in the data that is sent to the server/backend-->
                 <!--rows is the initial suggested height-->
                 <!--required is a validation attribute which means the field cannot be left empty-->
-                <p class="error-message" id="messageError"></p> <!--This is reserved for the error text message which is initially empty-->
+                <p class="error-message" id="messageError"></p>
+                <!--This is reserved for the error text message which is initially empty-->
               </div>
 
               <!--Submit Button-->
@@ -126,3 +131,37 @@
               <!--This displays a message on successful form submission, which starts out empty/hiddent by default-->
             </form> <!--This closes the form element-->
           </div> <!--This closes the .contact-form-card-->
+
+          <!--RIGHT COLUMN: BLUE CONTACT INFO PANEL-->
+          <aside class="contact-info-panel"> <!-- This aside tag is used for 'complementary' content-->
+            <div class="contact-info-inner">
+              <h2>Get In Touch</h2>
+              <p class="contact-info-text">
+                Our team is happy to answer any of your queries. <br>
+                Fill out the form and we'll be
+                in touch <br> as soon as possible.
+              </p>
+
+              <div class="contact-info-items">
+                <div class="contact-info-item">
+                  <i class="fa-solid fa-phone"></i> <!--fa-phone is a Phone Icon linked from Font Awesome-->
+                  <span>0121 555 0198</span>
+                </div>
+
+                <div class="contact-info-item">
+                  <i class="fa-regular fa-envelope"></i> <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
+                  <span>Tecci_Queries@net.com</span>
+                </div>
+
+                <div class="contact-info-item">
+                  <i class="fa-solid fa-location-dot"></i> <!--fa-location-dot is a Location Icon linked from Font Awesome-->
+                  <span>Birmingham, B4 7ET</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+  </main>
