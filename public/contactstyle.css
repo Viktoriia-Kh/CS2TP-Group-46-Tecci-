@@ -145,29 +145,103 @@ ul {
     color: #e6f3ff;
 }
 
+/* LEFT COLUMN: CONTACT FORM CARD */
+
+.contact-form-card {
+    background-color: #ffffff;
+    border-radius: 18px; /* This gives the contact form card rounded corners */
+    padding: 32px 32px 28px; /* This adds inner spacing as it keeps the text and inputs away from the edges, making the card easier to read */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06); /* This adds a slight shadow which gives the card a floating effect */
+    margin: 100px 0; /* This adds vertical spacing outside of the card, giving it 140px of space above and below */
+    width: 100%; /* This makes the card take up the full width of the grid column that it sits in */
+    max-width: none; /* This makes sure there is no maximum width restricting the card */
+    margin-left: auto; /* This pushes the card to the right insides of the grid column */
+}
+
+.contact-form {
+    display: flex; /* This and the two lines below vertically aligns each .form-row with a 18px gap between them */
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-container {
+    display: grid; /* This turns the container into a grid */
+    grid-template-columns: 1.1fr 0.9fr; /* This creates 2 columns, with the left column being 1.1fr and the right column being 0.9fr */
+    gap: 0; /* This creates no space between the columns */
+    padding: 50px 0; /* This adds 50px of top and bottom space inside this container */
+}
+
+.form-row {
+    display: flex; /* This and the two lines below vertically align the label, input, and error text vertically with a 6px gap between them */
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-row label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.form-row input,
+.form-row textarea {
+    border: 1px solid #d1d5db;
+    border-radius: 6px; /* This gives the fields slightly rounded corners */
+    padding: 10px 12px; /* This creates internal space of 10px for the top/bottom and 12px for the left/right */
+    font-size: 14px;
+    font-family: inherit;
+    outline: none; /* This removes the default browser focus outline */
+    transition: border-color 0.15s ease, box-shadow 0.15s ease; /* This gives a smooth animation for the border colour whilst the field is focused/clicked */
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+    border-color: #005baf;
+    box-shadow: 0 0 0 2px rgba(0, 91, 175, 0.1); /* This adds a soft blue glow arounf the field when the field is active */
+}
+
+.form-row textarea {
+    resize: vertical; /* This allows the user to resize the textarea vertically only */
+    min-height: 140px; /* This makes sure that the query message box starts with a minimum height */
+}
+
+.contact-submit-btn {
+    display: block; /* This and the line below centres the button horizontally */
+    margin: 12px auto 0;
+    width: 160px; /* This gives the button a fixed width */
+}
+
 /* BUTTON BASE */
 
 .btn {
-    display: inline-block; /* Since Buttons by default are inline, by using inline-block, you can add padding, set width if needed */
-    padding: 13px 29px; /* This gives the button its internal space,  */
-    border-radius: 999px; /* This forces the Button into the required 'pill' shape */
+    display: inline-block;
+    /* Since Buttons by default are inline, by using inline-block, you can add padding, set width if needed */
+    padding: 13px 29px;
+    /* This gives the button its internal space,  */
+    border-radius: 999px;
+    /* This forces the Button into the required 'pill' shape */
     font-weight: 600;
     font-size: 15px;
-    border: none; /* This removes the default border buttons */
-    cursor: pointer; /* This gives you the hand cursor when hovering */
+    border: none;
+    /* This removes the default border buttons */
+    cursor: pointer;
+    /* This gives you the hand cursor when hovering */
     text-align: center;
 }
 
 .btn-primary {
     background-color: #005baf;
-    color: #ffffff; /* Button text */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* This allows the button to float when hovering */
+    color: #ffffff;
+    /* Button text */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    /* This allows the button to float when hovering */
     transition: background-color 0.15s ease, transform 0.15s ease,
         box-shadow 0.15s ease;
 }
 
 .btn-primary:hover {
     background-color: #00488c;
-    transform: translateY(-1px); /* This moves the button 1px up when hovering */
+    transform: translateY(-1px);
+    /* This moves the button 1px up when hovering */
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
 }
