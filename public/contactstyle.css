@@ -224,3 +224,52 @@ ul {
     transform: translateY(-1px); /* This moves the button 1px up when hovering */
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
 }
+
+/* RIGHT COLUMN: BLUE INFO PANEL */
+
+.contact-info-panel {
+    background-color: #e6f3ff;
+    border-radius: 0; /* This makes sure that the panel edges are squred, not rounded */
+    display: flex; /* This turns the entire panel into a flex container */
+    align-items: center;
+    justify-content: center; /* This controls horizontal alignment */
+    padding: 32px 24px; /* This adds inner spacing on all sides of the panel so the content doesn't touch the edges, 32px is top/bottom, 24px is left and right */
+}
+
+.contact-info-inner {
+    text-align: center; /* This centres all the inline content which inclue: the heading text, the paragraph and the spans in the contact detail rows */
+}
+
+.contact-info-inner h2 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #03315b;
+    margin-bottom: 12px; /* This adds 12px of space below the heading */
+}
+
+.contact-info-text {
+    font-size: 18px;
+    color: #2e2f33;
+    margin-bottom: 38px; /* This adds 32px of space below the paragraph before the contact details list */
+}
+
+.contact-info-items {
+    display: flex; /* This makes a flex container */
+    flex-direction: column; /* This aligns each item vertically */
+    gap: 18px;
+}
+
+.contact-info-item {
+    display: flex; /* This turns each item into a flex row, so the icon is on the left and the text is on the right */
+    align-items: center; /* This vertically centres the icon and text within the row */
+    justify-content: center; /* This centres the whole row horizontally inside the panel */
+    gap: 10px;
+    font-size: 18px;
+    color: #111827;
+}
+
+.contact-info-item i {
+    font-size: 18px;
+    color: #03315b;
+}
+
