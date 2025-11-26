@@ -334,4 +334,98 @@ ul {
     color: #ffffff;
 }
 
+/* RESPONSIVENESS */
+
+/* Tablets/Small Laptops */
+@media (max-width: 900px) { /* Starts a media query. so everything inside of {} will only apply when the screen is 900px wide or smaller */
+    
+    .contact-grid {
+        grid-template-columns: 1fr; /* This collapses both columns into a single full-width column */
+    }
+    
+    .contact-info-panel {
+        border-radius: 18px; /* This gives the blue panel rounded corners */
+    }
+}
+
+/* For Mobile Phones */
+@media (max-width: 600px) { /* Starts a media query. so everything inside of {} will only apply when the screen is 600px wide or smaller */
+
+/* HEADER SECTION */
+
+    .nav-container {
+        flex-wrap: wrap; /* This allows items to move onto a second row if there is not enough space */
+        align-items: center;
+        gap: 8px 12px; /* This creates smaller gaps for mobile phone screen */
+        padding-inline: 8px; /* This adds left and right padding */
+    }
+
+    .logo {
+        font-size: 26px; /* This reduces text size so it fits better */
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex: 1 0 50%; /* Flex-grow: 1 - Allowed to grow to fill extra space if there is any, Flex-shrink: 0 - Means 'Try' not to shrink too much, Flex-basis: 50% - Starting width for this item should be 50% of the row */
+    }
+
+    .logo img {
+        height: 32px; /* This reduces Logo size */
+    }
+
+    .nav-icons {
+        display: flex; /* This makes sure the three icons sit in a horizontal row */
+        justify-content: flex-end; /* This aligns icons to the right side of the available space */
+        flex: 1 0 auto; /* This is the same concept as Flex-grow, Flex-shrink, Flex-basis, Flex-basis: auto - Width starts based on the size of icons, not a fixed % */
+        font-size: 17px;
+        gap: 12px;
+    }
+
+    .main-nav { /* This Puts the nav menu on its own row */
+        order: 3; /* This forces .main-nav to appear below the logo and icons */
+        width: 100%;
+    }
+
+    .main-nav ul {
+        display: flex; /* This makes items layed out in a row */
+        justify-content: center; /* This centres the links horizontally on the second row */
+        flex-wrap: wrap; /* This allows menu items to wrap to another line if the screen is very narrow */
+        gap: 12px;
+        font-size: 15px;
+    }
+
+  /* CONTACT SECTION */
+    .contact-section {
+        padding: 32px 0 40px; /* This adds space above and below the entire section */
+    }
+
+    .contact-form-card {
+        padding: 24px 18px 22px; /* This reduces the internal padding */
+    }
+
+    .contact-info-panel {
+        margin-top: 16px; /* This adds space between the form and blue panel */
+        padding: 24px 16px; /* This reduces internal padding for smaller screens */
+    }
+
+    .contact-info-inner h2 {
+        font-size: 24px;
+    }
+
+  /* FOOTER */
+    .footer-inner {
+        grid-template-columns: 1fr; /* This creates one full width column */
+        gap: 24px;
+    }
+
+    .footer-col {
+        text-align: center;
+    }
+
+    .footer-bottom {
+        font-size: 12px;
+    }
+}
+
+
+
 
