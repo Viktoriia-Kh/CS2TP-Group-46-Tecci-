@@ -4,8 +4,10 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box; /* Makes the width easier to work with */
-    margin: 0; /* Removes browser default spacing so you have full control */
+    box-sizing: border-box;
+    /* This makes the width easier to work with */
+    margin: 0;
+    /* This removes the browser default spacing so you have full control */
     padding: 0;
 }
 
@@ -13,25 +15,111 @@
 
 body {
     font-family: 'Signika';
-    background-color: #f5f7fb; /* color: #ffffff; */
+    background-color: #f5f7fb;
+    /* color: #ffffff; */
     line-height: 1.6;
 }
 
-img { /* Targets every image on the Wesbite */
-    max-width: 100%; /* Prevents image overflowing from out of container */
-    display: block; /* Allows margin/padding around the image */
+img {
+    /* This targets every image on the Wesbite */
+    max-width: 100%;
+    /* This prevents the image overflowing from out of the container */
+    display: block;
+    /* This allows for margin/padding around the image */
 }
 
-a { /* Controls appearance of hyperlinks */
-    text-decoration: none; /* Removes default blue underline on links */
-    color: inherit; /* Link uses same colour as parent element */
+a {
+    /* This controls the appearance of hyperlinks */
+    text-decoration: none;
+    /* This removes the default blue underline on the links */
+    color: inherit;
+    /* This makes the Link use the same colour as the parent element */
 }
 
 ul {
-    list-style: none; /* Removes default bullets */
+    list-style: none;
+    /* This removes the default bullets */
 }
 
 .container {
-    width: min(1200px, 100% - 32px); /* Sets maximum width of content, has consistent padding */
-    margin-inline: auto; /* Centres .container horizontally */
+    width: min(1200px, 100% - 32px);
+    /* This sets the maximum width of the content, has consistent padding */
+    margin-inline: auto;
+    /* This centres .container horizontally */
+}
+
+/* HEADER & NAVBAR SECTION */
+
+.main-header {
+    background-color: #03315b;
+    color: #ffffff; /* This sets the default text colour inside the Header to white */
+    border-bottom-style: solid;
+    border-bottom-color: #085296;
+    border-bottom-width: 15px
+}
+
+.nav-container {
+    display: flex; /* This turns the container into a flexbox row, allowing the logo, nav, and icons to sit horizontally */
+    align-items: center;
+    justify-content: space-between; /* This pushes Logo to the far left, Icons to the far right. Nav Menu in the middle: Creating a 3-Part Layout */
+    padding: 12px 0; /* This adds vertical spacing */
+    gap: 32px; /* This adds space between the 3 Sections inside the Nav */
+}
+
+.logo {
+    display: flex; /* This places the Logo and Text side by side */
+    align-items: center;
+    gap: 9.6px; /* This adds space between Logo and Tecci Text */
+    text-transform: uppercase; 
+    font-weight: 700;
+    font-size: 40px;
+}
+
+.logo img {
+    height: 44px;
+}
+
+.main-nav ul {
+    display: flex; /* This turns <ul> into a Horizontal Row */
+    align-items: center;
+    gap: 24px; /* This controls the spacing between each Menu Item */
+    font-size: 18px;
+}
+
+.main-nav a {
+    position: relative; /* This lets the ::after element (used to create a custom animated underline) be positioned relative to the link */
+    padding-bottom: 1.6px; /* This ensures space for the underline animation */
+}
+
+.main-nav a::after {
+    content: ""; /* This is required to create a pseudo element */
+    position: absolute; /* This positions the underline relative to the link */
+    left: 0;
+    bottom: -4px; /* This places the underline slightly below the text */
+    width: 0; /* This starts with a width of 0, making it initially invisible */
+    height: 2px; /* This is the thickness of the underline */
+    background-color: #e6f3ff;
+    transition: width 0.2s ease; /* This animates the underline growing on the hover */
+}
+
+.main-nav a:hover::after, /* On Hover: The underline expands to full width */
+.main-nav a.active::after { /* On the active Page (Home): The underline is always shown */
+    width: 100%;
+}
+
+.nav-icons {
+    display: flex; /* This lays out the Icons horizontally */
+    align-items: center;
+    gap: 16px;
+    font-size: 19px;
+}
+
+.nav-icons a {
+    padding: 2.4px;
+    transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.nav-icons a:hover {
+    transform: translateY(-1px); /* This moves the Icon 1px upwards, giving it a modern lift effect */
+    color: #e6f3ff;
 }
