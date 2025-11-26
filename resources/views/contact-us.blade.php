@@ -214,6 +214,9 @@
     </div>
   </footer>
 
+  <!--Link to external JavaScript File-->
+  <script src="NewContact.js"></script>
+
 </body>
 
 </html>
