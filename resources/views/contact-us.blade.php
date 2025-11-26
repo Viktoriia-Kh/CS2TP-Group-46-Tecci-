@@ -154,7 +154,8 @@
                 </div>
 
                 <div class="contact-info-item">
-                  <i class="fa-solid fa-location-dot"></i> <!--fa-location-dot is a Location Icon linked from Font Awesome-->
+                  <i class="fa-solid fa-location-dot"></i>
+                  <!--fa-location-dot is a Location Icon linked from Font Awesome-->
                   <span>Birmingham, B4 7ET</span>
                 </div>
               </div>
@@ -165,3 +166,54 @@
       </div>
     </section>
   </main>
+
+  <!--FOOTER-->
+  <footer class="site-footer">
+    <div class="container footer-inner"> <!--footer-inner used to create multi-column layout-->
+      <div class="footer-col">
+        <h3>TECCI</h3>
+        <p>
+          Smart Tech at Smart Prices.<br>
+          Tecci makes premium devices accessible to<br>
+          students and customers across the UK.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact-us.blade.php">Contact</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="basket.html">Basket</a></li>
+          <li><a href="account.html">My Account</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <ul class="contact-list">
+          <li>
+            <i class="fa-solid fa-location-dot"></i> <!--fa-loocation-dot is a Location Icon linked from Font Awesome-->
+            <span>0121 555 0198</span><br><br>
+          </li>
+          <li>
+            <i class="fa-solid fa-phone"></i> <!--fa-phone is a Phone Icon linked from Font Awesome-->
+            <span>Tecci_Queries@net.com</span><br><br>
+          </li>
+          <li>
+            <i class="fa-regular fa-envelope"></i> <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
+            <span>Birmingham, B4 7ET</span><br><br>
+          </li>
+        </ul>
+      </div>
+    </div> <!--Closes <div class="container footer-inner"-->
+    <div class="footer-bottom">
+      <p>&copy; 2025 Tecci. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
