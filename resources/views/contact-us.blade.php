@@ -215,7 +215,7 @@
   </footer>
 
   <!--Link to external JavaScript File-->
-  <script src="NewContact.js"></script>
+  <script src="contact-us.js"></script>
 
 </body>
 
