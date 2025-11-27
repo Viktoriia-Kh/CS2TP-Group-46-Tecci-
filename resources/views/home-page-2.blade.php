@@ -50,7 +50,8 @@
       <!--Left Side: Text Content-->
       <div class="hero-text">
         <h1>
-          <p class="special-word">Affordable<p>
+          <p class="special-word">Affordable
+          <p>
           <p>Tech.</p>
           <p class="special-word">Unbeatable</p>
           <p>Style.</p>
@@ -106,6 +107,49 @@
         </a>
       </div> <!--Closes .card-grid product-grid-->
     </div> <!--Closes .container-->
+  </section>
+
+  <!--PRODUCT CATEGORIES-->
+  <section class="product-categories">
+    <div class="container">
+      <h2>Shop All Products Now</h2>
+      <div class="card-grid category-grid">
+        <a href="products.html" class="category-card">
+          <div class="category-icon">
+            <i class="fa-solid fa-laptop"></i> <!--fa-laptop is a Laptop Icon linked from Font Awesome-->
+          </div>
+          <p>Laptops</p>
+        </a>
+
+        <a href="products.html" class="category-card">
+          <div class="category-icon">
+            <i class="fa-solid fa-desktop"></i> <!--fa-desktop is a Desktop Icon linked from Font Awesome-->
+          </div>
+          <p>PCs</p>
+        </a>
+
+        <a href="products.html" class="category-card">
+          <div class="category-icon">
+            <i class="fa-solid fa-mobile-screen-button"></i> <!--fa-mobile-screen-button is a Mobile Icon linked from Font Awesome-->
+          </div>
+          <p>Smartphones</p>
+        </a>
+
+        <a href="products.html" class="category-card">
+          <div class="category-icon">
+            <i class="fa-solid fa-tablet-screen-button"></i> <!--fa-tablet-screen-button is a Tablet Icon linked from Font Awesome-->
+          </div>
+          <p>Tablets</p>
+        </a>
+
+        <a href="products.html" class="category-card">
+          <div class="category-icon">
+            <i class="fa-solid fa-headphones"></i> <!--fa-headphones is a Headphone Icon linked from Font Awesome-->
+          </div>
+          <p>Accessories</p>
+        </a>
+      </div>
+    </div>
   </section>
 
   <!--FOOTER-->
