@@ -68,6 +68,46 @@
     </div>
   </section>
 
+  <!--FEATURED PRODUCTS-->
+  <section class="featured-products" id="featured">
+    <div class="container">
+      <h2>Featured Products</h2>
+      <div class="card-grid product-grid"> <!-- This div will hold all 4 Product Cards-->
+        <a href="product-1.html" class="product-card">
+          <div class="product-image-placeholder"> <img src="Laptop.PNG" alt="Budget Student Laptop"></div>
+          <div class="product-info">
+            <p class="product-name">Laptop</p>
+            <p class="product-price">£999.00</p>
+          </div>
+        </a>
+
+        <a href="product-2.html" class="product-card">
+          <div class="product-image-placeholder"></div>
+          <div class="product-info">
+            <p class="product-name">Item Name</p>
+            <p class="product-price">£XXX.XX</p>
+          </div>
+        </a>
+
+        <a href="product-3.html" class="product-card">
+          <div class="product-image-placeholder"></div>
+          <div class="product-info">
+            <p class="product-name">Item Name</p>
+            <p class="product-price">£XXX.XX</p>
+          </div>
+        </a>
+
+        <a href="product-4.html" class="product-card">
+          <div class="product-image-placeholder"></div>
+          <div class="product-info">
+            <p class="product-name">Item Name</p>
+            <p class="product-price">£XXX.XX</p>
+          </div>
+        </a>
+      </div> <!--Closes .card-grid product-grid-->
+    </div> <!--Closes .container-->
+  </section>
+
   <!--FOOTER-->
   <footer class="site-footer">
     <div class="container footer-inner"> <!--footer-inner used to create multi-column layout-->
