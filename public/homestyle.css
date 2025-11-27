@@ -19,12 +19,12 @@ body {
 
 img { /* This targets every image on the Wesbite */
   max-width: 100%; /* This prevents the image overflowing from out of the container */
-  display: block; /* This allows margin/padding around the image */
+  display: block; /* This allows for margin/padding around the image */
 }
 
-a { /* This controls appearance of the hyperlinks */
+a { /* This controls the appearance of hyperlinks */
   text-decoration: none; /* This removes the default blue underline on the links */
-  color: inherit; /* This link uses same colour as parent element */
+  color: inherit; /* This makes the Link use same colour as parent the element */
 }
 
 ul {
@@ -32,10 +32,9 @@ ul {
 }
 
 .container {
-  width: min(1200px, 100% - 2rem); /* This sets maximum width of content, has consistent padding */
+  width: min(1200px, 100% - 32px); /* This sets the maximum width of the content, has consistent padding */
   margin-inline: auto; /* This centres .container horizontally */
 }
-
 
 /* HEADER & NAVBAR SECTION */
 
@@ -48,7 +47,7 @@ ul {
 }
 
 .nav-container {
-  display: flex; /* This turns the container into a flexbox row, allowing logo, nav, and icons to sit horizontally */
+  display: flex; /* This turns the container into a flexbox row, allowing the logo, nav, and icons to sit horizontally */
   align-items: center; 
   justify-content: space-between; /* This pushes the Logo to the far left, Icons to the far right. Nav Menu in the middle: Creating a 3-Part Layout */
   padding: 12px 0; /* This adds vertical spacing */
@@ -69,9 +68,9 @@ ul {
 }
 
 .main-nav ul {
-  display: flex; /* This turns <ul> into a Horizontal Row */
+  display: flex; /* This turns <ul> into Horizontal Row */
   align-items: center;
-  gap: 24px; /* This controls spacing between each Menu Item */
+  gap: 24px; /* This controls the spacing between each Menu Item */
   font-size: 18px;
 }
 
@@ -85,8 +84,8 @@ ul {
   position: absolute; /* This positions the underline relative to the link */
   left: 0;
   bottom: -4px; /* This places the underline slightly below the text */
-  width: 0; /* This starts with a width of 0, making it initially invisible */
-  height: 2px; /* This is for the thickness of underline */
+  width: 0; /* This starts with a width of 0, making it initially invisibale */
+  height: 2px; /* Thickness of underline */
   background-color: #e6f3ff;
   transition: width 0.2s ease; /* This animates the underline growing on the hover */
 }
@@ -97,7 +96,7 @@ ul {
 }
 
 .nav-icons {
-  display: flex; /* This lays out Icons horizontally */
+  display: flex; /* This lays out the Icons horizontally */
   align-items: center;
   gap: 16px;
   font-size: 19px;
@@ -123,7 +122,7 @@ ul {
 }
 
 .footer-inner {
-  display: grid; /* This enables CCS Grid Layout */
+  display: grid; /* This enables the CSS Grid Layout */
   grid-template-columns: 2fr 1.5fr 1.8fr; /* This creates 3 columns with different relative widths: First Column is 2 fractions, Second Column is 1.5 fractions. Third Column is 1.8 fractions */
   gap: 40px; /* Space between the columns */
   padding-bottom: 32px; /* This adds space below the columns, before the copyright bar */
@@ -156,8 +155,8 @@ ul {
 }
 
 .contact-list li {
-  display: flex; /* This places Icons and text in a row */
-  align-items: center; /* This vertically aligns Icon and text */
+  display: flex; /* This places the Icons and text in a row */
+  align-items: center; /* This vertically aligns the Icon and text */
   gap: 8px; /* Space between Icon and text */
   font-size: 14px;
   color: #ffffff;
@@ -169,12 +168,8 @@ ul {
 
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 14px 0 19px; /* Gives the text some space */
+  padding: 14px 0 19px; /* This gives the text some space */
   text-align: center;
   font-size: 13px;
   color: #ffffff;
 }
-
-
-
-
