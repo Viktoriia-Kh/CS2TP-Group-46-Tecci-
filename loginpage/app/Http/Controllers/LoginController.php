@@ -13,9 +13,9 @@ class LoginController extends Controller
     {
 
         // assigning variables
-        $email_address = ''; // this will hold the email address which the user enters when logging in
-        $password = ''; // this will hold the password entered by the user when they log in
-        $error_messages = []; // this will show any error messages if something goes wrong
+        $email_address = ''; // holds the email address which the user enters when logging in
+        $password = ''; // holds the password entered by the user
+        $error_messages = []; // this will show any error messages
 
         // this will check if the form has been submitted by the user
         if ($request->isMethod('post')) {

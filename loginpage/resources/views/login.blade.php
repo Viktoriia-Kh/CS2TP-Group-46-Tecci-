@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
-        <link rel="stylesheet" href="{{asset('css/style.css') }}"> <!-- created a link to the stylesheet -->
+        <link rel="stylesheet" href="{{asset('style.css') }}"> <!-- created a link to the stylesheet -->
     </head>
     <body>
         <section class="section-form">
