@@ -5,14 +5,63 @@ body {
     display: flex;
     justify-content: center;
     font-family: Arial, sans-serif;
-    background-color: aliceblue;
+    background-color: royalblue;
     align-items: center;
     height: 100vh;
 }
 
-button {
-    background-color: blue;
+/* styling for button */
+.section-form button {
+    background-color: royalblue;
     color: aliceblue;
     font-weight: bold;
-
+    font-size: 15px;
+    width: 100%;
+    padding: 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    margin-top: 12px;
 }
+
+.section-form button:hover {
+    background-color: mediumblue;
+}
+
+/* styling the email and password input boxes */
+.section-form input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid lightgrey;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* styling the labels for each input */
+.section-form label {
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.section-form h2 {
+    text-align: center;
+    color: royalblue;
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+/* styling for the login card */
+.section-form {
+    background-color: white;
+    box-shadow: 0px 0px 20px blue;
+    padding: 45px;
+    width: 380px;
+    border-radius: 20px;
+    text-align: left;
+}
+
+
