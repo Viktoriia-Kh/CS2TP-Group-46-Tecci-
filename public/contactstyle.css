@@ -277,12 +277,12 @@ ul {
 
 .site-footer {
     background-color: #03315b;
-    color: #ffffff; /* Sets default color inside the Footer to white */
-    padding-top: 40px; /* Adds space to the top so the content is not stuck to the edge */
+    color: #ffffff; /* This sets the default colour inside the Footer to white */
+    padding-top: 40px; /* This adds the space to the top so the content is not stuck to the edge */
 }
 
 .footer-inner {
-    display: grid; /* Enables CCS Grid Layout */
+    display: grid; /* This enables the CSS Grid Layout */
     grid-template-columns: 2fr 1.5fr 1.8fr; /* This creates 3 columns with different relative widths: First Column is 2 fractions, Second Column is 1.5 fractions. Third Column is 1.8 fractions */
     gap: 40px; /* Space between the columns */
     padding-bottom: 32px; /* This adds space below the columns, before the copyright bar */
@@ -290,7 +290,7 @@ ul {
 
 .footer-col h3,
 .footer-col h4 {
-    margin-bottom: 14px; /* Adds space from under the Headings to seperate them from the content */
+    margin-bottom: 14px; /* This adds space from under the Headings to seperate them from the content */
 }
 
 .footer-col p {
@@ -299,7 +299,7 @@ ul {
 }
 
 .footer-col ul {
-    display: flex; /* Turns the UL into a flex container */
+    display: flex; /* This turns the UL into a flex container */
     flex-direction: column; /* This aligns the list items vertically */
     gap: 6px; /* This adds vertical spacing between list items */
 }
@@ -307,7 +307,7 @@ ul {
 .footer-col a {
     font-size: 14px;
     color: #ffffff;
-    transition: color 0.15s ease; /* Adds a colour transition when hovering */
+    transition: color 0.15s ease; /* This adds a colour transition when hovering */
 }
 
 .footer-col a:hover {
@@ -315,8 +315,8 @@ ul {
 }
 
 .contact-list li {
-    display: flex; /* Places Icons and text in a row */
-    align-items: center; /* Vertically aligns Icon and text */
+    display: flex; /* This places the Icons and text in a row */
+    align-items: center; /* This vertically aligns the Icon and text */
     gap: 8px; /* Space between Icon and text */
     font-size: 14px;
     color: #ffffff;
@@ -328,7 +328,7 @@ ul {
 
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 14px 0 19px; /* Gives the text some space */
+    padding: 14px 0 19px; /* This gives the text some space */
     text-align: center;
     font-size: 13px;
     color: #ffffff;
