@@ -44,6 +44,29 @@
     </div>
   </header>
 
+  <section class="hero">
+    <div class="container hero-inner"> <!--.hero-inner used to turn this into a two column layout-->
+
+      <!--Left Side: Text Content-->
+      <div class="hero-text">
+        <h1>
+          <p class="special-word">Affordable<p>
+          <p>Tech.</p>
+          <p class="special-word">Unbeatable</p>
+          <p>Style.</p>
+        </h1>
+        <p class="hero-subtitle">Smart gadgets and sleek devices, priced for University Students.</p>
+        <a href="products.html" class="btn btn-primary">Shop Now</a>
+      </div>
+
+      <!--Right Side: Hero Image-->
+      <div class="hero-banner">
+        <img src="https://i.ibb.co/XfxPXyL5/Hero-Section-Image.webp" alt="Student using a laptop from Tecci"
+          class="hero-image">
+      </div>
+    </div>
+    </div>
+  </section>
 
   <!--FOOTER-->
   <footer class="site-footer">
