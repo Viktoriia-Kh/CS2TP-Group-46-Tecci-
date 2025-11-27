@@ -431,3 +431,161 @@ ul {
   font-size: 13px;
   color: #ffffff;
 }
+
+/* RESPONSIVENESS */
+
+/* For Tablets/Small Laptops */
+@media (max-width: 900px) {  /* Starts a media query. so everything inside of {} will only apply when the screen is 900px wide or smaller */
+  
+  /* HERO SECTION */
+  .hero-inner {
+    flex-direction: column; /* Switches Flexbox direction from row to column */
+    align-items: center; /* This horizontally centres the text and image inside the Hero Section */
+    text-align: center;
+    gap: 32px; /* Space is needed as eveyrhting is now aligned vertically */
+    min-height: auto; /* This removes the fixed minimum height for smaller screens */
+    
+    /* The next three lines reverse the full-width override we used on desktop */
+    width: min(1200px, 100% - 32 px);
+    margin-inline: auto;
+    padding-left: 0;
+  }
+
+  .hero-text {
+    max-width: 100%; /* Let's the left column in Hero Section to grow to full width */
+    align-items: center;
+  }
+
+  .hero-banner {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-image {
+    height: auto; /* Let's the image height respond to its natural aspect ratio */
+  }
+
+  /* FEATURED PRODUCTS GRID */
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Creates 2 columns instead of 4 */
+  }
+
+  /* PRODUCT CATEGORIES GRID */
+  .category-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* Creates 3 columns instead of 5 */
+  }
+
+  /* TESTIMONIALS GRID */
+  .testimonial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Creates 2 columnc instead of 3 */
+  }
+
+/* For Mobile Phones */
+@media (max-width: 600px) { /* Starts a media query. so everything inside of {} will only apply when the screen is 600px wide or smaller */
+
+  /* HEADER SECTION */
+  .nav-container {
+    flex-wrap: wrap; /* This allows items to move onto a second row if there is not enough space */
+    align-items: center;
+    gap: 8px 12px; /* Smaller gaps for mobile phone screen */
+    padding-inline: 8px; /* This adds left and right padding */
+  }
+
+  .logo {
+    font-size: 26px; /* This reduces text size so it fits better */
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1 0 50%; /* Flex-grow: 1 - Allowed to grow to fill extra space if there is any, Flex-shrink: 0 - Means 'Try' not to shrink too much, Flex-basis: 50% - Starting width for this item should be 50% of the row */
+  }
+
+  .logo img {
+    height: 32px; /* This reduces Logo size */
+  }
+
+  .nav-icons {
+    display: flex; /* This makes sure the three icons sit in a horizontal row */
+    justify-content: flex-end; /* This aligns icons to the right side of the available space */
+    flex: 1 0 auto; /* This is the same concept as Flex-grow, Flex-shrink, Flex-basis, Flex-basis: auto - Width starts based on the size of icons, not a fixed % */
+    font-size: 17px;
+    gap: 12px;
+  }
+
+  .main-nav { /* This Puts the nav menu on its own row */
+    order: 3; /* This forces .main-nav to appear below the logo and icons */
+    width: 100%;
+  }
+
+  .main-nav ul {
+    display: flex; /* This makes items layed out in a row */
+    justify-content: center; /* This centres the links horizontally on the second row */
+    flex-wrap: wrap; /* This allows menu items to wrap to another line if the screen is very narrow */
+    gap: 12px;
+    font-size: 15px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 24px 0 32px; /* This reduces the padding so more content can be visible without scrolling */
+  }
+
+  .hero-inner {
+    gap: 24px; /* This creates a smaller gap between the hero text and banner */
+  }
+
+  .hero-text h1 {
+    font-size: clamp(28px, 7vw, 34px); /* This reduces the hero heading size, 7% of viewport width, between 24px and 34px */
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+  .hero-image {
+    height: auto; /* This let's the image height follows it's aspect ratio, so it doesn't look too stretched */
+  }
+
+  .hero-banner {
+    min-height: 0; /* This removes the minimum height, so the banner can shrink naturally on smaller phones */
+  }
+
+  .banner-slide {
+    flex-direction: column; /* This makes the text and images align vertically in a column instead of row */
+    text-align: left;
+    gap: 16px;
+  }
+
+  .banner-image {
+    order: -1; /* This moves the image above the text in the column */
+  }
+
+  /* GRIDS: MAKE SINGLE COLUMN */
+  .product-grid,
+  .category-grid,
+  .testimonial-grid {
+    grid-template-columns: 1fr; /* This creates one full width column */
+  }
+
+  .featured-products,
+  .product-categories,
+  .testimonials {
+    padding: 32px 0 40px; /* This slightly reduces the top/bottom padding */
+  }
+
+  /* FOOTER */
+  .footer-inner {
+    grid-template-columns: 1fr; /* This creates one full width column */
+    gap: 24px;
+  }
+
+  .footer-col {
+    text-align: center;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+  }
+}
+
+}
+
