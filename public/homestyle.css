@@ -194,6 +194,67 @@ ul {
   object-fit: cover; /* This makes the image fill the box completely, even if it has to be slightly cropped */
 }
 
+/* FEATURED PRODUCTS SECTION */
+
+.featured-products {
+  background-color: #085296;
+  color: #ffffff;
+  padding: 48px 0 56px;
+  text-align: center; /* This aligns the heading and any direct text in the section to the centre */
+}
+
+.featured-products h2 {
+  font-size: 34px;
+  margin-bottom: 35px; /* This sepearates the Heading from the grid of cards */
+}
+
+.card-grid { /* Generic grid container */
+  display: grid; /* This enables the CSS Grid Layout */
+  gap: 24px; /* This controls spacing between the Grid Items */
+}
+
+.product-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* This creates 4 equal columns, one for each Featured Product */
+}
+
+.product-card {
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 18px; /* This creates soft rounded corners */
+  padding: 21px 18px 22px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  display: flex; /* This treats the card content as a vertical flexbox */
+  flex-direction: column; /* This stacks the image and placeholder vertically */
+  justify-content: space-between; /* This makes the content in the card nicely spaced */
+  transition: transform 0.18s ease, box-shadow 0.18s ease; /* This is for the hover animation */
+}
+
+.product-card:hover {
+  transform: translateY(-6px); /* This moves the card 6px up when hovering */
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18); /* Increases shadow */
+}
+
+.product-image-placeholder {
+  background-color: #f3f4f6;
+  border-radius: 14px;
+  height: 150px;
+}
+
+.product-info {
+  text-align: center;
+  margin-top: 19px;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.product-price {
+  font-size: 13px;
+  color: #000000;
+}
+
 
 /* FOOTER SECTION */
 
