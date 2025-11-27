@@ -50,8 +50,7 @@
       <!--Left Side: Text Content-->
       <div class="hero-text">
         <h1>
-          <p class="special-word">Affordable
-          <p>
+          <p class="special-word">Affordable<p>
           <p>Tech.</p>
           <p class="special-word">Unbeatable</p>
           <p>Style.</p>
@@ -150,6 +149,86 @@
         </a>
       </div>
     </div>
+  </section>
+
+  <!--TESTIMONIALS-->
+  <section class="testimonials">
+    <div class="container">
+      <h2>Testimonials</h2>
+      <div class="card-grid testimonial-grid">
+        <article class="testimonial-card">
+          <div class="testimonial-quote-icon">
+            <i class="fa-solid fa-quote-left"></i> <!--fa-quote-left is a Left Quote Icon linked from Font Awesome-->
+          </div>
+          <p class="testimonial-text">
+            As a second-year student on a tight budget, finding good tech actually lasts is hard.
+            Tecci has been a life-saver. My laptop arrived quickly, looks premium, and runs my
+            coursework apps smoothly. The prices are honestly unbeatable. Highly recommend!
+          </p>
+          <div class="testimonial-rating">
+            <i class="fa-solid fa-star"></i> <!--fa-star is a Star Icon linked from Font Awesome-->
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="testimonial-user">
+            <div class="avatar">SP</div>
+            <div>
+              <p class="testimonial-name">Sean Parker</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div class="testimonial-quote-icon">
+            <i class="fa-solid fa-quote-left"></i> <!--fa-quote-left is a Left Quote Icon linked from Font Awesome-->
+          </div>
+          <p class="testimonial-text">
+            Amazing experience from start to finish. I ordered a refurbished tablet for
+            Lectures and it looks brand new! Tecci definitely understands what students
+            need - Affordable, reliable tech without the headache.
+          </p>
+          <div class="testimonial-rating">
+            <i class="fa-solid fa-star"></i> <!--fa-star is a Star Icon linked from Font Awesome-->
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="testimonial-user">
+            <div class="avatar">AR</div>
+            <div>
+              <p class="testimonial-name">Aisha Rahman</p>
+            </div>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <div class="testimonial-quote-icon">
+            <i class="fa-solid fa-quote-left"></i> <!--fa-quote-left is a Left Quote Icon linked from Font Awesome-->
+          </div>
+          <p class="testimonial-text">
+            I'm not a student, but I needed an affordable laptop for working from home and Tecci
+            offered much better prices than the high-street stores. The device performs really well
+            for everyday tasks, and delivery was fast and hassle-free. I'm giving 4 stars only
+            because the model I wanted was temporarily out of stock. Overall, very satisfied.
+          </p>
+          <div class="testimonial-rating">
+            <i class="fa-solid fa-star"></i> <!--fa-star is a Star Icon linked from Font Awesome-->
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+          </div>
+          <div class="testimonial-user">
+            <div class="avatar">ML</div>
+            <div>
+              <p class="testimonial-name">Mei Lin</p>
+            </div>
+          </div>
+        </article>
+      </div> <!--Closes each card-->
+    </div> <!--Closes .container-->
   </section>
 
   <!--FOOTER-->
