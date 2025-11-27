@@ -303,6 +303,73 @@ ul {
   font-size: 29px; /* Controls Icon size */
 }
 
+/* TESTIMONIALS SECTION */
+
+.testimonials {
+  padding: 48PX 0 56PX;
+  background: linear-gradient(to bottom, #ffffff, #e6f3ff); /* This gives a smooth vertical fade: White at the top to light blue at the bottom */
+}
+
+.testimonials h2 {
+  text-align: center;
+  font-size: 34px;
+  margin-bottom: 35px; /* This adds spacing below it before the cards start */
+}
+
+.testimonial-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* This makes 3 equal columns, one for each testimonial */
+}
+
+.testimonial-card {
+  background-color: #ffffff;
+  border-radius: 18px; /* This creates rounded corners */
+  padding: 29px 22px 26px; /* This gives inner spacing */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  display: flex; /* This and the line below aligns the quote icon, text, star icons and user vertically */
+  flex-direction: column;
+  gap: 14px; /* Space between items in the column */
+}
+
+.testimonial-quote-icon {
+  font-size: 24px;
+  color: #085296;
+}
+
+.testimonial-text {
+  font-size: 14px;
+  color: #2e2f33;
+}
+
+.testimonial-rating {
+  font-size: 14px; /* This controls the star icon size */
+  color: #f7da00;
+}
+
+.testimonial-user {
+  display: flex; /* This places the Avatar and text in a row */
+  align-items: center; /* This vertically aligns items to the centre */
+  gap: 11px; /* Space between avatar and name */
+  margin-top: 6px; /* This gives the small extra spacing above this row */
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px; /* This gives perfect circle shape */
+  background: #085296;
+  color: #ffffff;
+  display: flex; /* This and the two lines below centres the initials inside the circle */
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.testimonial-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
 
 /* FOOTER SECTION */
 
