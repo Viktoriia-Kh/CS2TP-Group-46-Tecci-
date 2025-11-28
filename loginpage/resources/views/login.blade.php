@@ -9,9 +9,9 @@
         <section class="section-form">
             <h2>Login</h2>
             {{-- This will display error messages to the user--}}
-            @if ($errors->any())
-                <ul style="color: red;">  {{-- the error message will be red--}}
-                    @foreach ($errors->all() as $error)
+            @if (!empty($error_messages))
+                <ul class="error-messages">
+                    @foreach ($error_messages as $error)
                         <li>{{$error}}</li>
                     @endforeach
                 </ul>
@@ -34,6 +34,10 @@
                 </div>
 
                 <button type="submit">Login</button> <!-- allows the user to login-->
+
+                <p class="signup-message">
+                    Don't have an account? <a href="/signup">Sign up</a> <!-- redirects the user to signup to make an account-->
+                </p>
 
 
             </form>
