@@ -83,8 +83,95 @@
           <button class="confirm-filter-btn">Apply Filters</button>
         </div>
       </aside>
-
       
+      <!-- RIGHT CONTENT AREA -->
+      <div class="products-content">
+        <!-- CATEGORY TABS -->
+        <div class="category-tabs">
+          <button class="tab-button active" data-category="all">All Products</button>
+          <button class="tab-button" data-category="pcs">PCs</button>
+          <button class="tab-button" data-category="laptops">Laptops</button>
+          <button class="tab-button" data-category="phones">Phones</button>
+          <button class="tab-button" data-category="tablets">Tablets</button>
+          <button class="tab-button" data-category="accessories">Accessories</button>
+          
+          <!-- Sort Dropdown -->
+          <div class="sort-container">
+            <select class="sort-dropdown">
+              <option value="featured">Sort by: Featured</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="newest">Newest</option>
+              <option value="rating">Top Rated</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- FEATURED PRODUCTS GRID -->
+        <div class="featured-items-section">
+          <div class="featured-grid">
+            <!-- Product Card 1 -->
+            <div class="product-card-item">
+              <div class="product-image-placeholder"></div>
+              <div class="product-item-info">
+                <h4>Lorem Ipsum Device</h4>
+                <p class="product-item-price">£599.99</p>
+                <button class="add-to-cart-quick">Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="product-card-item">
+              <div class="product-image-placeholder"></div>
+              <div class="product-item-info">
+                <h4>Dolor Sit Amet Pro</h4>
+                <p class="product-item-price">£1,299.99</p>
+                <button class="add-to-cart-quick">Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="product-card-item">
+              <div class="product-image-placeholder"></div>
+              <div class="product-item-info">
+                <h4>Consectetur Ultra</h4>
+                <p class="product-item-price">£449.99</p>
+                <button class="add-to-cart-quick">Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Product Card 4 -->
+            <div class="product-card-item">
+              <div class="product-image-placeholder"></div>
+              <div class="product-item-info">
+                <h4>Adipiscing Tech Max</h4>
+                <p class="product-item-price">£899.99</p>
+                <button class="add-to-cart-quick">Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Product Card 5 -->
+            <div class="product-card-item">
+              <div class="product-image-placeholder"></div>
+              <div class="product-item-info">
+                <h4>Elit Gadget Plus</h4>
+                <p class="product-item-price">£349.99</p>
+                <button class="add-to-cart-quick">Add to Cart</button>
+              </div>
+            </div>
+
+            <!-- Product Card 6 -->
+            <div class="product-card-item">
+              <div class="product-image-placeholder"></div>
+              <div class="product-item-info">
+                <h4>Sed Do Device</h4>
+                <p class="product-item-price">£749.99</p>
+                <button class="add-to-cart-quick">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
