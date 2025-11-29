@@ -83,7 +83,7 @@
           <button class="confirm-filter-btn">Apply Filters</button>
         </div>
       </aside>
-      
+
       <!-- RIGHT CONTENT AREA -->
       <div class="products-content">
         <!-- CATEGORY TABS -->
@@ -110,65 +110,6 @@
         <!-- FEATURED PRODUCTS GRID -->
         <div class="featured-items-section">
           <div class="featured-grid">
-            <!-- Product Card 1 -->
-            <div class="product-card-item">
-              <div class="product-image-placeholder"></div>
-              <div class="product-item-info">
-                <h4>Lorem Ipsum Device</h4>
-                <p class="product-item-price">£599.99</p>
-                <button class="add-to-cart-quick">Add to Cart</button>
-              </div>
-            </div>
-
-            <!-- Product Card 2 -->
-            <div class="product-card-item">
-              <div class="product-image-placeholder"></div>
-              <div class="product-item-info">
-                <h4>Dolor Sit Amet Pro</h4>
-                <p class="product-item-price">£1,299.99</p>
-                <button class="add-to-cart-quick">Add to Cart</button>
-              </div>
-            </div>
-
-            <!-- Product Card 3 -->
-            <div class="product-card-item">
-              <div class="product-image-placeholder"></div>
-              <div class="product-item-info">
-                <h4>Consectetur Ultra</h4>
-                <p class="product-item-price">£449.99</p>
-                <button class="add-to-cart-quick">Add to Cart</button>
-              </div>
-            </div>
-
-            <!-- Product Card 4 -->
-            <div class="product-card-item">
-              <div class="product-image-placeholder"></div>
-              <div class="product-item-info">
-                <h4>Adipiscing Tech Max</h4>
-                <p class="product-item-price">£899.99</p>
-                <button class="add-to-cart-quick">Add to Cart</button>
-              </div>
-            </div>
-
-            <!-- Product Card 5 -->
-            <div class="product-card-item">
-              <div class="product-image-placeholder"></div>
-              <div class="product-item-info">
-                <h4>Elit Gadget Plus</h4>
-                <p class="product-item-price">£349.99</p>
-                <button class="add-to-cart-quick">Add to Cart</button>
-              </div>
-            </div>
-
-            <!-- Product Card 6 -->
-            <div class="product-card-item">
-              <div class="product-image-placeholder"></div>
-              <div class="product-item-info">
-                <h4>Sed Do Device</h4>
-                <p class="product-item-price">£749.99</p>
-                <button class="add-to-cart-quick">Add to Cart</button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -227,3 +168,152 @@
 </body>
 
 </html>
+
+<script>
+  // Product data with categories and details
+  const allProducts = [
+    { id: 1, name: "Lorem Ipsum Device", price: 599.99, category: "laptops", condition: "new" },
+    { id: 2, name: "Dolor Sit Amet Pro", price: 1299.99, category: "pcs", condition: "new" },
+    { id: 3, name: "Consectetur Ultra", price: 449.99, category: "phones", condition: "used" },
+    { id: 4, name: "Adipiscing Tech Max", price: 899.99, category: "tablets", condition: "refurbished" },
+    { id: 5, name: "Elit Gadget Plus", price: 349.99, category: "accessories", condition: "new" },
+    { id: 6, name: "Sed Do Device", price: 749.99, category: "laptops", condition: "used" },
+    { id: 7, name: "Eiusmod Premium", price: 1099.99, category: "pcs", condition: "new" },
+    { id: 8, name: "Tempor Tech Elite", price: 599.99, category: "phones", condition: "new" },
+    { id: 9, name: "Incididunt Ultra", price: 799.99, category: "tablets", condition: "refurbished" },
+    { id: 10, name: "Labore Device Pro", price: 459.99, category: "accessories", condition: "used" },
+  ];
+
+  let currentCategory = "all";
+  let currentSortOption = "featured";
+  let priceRange = 2000;
+  let selectedConditions = [];
+
+  // Category tab functionality
+  document.querySelectorAll(".tab-button").forEach(button => {
+    button.addEventListener("click", (e) => {
+      document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+      e.target.classList.add("active");
+      currentCategory = e.target.dataset.category;
+      displayProducts();
+    });
+  });
+
+  // Sort dropdown functionality
+  document.querySelector(".sort-dropdown").addEventListener("change", (e) => {
+    currentSortOption = e.target.value;
+    displayProducts();
+  });
+
+  // Price range slider
+  document.querySelector(".price-slider").addEventListener("input", (e) => {
+    priceRange = e.target.value;
+    document.querySelectorAll(".price-range-display span")[1].textContent = "£" + priceRange;
+  });
+
+  // Search functionality
+  document.querySelector(".search-input").addEventListener("input", (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    filterAndDisplayProducts(searchTerm);
+  });
+
+  // Apply filters button
+  document.querySelector(".confirm-filter-btn").addEventListener("click", () => {
+    selectedConditions = Array.from(document.querySelectorAll(".checkbox-label input[type='checkbox']:checked"))
+      .map(cb => cb.value);
+    displayProducts();
+  });
+
+  // Filter products based on criteria
+  function filterProducts(searchTerm = "") {
+    let filtered = allProducts;
+
+    // Filter by category
+    if (currentCategory !== "all") {
+      filtered = filtered.filter(p => p.category === currentCategory);
+    }
+
+    // Filter by price range
+    filtered = filtered.filter(p => p.price <= priceRange);
+
+    // Filter by condition
+    if (selectedConditions.length > 0) {
+      filtered = filtered.filter(p => selectedConditions.includes(p.condition));
+    }
+
+    // Filter by search term
+    if (searchTerm) {
+      filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm));
+    }
+
+    return filtered;
+  }
+
+  // Sort products
+  function sortProducts(products) {
+    const sorted = [...products];
+    
+    switch(currentSortOption) {
+      case "price-low":
+        sorted.sort((a, b) => a.price - b.price);
+        break;
+      case "price-high":
+        sorted.sort((a, b) => b.price - a.price);
+        break;
+      case "newest":
+        sorted.sort((a, b) => b.id - a.id);
+        break;
+      case "rating":
+        sorted.sort((a, b) => b.id - a.id); // Placeholder for rating
+        break;
+      case "featured":
+      default:
+        // Keep original order
+        break;
+    }
+    
+    return sorted;
+  }
+
+  // Display products
+  function displayProducts() {
+    const filtered = filterProducts();
+    const sorted = sortProducts(filtered);
+    renderProducts(sorted);
+  }
+
+  // Filter and display with search
+  function filterAndDisplayProducts(searchTerm) {
+    const filtered = filterProducts(searchTerm);
+    const sorted = sortProducts(filtered);
+    renderProducts(sorted);
+  }
+
+  // Render products to the DOM
+  function renderProducts(products) {
+    const grid = document.querySelector(".featured-grid");
+    grid.innerHTML = "";
+
+    if (products.length === 0) {
+      grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">No products found</p>';
+      return;
+    }
+
+    products.forEach(product => {
+      const productCard = document.createElement("div");
+      productCard.className = "product-card-item";
+      productCard.innerHTML = `
+        <div class="product-image-placeholder"></div>
+        <div class="product-item-info">
+          <h4>${product.name}</h4>
+          <p class="product-item-price">£${product.price.toFixed(2)}</p>
+          <button class="add-to-cart-quick">Add to Cart</button>
+        </div>
+      `;
+      grid.appendChild(productCard);
+    });
+  }
+
+  // Initialize display
+  displayProducts();
+</script>
