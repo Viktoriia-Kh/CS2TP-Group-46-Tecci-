@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Contact;
+
+class ContactController extends Controller
+{
+    /**
+     * Show the contact us form.
+     */
+    public function showForm()
+    {
+        return view('contact-us'); // resources/views/contact-us.blade.php
+    }
+
+    /**
+     * Handle the form submission.
+     */
+    public function submit(Request $request)
+    {
+        // Validate incoming data
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name'  => 'required|string|max:255',
+            'phone'      => 'required|string|max:20',
+            'email'      => 'required|email|max:255',
+            'issue'      => 'required|string',
+        ]);
+
+        // Save the data into the contacts table
+        Contact::create($validated);
+
+        // Redirect back to the form with a success message
+        return redirect()->route('contact.form')->with('success', 'Message sent!');
+    }
+}

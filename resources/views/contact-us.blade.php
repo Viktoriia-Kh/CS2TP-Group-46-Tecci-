@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  
 
 <head>
   <meta charset="UTF-8" />
@@ -13,7 +14,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
 </head>
-
 <body>
   <!--HEADER SECTION (SAME STRUCTURE AS HOME PAGE)-->
   <header class="main-header">
@@ -54,7 +54,8 @@
 
           <!--LEFT COLUMN: CONTACT FORM CARD-->
           <div class="contact-form-card">
-            <form id="contactForm" class="contact-form" action="contact-handler.php" method="post" novalidate>
+            <form action="{{ route('contact.submit') }}" method="POST">
+              @csrf
               <!--id gives the form a unique identifier used in JS-->
               <!--action tells the browser where to send the form data when it's submitted, this is part of backend-->
               <!--method="post" tells the browser how to send the form data, post sends the data in the HTTP body-->
@@ -63,7 +64,7 @@
               <!--First Name-->
               <div class="form-row">
                 <label for="firstName">First Name</label> <!--This is the description of the input-->
-                <input type="text" id="firstName" name="firstName" placeholder="Please Enter First Name..." required />
+                <input type="text" id="firstName" name="first_name" placeholder="Please Enter First Name..." required />
                 <!--type="text" is used for standard single-line text input-->
                 <!--id in this case is used by the 'label for="firstName"' for accessibility-->
                 <!--name is the key used in the data that is sent to the server-->
@@ -75,7 +76,7 @@
               <!--Last Name-->
               <div class="form-row">
                 <label for="lastName">Last Name</label> <!--This is the description of the input-->
-                <input type="text" id="lastName" name="lastName" placeholder="Please Enter Last Name..." required />
+                <input type="text" id="lastName" name="last_name" placeholder="Please Enter Last Name..." required />
                 <!--type="text" is used for standard single-line text input-->
                 <!--id in this case is used by the 'label for="lastName"' for accessibility-->
                 <!--name is the key used in the data that is sent to the server-->
@@ -111,7 +112,7 @@
               <!--Message-->
               <div class="form-row">
                 <label for="message">What Do You Have In Mind?</label> <!--This is the description of the textarea-->
-                <textarea id="message" name="message" rows="5" placeholder="Please Enter Query..." required></textarea>
+                <textarea id="message" name="issue" rows="5" placeholder="Please Enter Query..." required></textarea>
                 <!--id in this case is used by the 'label for="message"' for accessibility-->
                 <!--name is the key used in the data that is sent to the server/backend-->
                 <!--rows is the initial suggested height-->
