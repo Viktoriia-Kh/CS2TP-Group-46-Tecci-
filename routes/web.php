@@ -6,6 +6,9 @@ use App\Http\Controllers\DisplayProductController;
 
 
 Route::get('/', function () {
+    return view('product');
+});
+Route::get('/', function () {
     return view('displayproduct');
 });
 
