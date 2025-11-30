@@ -47,10 +47,11 @@ class ProductController extends Controller
     // Displays Products on the page
     public function show(Product $product)
     {
-        // Load category + inventory for this product
+        // Load all related info
         $product->load(['category', 'inventory']);
 
-        return view('products.show', [
+        // Render details
+        return view('product', [
             'product' => $product,
         ]);
     }

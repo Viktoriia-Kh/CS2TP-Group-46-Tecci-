@@ -7,28 +7,26 @@ use App\Models\Product;
 class DisplayProductController extends Controller
 {
     public function index()
-        {
-            // Load all products with their category
-            $products = Product::with('category')->get();
+    {
+        // Load all products with category
+        $products = Product::with('category')->get();
 
-            // Map Eloquent models to the array
-            $productsForJs = $products->map(function ($product) {
-                return [
-                    'id'   => $product->id,
-                    'name' => $product->name,
-                    'price' => (float) $product->price,
+        // Convert DB products
+        $productsForJs = $products->map(function ($p) {
+            return [
+                'id'        => $p->id,
+                'name'      => $p->name,
+                'price'     => (float) $p->price,
+                'category'  => $p->category
+                                ? strtolower(str_replace(' ', '', $p->category->name))
+                                : 'uncategorised',
+                'condition' => $p->condition ?? 'new',
+            ];
+        });
 
-                    // Category string used by the front-end JS tabs.
-                    'category' => $product->category
-                        ? strtolower(str_replace(' ', '', $product->category->name))
-                        : 'uncategorised',
-
-                    'condition' => $product->condition ?? 'new',
-                ];
-            });
-
-            return view('displayproduct', [
-                'productsForJs' => $productsForJs,
-            ]);
-        }
+        // Render YOUR list page view
+        return view('displayproduct', [
+            'productsForJs' => $productsForJs,
+        ]);
     }
+}

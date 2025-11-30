@@ -16,4 +16,5 @@ Route::get('product', function () {
 Route::get('/', [DisplayProductController::class, 'index'])->name('products.index');
 
 // Single product details page
-Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/product/{product}', [ProductController::class, 'show'])
+    ->name('product.detail');

@@ -292,14 +292,21 @@
     products.forEach(product => {
       const productCard = document.createElement("div");
       productCard.className = "product-card-item";
-      productCard.innerHTML = `
-        <div class="product-image-placeholder"></div>
-        <div class="product-item-info">
-          <h4>${product.name}</h4>
-          <p class="product-item-price">£${product.price.toFixed(2)}</p>
-          <button class="add-to-cart-quick">Add to Cart</button>
-        </div>
-      `;
+
+
+
+    productCard.innerHTML = `
+      <a href="/product/${product.id}">
+          <div class="product-image-placeholder"></div>
+          <div class="product-item-info">
+              <h4>${product.name}</h4>
+              <p class="product-item-price">£${product.price.toFixed(2)}</p>
+              <button class="add-to-cart-quick">Add to Cart</button>
+            </div>
+          </div>
+      </a>
+    `;
+
       grid.appendChild(productCard);
     });
   }

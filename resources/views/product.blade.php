@@ -5,7 +5,7 @@
   <title>Tecci | Affordable Tech for Students</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!--Links to HTML/CSS Files-->
-  <link rel="stylesheet" href="sstyle.css" />
+  <link rel="stylesheet" href="{{ asset('sstyle.css') }}">
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
@@ -41,31 +41,53 @@
     </div>
   </header>
 
-    <main>
-        <section class="product-detail">
-            <h1 class="product-name">Lorem Ipsum Dolor Sit Amet</h1>
-            
-            <div class="product-container">
-                <div class="product-image-box">
-                    <img src="{{asset('images/laptop.jpg')}}" alt="Product Image" class="product-image">
-                </div>
-                
-                <div class="product-info-box">
-                    <div class="product-price-box">
-                        <span class="price-label">Price:</span>
-                        <span class="price-value">€999.99</span>
-                    </div>
-                    
-                    <div class="product-description-box">
-                        <h3>Description</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div>
-                    
-                    <button class="add-to-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-        </section>
-    </main>
+  <main>
+      <section class="product-detail">
+
+          {{-- Product Name --}}
+          <h1 class="product-name">{{ $product->name }}</h1>
+
+          <div class="product-container">
+
+              {{-- Image --}}
+              <div class="product-image-box">
+                  @if ($product->image_url)
+                      <img src="{{ asset($product->image_url) }}" 
+                          alt="{{ $product->name }}" 
+                          class="product-image">
+                  @else
+                      <img src="{{ asset('images/laptop.jpg') }}" 
+                          class="product-image">
+                  @endif
+              </div>
+
+              {{-- Info --}}
+              <div class="product-info-box">
+
+                  <div class="product-price-box">
+                      <span class="price-label">Price:</span>
+                      <span class="price-value">£{{ number_format($product->price, 2) }}</span>
+                  </div>
+
+                  <div class="product-description-box">
+                      <h3>Description</h3>
+                      <p>{{ $product->description }}</p>
+                  </div>
+
+                  {{-- Stock --}}
+                  <div class="product-stock-box">
+                      <h3>Stock Status</h3>
+                      <p>
+                          {{ $product->stock_status }}
+                      </p>
+                  </div>
+                  
+                  <button class="add-to-cart-btn">Add to Cart</button>
+
+              </div>
+          </div>
+      </section>
+  </main>
 
     <!--FOOTER-->
   <footer class="site-footer">
