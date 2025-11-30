@@ -171,7 +171,7 @@
 <script>
   // Product data with categories and details
   const allProducts = [
-    { id: 1, name: "Lorem Ipsum Device", price: 599.99, category: "laptops", condition: "new" },
+    { id: 1, name: {{ $product->name }}, price: 599.99, category: "laptops", condition: "new" },
     { id: 2, name: "Dolor Sit Amet Pro", price: 1299.99, category: "pcs", condition: "new" },
     { id: 3, name: "Consectetur Ultra", price: 449.99, category: "phones", condition: "used" },
     { id: 4, name: "Adipiscing Tech Max", price: 899.99, category: "tablets", condition: "refurbished" },
