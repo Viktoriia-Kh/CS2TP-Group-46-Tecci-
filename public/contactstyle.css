@@ -132,7 +132,7 @@ ul {
     gap: 18px;
 }
 
-.contact-container {
+.contact-grid {
     display: grid; /* This turns the container into a grid */
     grid-template-columns: 1.1fr 0.9fr; /* This creates 2 columns, with the left column being 1.1fr and the right column being 0.9fr */
     gap: 0; /* This creates no space between the columns */
@@ -337,7 +337,7 @@ ul {
 /* RESPONSIVENESS */
 
 /* Tablets/Small Laptops */
-@media (max-width: 900px) { /* Starts a media query. so everything inside of {} will only apply when the screen is 900px wide or smaller */
+@media (max-width: 700px) { /* Starts a media query. so everything inside of {} will only apply when the screen is 900px wide or smaller */
     
     .contact-grid {
         grid-template-columns: 1fr; /* This collapses both columns into a single full-width column */
