@@ -41,15 +41,26 @@ class DisplayProductController extends Controller
             });
         }
 
-        // Get the final product list
         $products = $query->get();
 
-        // Send data to your Blade file
+        /**
+         * Build JSON array for JavaScript (matching your old allProducts array)
+         */
+        $productsJson = $products->map(function ($p) {
+            return [
+                'id'        => $p->id,
+                'name'      => $p->name,
+                'price'     => (float) $p->student_price, // or $p->price
+                'category'  => strtolower(optional($p->category)->name ?? 'other'),
+                'condition' => 'new', // you can replace this later with a DB column
+            ];
+        });
+
         return view('displayproduct', [
-            'products'          => $products,
-            'categories'        => $categories,
-            'currentCategoryId' => $request->category ?? null,
-            'searchTerm'        => $request->q ?? '',
+            'products'     => $products,
+            'productsJson' => $productsJson,
         ]);
+
+
     }
 }
