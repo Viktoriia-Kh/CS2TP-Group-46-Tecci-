@@ -169,19 +169,10 @@
 </html>
 
 <script>
-  // Product data with categories and details
-  const allProducts = [
-    { id: 1, name: "Lorem Ipsum Device", price: 599.99, category: "laptops", condition: "new" },
-    { id: 2, name: "Dolor Sit Amet Pro", price: 1299.99, category: "pcs", condition: "new" },
-    { id: 3, name: "Consectetur Ultra", price: 449.99, category: "phones", condition: "used" },
-    { id: 4, name: "Adipiscing Tech Max", price: 899.99, category: "tablets", condition: "refurbished" },
-    { id: 5, name: "Elit Gadget Plus", price: 349.99, category: "accessories", condition: "new" },
-    { id: 6, name: "Sed Do Device", price: 749.99, category: "laptops", condition: "used" },
-    { id: 7, name: "Eiusmod Premium", price: 1099.99, category: "pcs", condition: "new" },
-    { id: 8, name: "Tempor Tech Elite", price: 599.99, category: "phones", condition: "new" },
-    { id: 9, name: "Incididunt Ultra", price: 799.99, category: "tablets", condition: "refurbished" },
-    { id: 10, name: "Labore Device Pro", price: 459.99, category: "accessories", condition: "used" },
-  ];
+
+// Product data with categories and details
+    const allProducts = @json($productsForJs);
+
 
   let currentCategory = "all";
   let currentSortOption = "featured";

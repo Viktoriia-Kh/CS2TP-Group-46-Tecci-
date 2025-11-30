@@ -8,64 +8,52 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Show the main products page.
-     *
-     * This will fetch:
-     *  - all products (with their category + inventory)
-     *  - all categories (for filter buttons, if you want)
-     *
-     * It then sends them to the Blade view "displayproduct".
-     */
+
+
     public function index(Request $request)
     {
-        // Get all active categories (for filters)
+        // Get all active categories for filters
         $categories = Category::where('is_active', true)
                               ->orderBy('name')
                               ->get();
 
-        // Base query for products with relationships
+        // Base query
         $query = Product::with(['category', 'inventory']);
 
-        // Optional: filter by category if ?category=ID is in the URL
-        $currentCategoryId = $request->query('category');
-        if (!empty($currentCategoryId)) {
-            $query->where('category_id', $currentCategoryId);
+        // Optional category filter: ?category=ID
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->query('category'));
         }
 
-        // Optional: search by keyword if ?q= is in the URL
-        $searchTerm = $request->query('q');
-        if (!empty($searchTerm)) {
-            $query->where(function ($q) use ($searchTerm) {
-                $q->where('name', 'like', "%{$searchTerm}%")
-                  ->orWhere('brand', 'like', "%{$searchTerm}%")
-                  ->orWhere('description', 'like', "%{$searchTerm}%");
+        // Optional search filter
+        if ($request->filled('q')) {
+            $search = $request->query('q');
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('brand', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
             });
         }
 
-        // Get all products (you can change to paginate() later)
-        $products = $query->get();
+        // Paginate results
+        $products = $query->paginate(12)->withQueryString();
 
-        // Send data to your Blade view: resources/views/displayproduct.blade.php
         return view('displayproduct', [
-            'products'          => $products,
-            'categories'        => $categories,
-            'currentCategoryId' => $currentCategoryId,
-            'searchTerm'        => $searchTerm,
+            'products'   => $products,
+            'categories' => $categories,
         ]);
     }
 
-    /**
-     * Show a single product detail page.
-     * (We can use this later if you have a separate product details page)
-     */
+    // Displays Products on the page
     public function show(Product $product)
     {
+        // Load category + inventory for this product
         $product->load(['category', 'inventory']);
 
-        return view('productshow', [ // you'll create resources/views/productshow.blade.php later
+        return view('products.show', [
             'product' => $product,
         ]);
     }
 }
+
 
