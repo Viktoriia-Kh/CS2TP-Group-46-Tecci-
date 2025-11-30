@@ -24,7 +24,7 @@ class ContactController extends Controller
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name'  => 'required|string|max:255',
-            'phone'      => 'required|string|max:20',
+            'phone'      => 'required|regex:/^[0-9]+$/|min:11|max:15',
             'email'      => 'required|email|max:255',
             'issue'      => 'required|string',
         ]);

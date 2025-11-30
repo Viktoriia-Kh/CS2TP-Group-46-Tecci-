@@ -88,7 +88,7 @@
               <!--Phone Number-->
               <div class="form-row">
                 <label for="phone">Phone Number</label> <!--This is the description of the input-->
-                <input type="tel" id="phone" name="phone" placeholder="Please Enter Phone Number..." required />
+                <input type="text" id="phone" name="phone" inputmode="numeric" pattern="[0-9]*" placeholder="Please Enter Phone Number..." required />
                 <!--type="tel" is used to indicate telephone input-->
                 <!--id in this case is used by the 'label for="phone"' for accessibility-->
                 <!--name is the key used in the data that is sent to the server-->

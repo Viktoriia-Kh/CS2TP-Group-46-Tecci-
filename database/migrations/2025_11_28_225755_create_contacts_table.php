@@ -18,7 +18,7 @@ Schema::create('contacts', function (Blueprint $table) {
     $table->string('last_name');
     $table->string('phone');
     $table->string('email');
-    $table->text('issue');   // ⬅️ change from 'Query' to 'issue'
+    $table->text('issue');
     $table->timestamps();
 });
     }
