@@ -12,19 +12,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // Primary key (product_id)
+
+            // Foreign key linking product → category
             $table->foreignId('category_id')
-                ->constrained()
-                ->cascadeOnDelete();
+                ->constrained(`categories`) // references categories.id
+                ->cascadeOnDelete(); // delete products if category deleted
     
-            $table->string('name', 150);
-            $table->string('brand')->nullable();
-            $table->text('description')->nullable();
-            $table->decimal('price', 10, 2);
-            $table->decimal('student_price', 10, 2)->nullable();
-            $table->string('image_url')->nullable();
-    
-            $table->timestamps();
+            $table->string('name', 150); // Product name
+            $table->string('brand')->nullable(); // Brand
+            $table->text('description')->nullable(); // Description
+            $table->decimal('price', 10, 2);  // Standard price
+            $table->decimal('student_price', 10, 2)->nullable();  // Student price
+            $table->string('image_url')->nullable();  // Image path or URL
+
+            $table->timestamps(); // created_at + updated_at
         });
     }
     
