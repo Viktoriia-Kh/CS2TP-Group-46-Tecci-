@@ -3,9 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
-        <link rel="stylesheet" href="{{asset('style.css') }}"> <!-- created a link to the stylesheet -->
+        <link rel="stylesheet" href="{{asset('style.css') }}"> <!-- created a link to the stylesheet-->
     </head>
     <body>
+        <img src="{{asset('images/Logo.png')}}" class="tecci-logo" alt="Tecci Logo"> <!-- linked the image file-->
         <section class="section-form">
             <h2>Login</h2>
             {{-- This will display error messages to the user--}}

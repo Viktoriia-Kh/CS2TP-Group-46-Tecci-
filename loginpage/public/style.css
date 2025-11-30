@@ -84,3 +84,11 @@ body {
 .error-messages li {
     list-style-type: none;
 }
+
+/* positioning the logo on the top left of the form */
+.tecci-logo{
+    position: absolute;
+    top: 20px;
+    width: 130px;
+    left: 20px;
+}
