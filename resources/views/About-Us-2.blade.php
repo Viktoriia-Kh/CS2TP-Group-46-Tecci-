@@ -94,3 +94,59 @@
                 </div>
             </div>
         </section>
+
+        <!--WHY TECCI-->
+        <section class="why-tecci">
+            <div class="container why-inner">
+                <div class="why-heading-wrap">
+                    <h2>Why Tecci?</h2>
+                </div>
+
+                <div class="why-items">
+                    <!--Item 1-->
+                    <article class="why-item">
+                        <div class="why-icon">
+                            <i class="fa-solid fa-hand-holding-dollar"></i> <!--fa-hand-holding-dollar is a Hand Holding A Dollar Icon linked from Font Awesome-->
+                        </div>
+                        <div class="why-content">
+                            <h3>Tecci Made Accessible</h3>
+                            <p>
+                                We believe everyone deserves access to reliable technology, no matter their
+                                budget. Our products are carefully selected to balance performance, affordability,
+                                and durability.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!--Item 2-->
+                    <article class="why-item">
+                        <div class="why-icon">
+                            <i class="fa-solid fa-user-graduate"></i> <!--fa-user-graduate is a Graduated User Icon linked from Font Awesome-->
+                        </div>
+                        <div class="why-content">
+                            <h3>Designed For Students</h3>
+                            <p>
+                                Students are at the heart of Tecci. We recognise the challenges of studying,
+                                working, and managing finances — and how essential the right tech is for coursework,
+                                deadlines, and online learning. Tecci makes finding the right device simple,
+                                stress-free, and cost-effective.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!--Item 3-->
+                    <article class="why-item">
+                        <div class="why-icon">
+                            <i class="fa-solid fa-scale-balanced"></i> <!--fa-scale-balanced is a Balanced Scale Icon linked from Font Awesome-->
+                        </div>
+                        <div class="why-content">
+                            <h3>Transparency First</h3>
+                            <p>
+                                What you see is what you get. Clear specifications, honest pricing, and accurate
+                                stock levels ensure that every customer knows exactly what they are purchasing.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
