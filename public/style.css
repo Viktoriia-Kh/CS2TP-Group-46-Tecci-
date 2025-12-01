@@ -92,3 +92,11 @@ body {
     width: 130px;
     left: 20px;
 }
+
+/* adding styling for the text under Welcome Back */
+.sub-message{
+    text-align: center;
+    font-size: 16px;
+    color: grey;
+    margin-bottom: 20px;
+}
