@@ -1,0 +1,238 @@
+/* Base layout for signup page */
+body.signup-page {
+  margin: 0;
+  font-family: "Signika", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f5f5fa;
+  color: #1b1b1f;
+}
+
+/* Center wrapper */
+.signup-main {
+  min-height: calc(100vh - 80px); /* leave room if you have header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+/* Card container */
+.signup-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 2rem 1.75rem;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+  box-sizing: border-box;
+}
+
+/* Logo row */
+.signup-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.signup-logo-row img {
+  height: 40px;
+  width: auto;
+}
+
+.signup-logo-row .brand-text {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+}
+
+/* Headline + subtext */
+.signup-header {
+  margin-bottom: 1.75rem;
+}
+
+.signup-header h1 {
+  font-size: 1.4rem;
+  margin: 0 0 0.35rem 0;
+}
+
+.signup-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Social buttons section */
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.social-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: #111827;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
+}
+
+.social-btn svg {
+  flex-shrink: 0;
+}
+
+.social-btn:hover {
+  background: #f9fafb;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+  transform: translateY(-1px);
+}
+
+.social-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Divider */
+.signup-divider {
+  position: relative;
+  margin: 1.25rem 0 1.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.signup-divider::before,
+.signup-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 42%;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.signup-divider::before {
+  left: 0;
+}
+
+.signup-divider::after {
+  right: 0;
+}
+
+/* Form */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.signup-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.signup-form label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.signup-form input {
+  border-radius: 0.6rem;
+  border: 1px solid #e5e7eb;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.87rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.signup-form input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.25);
+}
+
+/* Error & success messages pulled from Laravel */
+.alert-success {
+  background: #ecfdf3;
+  color: #166534;
+  border-radius: 0.6rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.8rem;
+  margin-bottom: 0.9rem;
+}
+
+.alert-error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-radius: 0.6rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.8rem;
+  margin-bottom: 0.9rem;
+}
+
+.alert-error ul {
+  margin: 0.25rem 0 0;
+  padding-left: 1rem;
+}
+
+/* Submit button */
+.signup-submit-btn {
+  margin-top: 0.4rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  border: none;
+  background: #4f46e5;
+  color: #ffffff;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
+}
+
+.signup-submit-btn:hover {
+  background: #4338ca;
+  box-shadow: 0 12px 30px rgba(55, 48, 163, 0.4);
+  transform: translateY(-1px);
+}
+
+.signup-submit-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Bottom text: Already have an account? */
+.signup-footer-text {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.signup-footer-text a {
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signup-footer-text a:hover {
+  text-decoration: underline;
+}
+
+/* Small screens tweaks */
+@media (max-width: 480px) {
+  .signup-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 14px;
+  }
+}
