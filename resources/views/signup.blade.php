@@ -6,7 +6,7 @@
     <title>Tecci | Sign Up</title>
 
     <!-- Link to your custom CSS -->
-    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
