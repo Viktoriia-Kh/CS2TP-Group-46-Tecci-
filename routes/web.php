@@ -62,7 +62,7 @@ Route::get('/email/verify', function () {
 // Verification link (user clicks from email)
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill(); // Marks email as verified
-    return redirect('/')->with('success', 'Email verified successfully!');
+    return redirect(to: '/')->with('success', 'Email verified successfully!');
 })->middleware(['auth', 'signed', 'throttle:6,1'])
   ->name('verification.verify');
 
@@ -77,3 +77,11 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('success', 'Verification email sent again!');
 })->middleware(['auth', 'throttle:6,1'])
   ->name('verification.send');
+
+  Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+
+    return redirect('/')->with('success', 'Logged out successfully.');
+})->name('logout');

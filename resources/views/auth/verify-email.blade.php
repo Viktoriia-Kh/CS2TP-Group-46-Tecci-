@@ -29,5 +29,18 @@
                     Resend verification email
                 </button>
             </form>
+        <p class="signup-footer-text">
+    Logged in as {{ auth()->user()->name }} – 
+    <a href="{{ route('logout') }}"
+       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        Log out
+    </a>
+</p>
+
+<form id="logout-form" method="POST" action="{{ route('logout') }}" style="display:none;">
+    @csrf
+</form>
+        </div>
+    </main> 
 
             
