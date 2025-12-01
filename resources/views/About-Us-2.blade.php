@@ -46,3 +46,51 @@
 
         </div>
     </header>
+
+    <main>
+        <!--WHO ARE WE + STORY-->
+        <!--Row 1: Who Are We? Image On The Right, Text On The Left-->
+        <section class="about-row about-row-top">
+            <div class="container about-row-grid">
+                <div class="about-text-block">
+                    <h1>Who Are We?</h1>
+                    <p>
+                        Tecci is an e-commerce platform created with one purpose in mind: To make quality
+                        technology affordable, accessible, and stress-free for students and young professionals.
+                    </p>
+                    <p>
+                        That’s why Tecci focuses on providing budget-friendly laptops, PCs, tablets, phones, and
+                        accessories without compromising reliability or performance.
+                    </p>
+                </div>
+
+                <div class="about-image-block">
+                    <img src="Top-Right-Team-Image.png" alt="Students collaborating with laptops" />
+                </div>
+            </div>
+        </section>
+
+        <!--Row 2: Image On The Left, Story Behind Tecci Text On The Right-->
+        <section class="about-row about-row-bottom">
+            <div class="container about-row-grid about-row-reverse">
+                <div class="about-image-block">
+                    <img src="Bottom-Left-Black-And-White-Image.png" alt="Team working with laptops and notebooks" />
+                </div>
+
+                <div class="about-text-block">
+                    <h2>The Story Behind Tecci</h2>
+                    <p>
+                        Tecci was created by a Team who understands the struggles of being a student. We’ve
+                        experienced unreliable laptops, expensive repairs, and long hours searching for
+                        affordable replacements. We understand that technology is essential for academic
+                        success, creative projects, and everyday life — but it shouldn’t come with a heavy
+                        price tag.
+                    </p>
+                    <p>
+                        We wanted to build something better — a platform that students can trust, that balances
+                        affordability with quality, and that makes online tech shopping straightforward and
+                        reliable.
+                    </p>
+                </div>
+            </div>
+        </section>
