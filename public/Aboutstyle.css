@@ -111,3 +111,49 @@ ul {
   transform: translateY(-1px); /* This moves the Icon 1px upwards, giving it a modern lift effect */
   color: #e6f3ff;
 }
+
+/* WHO ARE WE + STORY SECTION */
+
+.about-row {
+  background-color: #e6f3ff;
+  padding: 0; /* This eliminates the extra gaps above and below each row from this Section */
+}
+
+.about-row-top {
+  border-bottom: 0px solid #ffffff; /* This makes sure that there is no seperation between both rows */
+}
+
+.about-row-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); /* This makes the first column slightly wider than the second column */
+  gap: 0px; /* This removes the spacing between the text and the image */
+  align-items: center; /* This vertically centers the content in each row */
+}
+
+.about-row-reverse { /* This reverses the order for the second row so that the image in on the left, and the text is on the right */
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+}
+
+.about-text-block h1,
+.about-text-block h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #03315b;
+  margin-bottom: 18px;
+  margin-left: 60px; /* This makes sure that the text does not stick to the edge of the container */
+  
+}
+
+.about-text-block p {
+  font-size: 14px;
+  color: #111827;
+  margin-bottom: 10px;
+  margin-left: 60px; /* This makes sure that the text does not stick to the edge of the container */
+  max-width: 460px; /* This helps to keep the line length readable */
+}
+
+.about-image-block img {
+  width: 100%; /* This and the line below allows the images to fill their grid cell completely */
+  height: 100%;
+  object-fit: cover; /* This crops the images nicely so that they can easily fill the space */
+}
