@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SignUpController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -25,11 +26,8 @@ Route::get('/', function () {
 Route::get('/signup', [SignUpController::class, 'showForm'])
     ->name('signup.form');
 
-// If your controller method is called "submit", keep this:
 Route::post('/signup', [SignUpController::class, 'submit'])
     ->name('signup.submit');
-
-// If it's called "register", switch submit → register
 
 
 /*
@@ -59,11 +57,25 @@ Route::get('/email/verify', function () {
 })->middleware('auth')
   ->name('verification.notice');
 
-// Verification link (user clicks from email)
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill(); // Marks email as verified
-    return redirect(to: '/')->with('success', 'Email verified successfully!');
-})->middleware(['auth', 'signed', 'throttle:6,1'])
+// ✅ Verification link (user clicks from email) – NO auth middleware now
+Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
+    $user = \App\Models\User::findOrFail($id);
+
+    // Check hash is valid for this email
+    if (! hash_equals(sha1($user->getEmailForVerification()), (string) $hash)) {
+        abort(403, 'Invalid verification link.');
+    }
+
+    if (! $user->hasVerifiedEmail()) {
+        $user->markEmailAsVerified();
+        event(new \Illuminate\Auth\Events\Verified($user));
+    }
+
+    // Optional: log them in so they're authenticated after clicking
+    Auth::login($user);
+
+    return redirect('/signup')->with('success', 'Email verified successfully!');
+})->middleware(['signed', 'throttle:6,1'])
   ->name('verification.verify');
 
 // Resend verification email
@@ -78,10 +90,17 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])
   ->name('verification.send');
 
-  Route::post('/logout', function () {
+
+// Logout
+Route::post('/logout', function () {
     Auth::logout();
     request()->session()->invalidate();
     request()->session()->regenerateToken();
 
     return redirect('/')->with('success', 'Logged out successfully.');
 })->name('logout');
+
+// (Optional but avoids future "login route not defined" issues)
+Route::get('/login', function () {
+    return redirect()->route('signup.form');
+})->name('login');

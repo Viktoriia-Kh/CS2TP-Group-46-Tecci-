@@ -25,14 +25,14 @@ class SignUpController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        // 2) create user and store in variable
+        // 2) create user
         $user = User::create([
             'name'     => $validated['name'],
             'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
 
-        // 3) log them in (email verification requires logged-in user)
+        // 3) log them in
         Auth::login($user);
 
         // 4) send the verification email
