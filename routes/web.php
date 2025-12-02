@@ -68,7 +68,7 @@ Route::get('/auth/microsoft', function () {
 Route::get('/auth/microsoft/callback', function () {
     return redirect('/')->with('success', 'Logged in with Microsoft!');
 })->name('auth.microsoft.callback');
-
+ 
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +85,7 @@ Route::get('/email/verify', function () {
 // Verification link (user clicks from email) – NO auth middleware now
 Route::get('/{id}/{hash}', function (Request $request, $id, $hash) {
     $user = User::findOrFail($id);
+
 
     // Check hash is valid for this email
     if (! hash_equals(sha1($user->getEmailForVerification()), (string) $hash)) {
