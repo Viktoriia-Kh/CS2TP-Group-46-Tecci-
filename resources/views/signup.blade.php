@@ -25,7 +25,7 @@
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="{{ url('/contact') }}">Contact</a></li>
-                    <li><a href="#" class="active">Sign Up</a></li>
+                    <li><a href="#" class="active">Products</a></li>
                 </ul>
             </nav>
 
@@ -106,46 +106,40 @@
         </div>
     </main>
 
-    {{-- FOOTER --}}
-    <footer class="site-footer">
-        <div class="container footer-inner">
-
-            <div class="footer-col">
-                <h3>TECCI</h3>
-                <p>
-                    Smart Tech at Smart Prices.<br>
-                    Tecci makes premium devices accessible to<br>
-                    students and customers across the UK.
-                </p>
-            </div>
-
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                    <li><a href="/products">Products</a></li>
-                    <li><a href="/basket">Basket</a></li>
-                    <li><a href="/account">My Account</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>Contact Info</h4>
-                <ul class="contact-list">
-                    <li><i class="fa-solid fa-location-dot"></i> Birmingham, B4 7ET</li>
-                    <li><i class="fa-solid fa-phone"></i> 0121 555 0198</li>
-                    <li><i class="fa-regular fa-envelope"></i> Tecci_Queries@net.com</li>
-                </ul>
-            </div>
-
+   <footer class="main-footer">
+    <div class="container footer-inner">
+        <div class="footer-col">
+            <h3>TECCI</h3>
+            <p>
+                Smart Tech at Smart Prices.<br>
+                Tecci makes premium devices accessible to<br>
+                students and customers across the UK.
+            </p>
         </div>
 
-        <div class="footer-bottom">
-            <p>&copy; 2025 Tecci. All rights reserved.</p>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/basket">Basket</a></li>
+                <li><a href="/account">My Account</a></li>
+            </ul>
         </div>
-    </footer>
 
-</body>
-</html>
+        <div class="footer-col">
+            <h4>Contact Info</h4>
+            <ul class="contact-list">
+                <li><i class="fa-solid fa-location-dot"></i> Birmingham, B4 7ET</li>
+                <li><i class="fa-solid fa-phone"></i> 0121 555 0198</li>
+                <li><i class="fa-regular fa-envelope"></i> Tecci_Queries@net.com</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        &copy; 2025 Tecci. All rights reserved.
+    </div>
+</footer>

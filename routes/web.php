@@ -2,13 +2,12 @@
 
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SignUpController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
-use Laravel\Socialite\Facades\Socialite;
-use App\Models\User;   // 👈 ADD THIS
 
 /*
 |--------------------------------------------------------------------------
@@ -39,34 +38,17 @@ Route::post('/signup', [SignUpController::class, 'submit'])
 | Social Redirect Buttons
 |--------------------------------------------------------------------------
 */
-// 1) Redirect to Google
+
 Route::get('/auth/google', function () {
     return Socialite::driver('google')->redirect();
 })->name('auth.google');
 
-// 2) Callback from Google
-Route::get('/auth/google/callback', function () {
-    $googleUser = Socialite::driver('google')->user();
-
-    // Find or create local user
-    $user = User::firstOrCreate(
-        ['email' => $googleUser->getEmail()],
-        [
-            'name'     => $googleUser->getName() ?? $googleUser->getNickname() ?? 'Google User',
-            'password' => bcrypt(Str::random(32)), // random, they’ll log in via Google
-        ]
-    );
-
-    Auth::login($user);
-
-    // After login, send them home (change if you want)
-    return redirect('/');   
-})->name('auth.google.callback');
-
-
 Route::get('/auth/microsoft', function () {
     return redirect()->away('https://login.microsoftonline.com/');
 })->name('auth.microsoft');
+Route::get('/auth/microsoft/callback', function () {
+    return redirect('/')->with('success', 'Logged in with Microsoft!');
+})->name('auth.microsoft.callback');
 
 
 /*
@@ -81,8 +63,8 @@ Route::get('/email/verify', function () {
 })->middleware('auth')
   ->name('verification.notice');
 
-// ✅ Verification link (user clicks from email) – NO auth middleware now
-Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
+// Verification link (user clicks from email) – NO auth middleware now
+Route::get('/{id}/{hash}', function (Request $request, $id, $hash) {
     $user = \App\Models\User::findOrFail($id);
 
     // Check hash is valid for this email
