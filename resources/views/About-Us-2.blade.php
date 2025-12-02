@@ -21,8 +21,7 @@
         <div class="container nav-container">
 
             <!-- Logo -->
-            <a href="home-page-2.blade.php" class="logo">
-                <!--Using this will make the Logo clickable and takes the user to the Home Page-->
+            <a href="home-page-2.blade.php" class="logo"> <!--Using this will make the Logo clickable and takes the user to the Home Page-->
                 <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
                 <span class="logo-text">TECCI</span> <!--span is an inline element used for short text-->
             </a>
@@ -150,3 +149,47 @@
                 </div>
             </div>
         </section>
+
+        <!--MISSION & VISION-->
+        <section class="mission-vision">
+            <!--Our Mission-->
+            <div class="container mission-grid">
+                <div class="mission-image">
+                    <img src="Our-Mission-Background-Image.png" alt="Team joining hands in collaboration" />
+                </div>
+
+                <div class="mission-card">
+                    <h2>Our Mission</h2>
+                    <p>
+                        To empower students and young professionals by providing affordable technology through
+                        a user-friendly, secure, and scalable platform.
+                    </p>
+                    <p>
+                        We aim to make the online shopping experience seamless — from browsing products to
+                        checking out, receiving orders, and managing account details.
+                    </p>
+                </div>
+            </div>
+
+            <!--Our Vision-->
+            <div class="container vision-grid">
+                <div class="vision-card">
+                    <h2>Our Vision</h2>
+                    <p>
+                        To become the go-to online store for students needing dependable technology at fair
+                        prices.
+                    </p>
+                    <p>
+                        To deliver the smoothest online shopping experience possible.
+                    </p>
+                    <p>
+                        To create a platform that grows alongside the people who use it.
+                    </p>
+                </div>
+
+                <div class="vision-image">
+                    <img src="Our-Promise-Background.png" alt="Business meeting in a modern office" />
+                </div>
+            </div>
+        </section>
+    </main>
