@@ -372,3 +372,73 @@ body.signup-page {
     align-items: flex-start;
   }
 }
+/* MULTI-COLUMN FOOTER */
+.site-footer {
+  background: #021d36;
+  color: #e5e7eb;
+  padding: 40px 0 20px;
+  margin-top: 3rem;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  width: min(300px, 100%);
+}
+
+.footer-col h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #ffffff;
+}
+
+.footer-col h4 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.footer-col p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  opacity: 0.9;
+  transition: opacity 0.15s ease, transform 0.12s ease;
+}
+
+.footer-col ul li a:hover {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+.contact-list i {
+  margin-right: 8px;
+  color: #4f93ff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: 20px;
+}
+
+.footer-bottom p {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+

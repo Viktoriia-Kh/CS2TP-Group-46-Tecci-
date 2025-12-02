@@ -1,98 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Verify your email | Tecci</title>
+@extends('layouts.app')
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
+@section('title', 'Verify Your Email | Tecci')
 
-<body class="signup-page">
+@section('body-class', 'signup-page')
 
-    {{-- Global Header --}}
-    <header class="main-header">
-        <div class="container nav-container">
+@section('content')
+<main class="signup-main">
+    <div class="signup-card">
 
-            {{-- Logo --}}
-            <a href="{{ url('/') }}" class="logo">
-                <img src="{{ asset('images/Logo.png') }}" alt="Tecci Logo">
-                <span>Tecci</span>
-            </a>
-
-            {{-- Navigation --}}
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="{{ route('signup.form') }}">Sign up</a></li>
-                </ul>
-            </nav>
-
-            {{-- Icons --}}
-            <div class="nav-icons">
-                <a href="#">🔍</a>
-                <a href="#">🛒</a>
-            </div>
-
-        </div>
-    </header>
-
-    {{-- Main Content --}}
-    <main class="signup-main">
-        <div class="signup-card">
-
-            <div class="signup-header">
-                <h1>Verify your email</h1>
-                <p>
-                    We’ve sent a verification link to
-                    <strong>{{ auth()->user()->email }}</strong>.
-                    Please click the link in that email to activate your account.
-                </p>
-            </div>
-
-            {{-- Status: link re-sent --}}
-            @if (session('success'))
-                <div class="alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            {{-- Resend button --}}
-            <form method="POST" action="{{ route('verification.send') }}" class="signup-form">
-                @csrf
-                <button type="submit" class="signup-submit-btn">
-                    Resend verification email
-                </button>
-            </form>
-
-            <p class="signup-footer-text">
-                Logged in as {{ auth()->user()->name }} –
-                <a href="{{ route('logout') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Log out
-                </a>
+        <div class="signup-header">
+            <h1>Verify your email</h1>
+            <p>
+                We’ve sent a verification link to 
+                <strong>{{ auth()->user()->email }}</strong>.
             </p>
-
-            <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display:none;">
-                @csrf
-            </form>
-
         </div>
-    </main>
 
-    {{-- Footer --}}
-    <footer class="main-footer">
-        <div class="container footer-inner">
-            <p class="footer-copy">© {{ date('Y') }} Tecci. All rights reserved.</p>
-            <ul class="footer-links">
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Terms</a></li>
-                <li><a href="#">Support</a></li>
+        {{-- Status message --}}
+        @if (session('status') == 'verification-link-sent')
+            <div class="alert-success">
+                A new verification link has been sent.
+            </div>
+        @endif
+
+        {{-- Resend form --}}
+        <form method="POST" action="{{ route('verification.send') }}" class="signup-form">
+            @csrf
+            <button type="submit" class="signup-submit-btn">
+                Resend verification email
+            </button>
+        </form>
+
+        {{-- Logout --}}
+        <p class="signup-footer-text">
+            Logged in as {{ auth()->user()->name }} –
+            <a href="{{ route('logout') }}"
+               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                Log out
+            </a>
+        </p>
+
+        <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display:none;">
+            @csrf
+        </form>
+
+    </div>
+</main>
+<footer class="site-footer">
+    <div class="container footer-inner">
+
+        {{-- Column 1 – Brand --}}
+        <div class="footer-col">
+            <h3>TECCI</h3>
+            <p>
+                Smart Tech at Smart Prices.<br>
+                Tecci makes premium devices accessible to<br>
+                students and customers across the UK.
+            </p>
+        </div>
+
+        {{-- Column 2 – Quick Links --}}
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="{{ url('/') }}">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="{{ route('signup.form') }}">Sign Up</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Basket</a></li>
+                <li><a href="#">My Account</a></li>
             </ul>
         </div>
-    </footer>
 
-</body>
-</html>
+        {{-- Column 3 – Contact Info --}}
+        <div class="footer-col">
+            <h4>Contact Info</h4>
+            <ul class="contact-list">
+                <li>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>0121 555 0198</span>
+                </li>
+
+                <li>
+                    <i class="fa-solid fa-phone"></i>
+                    <span>Tecci_Queries@net.com</span>
+                </li>
+
+                <li>
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>Birmingham, B4 7ET</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; {{ date('Y') }} Tecci. All rights reserved.</p>
+    </div>
+</footer>
+
+@endsection
