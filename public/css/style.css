@@ -1,21 +1,154 @@
-/* Base layout for signup page */
+/* ================================
+   GLOBAL RESET
+================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove bullets from lists */
+ul {
+  list-style: none;
+}
+
+/* Make images behave nicely */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Links inherit text colour by default */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================================
+   BASE STYLES
+   (for all pages except signup)
+================================== */
+
+body:not(.signup-page) {
+  font-family: "Signika", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background-color: #f5f7fb;
+  color: #111827;
+  line-height: 1.6;
+}
+
+/* Centre content container with max width */
+.container {
+  width: min(1200px, 100% - 32px);
+  margin-inline: auto;
+}
+
+/* ================================
+   MAIN HEADER / NAVBAR
+================================== */
+
+.main-header {
+  background-color: #03315b;
+  color: #ffffff;
+  border-bottom: 15px solid #085296;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  gap: 32px;
+}
+
+/* Logo area */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9.6px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.logo img {
+  height: 44px;
+}
+
+/* Main navigation menu */
+.main-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 18px;
+}
+
+.main-nav a {
+  position: relative;
+  padding-bottom: 1.6px;
+}
+
+/* Underline animation */
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: #e6f3ff;
+  transition: width 0.2s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+  width: 100%;
+}
+
+/* Header icons (e.g. search, cart) */
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 19px;
+}
+
+.nav-icons a {
+  padding: 2.4px;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.nav-icons a:hover {
+  transform: translateY(-1px);
+  color: #e6f3ff;
+}
+
+/* ================================
+   SIGNUP PAGE
+================================== */
+
+/* Only for pages with class="signup-page" on <body> */
 body.signup-page {
   margin: 0;
-  font-family: "Signika", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #4169e1;
+  font-family: "Signika", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: #4169e1; /* Royal blue background */
   color: #1b1b1f;
 }
 
-/* Center wrapper */
+/* Centre the signup card on screen */
 .signup-main {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px); /* space for header/footer */
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem 1.5rem;
 }
 
-/* Card */
+/* White signup card */
 .signup-card {
   width: 100%;
   max-width: 420px;
@@ -26,7 +159,7 @@ body.signup-page {
   box-sizing: border-box;
 }
 
-/* Header */
+/* Card header text */
 .signup-header h1 {
   margin: 0;
   font-size: 1.35rem;
@@ -40,25 +173,7 @@ body.signup-page {
   color: #6b7280;
 }
 
-/* Logo row */
-.signup-logo-row {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.signup-logo {
-  height: 40px;
-  width: auto;
-}
-
-.brand-text {
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: #ffffff;
-}
-
-/* Social buttons */
+/* Social sign-in buttons */
 .social-buttons {
   display: flex;
   flex-direction: column;
@@ -80,7 +195,8 @@ body.signup-page {
   text-decoration: none;
   color: #111827;
   cursor: pointer;
-  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
+  transition: background 0.15s ease, box-shadow 0.15s ease,
+    transform 0.08s ease;
 }
 
 .social-btn:hover {
@@ -89,7 +205,7 @@ body.signup-page {
   transform: translateY(-1px);
 }
 
-/* Divider */
+/* Little "or continue with" text */
 .signup-divider {
   margin: 1.1rem 0 0.8rem;
   text-align: center;
@@ -97,7 +213,7 @@ body.signup-page {
   color: #9ca3af;
 }
 
-/* Alerts */
+/* Alert messages (success + error) */
 .alert-success,
 .alert-error {
   margin-bottom: 0.75rem;
@@ -116,13 +232,14 @@ body.signup-page {
   color: #b91c1c;
 }
 
-/* Form */
+/* Signup form layout */
 .signup-form {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
+/* Label + input groups */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -162,7 +279,8 @@ body.signup-page {
   font-weight: 600;
   cursor: pointer;
   letter-spacing: 0.02em;
-  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
+  transition: background 0.15s ease, box-shadow 0.15s ease,
+    transform 0.08s ease;
 }
 
 .signup-submit-btn:hover {
@@ -170,7 +288,7 @@ body.signup-page {
   transform: translateY(-1px);
 }
 
-/* Footer text */
+/* Tiny footer text under form */
 .signup-footer-text {
   margin-top: 0.9rem;
   font-size: 0.78rem;
@@ -188,7 +306,69 @@ body.signup-page {
   text-decoration: underline;
 }
 
-/* Header spacing */
-header.p-6 {
-  padding: 1rem 1.5rem 0.5rem;
+/* ================================
+   FOOTER
+================================== */
+
+.main-footer {
+  background-color: #021d36;
+  color: #e5e7eb;
+  margin-top: 3rem;
+  padding: 16px 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.footer-copy {
+  opacity: 0.9;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.8rem;
+}
+
+.footer-links a {
+  opacity: 0.9;
+  transition: opacity 0.15s ease, transform 0.12s ease;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+/* ================================
+   RESPONSIVE TWEAKS
+================================== */
+
+@media (max-width: 768px) {
+  .nav-container {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .logo {
+    font-size: 32px;
+  }
+
+  .main-nav ul {
+    gap: 16px;
+    font-size: 16px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
