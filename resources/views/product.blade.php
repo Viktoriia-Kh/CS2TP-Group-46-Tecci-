@@ -26,9 +26,9 @@
       <nav class="main-nav">
         <ul>
           <li><a href="/">Home</a></li> <!--class="active" marks the Current Page-->
-          <li><a href="about-us">About</a></li>
-          <li><a href="contact-us">Contact</a></li>
-          <li><a href="displayproduct">Products</a></li>
+          <li><a href="/about-us">About</a></li>
+          <li><a href="/contact-us">Contact</a></li>
+          <li><a href="/displayproduct">Products</a></li>
         </ul>
       </nav>
 
@@ -106,9 +106,9 @@
         <h4>Quick Links</h4>
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="about-us">About</a></li>
-          <li><a href="contact-us">Contact</a></li>
-          <li><a href="displayproduct">Products</a></li>
+          <li><a href="/about-us">About</a></li>
+          <li><a href="/contact-us">Contact</a></li>
+          <li><a href="/displayproduct">Products</a></li>
           <li><a href="basket.html">Basket</a></li>
           <li><a href="account.html">My Account</a></li>
         </ul>
