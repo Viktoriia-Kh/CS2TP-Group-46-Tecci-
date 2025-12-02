@@ -29,9 +29,9 @@
       <!--Navigation Menu-->
       <nav class="main-nav">
         <ul>
-          <li><a href="NewHome.html">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="NewContact.html" class="active">Contact</a></li> <!--class="active" marks the Current Page-->
+          <li><a href="contact-us" class="active">Contact</a></li> <!--class="active" marks the Current Page-->
           <li><a href="products.html">Products</a></li>
         </ul>
       </nav>
