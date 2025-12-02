@@ -6,10 +6,14 @@
         <link rel="stylesheet" href="{{asset('style.css') }}"> <!-- created a link to the stylesheet-->
     </head>
     <body>
+
+    <div class="logo-text">
         <img src="{{asset('images/Logo.png')}}" class="tecci-logo" alt="Tecci Logo"> <!-- linked the image file-->
+        <span class="tecci-text">Tecci</span>
+    </div>
         <section class="section-form">
             <h2>Welcome Back</h2>
-            <p class="sub-message">Login to your Tecci account.</p>
+            <p class="welcome-sub-message">Login to your Tecci account.</p>
             {{-- This will display error messages to the user--}}
             @if (!empty($error_messages))
                 <ul class="error-messages">
