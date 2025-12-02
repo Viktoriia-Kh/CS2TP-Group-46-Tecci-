@@ -35,3 +35,79 @@ ul {
   width: min(1200px, 100% - 32px); /* This sets the maximum width of the content, has consistent padding */
   margin-inline: auto; /* This centres .container horizontally */
 }
+
+/* HEADER & NAVBAR SECTION */
+
+.main-header {
+  background-color: #03315b;
+  color: #ffffff; /* This sets the default text colour inside the Header to white */
+  border-bottom-style: solid;
+  border-bottom-color: #085296;
+  border-bottom-width: 15px
+}
+
+.nav-container {
+  display: flex; /* This turns the container into a flexbox row, allowing the logo, nav, and icons to sit horizontally */
+  align-items: center; 
+  justify-content: space-between; /* This pushes the Logo to the far left, Icons to the far right. Nav Menu in the middle: Creating a 3-Part Layout */
+  padding: 12px 0; /* This adds vertical spacing */
+  gap: 32px; /* This adds space between the 3 Sections inside the Nav */
+}
+
+.logo {
+  display: flex; /* This places the Logo and Text side by side */
+  align-items: center; 
+  gap: 9.6px; /* This adds space between Logo and Tecci Text */
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.logo img {
+  height: 44px;
+}
+
+.main-nav ul {
+  display: flex; /* This turns <ul> into Horizontal Row */
+  align-items: center;
+  gap: 24px; /* This controls the spacing between each Menu Item */
+  font-size: 18px;
+}
+
+.main-nav a {
+  position: relative; /* This lets the ::after element (used to create a custom animated underline) be positioned relative to the link */
+  padding-bottom: 1.6px; /* This ensures space for the underline animation */
+}
+
+.main-nav a::after {
+  content: ""; /* This is required to create a pseudo element */
+  position: absolute; /* This positions the underline relative to the link */
+  left: 0;
+  bottom: -4px; /* This places the underline slightly below the text */
+  width: 0; /* This starts with a width of 0, making it initially invisibale */
+  height: 2px; /* Thickness of underline */
+  background-color: #e6f3ff;
+  transition: width 0.2s ease; /* This animates the underline growing on the hover */
+}
+
+.main-nav a:hover::after, /* On Hover: The underline expands to full width */
+.main-nav a.active::after { /* On the active Page (Home): The underline is always shown */
+  width: 100%;
+}
+
+.nav-icons {
+  display: flex; /* This lays out the Icons horizontally */
+  align-items: center;
+  gap: 16px;
+  font-size: 19px;
+}
+
+.nav-icons a {
+  padding: 2.4px;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.nav-icons a:hover {
+  transform: translateY(-1px); /* This moves the Icon 1px upwards, giving it a modern lift effect */
+  color: #e6f3ff;
+}
