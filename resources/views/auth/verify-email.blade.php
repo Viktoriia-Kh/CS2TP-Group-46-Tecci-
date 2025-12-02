@@ -46,10 +46,10 @@
 
     </div>
 </main>
-<footer class="site-footer">
+<<footer class="main-footer">
     <div class="container footer-inner">
 
-        {{-- Column 1 – Brand --}}
+        {{-- Column 1 --}}
         <div class="footer-col">
             <h3>TECCI</h3>
             <p>
@@ -59,35 +59,35 @@
             </p>
         </div>
 
-        {{-- Column 2 – Quick Links --}}
+        {{-- Column 2 --}}
         <div class="footer-col">
             <h4>Quick Links</h4>
-            <ul>
-                <li><a href="{{ url('/') }}">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="{{ route('signup.form') }}">Sign Up</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Basket</a></li>
-                <li><a href="#">My Account</a></li>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/basket">Basket</a></li>
+                <li><a href="/account">My Account</a></li>
             </ul>
         </div>
 
-        {{-- Column 3 – Contact Info --}}
+        {{-- Column 3 --}}
         <div class="footer-col">
             <h4>Contact Info</h4>
-            <ul class="contact-list">
+            <ul class="contact-list footer-links">
                 <li>
-                    <i class="fa-solid fa-location-dot"></i>
+                    <i class="fa-solid fa-phone"></i>
                     <span>0121 555 0198</span>
                 </li>
 
                 <li>
-                    <i class="fa-solid fa-phone"></i>
+                    <i class="fa-solid fa-envelope"></i>
                     <span>Tecci_Queries@net.com</span>
                 </li>
 
                 <li>
-                    <i class="fa-regular fa-envelope"></i>
+                    <i class="fa-solid fa-location-dot"></i>
                     <span>Birmingham, B4 7ET</span>
                 </li>
             </ul>
@@ -99,5 +99,3 @@
         <p>&copy; {{ date('Y') }} Tecci. All rights reserved.</p>
     </div>
 </footer>
-
-@endsection
