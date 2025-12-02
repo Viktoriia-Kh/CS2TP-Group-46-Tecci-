@@ -304,4 +304,67 @@ ul {
   object-fit: cover; /* This makes the image fill its grid cell easily */
 }
 
+/* FOOTER SECTION */
+
+.site-footer {
+  background-color: #03315b;
+  color: #ffffff; /* This sets the default colour inside the Footer to white */
+  padding-top: 40px; /* This adds space to the top so the content is not stuck to the edge */
+}
+
+.footer-inner {
+  display: grid; /* This enables the CSS Grid Layout */
+  grid-template-columns: 2fr 1.5fr 1.8fr; /* This creates 3 columns with different relative widths: First Column is 2 fractions, Second Column is 1.5 fractions. Third Column is 1.8 fractions */
+  gap: 40px; /* Space between the columns */
+  padding-bottom: 32px; /* This adds space below the columns, before the copyright bar */
+}
+
+.footer-col h3,
+.footer-col h4 {
+  margin-bottom: 14px; /* This adds space from under the Headings to seperate them from the content */
+}
+
+.footer-col p {
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.footer-col ul {
+  display: flex; /* This turns the UL into a flex container */
+  flex-direction: column; /* This aligns the list items vertically */
+  gap: 6px; /* This adds vertical spacing between list items */
+}
+
+.footer-col a {
+  font-size: 14px; 
+  color: #ffffff;
+  transition: color 0.15s ease; /* This adds a colour transition when hovering */
+}
+
+.footer-col a:hover {
+  color: #dae6f2; /* When hovering, it becomes this colour */
+}
+
+.contact-list li {
+  display: flex; /* This places the Icons and text in a row */
+  align-items: center; /* This vertically aligns the Icon and text */
+  gap: 8px; /* Space between Icon and text */
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.contact-list i {
+  font-size: 16px; /* This makes sure that each Icon is a consistent size */
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 14px 0 19px; /* This gives the text some space */
+  text-align: center;
+  font-size: 13px;
+  color: #ffffff;
+}
+
+
+
 
