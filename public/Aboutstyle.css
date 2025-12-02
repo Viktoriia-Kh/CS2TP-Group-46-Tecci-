@@ -234,3 +234,74 @@ ul {
   font-size: 14px;
 }
 
+/* MISSION & VISION SECTION */
+
+.mission-vision {
+  background-color: #e6f3ff;
+  padding: 48px 0 56px; /* This adds vertical space inside this section */
+}
+
+/* Our Mission */
+.mission-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr); /* This creates two columns, with the image column being slightly smaller than the text column */
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 56px; /* This seperates the Mission and Vision rows from each other */
+}
+
+.mission-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This makes the image fill its grid cell easily */
+}
+
+.mission-card {
+  background-color: #085296;
+  color: #ffffff;
+  padding: 24px 26px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); /* This creates a slight shadow effect */
+}
+
+.mission-card h2 {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.mission-card p {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+/* Our Vision */
+.vision-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr); /* This creates two columns, with the image column being slightly smaller than the text column */
+  gap: 32px;
+  align-items: center;
+}
+
+.vision-card {
+  background-color: #085296;
+  color: #ffffff;
+  padding: 24px 26px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); /* This creates a slight shadow effect */
+}
+
+.vision-card h2 {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.vision-card p {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.vision-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This makes the image fill its grid cell easily */
+}
+
+
