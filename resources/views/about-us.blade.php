@@ -30,9 +30,9 @@
             <!--Navigation Menu-->
             <nav class="main-nav">
                 <ul>
-                    <li><a href="home-page-2.blade.php">Home</a></li> <!--class="active" marks the Current Page-->
-                    <li><a href="About-Us-2.blade.php" class="active">About</a></li>
-                    <li><a href="contact-us.blade.php">Contact</a></li>
+                    <li><a href="/">Home</a></li> <!--class="active" marks the Current Page-->
+                    <li><a href="about-us" class="active">About</a></li>
+                    <li><a href="contact-us">Contact</a></li>
                     <li><a href="products.html">Products</a></li>
                 </ul>
             </nav>
@@ -210,9 +210,9 @@
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="home-page-2.blade.php">Home</a></li>
-                    <li><a href="About-Us-2.blade.php">About</a></li>
-                    <li><a href="contact-us-2.blade.php">Contact</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="about-us">About</a></li>
+                    <li><a href="contact-us">Contact</a></li>
                     <li><a href="products.html">Products</a></li>
                     <li><a href="basket.html">Basket</a></li>
                     <li><a href="account.html">My Account</a></li>
