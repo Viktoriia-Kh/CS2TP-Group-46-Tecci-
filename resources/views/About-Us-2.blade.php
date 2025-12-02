@@ -74,7 +74,7 @@
         <section class="about-row about-row-bottom">
             <div class="container about-row-grid about-row-reverse">
                 <div class="about-image-block">
-                    <img src="Bottom-Left-Black-And-White-Image.png" alt="Team working with laptops and notebooks" />
+                    <img src="https://i.ibb.co/hxKBB9Fr/Bottom-Left-Black-And-White-Image.png" alt="Team working with laptops and notebooks" />
                 </div>
 
                 <div class="about-text-block">
