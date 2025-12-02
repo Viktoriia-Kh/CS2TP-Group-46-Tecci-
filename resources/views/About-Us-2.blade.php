@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="about-image-block">
-                    <img src="Top-Right-Team-Image.png" alt="Students collaborating with laptops" />
+                    <img src="https://i.ibb.co/N6Nmw6G4/Top-Right-Team-Image.png" alt="Students collaborating with laptops" />
                 </div>
             </div>
         </section>
@@ -156,7 +156,7 @@
             <!--Our Mission-->
             <div class="container mission-grid">
                 <div class="mission-image">
-                    <img src="Our-Mission-Background-Image.png" alt="Team joining hands in collaboration" />
+                    <img src="https://i.ibb.co/ZpDDHg4N/Our-Mission-Background-Image.png" alt="Team joining hands in collaboration" />
                 </div>
 
                 <div class="mission-card">
@@ -189,7 +189,7 @@
                 </div>
 
                 <div class="vision-image">
-                    <img src="Our-Promise-Background.png" alt="Business meeting in a modern office" />
+                    <img src="https://i.ibb.co/8458sxX6/Our-Promise-Background-Image.png" alt="Business meeting in a modern office" />
                 </div>
             </div>
         </section>
