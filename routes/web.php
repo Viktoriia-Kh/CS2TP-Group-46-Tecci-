@@ -1,13 +1,14 @@
 <?php
 
-<?php
-
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SignUpController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,24 @@ Route::post('/signup', [SignUpController::class, 'submit'])
 Route::get('/auth/google', function () {
     return Socialite::driver('google')->redirect();
 })->name('auth.google');
+Route::get('/auth/google/callback', function () {
+    $googleUser = Socialite::driver('google')->user();
+
+    // Find or create local user
+    $user = User::firstOrCreate(
+        ['email' => $googleUser->getEmail()],
+        [
+            'name'     => $googleUser->getName() ?? $googleUser->getNickname() ?? 'Google User',
+            'password' => bcrypt(Str::random(32)), // random, they’ll log in via Google
+        ]
+    );
+
+    Auth::login($user);
+
+    // After login, send them home (change if you want)
+    return redirect('/');   // or route('signup.form')
+})->name('auth.google.callback');
+
 
 Route::get('/auth/microsoft', function () {
     return redirect()->away('https://login.microsoftonline.com/');
@@ -65,7 +84,7 @@ Route::get('/email/verify', function () {
 
 // Verification link (user clicks from email) – NO auth middleware now
 Route::get('/{id}/{hash}', function (Request $request, $id, $hash) {
-    $user = \App\Models\User::findOrFail($id);
+    $user = User::findOrFail($id);
 
     // Check hash is valid for this email
     if (! hash_equals(sha1($user->getEmailForVerification()), (string) $hash)) {
@@ -106,7 +125,6 @@ Route::post('/logout', function () {
     return redirect('/')->with('success', 'Logged out successfully.');
 })->name('logout');
 
-// (Optional but avoids future "login route not defined" issues)
 Route::get('/login', function () {
     return redirect()->route('signup.form');
 })->name('login');
