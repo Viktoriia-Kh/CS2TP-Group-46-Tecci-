@@ -27,7 +27,7 @@ Route::get('product', function () {
 });
 
 // Products listing page 
-Route::get('/', [DisplayProductController::class, 'index'])->name('products.index');
+Route::get('displayproduct', [DisplayProductController::class, 'index'])->name('products.index');
 
 // Single product details page
 Route::get('/product/{product}', [ProductController::class, 'show'])

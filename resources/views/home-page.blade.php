@@ -20,7 +20,7 @@
     <div class="container nav-container">
 
       <!-- Logo -->
-      <a href="home-page-2.blade.php" class="logo"> <!--Using this will make the Logo clickable and takes the user to the Home Page-->
+      <a href="/" class="logo"> <!--Using this will make the Logo clickable and takes the user to the Home Page-->
         <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
         <span class="logo-text">TECCI</span> <!--Is an inline element used for short text-->
       </a>
@@ -31,7 +31,7 @@
           <li><a href="/" class="active">Home</a></li> <!--class="active" marks the Current Page-->
           <li><a href="about-us">About</a></li>
           <li><a href="contact-us">Contact</a></li>
-          <li><a href="products.html">Products</a></li>
+          <li><a href="displayproduct">Products</a></li>
         </ul>
       </nav>
 
@@ -56,7 +56,7 @@
           <p>Style.</p>
         </h1>
         <p class="hero-subtitle">Smart gadgets and sleek devices, priced for University Students.</p>
-        <a href="products.html" class="btn btn-primary">Shop Now</a>
+        <a href="displayproduct" class="btn btn-primary">Shop Now</a>
       </div>
 
       <!--Right Side: Hero Image-->
@@ -73,7 +73,7 @@
     <div class="container">
       <h2>Featured Products</h2>
       <div class="card-grid product-grid"> <!-- This div will hold all 4 Product Cards-->
-        <a href="product-1.html" class="product-card">
+        <a href="product/1" class="product-card">
           <div class="product-image-placeholder"> <img src="Laptop.PNG" alt="Budget Student Laptop"></div>
           <div class="product-info">
             <p class="product-name">Laptop</p>
@@ -113,35 +113,35 @@
     <div class="container">
       <h2>Shop All Products Now</h2>
       <div class="card-grid category-grid">
-        <a href="products.html" class="category-card">
+        <a href="displayproduct" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-laptop"></i> <!--fa-laptop is a Laptop Icon linked from Font Awesome-->
           </div>
           <p>Laptops</p>
         </a>
 
-        <a href="products.html" class="category-card">
+        <a href="displayproduct" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-desktop"></i> <!--fa-desktop is a Desktop Icon linked from Font Awesome-->
           </div>
           <p>PCs</p>
         </a>
 
-        <a href="products.html" class="category-card">
+        <a href="displayproduct" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-mobile-screen-button"></i> <!--fa-mobile-screen-button is a Mobile Icon linked from Font Awesome-->
           </div>
           <p>Smartphones</p>
         </a>
 
-        <a href="products.html" class="category-card">
+        <a href="displayproduct" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-tablet-screen-button"></i> <!--fa-tablet-screen-button is a Tablet Icon linked from Font Awesome-->
           </div>
           <p>Tablets</p>
         </a>
 
-        <a href="products.html" class="category-card">
+        <a href="displayproduct" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-headphones"></i> <!--fa-headphones is a Headphone Icon linked from Font Awesome-->
           </div>
@@ -250,7 +250,7 @@
           <li><a href="/">Home</a></li>
           <li><a href="about-us">About</a></li>
           <li><a href="contact-us">Contact</a></li>
-          <li><a href="products.html">Products</a></li>
+          <li><a href="displayproduct">Products</a></li>
           <li><a href="basket.html">Basket</a></li>
           <li><a href="account.html">My Account</a></li>
         </ul>

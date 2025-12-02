@@ -17,7 +17,7 @@
     <div class="container nav-container">
 
       <!-- Logo -->
-      <a href="home-page-2.blade.php" class="logo"> <!--Using this will make the Logo clickable and takes the user to the Home Page-->
+      <a href="/" class="logo"> <!--Using this will make the Logo clickable and takes the user to the Home Page-->
         <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
         <span class="logo-text">TECCI</span>
       </a>
@@ -25,10 +25,10 @@
       <!--Navigation Menu-->
       <nav class="main-nav">
         <ul>
-          <li><a href="index.html" class="active">Home</a></li> <!--class="active" marks the Current Page-->
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact-us-2.blade.php">Contact</a></li>
-          <li><a href="products.html">Products</a></li>
+          <li><a href="/">Home</a></li> <!--class="active" marks the Current Page-->
+          <li><a href="about-us">About</a></li>
+          <li><a href="contact-us">Contact</a></li>
+          <li><a href="displayproduct">Products</a></li>
         </ul>
       </nav>
 
@@ -105,10 +105,10 @@
       <div class="footer-col">
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="products.html">Products</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="about-us">About</a></li>
+          <li><a href="contact-us">Contact</a></li>
+          <li><a href="displayproduct">Products</a></li>
           <li><a href="basket.html">Basket</a></li>
           <li><a href="account.html">My Account</a></li>
         </ul>
