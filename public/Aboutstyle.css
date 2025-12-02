@@ -157,3 +157,80 @@ ul {
   height: 100%;
   object-fit: cover; /* This crops the images nicely so that they can easily fill the space */
 }
+
+/* WHY TECCI SECTION */
+
+.why-tecci {
+  background-color: #085296;
+  color: #ffffff;
+  padding: 48px 0 56px; /* This adds vertical padding above and below the inner content */
+}
+
+.why-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr); /* This creates two columns, with the left column being more narrow compared to the right column */
+  gap: 32px; /* This creates a gap between the two columns */
+  align-items: center;
+}
+
+/* Left Heading With A Curved Background Shape */
+.why-heading-wrap {
+  position: relative; /* This is positioned relative so that its pseudo-element can be absolutely posiitoned inside it */
+  padding-left: 24px; /* This makes sure that the text doesn't sit exactly on the curve edge */
+}
+
+.why-heading-wrap::before {
+  content: ""; /* This is required to make a ::before pseudo-element actually exist, by creating an empty box that you can style */
+  position: absolute; /* This lets you position the pseudo-element freely */
+  inset: -80px 30% -80px -120px; /* This sets the offsets from each side, so it extends above, below, and far to the left of the heading area, and stops 30% from the right, so it doesn't cover the reasons */
+  background-color: #03315b;
+  border-top-right-radius: 999px; /* This and the line below creates the large pill shape */
+  border-bottom-right-radius: 999px; /* This gives a rounded corner */
+  z-index: 0; /* This keeps the curved background shape behind the text */
+}
+
+.why-heading-wrap h2 {
+  position: relative; /* This allows the z-index to work cleanly on the heading */
+  z-index: 1; /* This puts the heading above the ::before shape */
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* Right: List Of Reasons */
+.why-items { /* This aligns the three reasons vertically with spacing */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.why-item {
+  display: flex; /* This makes each reason its own row */
+  align-items: flex-start; /* This aligns the icons with the top of the text */
+  gap: 16px;
+}
+
+.why-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px; /* This creates a circular border around each of the icons */
+  border: 2px solid #e6f3ff;
+  display: flex; /* This and the two lines below helps to centre the <i> inside */
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* This stops the icon from shrinking in size when the paragraph is too long */
+}
+
+.why-icon i {
+  font-size: 20px;
+}
+
+.why-content h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.why-content p {
+  font-size: 14px;
+}
+
