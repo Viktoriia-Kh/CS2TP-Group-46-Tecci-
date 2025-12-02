@@ -20,7 +20,7 @@
     <div class="container nav-container">
 
       <!--Logo-->
-      <a href="NewHome.html" class="logo">
+      <a href="/" class="logo">
         <!--Using this will make the Logo clickable and takes the user to the Home Page-->
         <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo" />
         <span class="logo-text">TECCI</span>
@@ -30,9 +30,9 @@
       <nav class="main-nav">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="about-us">About</a></li>
           <li><a href="contact-us" class="active">Contact</a></li> <!--class="active" marks the Current Page-->
-          <li><a href="products.html">Products</a></li>
+          <li><a href="displayproduct">Products</a></li>
         </ul>
       </nav>
 
@@ -186,7 +186,7 @@
           <li><a href="/">Home</a></li>
           <li><a href="about-us">About</a></li>
           <li><a href="contact-us">Contact</a></li>
-          <li><a href="products.html">Products</a></li>
+          <li><a href="displayproduct">Products</a></li>
           <li><a href="basket.html">Basket</a></li>
           <li><a href="account.html">My Account</a></li>
         </ul>
