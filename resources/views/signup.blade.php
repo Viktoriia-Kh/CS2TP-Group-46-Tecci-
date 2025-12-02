@@ -92,7 +92,7 @@
 
         <p class="signup-footer-text">
             Already have an account?
-            <a href="#">Sign in</a>
+            <a href="#">Login in</a>
         </p>
 
     </div>
