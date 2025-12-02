@@ -9,5 +9,8 @@ Route::post('/contact-us', [ContactController::class, 'submit'])->name('contact.
 
 
 Route::get('/', function () {
+    return view('home-page');
+});
+Route::get('contactus', function () {
     return view('contact-us');
 });
