@@ -8,11 +8,18 @@
         <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
     </head>
     <body>
+    <!-- adding simple nav bar to the login page-->
+    <nav class="login-navbar">
+        <div class="navbar-left">
+            <!-- logo will be on the left side of the navbar-->
+            <img src="{{asset('images/Logo.png')}}" class="tecci-logo" alt="Tecci Logo"> <!-- linked the image file-->
+            <span class="tecci-text">Tecci</span>
+        </div>
 
-    <div class="logo-text">
-        <img src="{{asset('images/Logo.png')}}" class="tecci-logo" alt="Tecci Logo"> <!-- linked the image file-->
-        <span class="tecci-text">Tecci</span>
-    </div>
+        <div class="navbar-right">
+            <a href="/homepage" class="homepage-link">Return To Home</a>
+        </div>
+    </nav>
         <section class="section-form">
             <h2>Welcome Back</h2>
             <p class="welcome-sub-message">Login to your Tecci account.</p>

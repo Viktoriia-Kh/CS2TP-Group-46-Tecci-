@@ -15,6 +15,7 @@ body {
     background-color: royalblue;
     color: aliceblue;
     font-weight: bold;
+    font-family: Signika;
     font-size: 15px;
     width: 100%;
     padding: 15px;
@@ -41,6 +42,7 @@ body {
 /* styling the labels for each input */
 .section-form label {
     font-size: 15px;
+    font-family: Signika;
     font-weight: bold;
     color: black;
     display: block;
@@ -51,6 +53,7 @@ body {
     text-align: center;
     color: royalblue;
     font-size: 30px;
+    font-family: Signika;
     margin-top: 10px;
 }
 
@@ -96,7 +99,7 @@ body {
 
 /* positioning the logo on the top left of the form */
 .tecci-logo{
-    width: 90px;
+    width: 50px;
     height: auto;
 }
 
@@ -104,6 +107,7 @@ body {
 .welcome-sub-message{
     text-align: center;
     font-size: 16px;
+    font-family: Signika;
     color: grey;
     margin-bottom: 20px;
 }
@@ -120,17 +124,58 @@ body {
 
 .tecci-text{
     display: flex;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 700;
     color: white;
     font-family: Signika;
     text-transform: uppercase;
 }
 
+/* navbar styling */
+.login-navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: navy;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* left side navbar styling */
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* right side navbar styling */
+.navbar-right .homepage-link{
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    font-family: Signika;
+}
+
+.navbar-right{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 60px;
+}
+
+.navbar-right .homepage-link:hover{
+    text-decoration: underline;
+}
+
+/* footer styling */
 .basic-footer{
     margin-top: 40px;
     text-align: center;
-    padding: 20px;
+    padding: 15px;
     color: white;
     background-color: navy;
     position: fixed;
@@ -138,4 +183,7 @@ body {
     left: 0;
     width: 100%;
     font-size: 12px;
+    font-family: Signika;
 }
+
+
