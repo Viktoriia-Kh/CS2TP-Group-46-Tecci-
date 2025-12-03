@@ -1,111 +1,117 @@
-/* background for the whole page */
+/* Brand Colours */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-   padding: 0;
-   margin: 0;
-   display: flex;
-   justify-content: center;
-   font-family: Arial, sans-serif;
-   background-color: royalblue;
-   align-items: center;
-   height: 100vh;
+    background-color: #f5f7fb; 
+    font-family: 'Signika', sans-serif;
+    color: #000000;
+    line-height: 1.6;
+    
+    /* No height as basket page needs to scroll if there are numerous items. */
+    min-height: 100vh;
+    padding-top: 100px; /* Adds space so content isn't hidden behind fixed navbar */
+    padding-bottom: 80px; /* Adds space so content isn't hidden behind footer */
 }
 
-
-
-/* positioning the logo on the top left of the form */
-.tecci-logo{
-   width: 50px;
-   height: auto;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
+/* Header/Navbar */
 
-/* ading styling for the text under Welcome Back */
-.welcome-sub-message{
-   text-align: center;
-   font-size: 16px;
-   font-family: Signika;
-   color: grey;
-   margin-bottom: 20px;
+.login-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    /* Tecci Colours */
+    background-color: #03315b; 
+    border-bottom: 15px solid #085296; 
+    
+    height: 90px; 
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-
-/* positioning Tecci text next to logo */
-.logo-text{
-   position: absolute;
-   top: 15px;
-   left: 15px;
-   display: flex;
-   align-items: center;
-   gap: 10px;
-}
-
-
-.tecci-text{
-   display: flex;
-   font-size: 30px;
-   font-weight: 700;
-   color: white;
-   font-family: Signika;
-   text-transform: uppercase;
-}
-
-
-/* navbar styling */
-.login-navbar{
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 50px;
-   background-color: navy;
-   padding: 12px;
-   display: flex;
-   justify-content: space-between;
-}
-
-
-/* left side navbar styling */
+/* Logo Section */
 .navbar-left {
-   display: flex;
-   align-items: center;
-   gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.tecci-logo {
+    width: 44px; 
+    height: auto;
+}
+
+.tecci-text {
+    font-family: 'Signika', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+/* Navigation Links */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.navbar-right .homepage-link {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.2s ease;
+}
+
+/* Hover effect matching the homepage style */
+.navbar-right .homepage-link:hover {
+    color: #e6f3ff;
+    text-decoration: none;
 }
 
 
-/* right side navbar styling */
-.navbar-right .homepage-link{
-   font-size: 18px;
-   font-weight: bold;
-   color: white;
-   text-decoration: none;
-   font-family: Signika;
+/* Page Content */
+
+.welcome-sub-message {
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Signika', sans-serif;
+    color: #2e2f33; /* Dark grey from homepage text */
+    margin: 40px 0;
 }
 
 
-.navbar-right{
-   display: flex;
-   align-items: center;
-   margin-left: auto;
-   margin-right: 60px;
-}
+/* Footer */
 
+.basic-footer {
+    background-color: #03315b; /* Team Dark Blue */
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    
 
-.navbar-right .homepage-link:hover{
-   text-decoration: underline;
-}
-
-
-/* footer styling */
-.basic-footer{
-   margin-top: 40px;
-   text-align: center;
-   padding: 15px;
-   color: white;
-   background-color: navy;
-   position: fixed;
-   bottom: 0;
-   left: 0;
-   width: 100%;
-   font-size: 12px;
-   font-family: Signika;
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    
+    font-size: 13px;
+    font-family: 'Signika', sans-serif;
+    border-top: 1px solid rgba(255, 255, 255, 0.12); 
 }
