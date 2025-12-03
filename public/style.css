@@ -1,0 +1,111 @@
+/* background for the whole page */
+body {
+   padding: 0;
+   margin: 0;
+   display: flex;
+   justify-content: center;
+   font-family: Arial, sans-serif;
+   background-color: royalblue;
+   align-items: center;
+   height: 100vh;
+}
+
+
+
+/* positioning the logo on the top left of the form */
+.tecci-logo{
+   width: 50px;
+   height: auto;
+}
+
+
+/* ading styling for the text under Welcome Back */
+.welcome-sub-message{
+   text-align: center;
+   font-size: 16px;
+   font-family: Signika;
+   color: grey;
+   margin-bottom: 20px;
+}
+
+
+/* positioning Tecci text next to logo */
+.logo-text{
+   position: absolute;
+   top: 15px;
+   left: 15px;
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+
+.tecci-text{
+   display: flex;
+   font-size: 30px;
+   font-weight: 700;
+   color: white;
+   font-family: Signika;
+   text-transform: uppercase;
+}
+
+
+/* navbar styling */
+.login-navbar{
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 50px;
+   background-color: navy;
+   padding: 12px;
+   display: flex;
+   justify-content: space-between;
+}
+
+
+/* left side navbar styling */
+.navbar-left {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+
+/* right side navbar styling */
+.navbar-right .homepage-link{
+   font-size: 18px;
+   font-weight: bold;
+   color: white;
+   text-decoration: none;
+   font-family: Signika;
+}
+
+
+.navbar-right{
+   display: flex;
+   align-items: center;
+   margin-left: auto;
+   margin-right: 60px;
+}
+
+
+.navbar-right .homepage-link:hover{
+   text-decoration: underline;
+}
+
+
+/* footer styling */
+.basic-footer{
+   margin-top: 40px;
+   text-align: center;
+   padding: 15px;
+   color: white;
+   background-color: navy;
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+   font-size: 12px;
+   font-family: Signika;
+}

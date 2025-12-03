@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class BasketController extends Controller
 {
-    //code 4 backend
+    public function index()
+    {
+        return view('basket'); // locates resources/views/basket.blade.php
+    }
 }
