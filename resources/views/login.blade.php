@@ -54,4 +54,9 @@
 
     </body>
 
+    <!-- creating a simple footer -->
+    <footer class="basic-footer">
+        <p>&copy; 2025 Tecci. All rights reserved.</p>
+    </footer>
+
 </html>
