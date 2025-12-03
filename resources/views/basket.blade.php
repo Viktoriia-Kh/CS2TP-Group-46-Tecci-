@@ -11,9 +11,11 @@
    <!-- adding simple nav bar to the login page-->
    <nav class="login-navbar">
        <div class="navbar-left">
-           <!-- logo will be on the left side of the navbar-->
-           <img src="{{asset('images/Logo.png')}}" class="tecci-logo" alt="Tecci Logo"> <!-- linked the image file-->
-           <span class="tecci-text">Tecci</span>
+           <!-- logo -->
+           <a href="/" class="logo">
+        <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
+        <span class="logo-text">TECCI</span>
+         </a>
        </div>
 
 

@@ -50,17 +50,31 @@ a {
     gap: 15px;
 }
 
-.tecci-logo {
-    width: 44px; 
-    height: auto;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
 }
 
-.tecci-text {
+
+.logo img{
+    height: 44px;
+    width: auto;
+}
+
+.logo-text {
     font-family: 'Signika', sans-serif;
     font-size: 30px;
     font-weight: 700;
     color: #ffffff;
     text-transform: uppercase;
+}
+
+
+/* Hover effect for logo */
+.logo:hover .logo-text {
+    color: #e6f3ff; /* Subtle hover effect */
 }
 
 /* Navigation Links */
