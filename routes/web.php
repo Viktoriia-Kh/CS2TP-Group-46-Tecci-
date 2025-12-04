@@ -2,6 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BasketController; 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DisplayProductController;
@@ -14,9 +15,18 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 
+// Root URL
 Route::get('/', function () {
     return view('home-page');
 });
+
+
+// Basket Logic (Viewing, Adding, Removing)
+Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
+Route::get('/add-to-basket/{id}', [BasketController::class, 'add'])->name('basket.add');
+Route::get('/remove-from-basket/{id}', [BasketController::class, 'remove'])->name('basket.remove');
+Route::get('/decrease-quantity/{id}', [BasketController::class, 'decrease'])->name('basket.decrease');
+
 
 Route::get('/login', function () {
     return view('login');
