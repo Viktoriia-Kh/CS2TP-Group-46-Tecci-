@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('home-page');
 });
 
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
 Route::get('/signup', [SignUpController::class, 'showForm'])
     ->name('signup.form');
 
@@ -102,9 +106,9 @@ Route::post('/logout', function () {
     return redirect('/')->with('success', 'Logged out successfully.');
 })->name('logout');
 
-Route::get('/login', function () {
-    return redirect()->route('signup.form');
-})->name('login');
+// Route::get('/login', function () {
+//     return redirect()->route('signup.form');
+// })->name('login');
 
 Route::get('contactus', function () {
     return view('contact-us');
