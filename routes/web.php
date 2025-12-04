@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
@@ -12,6 +11,9 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Str;
+
+use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home-page');
@@ -130,3 +132,15 @@ Route::get('displayproduct', [DisplayProductController::class, 'index'])->name('
 // Single product details page
 Route::get('/product/{product}', [ProductController::class, 'show'])
     ->name('product.detail');
+
+
+Route::get('login', function () {
+    return view('login');
+});
+
+// routes for login
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+
+// route to redirect user to signup from login
+Route::get('/signup', [SignUpController::class, 'showSignupForm'])->name(('signup'));
