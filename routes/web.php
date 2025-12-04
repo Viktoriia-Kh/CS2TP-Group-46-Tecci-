@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Str;
+use App\Http\Controllers\CheckoutController;
 
 Route::get('/', function () {
     return view('home-page');
@@ -135,7 +136,7 @@ Route::get('checkout', function () {
     return view('checkout');
 });
 
-Route::get('/', [CheckoutController::class, 'checkout']);
+Route::get('checkout', [CheckoutController::class, 'checkout']);
     
 
 
