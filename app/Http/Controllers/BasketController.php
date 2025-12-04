@@ -53,5 +53,25 @@ class BasketController extends Controller
         }
 
         return redirect()->back();
+ 
+    }
+
+    // Decrease Quantity
+    public function decrease($id)
+    {
+        $basket = session()->get('basket', []);
+
+        if(isset($basket[$id])) {
+            // If quantity is more than 1, subtract 1
+            if($basket[$id]['quantity'] > 1) {
+                $basket[$id]['quantity']--;
+            } else {
+                // If quantity is 1, remove the single item entirely
+                unset($basket[$id]);
+            }
+        }
+
+        session()->put('basket', $basket);
+        return redirect()->back();
     }
 }

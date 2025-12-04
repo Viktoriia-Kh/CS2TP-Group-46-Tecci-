@@ -32,8 +32,8 @@
                 <span class="free-delivery-text">
                     <i class="fas fa-truck"></i> spend £60.00 or more for free delivery
                 </span>
-                <a href="/homepage" class="btn-continue-top">CONTINUE SHOPPING</a>
-                <button class="btn-checkout-top">CHECKOUT NOW</button>
+                <a href="/display-products-page" class="btn-continue-top">CONTINUE SHOPPING</a>
+                <a href="/checkout" class="btn-checkout-top">CHECKOUT NOW</a>
             </div>
         </div>
 
@@ -72,7 +72,7 @@
                                     <input type="text" value="{{ $details['quantity'] }}" readonly>
                                     <div class="qty-arrows">
                                         <a href="{{ route('basket.add', $id) }}">▲</a>
-                                        <a href="{{ route('basket.remove', $id) }}">▼</a>
+                                        <a href="{{ route('basket.decrease', $id) }}">▼</a>
                                     </div>
                                 </div>
                             </div>
@@ -139,8 +139,8 @@
                     </div>
 
                     <div class="final-actions">
-                        <a href="/homepage" class="btn-continue-bottom">CONTINUE SHOPPING</a>
-                        <button class="btn-checkout-bottom">CHECKOUT NOW</button>
+                        <a href="/display-products-page" class="btn-continue-bottom">CONTINUE SHOPPING</a>
+                        <a href="/checkout" class="btn-checkout-bottom">CHECKOUT NOW</a>
                     </div>
                 </div>
             </div>
