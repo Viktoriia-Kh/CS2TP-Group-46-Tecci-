@@ -13,10 +13,12 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('home-page');
-});
+// Homepage
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
 
 Route::get('/signup', [SignUpController::class, 'showForm'])
     ->name('signup.form');
@@ -136,3 +138,4 @@ Route::get('checkout', function () {
 });
 
 Route::get('checkout', [CheckoutController::class, 'checkout']);
+
