@@ -32,6 +32,7 @@ class ProductSeeder extends Seeder
                 'description' => $data['description'],
                 'price'       => $data['price'],
                 'student_price' => $data['student_price'],
+                'image_url' => $data['image_url'] ?? null,
             ]);
 
             Inventory::create([
@@ -49,7 +50,8 @@ class ProductSeeder extends Seeder
             'description' => '14-inch SSD laptop ideal for students',
             'price'       => 499.99,
             'student_price' => 449.99,
-            'qty'         => 10
+            'qty'         => 10,
+            'image_url'     => 'images/products/teccibook-14.jpg',      
         ]);
 
         $make([
@@ -59,7 +61,8 @@ class ProductSeeder extends Seeder
             'description' => '15-inch budget-friendly laptop',
             'price'       => 399.99,
             'student_price' => 359.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/budgetbook-15.jpg',
         ]);
 
                 $make([
@@ -69,7 +72,8 @@ class ProductSeeder extends Seeder
             'description' => 'placeholder',
             'price'       => 450.99,
             'student_price' => 429.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/teccibook-pro.jpg',
         ]);
 
             $make([
@@ -79,7 +83,8 @@ class ProductSeeder extends Seeder
             'description' => 'placeholder',
             'price'       => 299.99,
             'student_price' => 229.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/teccibook-max-xl.jpg',
         ]);
 
             $make([
@@ -89,7 +94,8 @@ class ProductSeeder extends Seeder
             'description' => 'placeholder',
             'price'       => 199.99,
             'student_price' => 99.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/budgetbook max xl.jpg',
         ]);
 
         // Example Desktop products
@@ -100,7 +106,8 @@ class ProductSeeder extends Seeder
             'description' => 'Compact desktop PC for small spaces',
             'price'       => 549.99,
             'student_price' => 449.99,
-            'qty'         => 10
+            'qty'         => 10,
+            'image_url' => 'images/products/DeskPro Mini.jpg',
         ]);
 
         $make([
@@ -110,7 +117,8 @@ class ProductSeeder extends Seeder
             'description' => 'Entry gaming desktop',
             'price'       => 799.99,
             'student_price' => 359.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/NovaStation G1.jpg',
         ]);
 
                 $make([
@@ -120,7 +128,8 @@ class ProductSeeder extends Seeder
             'description' => 'Reliable all-purpose desktop',
             'price'       => 499.99,
             'student_price' => 429.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/SuperPC Tower.jpg',
         ]);
 
             $make([
@@ -130,7 +139,8 @@ class ProductSeeder extends Seeder
             'description' => 'Office desktop bundle',
             'price'       => 449.99,
             'student_price' => 229.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/WorkMate Office.jpg',
         ]);
 
             $make([
@@ -140,7 +150,8 @@ class ProductSeeder extends Seeder
             'description' => 'Performance desktop for creative work',
             'price'       => 999.99,
             'student_price' => 899.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/PowerBox Z4.jpg',
         ]);
 
 
@@ -152,7 +163,8 @@ class ProductSeeder extends Seeder
             'description' => '10-inch screen, great for notes',
             'price'       => 299.99,
             'student_price' => 249.99,
-            'qty'         => 10
+            'qty'         => 10,
+            'image_url' => 'images/products/UniTab 10.jpg',
         ]);
 
         $make([
@@ -162,7 +174,8 @@ class ProductSeeder extends Seeder
             'description' => 'Portable 8-inch student tablet',
             'price'       => 199.99,
             'student_price' => 59.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/UniTab 8 Mini.jpg',
         ]);
 
                 $make([
@@ -172,7 +185,8 @@ class ProductSeeder extends Seeder
             'description' => 'Large 12-inch productivity tablet',
             'price'       => 379.99,
             'student_price' => 229.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/SlatePad 12.jpg',
         ]);
 
             $make([
@@ -182,7 +196,8 @@ class ProductSeeder extends Seeder
             'description' => 'Tablet for lecture notes & sketching',
             'price'       => 349.99,
             'student_price' => 229.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/StudyTab Pro.jpg',
         ]);
 
             $make([
@@ -192,7 +207,8 @@ class ProductSeeder extends Seeder
             'description' => 'Lightweight tablet with long battery',
             'price'       => 229.99,
             'student_price' => 199.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/LiteTab X.jpg',
         ]);
 
 
@@ -204,7 +220,8 @@ class ProductSeeder extends Seeder
             'description' => 'Affordable student smartphone',
             'price'       => 199.99,
             'student_price' => 99.99,
-            'qty'         => 10
+            'qty'         => 10,
+            'image_url' => 'images/products/CampusPhone Lite.jpg',
         ]);
 
         $make([
@@ -214,7 +231,8 @@ class ProductSeeder extends Seeder
             'description' => 'Mid-range smartphone with strong battery',
             'price'       => 249.99,
             'student_price' => 159.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/CampusPhone S2.jpg',
         ]);
 
                 $make([
@@ -224,7 +242,8 @@ class ProductSeeder extends Seeder
             'description' => 'Compact phone for everyday use',
             'price'       => 149.99,
             'student_price' => 129.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/TalkEasy Mini.jpg',
         ]);
 
             $make([
@@ -234,7 +253,8 @@ class ProductSeeder extends Seeder
             'description' => 'Flagship-quality budget phone',
             'price'       => 349.99,
             'student_price' => 229.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/TecciPhone X.jpg',
         ]);
 
             $make([
@@ -244,18 +264,20 @@ class ProductSeeder extends Seeder
             'description' => 'Phone ideal for student multitasking',
             'price'       => 229.99,
             'student_price' => 199.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/StudyPhone Ultra.jpg',
         ]);
 
         // Example Accssory products
             $make([
             'category_id' => $Accessory,
-            'name'        => 'StudyHeadphones Wireless',
+            'name'        => 'Study Headphones Wireless',
             'brand'       => 'TecciSound',
             'description' => 'Noise-cancelling headphones',
             'price'       => 59.99,
             'student_price' => 39.99,
-            'qty'         => 10
+            'qty'         => 10,
+            'image_url' => 'images/products/Study Headphones Wireless.jpg',
         ]);
 
         $make([
@@ -265,7 +287,8 @@ class ProductSeeder extends Seeder
             'description' => 'Wireless ergonomic mouse',
             'price'       => 24.99,
             'student_price' => 19.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/CampusMouse Pro.jpg',
         ]);
 
                 $make([
@@ -275,7 +298,8 @@ class ProductSeeder extends Seeder
             'description' => 'Full-size keyboard for typing',
             'price'       => 19.99,
             'student_price' => 9.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/LiteKeyboard 104.jpg',
         ]);
 
             $make([
@@ -285,7 +309,8 @@ class ProductSeeder extends Seeder
             'description' => 'Fast USB-C charger',
             'price'       => 14.99,
             'student_price' => 9.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/NovaCharger 30W.jpg',
         ]);
 
             $make([
@@ -295,7 +320,8 @@ class ProductSeeder extends Seeder
             'description' => 'Adjustable LED desk lamp',
             'price'       => 29.99,
             'student_price' => 9.99,
-            'qty'         => 8
+            'qty'         => 8,
+            'image_url' => 'images/products/DeskLight LED.jpg',
         ]);
 
     }

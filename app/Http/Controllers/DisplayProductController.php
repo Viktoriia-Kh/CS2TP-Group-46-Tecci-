@@ -21,6 +21,9 @@ class DisplayProductController extends Controller
                                 ? strtolower(str_replace(' ', '', $p->category->name))
                                 : 'uncategorised',
                 'condition' => $p->condition ?? 'new',
+                'image_url' => $p->image_url
+                    ? asset($p->image_url)
+                    : asset('images/Laptop.jpg'),
             ];
         });
 

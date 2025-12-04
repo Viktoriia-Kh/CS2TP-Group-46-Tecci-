@@ -296,14 +296,15 @@
 
 
     productCard.innerHTML = `
-      <a href="/product/${product.id}">
-          <div class="product-image-placeholder"></div>
-          <div class="product-item-info">
-              <h4>${product.name}</h4>
-              <p class="product-item-price">£${product.price.toFixed(2)}</p>
-              <button class="add-to-cart-quick">Add to Cart</button>
-            </div>
-          </div>
+      <a href="/product/${product.id}" class="product-link">
+        <div class="product-image-placeholder">
+          <img src="${product.image_url}" alt="${product.name}">
+        </div>
+        <div class="product-item-info">
+          <h4>${product.name}</h4>
+          <p class="product-item-price">£${product.price.toFixed(2)}</p>
+          <button class="add-to-cart-quick">Add to Cart</button>
+        </div>
       </a>
     `;
 
