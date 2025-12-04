@@ -70,7 +70,7 @@
                 <button type="submit">Login</button> <!-- allows the user to login-->
 
                 <p class="signup-message">
-                    Don't have an account? <a href="/signup">Sign up</a> <!-- redirects the user to signup to make an account-->
+                    Don't have an account? <a href="{{route('signup')}}">Sign up</a> <!-- redirects the user to signup to make an account-->
                 </p>
 
 
