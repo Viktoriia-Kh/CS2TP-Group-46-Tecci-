@@ -20,6 +20,11 @@ return [
 
     'resend' => [
         'key' => env('RESEND_KEY'),
+        'key' => env('POSTMARK_API_KEY'),
+    ],
+
+    'resend' => [
+        'key' => env('RESEND_API_KEY'),
     ],
 
     'ses' => [
@@ -34,5 +39,11 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+'google' => [
+    'client_id'     => env('GOOGLE_CLIENT_ID'),
+    'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+    'redirect'      => env('GOOGLE_REDIRECT_URI'),
+],
 
 ];
+
