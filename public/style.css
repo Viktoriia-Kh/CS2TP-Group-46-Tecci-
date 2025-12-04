@@ -1,13 +1,9 @@
 /* background for the whole page */
 body {
-    padding: 0;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    font-family: Arial, sans-serif;
+    padding: 0;
     background-color: royalblue;
-    align-items: center;
-    height: 100vh;
+    font-family: Signika;
 }
 
 /* styling for button */
@@ -65,6 +61,7 @@ body {
     width: 380px;
     border-radius: 20px;
     text-align: left;
+    margin: 120px auto 80px;
 }
 
 .signup-message {
@@ -97,10 +94,26 @@ body {
     list-style-type: none;
 }
 
-/* positioning the logo on the top left of the form */
-.tecci-logo{
-    width: 50px;
-    height: auto;
+.main-header {
+    background-color: midnightblue;
+    color: white;
+    border-bottom: 15px solid #085296;
+}
+
+/* styling the logo */
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 40px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+}
+
+.logo img {
+    height: 44px;
 }
 
 /* adding styling for the text under Welcome Back */
@@ -112,78 +125,170 @@ body {
     margin-bottom: 20px;
 }
 
-/* positioning Tecci text next to logo */
-.logo-text{
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.tecci-text{
-    display: flex;
-    font-size: 30px;
-    font-weight: 700;
-    color: white;
-    font-family: Signika;
-    text-transform: uppercase;
-}
 
 /* navbar styling */
-.login-navbar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background-color: navy;
-    padding: 12px;
-    display: flex;
-    justify-content: space-between;
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  gap: 32px;
 }
 
-/* left side navbar styling */
-.navbar-left {
+.main-nav ul {
+    list-style: none;
     display: flex;
     align-items: center;
-    gap: 10px;
-}
-
-/* right side navbar styling */
-.navbar-right .homepage-link{
+    gap: 24px;
     font-size: 18px;
-    font-weight: bold;
+}
+
+.main-nav a {
     color: white;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 1.6px;
     text-decoration: none;
-    font-family: Signika;
 }
 
-.navbar-right{
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    margin-right: 60px;
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: #e6f3ff;
+  transition: width 0.2s ease;
 }
 
-.navbar-right .homepage-link:hover{
-    text-decoration: underline;
+.main-nav a:hover::after,
+.main-nav a.active::after {
+  width: 100%;
 }
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 19px;
+}
+
+.nav-icons a {
+  padding: 2.4px;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.nav-icons a:hover {
+  transform: translateY(-1px);
+  color: #e6f3ff;
+}
+
+.nav-icons i{
+    color: white;
+}
+
+
 
 /* footer styling */
-.basic-footer{
-    margin-top: 40px;
-    text-align: center;
-    padding: 15px;
+/* ================================
+   FOOTER (SAME COLOUR AS HEADER)
+================================== */
+
+/* works for BOTH class="main-footer" and class="site-footer" */
+.main-footer,
+.site-footer {
+  background-color: #03315b;          /* same as header */
+  color: #ffffff;
+  border-top: 15px solid #085296;     /* same stripe as header */
+  padding: 40px 0 14px;
+  margin-top: 3rem;
+}
+
+
+.main-footer a{
     color: white;
-    background-color: navy;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    font-size: 12px;
-    font-family: Signika;
+    text-decoration: none;
+}
+
+.main-footer
+.site-footer a{
+    color: white;
+    text-decoration: none;
+}
+
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 48px;
+  font-size: 0.85rem;
+}
+
+.footer-col h3,
+.footer-col h4 {
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+.footer-col p {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  max-width: 260px;
+}
+
+.footer-col ul li + li {
+  margin-top: 0.25rem;
+  list-style: none;
+}
+
+.footer-col a:hover {
+  text-decoration: underline;
+}
+
+.contact-list i {
+  margin-right: 6px;
+}
+
+.footer-bottom {
+  margin-top: 24px;
+  padding-top: 10px;
+  text-align: center;
+  font-size: 0.75rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.footer-col ul,
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* ================================
+   RESPONSIVE
+================================== */
+
+@media (max-width: 768px) {
+  .nav-container {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .logo {
+    font-size: 32px;
+  }
+
+  .main-nav ul {
+    gap: 16px;
+    font-size: 16px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 

@@ -6,20 +6,39 @@
         <link rel="stylesheet" href="{{asset('style.css') }}"> <!-- created a link to the stylesheet-->
         <!-- Google font -->
         <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
+        <!-- Font awesome for icons-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     </head>
-    <body>
-    <!-- adding simple nav bar to the login page-->
-    <nav class="login-navbar">
-        <div class="navbar-left">
-            <!-- logo will be on the left side of the navbar-->
-            <img src="{{asset('images/Logo.png')}}" class="tecci-logo" alt="Tecci Logo"> <!-- linked the image file-->
-            <span class="tecci-text">Tecci</span>
-        </div>
 
-        <div class="navbar-right">
-            <a href="/homepage" class="homepage-link">Return To Home</a>
-        </div>
-    </nav>
+    <body>
+        <header class="main-header">
+            <div class="container nav-container">
+                <a href="{{ url('/') }}" class="logo">
+                    <img src="{{ asset('images/Logo.png') }}" alt="Tecci Logo">
+                    <span class="logo-text">TECCI</span>
+                </a>
+
+                <!-- main nav bar-->
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="{{ url('/') }}">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="{{ url('/contact') }}">Contact</a></li>
+                        <li><a href="#" class="active">Products</a></li>
+                    </ul>
+                </nav>
+
+                <!-- icons on the nav bar-->
+                <div class="nav-icons">
+                    <a href="#"><i class="fa-regular fa-heart"></i></a>
+                    <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a href="#"><i class="fa-regular fa-user"></i></a>
+                </div>
+
+
+            </div>
+        </header>
+
         <section class="section-form">
             <h2>Welcome Back</h2>
             <p class="welcome-sub-message">Login to your Tecci account.</p>
@@ -61,9 +80,42 @@
 
     </body>
 
-    <!-- creating a simple footer -->
-    <footer class="basic-footer">
-        <p>&copy; 2025 Tecci. All rights reserved.</p>
-    </footer>
+   <!-- creating the footer-->
+    <footer class="main-footer">
+    <div class="container footer-inner">
+        <div class="footer-col">
+            <h3>TECCI</h3>
+            <p>
+                Smart Tech at Smart Prices.<br>
+                Tecci makes premium devices accessible to<br>
+                students and customers across the UK.
+            </p>
+        </div>
 
+         <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/basket">Basket</a></li>
+                <li><a href="/account">My Account</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact Info</h4>
+            <ul class="contact-list">
+                <li><i class="fa-solid fa-location-dot"></i> Birmingham, B4 7ET</li>
+                <li><i class="fa-solid fa-phone"></i> 0121 555 0198</li>
+                <li><i class="fa-regular fa-envelope"></i> Tecci_Queries@net.com</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        &copy; 2025 Tecci. All rights reserved.
+    </div>
+</footer>
 </html>
