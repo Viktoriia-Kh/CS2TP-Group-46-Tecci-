@@ -88,7 +88,7 @@
         <!-- CATEGORY TABS -->
         <div class="category-tabs">
           <button class="tab-button active" data-category="all">All Products</button>
-          <button class="tab-button" data-category="pcs">PCs</button>
+          <button class="tab-button" data-category="desktops">PCs</button>
           <button class="tab-button" data-category="laptops">Laptops</button>
           <button class="tab-button" data-category="phones">Phones</button>
           <button class="tab-button" data-category="tablets">Tablets</button>
