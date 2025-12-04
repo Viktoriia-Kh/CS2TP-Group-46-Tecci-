@@ -2,6 +2,9 @@
 
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DisplayProductController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SignUpController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -10,35 +13,15 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Str;
 
-/*
-|--------------------------------------------------------------------------
-| Main Page
-|--------------------------------------------------------------------------
-*/
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('home-page');
 });
-
-
-/*
-|--------------------------------------------------------------------------
-| Signup Routes
-|--------------------------------------------------------------------------
-*/
 
 Route::get('/signup', [SignUpController::class, 'showForm'])
     ->name('signup.form');
 
 Route::post('/signup', [SignUpController::class, 'submit'])
     ->name('signup.submit');
-
-
-/*
-|--------------------------------------------------------------------------
-| Social Redirect Buttons
-|--------------------------------------------------------------------------
-*/
 
 Route::get('/auth/google', function () {
     return Socialite::driver('google')->redirect();
@@ -69,13 +52,6 @@ Route::get('/auth/microsoft/callback', function () {
     return redirect('/')->with('success', 'Logged in with Microsoft!');
 })->name('auth.microsoft.callback');
  
-
-/*
-|--------------------------------------------------------------------------
-| Email Verification Routes
-|--------------------------------------------------------------------------
-*/
-
 // Show "verify your email" page
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -129,3 +105,28 @@ Route::post('/logout', function () {
 Route::get('/login', function () {
     return redirect()->route('signup.form');
 })->name('login');
+
+Route::get('contactus', function () {
+    return view('contact-us');
+});
+
+Route::get('/contact-us', [ContactController::class, 'showForm'])->name('contact.form');
+Route::post('/contact-us', [ContactController::class, 'submit'])->name('contact.submit');
+
+Route::get('about-us', function () {
+    return view('about-us');
+});
+
+Route::get('display-product', function () {
+    return view('displayproduct');
+});
+Route::get('product', function () {
+    return view('product');
+});
+
+// Products listing page 
+Route::get('displayproduct', [DisplayProductController::class, 'index'])->name('products.index');
+
+// Single product details page
+Route::get('/product/{product}', [ProductController::class, 'show'])
+    ->name('product.detail');
