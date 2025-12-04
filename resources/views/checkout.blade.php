@@ -20,7 +20,7 @@
     <div class="container nav-container">
 
       <!-- Logo -->
-      <a href="home-page-2.blade.php" class="logo"> <!--Using this will make the Logo clickable and takes the user to the Home Page-->
+      <a href="/" class="logo"> <!--Using this will make the Logo clickable and takes the user to the Home Page-->
         <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
         <span class="logo-text">TECCI</span> <!--Is an inline element used for short text-->
       </a>
@@ -28,18 +28,18 @@
       <!--Navigation Menu-->
       <nav class="main-nav">
         <ul>
-          <li><a href="index.html" class="active">Home</a></li> <!--class="active" marks the Current Page-->
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact-us-2.blade.php">Contact</a></li>
-          <li><a href="products.html">Products</a></li>
+          <li><a href="/" class="active">Home</a></li> <!--class="active" marks the Current Page-->
+          <li><a href="about-us">About</a></li>
+          <li><a href="contact-us">Contact</a></li>
+          <li><a href="dislplayproduct">Products</a></li>
         </ul>
       </nav>
 
       <!--Icons-->
       <div class="nav-icons">
         <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a> <!--fa-heart is a Heart Icon linked from Font Awesome-->
-        <a href="basket.html"><i class="fa-solid fa-cart-shopping"></i></a> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
-        <a href="account.html"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
+        <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
+        <a href="login"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
       </div>
     </div>
   </header>
@@ -61,7 +61,7 @@
         <i class="fa-solid fa-cart-shopping" style="font-size: 4rem; color: #ccc; margin-bottom: 20px;"></i>
         <h2 style="color: #333;">Your cart is currently empty</h2>
         <p style="color: #666; margin-bottom: 30px;">Looks like you haven't added any tech yet.</p>
-        <a href="products.html" class="btn btn-primary" style="background: #005baf; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none;">
+        <a href="displayproduct" class="btn btn-primary" style="background: #005baf; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none;">
           Start Shopping
         </a>
       </div>
@@ -151,7 +151,7 @@
     <div class="container">
       <h2>Featured Products</h2>
       <div class="card-grid product-grid"> <!-- This div will hold all 4 Product Cards-->
-        <a href="product-1.html" class="product-card">
+        <a href="product/1" class="product-card">
           <div class="product-image-placeholder"> <img src="Laptop.PNG" alt="Budget Student Laptop"></div>
           <div class="product-info">
             <p class="product-name">Laptop</p>
@@ -159,7 +159,7 @@
           </div>
         </a>
 
-        <a href="product-2.html" class="product-card">
+        <a href="product/2" class="product-card">
           <div class="product-image-placeholder"></div>
           <div class="product-info">
             <p class="product-name">Item Name</p>
@@ -167,7 +167,7 @@
           </div>
         </a>
 
-        <a href="product-3.html" class="product-card">
+        <a href="product/3" class="product-card">
           <div class="product-image-placeholder"></div>
           <div class="product-info">
             <p class="product-name">Item Name</p>
@@ -175,7 +175,7 @@
           </div>
         </a>
 
-        <a href="product-4.html" class="product-card">
+        <a href="product/4" class="product-card">
           <div class="product-image-placeholder"></div>
           <div class="product-info">
             <p class="product-name">Item Name</p>
@@ -191,35 +191,35 @@
     <div class="container">
       <h2>Shop All Products Now</h2>
       <div class="card-grid category-grid">
-        <a href="products.html" class="category-card">
+        <a href="displayproduct" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-laptop"></i> <!--fa-laptop is a Laptop Icon linked from Font Awesome-->
           </div>
           <p>Laptops</p>
         </a>
 
-        <a href="products.html" class="category-card">
+        <a href="displayproduct" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-desktop"></i> <!--fa-desktop is a Desktop Icon linked from Font Awesome-->
           </div>
           <p>PCs</p>
         </a>
 
-        <a href="products.html" class="category-card">
+        <a href="displayproduct" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-mobile-screen-button"></i> <!--fa-mobile-screen-button is a Mobile Icon linked from Font Awesome-->
           </div>
           <p>Smartphones</p>
         </a>
 
-        <a href="products.html" class="category-card">
+        <a href="displayproduct" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-tablet-screen-button"></i> <!--fa-tablet-screen-button is a Tablet Icon linked from Font Awesome-->
           </div>
           <p>Tablets</p>
         </a>
 
-        <a href="products.html" class="category-card">
+        <a href="displayproduct" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-headphones"></i> <!--fa-headphones is a Headphone Icon linked from Font Awesome-->
           </div>
@@ -247,12 +247,12 @@
       <div class="footer-col">
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="basket.html">Basket</a></li>
-          <li><a href="account.html">My Account</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="about-us">About</a></li>
+          <li><a href="contact-us">Contact</a></li>
+          <li><a href="displayproduct">Products</a></li>
+          <li><a href="basket">Basket</a></li>
+          <li><a href="login">My Account</a></li>
         </ul>
       </div>
 
