@@ -147,43 +147,31 @@
 </div>
 
   <!--FEATURED PRODUCTS-->
-  <section class="featured-products" id="featured">
+ <section class="featured-products" id="featured">
     <div class="container">
       <h2>Featured Products</h2>
-      <div class="card-grid product-grid"> <!-- This div will hold all 4 Product Cards-->
-        <a href="product/1" class="product-card">
-          <div class="product-image-placeholder"> <img src="Laptop.PNG" alt="Budget Student Laptop"></div>
-          <div class="product-info">
-            <p class="product-name">Laptop</p>
-            <p class="product-price">£999.00</p>
-          </div>
-        </a>
+      <div class="card-grid product-grid">
 
-        <a href="product/2" class="product-card">
-          <div class="product-image-placeholder"></div>
-          <div class="product-info">
-            <p class="product-name">Item Name</p>
-            <p class="product-price">£XXX.XX</p>
-          </div>
-        </a>
+    @forelse ($featuredProducts as $product)
+        <a href="{{ url('product/' . $product->id) }}" class="product-card">
 
-        <a href="product/3" class="product-card">
-          <div class="product-image-placeholder"></div>
-          <div class="product-info">
-            <p class="product-name">Item Name</p>
-            <p class="product-price">£XXX.XX</p>
-          </div>
-        </a>
+            <div class="product-image-placeholder">
+                @if ($product->image_url)
+                    <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}">
+                @else
+                    <img src="{{ asset('images/Laptop.PNG') }}" alt="{{ $product->name }}">
+                @endif
+            </div>
 
-        <a href="product/4" class="product-card">
-          <div class="product-image-placeholder"></div>
-          <div class="product-info">
-            <p class="product-name">Item Name</p>
-            <p class="product-price">£XXX.XX</p>
-          </div>
+            <div class="product-info">
+                <p class="product-name">{{ $product->name }}</p>
+                <p class="product-price">£{{ number_format($product->price, 2) }}</p>
+            </div>
+
         </a>
-      </div> <!--Closes .card-grid product-grid-->
-    </div> <!--Closes .container-->
+    @empty
+        <p>No products available.</p>
+    @endforelse
   </section>
 
   <!--PRODUCT CATEGORIES-->
