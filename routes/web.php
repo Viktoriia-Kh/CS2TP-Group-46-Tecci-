@@ -13,4 +13,4 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 // route to redirect user to signup from login
-//Route::get('/signup', [SignUpController::class, 'showSignupForm'])->name(('signup'));
+Route::get('/signup', [SignUpController::class, 'showSignupForm'])->name(('signup'));
