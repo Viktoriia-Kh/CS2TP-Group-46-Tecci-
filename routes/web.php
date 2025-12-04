@@ -145,8 +145,5 @@ Route::get('displayproduct', [DisplayProductController::class, 'index'])->name('
 Route::get('/product/{product}', [ProductController::class, 'show'])
     ->name('product.detail');
 
-Route::get('checkout', function () {
-    return view('checkout');
-});
-
+// Checkout route
 Route::get('checkout', [CheckoutController::class, 'checkout']);
