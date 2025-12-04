@@ -6,7 +6,7 @@
   <title>Tecci | Your Shopping Cart</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!--Links to HTML/CSS Files-->
-  <link rel="stylesheet" href="homestyle.css" />
+  <link rel="stylesheet" href="checkoutstyle.css" />
   <link rel="stylesheet" href="contactstyle.css" />
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
