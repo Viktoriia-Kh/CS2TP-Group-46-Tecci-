@@ -59,10 +59,9 @@ Route::get('/email/verify', function () {
 })->middleware('auth')
   ->name('verification.notice');
 
-// Verification link (user clicks from email) – NO auth middleware now
-Route::get('/{id}/{hash}', function (Request $request, $id, $hash) {
+// Verification link (user clicks from email)
+Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
     $user = User::findOrFail($id);
-
 
     // Check hash is valid for this email
     if (! hash_equals(sha1($user->getEmailForVerification()), (string) $hash)) {
@@ -73,13 +72,13 @@ Route::get('/{id}/{hash}', function (Request $request, $id, $hash) {
         $user->markEmailAsVerified();
         event(new \Illuminate\Auth\Events\Verified($user));
     }
-
-    // Optional: log them in so they're authenticated after clicking
+    // log them in so they're authenticated after clicking
     Auth::login($user);
 
     return redirect('/signup')->with('success', 'Email verified successfully!');
 })->middleware(['signed', 'throttle:6,1'])
   ->name('verification.verify');
+
 
 // Resend verification email
 Route::post('/email/verification-notification', function (Request $request) {
@@ -137,11 +136,3 @@ Route::get('checkout', function () {
 });
 
 Route::get('checkout', [CheckoutController::class, 'checkout']);
-    
-
-
-
-
-
-
-
