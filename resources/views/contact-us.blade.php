@@ -39,8 +39,8 @@
       <!--Icons-->
       <div class="nav-icons">
         <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a>
-        <a href="basket.html"><i class="fa-solid fa-cart-shopping"></i></a>
-        <a href="account.html"><i class="fa-regular fa-user"></i></a>
+        <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="login"><i class="fa-regular fa-user"></i></a>
       </div>
 
     </div>
@@ -187,8 +187,8 @@
           <li><a href="about-us">About</a></li>
           <li><a href="contact-us">Contact</a></li>
           <li><a href="displayproduct">Products</a></li>
-          <li><a href="basket.html">Basket</a></li>
-          <li><a href="account.html">My Account</a></li>
+          <li><a href="basket">Basket</a></li>
+          <li><a href="login">My Account</a></li>
         </ul>
       </div>
 

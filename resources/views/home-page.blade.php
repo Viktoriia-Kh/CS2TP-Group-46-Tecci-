@@ -38,8 +38,8 @@
       <!--Icons-->
       <div class="nav-icons">
         <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a> <!--fa-heart is a Heart Icon linked from Font Awesome-->
-        <a href="basket.html"><i class="fa-solid fa-cart-shopping"></i></a> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
-        <a href="account.html"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
+        <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
+        <a href="login"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
       </div>
     </div>
   </header>
@@ -81,7 +81,7 @@
           </div>
         </a>
 
-        <a href="product-2.html" class="product-card">
+        <a href="product/2" class="product-card">
           <div class="product-image-placeholder"></div>
           <div class="product-info">
             <p class="product-name">Item Name</p>
@@ -89,7 +89,7 @@
           </div>
         </a>
 
-        <a href="product-3.html" class="product-card">
+        <a href="product/3" class="product-card">
           <div class="product-image-placeholder"></div>
           <div class="product-info">
             <p class="product-name">Item Name</p>
@@ -97,7 +97,7 @@
           </div>
         </a>
 
-        <a href="product-4.html" class="product-card">
+        <a href="product/4" class="product-card">
           <div class="product-image-placeholder"></div>
           <div class="product-info">
             <p class="product-name">Item Name</p>
@@ -251,8 +251,8 @@
           <li><a href="about-us">About</a></li>
           <li><a href="contact-us">Contact</a></li>
           <li><a href="displayproduct">Products</a></li>
-          <li><a href="basket.html">Basket</a></li>
-          <li><a href="account.html">My Account</a></li>
+          <li><a href="basket">Basket</a></li>
+          <li><a href="login">My Account</a></li>
         </ul>
       </div>
 
