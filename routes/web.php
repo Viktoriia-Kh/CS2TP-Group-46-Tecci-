@@ -16,7 +16,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 
 // Homepage
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'HomeController'])->name('home');
 
 
 
@@ -130,7 +130,7 @@ Route::get('product', function () {
 });
 
 // Products listing page 
-Route::get('displayproduct', [DisplayProductController::class, 'index'])->name('products.index');
+Route::get('displayproduct', [DisplayProductController::class, 'DisplayProductController'])->name('products.index');
 
 // Single product details page
 Route::get('/product/{product}', [ProductController::class, 'show'])

@@ -6,7 +6,7 @@ use App\Models\Product;
 
 class DisplayProductController extends Controller
 {
-    public function index()
+    public function DisplayProductController()
     {
         // Load all products with category
         $products = Product::with('category')->get();

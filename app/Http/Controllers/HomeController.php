@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     //Show the home page with products
-    public function index()
+    public function HomeController()
     {
         // Get 4 products
         $featuredProducts = Product::latest()->take(4)->get();
