@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
-        <link rel="stylesheet" href="style.css"> <!-- created a link to the stylesheet-->
+        <link rel="stylesheet" href="loginstyle.css"> <!-- created a link to the stylesheet-->
         <!-- Google font -->
         <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
         <!-- Font awesome for icons-->
