@@ -130,3 +130,17 @@ Route::get('displayproduct', [DisplayProductController::class, 'index'])->name('
 // Single product details page
 Route::get('/product/{product}', [ProductController::class, 'show'])
     ->name('product.detail');
+
+Route::get('checkout', function () {
+    return view('checkout');
+});
+
+Route::get('/', [CheckoutController::class, 'checkout']);
+    
+
+
+
+
+
+
+
