@@ -40,7 +40,7 @@
             {{-- Icons --}}
             <div class="nav-icons">
                 <a href="#"><i class="fa-regular fa-heart"></i></a>
-                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="{{ route('basket.index') }}"><i class="fa-solid fa-cart-shopping"></i></a>
                 <a href="#"><i class="fa-regular fa-user"></i></a>
             </div>
 
