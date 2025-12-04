@@ -135,7 +135,7 @@ a {
     font-size: 48px;
     font-weight: 700;
     color: #000;
-    text-transform: lowercase; /* "your bag" style */
+    text-transform: uppercase; 
     margin: 0;
     line-height: 1;
 }
@@ -197,7 +197,7 @@ a {
     margin-bottom: 20px;
     font-weight: 700;
     font-size: 14px;
-    text-transform: lowercase;
+    text-transform: capitalize;
 }
 
 /* --- ITEM ROW --- */
@@ -310,7 +310,7 @@ a {
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 20px;
-    text-transform: lowercase;
+    text-transform: capitalize;
 }
 
 .footer-col-delivery .sub-text {
@@ -359,6 +359,7 @@ a {
     justify-content: space-between;
     margin-bottom: 15px;
     font-size: 14px;
+    text-transform: capitalize;
 }
 
 .btn-update {
@@ -381,6 +382,7 @@ a {
     font-size: 14px;
     margin-bottom: 20px;
     cursor: pointer;
+    text-transform: capitalize;
 }
 
 .grand-total {

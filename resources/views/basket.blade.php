@@ -60,11 +60,6 @@
 
                         <div class="item-col-desc">
                             <h3 class="item-name">{{ strtolower($details['name']) }}</h3>
-                            
-                            <div class="item-meta">
-                                <p>Shoe size: <span>3</span></p>
-                                <p>Colour: <span>cobalt blue</span></p>
-                            </div>
 
                             <div class="item-controls">
                                 <label>quantity:</label>
@@ -75,10 +70,6 @@
                                         <a href="{{ route('basket.decrease', $id) }}">▼</a>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="item-links">
-                                <a href="#" class="change-link">change size</a>
                             </div>
                             
                             <a href="{{ route('basket.remove', $id) }}" class="remove-x">×</a>
@@ -94,20 +85,19 @@
             <div class="basket-footer-grid">
                 
                 <div class="footer-col-delivery">
-                    <h4>delivery options <span class="sub-text">- select later on at checkout</span></h4>
+                    <h4>Delivery Options <span class="sub-text">- select later on at checkout</span></h4>
                     <div class="delivery-row">
-                        <span>uk standard</span>
+                        <span>UK Standard</span>
                         <span>£3.99</span>
                     </div>
                     <div class="delivery-row">
-                        <span>uk next day (free over £60)</span>
+                        <span>UK Next Day (free over £60)</span>
                         <span>£4.99</span>
                     </div>
                     <div class="delivery-row">
-                        <span>uk sunday (free over £60)</span>
-                        <span>£5.99*</span>
+                        <span>UK Sunday (free over £60)</span>
+                        <span>£5.99</span>
                     </div>
-                    <a href="#" class="delivery-link">delivery options explained</a>
                 </div>
 
                 <div class="footer-col-payments">

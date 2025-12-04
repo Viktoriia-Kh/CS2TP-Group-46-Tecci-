@@ -39,10 +39,10 @@ class BasketController extends Controller
         session()->put('basket', $basket);
         
         // Refresh the page so you see the new item
-        return redirect()->back(); 
+        return redirect()->route('basket.index'); 
     }
 
-    
+    // Remove Items
     public function remove($id)
     {
         $basket = session()->get('basket');
