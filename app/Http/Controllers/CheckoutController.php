@@ -3,38 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Basket;
+
 
 class CheckoutController extends Controller
 {
-    /**
-     * Display checkout page and calculate totals.
-     */
-    public function show()
+  public function checkout()
     {
-        // Cart is stored in session
-        $cart = session()->get('cart', []);
+        // Fetch all rows from the 'basket' table
+        $cart = Basket::all();
 
-        // Calculate overall total
-        $total = 0;
-        foreach ($cart as $item) {
-            $total += $item['price'] * $item['quantity'];
-        }
+        // Calculate the Total
+        //  every item and do (price * quantity), then add it all up.
+        $total = $cart->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
 
+        // Send data to the view
+        // We use the variable name 'cart' to match your check inside the HTML
         return view('checkout', compact('cart', 'total'));
     }
 
-    /**
-     * Process checkout (NO payment).
-     */
-    public function process(Request $request)
-    {
-        // Here you COULD save an order later when your group adds an orders table.
-
-        // For now: simply clear cart
-        session()->forget('cart');
-
-        return redirect()
-            ->route('checkout.show')
-            ->with('success', 'Order placed successfully!');
-    }
 }

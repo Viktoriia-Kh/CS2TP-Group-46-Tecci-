@@ -3,38 +3,65 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
 
 class CartController extends Controller
 {
-    public function add($id)
+    // Show the cart page
+   public function showCheckout()
     {
-        // Find the product in the database
-        $product = Product::findOrFail($id);
+    $cart = session()->get('cart', []); // ensures it's always an array
+    $total = collect($cart)->sum(function ($item) {
+        return $item['price'] * $item['quantity'];
+    });
 
-        // Get current cart
+    return view('checkout', [
+        'cart' => $cart,
+        'total' => $total
+    ]);
+    }
+
+    // Add to cart
+    public function addToCart(Request $request)
+    {
         $cart = session()->get('cart', []);
 
-        // If item exists: increase quantity
-        foreach ($cart as &$item) {
-            if ($item['id'] == $id) {
-                $item['quantity']++;
-                session()->put('cart', $cart);
-                return back()->with('success', 'Quantity updated!');
-            }
-        }
+        $id = $request->id;
 
-        // If item not in cart, add new entry
-        $cart[] = [
-            'id' => $product->id,
-            'name' => $product->name,
-            'price' => $product->price,
-            'quantity' => 1,
-            'image_url' => $product->image_url,
-        ];
+        // Increase quantity if exists
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] += 1;
+        } else {
+            // Add new item
+            $cart[$id] = [
+                'name'      => $request->name,
+                'price'     => $request->price,
+                'image_url' => $request->image_url,
+                'quantity'  => 1,
+            ];
+        }
 
         session()->put('cart', $cart);
 
-        return back()->with('success', 'Product added to cart!');
+        return back()->with('success', 'Item added to cart!');
+    }
+
+    // Remove a single item
+    public function removeItem($id)
+    {
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+        }
+
+        return back()->with('success', 'Item removed.');
+    }
+
+    // Clear entire cart
+    public function clearCart()
+    {
+        session()->forget('cart');
+        return back()->with('success', 'Cart cleared.');
     }
 }

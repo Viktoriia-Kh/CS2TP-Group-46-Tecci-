@@ -1,14 +1,14 @@
-<?php
+    <?php
 
-use Illuminate\Support\Facades\Route;
+    use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\CheckoutController;
 
-Route::get('/', function () {
-    return view('checkout');
-});
+    Route::get('/', [CheckoutController::class, 'checkout']);
+    
 
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\CartController;
 
-Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
-Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
-Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
+
+
+
+
+

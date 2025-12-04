@@ -45,86 +45,105 @@
   </header>
 
   <section class="hero">
-    <div class="container hero-inner"> <!--.hero-inner used to turn this into a two column layout-->
 
-      <!--Left Side: Text Content-->
-      <div class="hero-text">
-        <h1>
-          <p class="special-word">Your Shopping Cart<p>
-   
-        </h1>
-      
-      </div>
+  <!-- MAIN CHECKOUT SECTION -->
+  <div class="checkout-container container" style="margin-top: 2rem; margin-bottom: 4rem;">
 
-      <!--Right Side: Hero Image-->
-     
-    </div>
-    </div>
-  </section>
-
-
-  <section class="product-list">
-    <div class="product-list-inner"> <!--.hero-inner used to turn this into a two column layout-->
-
-      <!--Left Side: Text Content-->
-      <div class="jfj">
-        <h2>
-   sdfjkdsfjlkdsajfjijfidsjfjidsjfkf;jdskfnjnjaf
-        </h2>
-      
-      </div>
-      
-
-      <!--Right Side: Hero Image-->
-    <div class="product-list-outer"> 
-         <h2>
-          <p>estimated total:<p>
-   
-        </h2>
-     </div>
-    </div>
-    </div>
-  </section>
-
-  <div class="checkout-container">
-
-    <h1>Checkout</h1>
-
-    <!-- Order placed message -->
     @if(session('success'))
-        <div class="success">{{ session('success') }}</div>
+      <div class="success" style="background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+        {{ session('success') }}
+      </div>
     @endif
 
-    <h2>Your Items</h2>
+    <!-- 1. EMPTY CART STATE -->
+    @if($cart->isEmpty())
+      <div style="text-align: center; padding: 60px 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <i class="fa-solid fa-cart-shopping" style="font-size: 4rem; color: #ccc; margin-bottom: 20px;"></i>
+        <h2 style="color: #333;">Your cart is currently empty</h2>
+        <p style="color: #666; margin-bottom: 30px;">Looks like you haven't added any tech yet.</p>
+        <a href="products.html" class="btn btn-primary" style="background: #005baf; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none;">
+          Start Shopping
+        </a>
+      </div>
+    
+    @else
 
-    @foreach ($cart as $item)
-    <div class="cart-item">
+      <div class="checkout-layout" style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
+        
+        <!-- 2. LEFT COLUMN: ITEMS LIST -->
+        <div class="cart-items-list">
+          <h3 style="margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px;">Your Items ({{ $cart->count() }})</h3>
+          
+          @foreach ($cart as $item)
+            <div class="cart-item" style="display: flex; gap: 20px; padding: 20px; background: #fff; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); align-items: center;">
+              
+              <!-- Product Image -->
+              <div class="item-image">
+                <img src="{{ $item->image_url ?? 'https://via.placeholder.com/150' }}" 
+                     alt="{{ $item->product }}" 
+                     style="width: 100px; height: 100px; object-fit: cover; border-radius: 6px;">
+              </div>
 
-        <!-- LEFT SIDE: image + name -->
-        <div class="cart-left">
-            <!-- Product image -->
-            <img src="{{ $item['image_url'] ?? '/placeholder.png' }}" class="cart-img">
-
-            <!-- Name and base price -->
-            <div>
-                <div class="item-name">{{ $item['name'] }}</div>
-                <div class="item-price">
-                    £{{ number_format($item['price'], 2) }} x {{ $item['quantity'] }}
+              <!-- Product Details -->
+              <div class="item-details" style="flex-grow: 1;">
+                <h4 style="margin: 0 0 5px 0; color: #03315b; font-size: 1.1rem;">{{ $item->product }}</h4>
+                <p style="margin: 0; color: #666; font-size: 0.9rem;">
+                  Price: £{{ number_format($item->price, 2) }}
+                </p>
+                <div style="margin-top: 10px; font-size: 0.9rem;">
+                  Quantity: <strong>{{ $item->quantity }}</strong>
                 </div>
+              </div>
+
+              <!-- Line Total -->
+              <div class="item-total" style="text-align: right;">
+                <span style="display: block; font-size: 1.2rem; font-weight: bold; color: #333;">
+                  £{{ number_format($item->price * $item->quantity, 2) }}
+                </span>
+              </div>
             </div>
+          @endforeach
         </div>
 
-        <!-- RIGHT SIDE: total for this item -->
-        <div class="item-price">
-            £{{ number_format($item['price'] * $item['quantity'], 2) }}
-        </div>
-    </div>
-    @endforeach
+        <!-- 3. RIGHT COLUMN: SUMMARY & PAY -->
+        <div class="cart-summary">
+          <div style="background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); position: sticky; top: 20px;">
+            <h3 style="margin-top: 0; color: #03315b;">Order Summary</h3>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 20px; margin-bottom: 10px; color: #666;">
+              <span>Subtotal</span>
+              <span>£{{ number_format($total, 2) }}</span>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px; color: #666;">
+              <span>Shipping</span>
+              <span>Free</span>
+            </div>
 
-    <!-- OVERALL TOTAL -->
-    <div class="total">
-        Total: £{{ number_format($total, 2) }}
-    </div>
+            <div style="border-top: 2px solid #eee; padding-top: 20px; display: flex; justify-content: space-between; margin-bottom: 25px;">
+              <span style="font-size: 1.2rem; font-weight: bold;">Total</span>
+              <span style="font-size: 1.5rem; font-weight: bold; color: #005baf;">£{{ number_format($total, 2) }}</span>
+            </div>
+
+            <button onclick="alert('Payment functionality is currently disabled.')" 
+                    style="width: 100%; padding: 15px; background: #005baf; color: white; border: none; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background 0.2s;">
+              Checkout
+            </button>
+            
+            <p style="text-align: center; font-size: 0.8rem; color: #999; margin-top: 15px;">
+              <i class="fa-solid fa-lock"></i> Secure Checkout
+            </p>
+          </div>
+        </div>
+
+      </div>
+    @endif
+
+  </div>
+  <!-- CHECKOUT SECTION END -->
+
+
+
 </div>
 
   <!--FEATURED PRODUCTS-->
