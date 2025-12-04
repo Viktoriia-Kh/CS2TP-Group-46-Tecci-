@@ -1,0 +1,175 @@
+    /* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* Header and Navigation */
+header {
+    font-size: larger;
+}
+
+.header-top {
+    background-color: white;
+    padding: 0.2rem 1rem;
+    display: flex;                 
+    justify-content: space-between;  
+    align-items: center;
+}
+
+/* Icons in header */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Adds space between icons */
+}
+
+/* Tecci Logo */
+.logo {
+    height: 100px;
+    width: auto;
+}
+
+/* User Icon & Trolley Icon */
+.img {
+    height: 65px;
+    width: auto;
+}
+
+nav {
+    background-color: #26639f; /* Tecci logo blue colour */
+    padding: 0.5rem 2rem;
+    font-weight: bold;
+}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    justify-content: right;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 0 1rem;
+    transition: color 0.3s ease;
+    font-size: 1.2rem;
+    white-space: nowrap;
+}
+
+nav ul li a:hover {
+    color: #ddd;
+}   
+
+/* Hero Section */
+.hero {
+    background-color: black;
+    padding: 4rem 2rem;
+}
+
+.hero-content-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.hero-text-content{
+    flex: 1;
+    text-align: left;
+}
+
+.hero-image-container{
+    flex: 1;
+    text-align: right;
+}
+
+.hero-image-container img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+.hero h2{
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+
+
+/* --- Media Queries --- */
+
+@media (max-width: 768px) {
+
+    /* Adds more top & bottom padding to the nav bar */
+    nav {
+        padding: 1rem 2rem;
+    }
+
+    nav ul {
+        flex-direction: column;  /* Stacks links vertically */
+        align-items: center;   /* Centers the stack horizontally */
+        gap: 1rem;             /* Adds space between each link */
+    }
+}
+
+
+/* Footer */
+footer {
+    background-color: #26639f;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+  }
+  
+  .price {
+    color: grey;
+    font-size: 22px;
+  }
+  
+  .card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  .card button:hover {
+    opacity: 0.7;
+  }
