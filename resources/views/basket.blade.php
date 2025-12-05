@@ -83,17 +83,29 @@
             </div>
 
             <div class="basket-footer-grid">
-                
+
                 <div class="footer-col-delivery">
-                    <h4>Delivery Options <span class="sub-text">- select later on at checkout</span></h4>
+                <div class="delivery-selection-wrapper">
+                    
+                    <h4 class="delivery-header">Delivery Options - select before check out</h4>
+
                     <div class="delivery-row">
-                        <span>UK Standard (FREE over £60)</span>
-                        <span>£3.99</span>
+                        <input type="checkbox" id="delivery-standard" class="delivery-checkbox delivery-group-checkbox">
+                        <label for="delivery-standard" class="delivery-label">
+                            UK Standard 3-5 working days (FREE over £60) - £3.99
+                        </label>
                     </div>
+
                     <div class="delivery-row">
-                        <span>UK Next Day</span>
-                        <span>£4.99</span>
+                        <input type="checkbox" id="delivery-premium" class="delivery-checkbox delivery-group-checkbox">
+                        <label for="delivery-premium" class="delivery-label">
+                            UK Next Day - £4.99
+                        </label>
                     </div>
+
+                    <div id="delivery-error-msg" class="delivery-error"></div>
+
+                </div>
                 </div>
 
                 <div class="footer-col-payments">
@@ -116,7 +128,7 @@
                     
                     <div class="discount-wrapper">
                     <div class="discount-container">
-                        <input type="text" id="discount-input" placeholder="Enter code (e.g. xmas10)">
+                        <input type="text" id="discount-input" placeholder="Enter Discount Code (e.g. xmas10)">
                         <button type="button" id="apply-btn">Apply</button>
                     </div>
                     <p id="message-area"></p>
@@ -129,7 +141,7 @@
 
                     <div class="final-actions">
                         <a href="/display-products-page" class="btn-continue-bottom">CONTINUE SHOPPING</a>
-                        <a href="/checkout" class="btn-checkout-bottom">CHECKOUT NOW</a>
+                        <a href="/checkout" id="checkout-btn" class="btn-checkout-bottom">CHECKOUT NOW</a>
                     </div>
                 </div>
             </div>

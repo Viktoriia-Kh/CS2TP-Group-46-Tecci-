@@ -773,3 +773,73 @@ ul {
     margin-left: 3px;
     font-weight: bold;
 }
+
+/* BASKET - Next Day Delivery Toggle Styles */
+.next-day-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.next-day-input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.next-day-label {
+    font-size: 0.875rem; /* Equivalent to small text */
+    font-weight: 500;
+    color: #374151;      /* Dark grey */
+    cursor: pointer;
+    user-select: none;   /* Prevents highlighting text when clicking */
+}
+
+/* BASKET - Delivery Header */
+.delivery-header {
+    font-size:  2rem; /* Increased from 1rem */
+    font-weight: 700;   /* Made slightly bolder */
+    color: #333;
+    margin: 0 0 10px 0;      
+    text-align: left;       
+}
+
+/* BASKET - Individual Delivery Method Checkbox Row */
+.delivery-row {
+    display: flex;
+    align-items: center;    
+    gap: 15px;              /* More space between box and text */
+    padding: 12px 0;    
+    border-bottom: 1px solid #f0f0f0; 
+}
+
+/* BASKET - Delivery Checkbox*/
+    .delivery-checkbox{
+    width: 20px;            /* Increased from 16px */
+    height: 20px;           /* Increased from 16px */
+    min-width: 20px;        /* Prevents squashing */
+    cursor: pointer;
+    accent-color: #007bff;  /* Optional: Makes the tick blue */
+    }
+
+/* BASKET - Label Text INCREASED SIZE */
+.delivery-label {
+    font-size: 1.1rem;      /* Increased from 0.9rem */
+    font-weight: 500;       /* Made slightly bolder */
+    color: #333;            /* Darker for better contrast */
+    cursor: pointer;
+    user-select: none;
+    line-height: 1.4;       
+}
+
+/* BASKET - Delivery Error Message */
+.delivery-error {
+    color: #dc3545; /* Red */
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 10px;
+    display: none; /* Hidden by default */
+}
