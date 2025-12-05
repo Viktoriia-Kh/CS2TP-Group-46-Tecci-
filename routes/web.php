@@ -21,10 +21,6 @@ use App\Http\Controllers\LoginController;
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
 
 
-// Root URL
-Route::get('/', function () {
-    return view('home-page');
-});
 
 Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('login');
 

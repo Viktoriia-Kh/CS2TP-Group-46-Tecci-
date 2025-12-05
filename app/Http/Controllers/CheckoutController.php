@@ -31,6 +31,6 @@ class CheckoutController extends Controller
 
         // Send data to view
         // Pass 'cart' & 'total' so the checkout page displays items
-        return view('checkout', compact('cart', 'total'));
+        return view('checkout', compact('cart', 'total', 'featuredProducts'));
     }
 }
