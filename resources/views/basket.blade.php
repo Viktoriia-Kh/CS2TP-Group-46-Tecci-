@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             
-                            <a href="{{ route('basket.remove', $id) }}" class="remove-x">×</a>
+                            <a href="{{ route('basket.remove', $id) }}" class="remove-item-link">remove item <span class="x-icon">×</span></a>
                         </div>
 
                         <div class="item-col-price">

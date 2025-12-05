@@ -751,3 +751,25 @@ ul {
     min-height: 1.5em; 
     margin-bottom: 0;
 }
+
+/* BASKET - Remove Item Link Styling */
+.remove-item-link {
+    text-decoration: none;
+    color: #999;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.2s;
+    display: inline-block;
+    margin-top: 10px; /* Spacing from the quantity box */
+}
+
+.remove-item-link:hover {
+    color: #dc3545; /* Red on hover */
+    cursor: pointer;
+}
+
+.x-icon {
+    font-size: 1.2rem;
+    margin-left: 3px;
+    font-weight: bold;
+}
