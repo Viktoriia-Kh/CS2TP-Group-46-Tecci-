@@ -30,7 +30,7 @@
             <h1 class="basket-title">Your basket</h1>
             <div class="header-actions">
                 <span class="free-delivery-text">
-                    <i class="fas fa-truck"></i> spend £60.00 or more for free delivery
+                    <i class="fas fa-truck"></i> Spend £60.00 or more for FREE delivery
                 </span>
                 <a href="/display-products-page" class="btn-continue-top">CONTINUE SHOPPING</a>
                 <a href="/checkout" class="btn-checkout-top">CHECKOUT NOW</a>
@@ -87,16 +87,12 @@
                 <div class="footer-col-delivery">
                     <h4>Delivery Options <span class="sub-text">- select later on at checkout</span></h4>
                     <div class="delivery-row">
-                        <span>UK Standard</span>
+                        <span>UK Standard (FREE over £60)</span>
                         <span>£3.99</span>
                     </div>
                     <div class="delivery-row">
-                        <span>UK Next Day (free over £60)</span>
+                        <span>UK Next Day</span>
                         <span>£4.99</span>
-                    </div>
-                    <div class="delivery-row">
-                        <span>UK Sunday (free over £60)</span>
-                        <span>£5.99</span>
                     </div>
                 </div>
 
