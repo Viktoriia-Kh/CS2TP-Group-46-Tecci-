@@ -131,7 +131,6 @@
                             <span class="price-text" id="delivery-cost">--</span>
                         </div>
                         
-                        <button class="btn-update">UPDATE BASKET</button>
                         
                         <div class="discount-wrapper">
                             <div class="discount-container">
