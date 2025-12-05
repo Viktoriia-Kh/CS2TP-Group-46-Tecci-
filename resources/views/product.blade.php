@@ -82,7 +82,7 @@
                       </p>
                   </div>
                   
-                  <button class="add-to-cart-btn">Add to Cart</button>
+                 <a href="{{ route('basket.add', $product->id) }}" class="add-to-cart-btn"> Add to Cart</a>
 
               </div>
           </div>
