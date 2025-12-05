@@ -6,8 +6,8 @@
   <title>Tecci | Your Shopping Cart</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!--Links to HTML/CSS Files-->
-  <link rel="stylesheet" href="checkoutstyle.css" />
-  <link rel="stylesheet" href="contactstyle.css" />
+  <link rel="stylesheet" href="{{ asset('checkoutstyle.css') }}" />
+  <link rel="stylesheet" href="{{ asset('contactstyle.css') }}" />
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
@@ -20,26 +20,26 @@
     <div class="container nav-container">
 
       <!-- Logo -->
-      <a href="/" class="logo"> <!--Using this will make the Logo clickable and takes the user to the Home Page-->
+      <a href="/" class="logo">
         <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
-        <span class="logo-text">TECCI</span> <!--Is an inline element used for short text-->
+        <span class="logo-text">TECCI</span>
       </a>
 
       <!--Navigation Menu-->
       <nav class="main-nav">
         <ul>
-          <li><a href="/" class="active">Home</a></li> <!--class="active" marks the Current Page-->
+          <li><a href="/" class="active">Home</a></li>
           <li><a href="about-us">About</a></li>
           <li><a href="contact-us">Contact</a></li>
-          <li><a href="dislplayproduct">Products</a></li>
+          <li><a href="{{ route('products.index') }}">Products</a></li>
         </ul>
       </nav>
 
       <!--Icons-->
       <div class="nav-icons">
-        <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a> <!--fa-heart is a Heart Icon linked from Font Awesome-->
-        <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
-        <a href="login"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
+        <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a>
+        <a href="{{ route('basket.index') }}"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="login"><i class="fa-regular fa-user"></i></a>
       </div>
     </div>
   </header>
@@ -55,13 +55,13 @@
       </div>
     @endif
 
-    <!-- 1. EMPTY CART STATE -->
-    @if($cart->isEmpty())
+    <!-- 1. EMPTY CART STATE (Updated for Arrays) -->
+    @if(empty($cart))
       <div style="text-align: center; padding: 60px 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
         <i class="fa-solid fa-cart-shopping" style="font-size: 4rem; color: #ccc; margin-bottom: 20px;"></i>
         <h2 style="color: #333;">Your cart is currently empty</h2>
         <p style="color: #666; margin-bottom: 30px;">Looks like you haven't added any tech yet.</p>
-        <a href="displayproduct" class="btn btn-primary" style="background: #005baf; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none;">
+        <a href="{{ route('products.index') }}" class="btn btn-primary" style="background: #005baf; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none;">
           Start Shopping
         </a>
       </div>
@@ -72,33 +72,36 @@
         
         <!-- 2. LEFT COLUMN: ITEMS LIST -->
         <div class="cart-items-list">
-          <h3 style="margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px;">Your Items ({{ $cart->count() }})</h3>
+          <!-- Updated count() for Array -->
+          <h3 style="margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px;">Your Items ({{ count($cart) }})</h3>
           
           @foreach ($cart as $item)
             <div class="cart-item" style="display: flex; gap: 20px; padding: 20px; background: #fff; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); align-items: center;">
               
-              <!-- Product Image -->
+              <!-- Product Image (Updated to Array Syntax) -->
               <div class="item-image">
-                <img src="{{ $item->image_url ?? 'https://via.placeholder.com/150' }}" 
-                     alt="{{ $item->product }}" 
-                     style="width: 100px; height: 100px; object-fit: cover; border-radius: 6px;">
+                <img src="{{ filter_var($item['image'], FILTER_VALIDATE_URL) ? $item['image'] : asset($item['image']) }}" 
+                     alt="{{ $item['name'] }}" 
+                     style="width: 100px; height: 100px; object-fit: cover; border-radius: 6px;"
+                     onerror="this.onerror=null;this.src='https://via.placeholder.com/150';">
               </div>
 
-              <!-- Product Details -->
+              <!-- Product Details (Updated to Array Syntax) -->
               <div class="item-details" style="flex-grow: 1;">
-                <h4 style="margin: 0 0 5px 0; color: #03315b; font-size: 1.1rem;">{{ $item->product }}</h4>
+                <!-- Used $item['name'] instead of ->product -->
+                <h4 style="margin: 0 0 5px 0; color: #03315b; font-size: 1.1rem;">{{ $item['name'] }}</h4>
                 <p style="margin: 0; color: #666; font-size: 0.9rem;">
-                  Price: £{{ number_format($item->price, 2) }}
+                  Price: £{{ number_format($item['price'], 2) }}
                 </p>
                 <div style="margin-top: 10px; font-size: 0.9rem;">
-                  Quantity: <strong>{{ $item->quantity }}</strong>
+                  Quantity: <strong>{{ $item['quantity'] }}</strong>
                 </div>
               </div>
 
-              <!-- Line Total -->
+              <!-- Line Total (Updated to Array Syntax) -->
               <div class="item-total" style="text-align: right;">
                 <span style="display: block; font-size: 1.2rem; font-weight: bold; color: #333;">
-                  £{{ number_format($item->price * $item->quantity, 2) }}
+                  £{{ number_format($item['price'] * $item['quantity'], 2) }}
                 </span>
               </div>
             </div>
@@ -117,7 +120,8 @@
             
             <div style="display: flex; justify-content: space-between; margin-bottom: 20px; color: #666;">
               <span>Shipping</span>
-              <span>Free</span>
+              <!-- NOTE: This is currently hardcoded as Free/TBD until we pass delivery info -->
+              <span>Calculated at next step</span>
             </div>
 
             <div style="border-top: 2px solid #eee; padding-top: 20px; display: flex; justify-content: space-between; margin-bottom: 25px;">
@@ -127,7 +131,7 @@
 
             <button onclick="alert('Payment functionality is currently disabled.')" 
                     style="width: 100%; padding: 15px; background: #005baf; color: white; border: none; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background 0.2s;">
-              Checkout
+              Pay Now
             </button>
             
             <p style="text-align: center; font-size: 0.8rem; color: #999; margin-top: 15px;">
@@ -191,37 +195,37 @@
     <div class="container">
       <h2>Shop All Products Now</h2>
       <div class="card-grid category-grid">
-        <a href="displayproduct" class="category-card">
+        <a href="{{ route('products.index') }}" class="category-card">
           <div class="category-icon">
-            <i class="fa-solid fa-laptop"></i> <!--fa-laptop is a Laptop Icon linked from Font Awesome-->
+            <i class="fa-solid fa-laptop"></i>
           </div>
           <p>Laptops</p>
         </a>
 
-        <a href="displayproduct" class="category-card">
+        <a href="{{ route('products.index') }}" class="category-card">
           <div class="category-icon">
-            <i class="fa-solid fa-desktop"></i> <!--fa-desktop is a Desktop Icon linked from Font Awesome-->
+            <i class="fa-solid fa-desktop"></i>
           </div>
           <p>PCs</p>
         </a>
 
-        <a href="displayproduct" class="category-card">
+        <a href="{{ route('products.index') }}" class="category-card">
           <div class="category-icon">
-            <i class="fa-solid fa-mobile-screen-button"></i> <!--fa-mobile-screen-button is a Mobile Icon linked from Font Awesome-->
+            <i class="fa-solid fa-mobile-screen-button"></i>
           </div>
           <p>Smartphones</p>
         </a>
 
-        <a href="displayproduct" class="category-card">
+        <a href="{{ route('products.index') }}" class="category-card">
           <div class="category-icon">
-            <i class="fa-solid fa-tablet-screen-button"></i> <!--fa-tablet-screen-button is a Tablet Icon linked from Font Awesome-->
+            <i class="fa-solid fa-tablet-screen-button"></i>
           </div>
           <p>Tablets</p>
         </a>
 
-        <a href="displayproduct" class="category-card">
+        <a href="{{ route('products.index') }}" class="category-card">
           <div class="category-icon">
-            <i class="fa-solid fa-headphones"></i> <!--fa-headphones is a Headphone Icon linked from Font Awesome-->
+            <i class="fa-solid fa-headphones"></i>
           </div>
           <p>Accessories</p>
         </a>
@@ -250,8 +254,8 @@
           <li><a href="/">Home</a></li>
           <li><a href="about-us">About</a></li>
           <li><a href="contact-us">Contact</a></li>
-          <li><a href="displayproduct">Products</a></li>
-          <li><a href="basket">Basket</a></li>
+          <li><a href="{{ route('products.index') }}">Products</a></li>
+          <li><a href="{{ route('basket.index') }}">Basket</a></li>
           <li><a href="login">My Account</a></li>
         </ul>
       </div>
@@ -260,20 +264,20 @@
         <h4>Contact Info</h4>
         <ul class="contact-list">
           <li>
-            <i class="fa-solid fa-location-dot"></i> <!--fa-loocation-dot is a Location Icon linked from Font Awesome-->
+            <i class="fa-solid fa-location-dot"></i> 
             <span>0121 555 0198</span><br><br>
           </li>
           <li>
-            <i class="fa-solid fa-phone"></i> <!--fa-phone is a Phone Icon linked from Font Awesome-->
+            <i class="fa-solid fa-phone"></i>
             <span>Tecci_Queries@net.com</span><br><br>
           </li>
           <li>
-            <i class="fa-regular fa-envelope"></i> <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
+            <i class="fa-regular fa-envelope"></i>
             <span>Birmingham, B4 7ET</span><br><br>
           </li>
         </ul>
       </div>
-    </div> <!--Closes <div class="container footer-inner"-->
+    </div> 
     <div class="footer-bottom">
       <p>&copy; 2025 Tecci. All rights reserved.</p>
     </div>
