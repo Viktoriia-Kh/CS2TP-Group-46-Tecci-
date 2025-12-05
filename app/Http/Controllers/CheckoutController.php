@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Basket;
+use App\Models\Product;
 
 class CheckoutController extends Controller
 {
@@ -23,6 +25,9 @@ class CheckoutController extends Controller
         foreach($cart as $id => $details) {
             $total += $details['price'] * $details['quantity'];
         }
+
+         // Fetch 4 products for the featured section
+        $featuredProducts = Product::latest()->take(4)->get();
 
         // Send data to view
         // Pass 'cart' & 'total' so the checkout page displays items
