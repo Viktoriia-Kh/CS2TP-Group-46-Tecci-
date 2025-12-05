@@ -118,37 +118,42 @@
                     </div>
                 </div>
 
-                <div class="footer-col-totals">
-                    <div class="totals-row">
-                        <span>subtotal</span>
-                        <span class="price-text" id="subtotal-amount">£{{ number_format($total, 2) }}</span>
-                    </div>
-
-                    <div class="totals-row">
-                        <span>delivery</span>
-                        <span class="price-text" id="delivery-cost">--</span>
-                    </div>
-                    
-                    <button class="btn-update">UPDATE BASKET</button>
-                    
-                    <div class="discount-wrapper">
-                        <div class="discount-container">
-                            <input type="text" id="discount-input" placeholder="Enter Discount Code (e.g. xmas10)">
-                            <button type="button" id="apply-btn">Apply</button>
+                        <div class="footer-col-totals">
+                        <div class="totals-row">
+                            <span>subtotal</span>
+                            <!-- CRITICAL ID #1: The JS reads this number -->
+                            <span class="price-text" id="subtotal-amount">£{{ number_format($total, 2) }}</span>
                         </div>
-                        <p id="message-area"></p>
-                    </div>
 
-                    <div class="totals-row grand-total">
-                        <span>grand total</span>
-                        <span class="price-text" id="checkout-total">£{{ number_format($total, 2) }}</span>
-                    </div>
+                        <div class="totals-row">
+                            <span>delivery</span>
+                            <!-- CRITICAL ID #2: The JS updates this text -->
+                            <span class="price-text" id="delivery-cost">--</span>
+                        </div>
+                        
+                        <button class="btn-update">UPDATE BASKET</button>
+                        
+                        <div class="discount-wrapper">
+                            <div class="discount-container">
+                                <!-- CRITICAL ID #3: The Input Field -->
+                                <input type="text" id="discount-input" placeholder="Enter Discount Code (e.g. xmas10)">
+                                <!-- CRITICAL ID #4: The Apply Button -->
+                                <button type="button" id="apply-btn">Apply</button>
+                            </div>
+                            <p id="message-area"></p>
+                        </div>
 
-                    <div class="final-actions">
-                        <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE SHOPPING</a>
-                        <a href="/checkout" id="checkout-btn" class="btn-checkout-bottom">CHECKOUT NOW</a>
+                        <div class="totals-row grand-total">
+                            <span>grand total</span>
+                            <!-- CRITICAL ID #5: The Final Total -->
+                            <span class="price-text" id="checkout-total">£{{ number_format($total, 2) }}</span>
+                        </div>
+
+                        <div class="final-actions">
+                            <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE SHOPPING</a>
+                            <a href="/checkout" class="btn-checkout-bottom checkout-validate">CHECKOUT NOW</a>
+                        </div>
                     </div>
-                </div>
             </div>
         @endif
     </div>
