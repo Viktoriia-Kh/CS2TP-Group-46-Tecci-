@@ -3,30 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Basket;
-use App\Models\Product;
 
 class CheckoutController extends Controller
 {
     public function checkout()
     {
-        // Fetch all rows from the 'basket' table
-        $cart = Basket::all();
+        // Fetch the basket from the session (same way BasketController does)
+        // If 'basket' doesn't exist, use empty array []
+        $cart = session()->get('basket', []);
 
-        // Calculate the total
-        // every item and do (price * quantity), then add it all up
-        $total = $cart->sum(function ($item) {
-            return $item->price * $item->quantity;
-        });
+        // Safety Check - If basket empty, redirect to basket page
+        if(empty($cart)) {
+            return redirect()->route('basket.index')->with('error', 'Your basket is empty!');
+        }
 
-        // Fetch 4 products for the featured section
-        $featuredProducts = Product::latest()->take(4)->get();
+        // Calculate the Total
+        // Session data is an Array, loop through it
+        $total = 0;
+        foreach($cart as $id => $details) {
+            $total += $details['price'] * $details['quantity'];
+        }
 
-        // Send ALL data to the view
-        return view('checkout', [
-            'cart'             => $cart,
-            'total'            => $total,
-            'featuredProducts' => $featuredProducts,
-        ]);
+        // Send data to view
+        // Pass 'cart' & 'total' so the checkout page displays items
+        return view('checkout', compact('cart', 'total'));
     }
 }
