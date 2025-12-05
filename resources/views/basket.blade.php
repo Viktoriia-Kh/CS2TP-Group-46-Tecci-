@@ -40,7 +40,7 @@
         @if(empty($basket) || count($basket) == 0)
             <div class="empty-basket-message">
                 <h2>Your basket is currently empty</h2>
-                <a href="/homepage" class="btn-continue-top">Start Shopping</a>
+                <a href="{{ route('products.index') }}" class="btn-continue-top">Start Shopping</a>
             </div>
         @else
             <div class="basket-table-headers">
