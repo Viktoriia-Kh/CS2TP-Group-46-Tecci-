@@ -2,44 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class BasketController extends Controller
 {
     // Show the Basket Page
-    public function index()
+    public function index() 
     {
         // Get the basket data from the session
         // If it doesn't exist yet, we use an empty list []
         $basket = session()->get('basket', []);
         
-        
         return view('basket', compact('basket'));
     }
 
-    // Add Item Logic
+    // Add Item To Basket Logic
     public function add($id)
     {
-        $basket = session()->get('basket', []);
+    // Find the product in the DB using the ID passed from the route
+    $product = Product::findOrFail($id);
 
-        // Logic - Check if item exists, if yes, add +1 to quantity
-        if(isset($basket[$id])) {
-            $basket[$id]['quantity']++;
-        } else {
-            
-            $basket[$id] = [
-                "name" => "Demo Product " . $id,
-                "quantity" => 1,
-                "price" => 20.00,
-                "image" => "https://via.placeholder.com/150"
-            ];
-        }
+    // Get the current basket from session (or start a new empty one)
+    $basket = session()->get('basket', []);
 
-        // Save the updated list back to the browser memory
-        session()->put('basket', $basket);
-        
-        // Refresh the page so you see the new item
-        return redirect()->route('basket.index'); 
+    // Check if this specific product ID is already in the basket
+    if(isset($basket[$id])) {
+        // If yes, just add 1 to the quantity
+        $basket[$id]['quantity']++;
+    } else {
+        // If no, add the real product details to the array
+        $basket[$id] = [
+            "name" => $product->name,
+            "quantity" => 1,
+            "price" => $product->price,
+            // We map the DB column 'image_url' to the session key 'image'
+            "image" => $product->image_url 
+        ];
+    }
+
+    // Save the updated basket back to the session
+    session()->put('basket', $basket);
+
+    // Go back to the page with a success message
+    return redirect()->back()->with('success', 'Product added to basket successfully!');
     }
 
     // Remove Items
