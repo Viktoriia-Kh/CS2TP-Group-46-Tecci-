@@ -55,7 +55,7 @@
                     
                     <div class="basket-item-row">
                         <div class="item-col-image">
-                            <img src="{{ $details['image'] ?? 'https://via.placeholder.com/150' }}" alt="{{ $details['name'] }}">
+                            <img src="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}" alt="{{ $details['name'] }}" class="basket-product-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/150';">
                         </div>
 
                         <div class="item-col-desc">
