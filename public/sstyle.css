@@ -711,3 +711,43 @@ ul {
         order: 3;
     }
 } 
+
+
+/* --- Discount Component For Basket Styles --- */
+.discount-wrapper {
+    margin-bottom: 20px; 
+    border-top: 1px solid #eee; 
+    padding-top: 15px;
+}
+
+.discount-container {
+    display: flex; 
+    gap: 10px;
+}
+
+#discount-input {
+    flex-grow: 1; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+}
+
+#apply-btn {
+    padding: 10px 15px; 
+    background: #333; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+}
+
+#apply-btn:hover {
+    background: #555; 
+}
+
+#message-area {
+    font-size: 0.9rem; 
+    margin-top: 5px; 
+    min-height: 1.5em; 
+    margin-bottom: 0;
+}
