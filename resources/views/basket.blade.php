@@ -121,17 +121,22 @@
                 <div class="footer-col-totals">
                     <div class="totals-row">
                         <span>subtotal</span>
-                        <span class="price-text">£{{ number_format($total, 2) }}</span>
+                        <span class="price-text" id="subtotal-amount">£{{ number_format($total, 2) }}</span>
+                    </div>
+
+                    <div class="totals-row">
+                        <span>delivery</span>
+                        <span class="price-text" id="delivery-cost">--</span>
                     </div>
                     
                     <button class="btn-update">UPDATE BASKET</button>
                     
                     <div class="discount-wrapper">
-                    <div class="discount-container">
-                        <input type="text" id="discount-input" placeholder="Enter Discount Code (e.g. xmas10)">
-                        <button type="button" id="apply-btn">Apply</button>
-                    </div>
-                    <p id="message-area"></p>
+                        <div class="discount-container">
+                            <input type="text" id="discount-input" placeholder="Enter Discount Code (e.g. xmas10)">
+                            <button type="button" id="apply-btn">Apply</button>
+                        </div>
+                        <p id="message-area"></p>
                     </div>
 
                     <div class="totals-row grand-total">

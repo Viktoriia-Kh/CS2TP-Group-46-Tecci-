@@ -1,125 +1,149 @@
 document.addEventListener("DOMContentLoaded", function() {
     console.log("✅ basket.js loaded successfully");
 
-    // --- Select All Necessary Elements ---
+    // --- Select Elements ---
+    const subtotalEl = document.getElementById('subtotal-amount');
+    const deliveryCostEl = document.getElementById('delivery-cost');
+    const totalEl = document.getElementById('checkout-total');
+    
+    const checkboxes = document.querySelectorAll('.delivery-group-checkbox');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const deliveryErrorMsg = document.getElementById('delivery-error-msg');
+    
     const applyButton = document.getElementById('apply-btn');
     const inputField = document.getElementById('discount-input');
     const messageArea = document.getElementById('message-area');
-    const priceElement = document.getElementById('checkout-total'); 
-    
-    // Select the Checkout Button and Error Message
-    const checkoutBtn = document.getElementById('checkout-btn');
-    const deliveryErrorMsg = document.getElementById('delivery-error-msg');
 
-    // Select the Delivery Checkboxes (The fix for your issue)
-    const checkboxes = document.querySelectorAll('.delivery-group-checkbox');
+    // Store state
+    let discountMultiplier = 1; // 1 = 100% price (no discount)
 
-    // --- Auto-Uncheck Logic (Mutual Exclusivity) ---
-    // This ensures only ONE box can be ticked at a time
+    // --- Calculation Logic ---
+    function updateTotals() {
+        // Get Subtotal (Remove '£' and commas)
+        let subtotalRaw = parseFloat(subtotalEl.innerText.replace(/[£,]/g, ''));
+        if (isNaN(subtotalRaw)) subtotalRaw = 0;
+
+        // Determine Delivery Cost
+        let deliveryPrice = 0;
+        let deliveryText = "--";
+        let isDeliverySelected = false;
+
+        checkboxes.forEach(box => {
+            if (box.checked) {
+                isDeliverySelected = true;
+                
+                // CHECK ID: Standard or Premium?
+                if (box.id === 'delivery-standard') {
+                    // Rule: Standard FREE if subtotal >= 60, otherwise £3.99
+                    if (subtotalRaw >= 60) {
+                        deliveryPrice = 0;
+                        deliveryText = "FREE";
+                    } else {
+                        deliveryPrice = 3.99;
+                        deliveryText = "£3.99";
+                    }
+                } else if (box.id === 'delivery-premium') {
+                    // Rule: Premium always £4.99
+                    deliveryPrice = 4.99;
+                    deliveryText = "£4.99";
+                }
+            }
+        });
+
+        // Update Delivery Text on Screen
+        if (deliveryCostEl) {
+            deliveryCostEl.innerText = deliveryText;
+            // Make "FREE" green, others black
+            deliveryCostEl.style.color = (deliveryText === "FREE") ? "#155724" : ""; 
+            deliveryCostEl.style.fontWeight = (deliveryText === "FREE") ? "bold" : "";
+        }
+
+        // Calculate Grand Total
+        // Formula: (Subtotal * Discount) + Delivery
+        let discountedSubtotal = subtotalRaw * discountMultiplier;
+        let finalTotal = discountedSubtotal + deliveryPrice;
+
+        // Update Grand Total Text
+        if (totalEl) {
+            totalEl.innerText = '£' + finalTotal.toFixed(2);
+        }
+
+        return isDeliverySelected;
+    }
+
+    // --- Event Listeners for Checkboxes ---
     if (checkboxes.length > 0) {
         checkboxes.forEach((checkbox) => {
             checkbox.addEventListener('change', function() {
+                // Mutual Exclusion (Radio Behavior)
                 if (this.checked) {
-                    // If this one is turned ON, turn the others OFF
                     checkboxes.forEach((other) => {
-                        if (other !== this) {
-                            other.checked = false;
-                        }
+                        if (other !== this) other.checked = false;
                     });
-                    
-                    // Hide the error message immediately since a selection was made
-                    if (deliveryErrorMsg) {
-                        deliveryErrorMsg.style.display = 'none';
-                    }
-                    
-                    console.log(`Selected: ${this.nextElementSibling.innerText.trim()}`);
-                    // We will add price updating logic here later
+                    if (deliveryErrorMsg) deliveryErrorMsg.style.display = 'none';
                 }
+                
+                // Recalculate totals immediately when clicked
+                updateTotals();
             });
         });
     }
 
     // --- Checkout Validation ---
-    // Prevents moving to the next page if nothing is selected
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function(event) {
-            let isAnyChecked = false;
-            
-            // Check if at least one box is ticked
-            checkboxes.forEach((box) => {
-                if (box.checked) isAnyChecked = true;
-            });
+            // Run calculation to see if anything is selected
+            const isSelected = updateTotals();
 
-            // If nothing checked, stop!
-            if (!isAnyChecked) {
-                event.preventDefault(); // Stop the link from working
+            if (!isSelected) {
+                event.preventDefault();
                 if (deliveryErrorMsg) {
                     deliveryErrorMsg.style.display = 'block';
-                    deliveryErrorMsg.textContent = 'Please select a delivery method';
+                    deliveryErrorMsg.innerText = "Please select a delivery method";
                 }
-            } 
+            }
         });
     }
 
-    // --- Discount Logic (Your Existing Code) ---
-    // STATE TRACKING: Keep track if discount is used
-    let discountApplied = false;
+    // --- Discount Logic ---
+    if (applyButton) {
+        applyButton.addEventListener('click', function() {
+            if (discountMultiplier < 1) {
+                messageArea.textContent = "A discount is already applied!";
+                messageArea.style.color = "#dc3545";
+                return;
+            }
 
-    if (!priceElement) {
-        console.error("❌ Error: Could not find 'checkout-total'");
-        return;
+            const code = inputField.value.trim().toLowerCase();
+            
+            if (code === 'xmas10') {
+                discountMultiplier = 0.90; // 10% off
+                messageArea.textContent = "Success! 10% discount applied.";
+                messageArea.style.color = "#155724";
+            } else if (code === 'welcome20') {
+                discountMultiplier = 0.80; // 20% off
+                messageArea.textContent = "Success! 20% discount applied.";
+                messageArea.style.color = "#155724";
+            } else if (code === '') {
+                messageArea.textContent = "Please enter a code.";
+                messageArea.style.color = "#dc3545";
+                return;
+            } else {
+                messageArea.textContent = "Invalid discount code.";
+                messageArea.style.color = "#dc3545";
+                return;
+            }
+
+            // Lock the button
+            applyButton.disabled = true;
+            applyButton.style.backgroundColor = "#ccc";
+            applyButton.style.cursor = "not-allowed";
+
+            // Recalculate numbers with new discount
+            updateTotals();
+        });
     }
-
-    applyButton.addEventListener('click', function() {
-      // CHECK: If already applied, stop immediately
-      if (discountApplied) {
-          messageArea.textContent = "A discount is already applied!";
-          messageArea.style.color = "#dc3545"; // Red color
-          return; 
-      }
-
-      let currentPriceText = priceElement.innerText;
-      let cleanPrice = currentPriceText.replace(/[^0-9.]/g, '');
-      let originalPrice = parseFloat(cleanPrice);
-      
-      if (isNaN(originalPrice)) return;
-
-      const code = inputField.value.trim().toLowerCase();
-      
-      if (code === 'xmas10') {
-        const newPrice = originalPrice * 0.90; 
-        priceElement.innerText = '£' + newPrice.toFixed(2);
-        
-        messageArea.textContent = "Success! 10% discount applied.";
-        messageArea.style.color = "#155724"; // Green color
-        
-        // LOCK: Mark discount as applied so it can't happen again
-        discountApplied = true;
-        
-        // Disable the button so they can't even click it
-        applyButton.disabled = true;
-        applyButton.style.backgroundColor = "#ccc";
-        applyButton.style.cursor = "not-allowed";
-
-      } else if (code === 'welcome20') {
-        const newPrice = originalPrice * 0.80;
-        priceElement.innerText = '£' + newPrice.toFixed(2);
-        
-        messageArea.textContent = "Success! 20% discount applied.";
-        messageArea.style.color = "#155724";
-        
-        // LOCK
-        discountApplied = true;
-        applyButton.disabled = true;
-        applyButton.style.backgroundColor = "#ccc";
-        applyButton.style.cursor = "not-allowed";
-
-      } else if (code === '') {
-        messageArea.textContent = "Please enter a code.";
-        messageArea.style.color = "#dc3545";
-      } else {
-        messageArea.textContent = "Invalid discount code.";
-        messageArea.style.color = "#dc3545";
-      }
-    });
+    
+    // Initial Run to set defaults
+    updateTotals();
 });
