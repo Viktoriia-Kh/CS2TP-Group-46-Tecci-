@@ -14,11 +14,19 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+
+// Homepage
+Route::get('/', [HomeController::class, 'HomeController'])->name('home');
+
 
 // Root URL
 Route::get('/', function () {
     return view('home-page');
 });
+
+Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('login');
 
 
 // Basket Logic (Viewing, Adding, Removing)
@@ -116,9 +124,7 @@ Route::post('/logout', function () {
     return redirect('/')->with('success', 'Logged out successfully.');
 })->name('logout');
 
-// Route::get('/login', function () {
-//     return redirect()->route('signup.form');
-// })->name('login');
+
 
 Route::get('contactus', function () {
     return view('contact-us');
@@ -139,7 +145,7 @@ Route::get('product', function () {
 });
 
 // Products listing page 
-Route::get('displayproduct', [DisplayProductController::class, 'index'])->name('products.index');
+Route::get('displayproduct', [DisplayProductController::class, 'DisplayProductController'])->name('products.index');
 
 // Single product details page
 Route::get('/product/{product}', [ProductController::class, 'show'])
@@ -147,3 +153,4 @@ Route::get('/product/{product}', [ProductController::class, 'show'])
 
 // Checkout route
 Route::get('checkout', [CheckoutController::class, 'checkout']);
+

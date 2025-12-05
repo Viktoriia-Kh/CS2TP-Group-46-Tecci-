@@ -29,8 +29,7 @@ a {
 ================================== */
 
 body:not(.signup-page) {
-  font-family: "Signika", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  font-family: "Signika";
   background-color: #f5f7fb;
   color: #111827;
   line-height: 1.6;

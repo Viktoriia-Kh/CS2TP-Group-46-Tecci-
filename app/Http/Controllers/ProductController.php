@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
 
 
-    public function index(Request $request)
+    public function ProductController(Request $request)
     {
         // Get all active categories for filters
         $categories = Category::where('is_active', true)

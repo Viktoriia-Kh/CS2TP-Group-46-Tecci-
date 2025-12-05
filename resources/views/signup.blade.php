@@ -23,16 +23,16 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="{{ url('/contact') }}">Contact</a></li>
-                    <li><a href="#" class="active">Products</a></li>
+                    <li><a href="about-us">About</a></li>
+                    <li><a href="contact-us">Contact</a></li>
+                    <li><a href="displayproduct">Products</a></li>
                 </ul>
             </nav>
 
             <div class="nav-icons">
                 <a href="#"><i class="fa-regular fa-heart"></i></a>
-                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="#"><i class="fa-regular fa-user"></i></a>
+                <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="login" class="active"><i class="fa-regular fa-user"></i></a>
             </div>
 
         </div>
@@ -100,7 +100,7 @@
 
             <p class="signup-footer-text">
                 Already have an account?
-                <a href="#">Login</a>
+                <a href="login">Login</a>
             </p>
 
         </div>
@@ -120,12 +120,12 @@
         <div class="footer-col">
             <h4>Quick Links</h4>
             <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/products">Products</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about-us">About</a></li>
+                <li><a href="/contact-us">Contact</a></li>
+                <li><a href="/displayproduct">Products</a></li>
                 <li><a href="/basket">Basket</a></li>
-                <li><a href="/account">My Account</a></li>
+                <li><a href="/login">My Account</a></li>
             </ul>
         </div>
 

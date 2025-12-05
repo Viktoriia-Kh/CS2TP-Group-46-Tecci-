@@ -6,7 +6,7 @@
   <title>Tecci | Affordable Tech for Students</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!--Links to HTML/CSS Files-->
-  <link rel="stylesheet" href="singlestyle.css" />
+  <link rel="stylesheet" href="displaystyle.css" />
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
@@ -88,7 +88,7 @@
         <!-- CATEGORY TABS -->
         <div class="category-tabs">
           <button class="tab-button active" data-category="all">All Products</button>
-          <button class="tab-button" data-category="pcs">PCs</button>
+          <button class="tab-button" data-category="desktops">PCs</button>
           <button class="tab-button" data-category="laptops">Laptops</button>
           <button class="tab-button" data-category="phones">Phones</button>
           <button class="tab-button" data-category="tablets">Tablets</button>
@@ -296,14 +296,15 @@
 
 
     productCard.innerHTML = `
-      <a href="/product/${product.id}">
-          <div class="product-image-placeholder"></div>
-          <div class="product-item-info">
-              <h4>${product.name}</h4>
-              <p class="product-item-price">£${product.price.toFixed(2)}</p>
-              <a href="/add-to-basket/${product.id}" class="add-to-cart-quick">Add to Cart</a>
-            </div>
-          </div>
+      <a href="/product/${product.id}" class="product-link">
+        <div class="product-image-placeholder">
+          <img src="${product.image_url}" alt="${product.name}">
+        </div>
+        <div class="product-item-info">
+          <h4>${product.name}</h4>
+          <p class="product-item-price">£${product.price.toFixed(2)}</p>
+          <a href="/add-to-basket/${product.id}" class="add-to-cart-quick">Add to Cart</a>
+        </div>
       </a>
     `;
 
