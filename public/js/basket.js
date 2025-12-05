@@ -7,8 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const totalEl = document.getElementById('checkout-total');
     
     const checkboxes = document.querySelectorAll('.delivery-group-checkbox');
-    const checkoutBtn = document.getElementById('checkout-btn');
     const deliveryErrorMsg = document.getElementById('delivery-error-msg');
+
+    // Selects all checkout buttons in basket (top and bottom)
+    const checkoutBtn = document.querySelectorAll('.checkout-validate');  
     
     const applyButton = document.getElementById('apply-btn');
     const inputField = document.getElementById('discount-input');
@@ -89,19 +91,24 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // --- Checkout Validation ---
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', function(event) {
-            // Run calculation to see if anything is selected
-            const isSelected = updateTotals();
+   // --- Checkout Validation (Updated for Multiple Buttons) ---
+    if (checkoutBtns.length > 0) {
+        checkoutBtns.forEach(btn => {
+            btn.addEventListener('click', function(event) {
+                // Run calculation to check anything is selected
+                const isSelected = updateTotals();
 
-            if (!isSelected) {
-                event.preventDefault();
-                if (deliveryErrorMsg) {
-                    deliveryErrorMsg.style.display = 'block';
-                    deliveryErrorMsg.innerText = "Please select a delivery method";
+                if (!isSelected) {
+                    event.preventDefault(); // Stop user from going to the link
+                    if (deliveryErrorMsg) {
+                        deliveryErrorMsg.style.display = 'block';
+                        deliveryErrorMsg.innerText = "Please select a delivery method";
+                        
+                        // Scroll to the error message so user sees it
+                        deliveryErrorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
                 }
-            }
+            });
         });
     }
 
