@@ -20,7 +20,7 @@
 
 
        <div class="navbar-right">
-           <a href="/homepage" class="homepage-link">Return To Home</a>
+           <a href="/" class="homepage-link">Return To Home</a>
        </div>
    </nav>
        
@@ -150,7 +150,8 @@
 
                         <div class="final-actions">
                             <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE SHOPPING</a>
-                            <a href="/checkout" class="btn-checkout-bottom checkout-validate">CHECKOUT NOW</a>
+                            <!-- <a href="/checkout" class="btn-checkout-bottom checkout-validate">CHECKOUT NOW</a> -->
+                            <a href="/checkout" class="btn-checkout-top">CHECKOUT NOW</a>
                         </div>
                     </div>
             </div>
