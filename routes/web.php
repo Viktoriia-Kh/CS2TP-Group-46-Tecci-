@@ -14,16 +14,14 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
 
 
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
-
+Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('login');
 
 Route::get('/signup', [SignUpController::class, 'showForm'])
     ->name('signup.form');
