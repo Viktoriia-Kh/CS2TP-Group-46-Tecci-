@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!--Links to HTML/CSS Files-->
   <link rel="stylesheet" href="{{ asset('checkoutstyle.css') }}" />
+    <link rel="stylesheet" href="{{ asset('common-style.css') }}" />
   <link rel="stylesheet" href="{{ asset('contactstyle.css') }}" />
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
