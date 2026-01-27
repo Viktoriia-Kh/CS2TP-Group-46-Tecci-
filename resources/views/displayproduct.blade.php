@@ -6,6 +6,7 @@
   <title>Tecci | Affordable Tech for Students</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!--Links to HTML/CSS Files-->
+  <link rel="stylesheet" href="common-style.css" />
   <link rel="stylesheet" href="displaystyle.css" />
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
