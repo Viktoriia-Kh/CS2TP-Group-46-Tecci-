@@ -132,3 +132,72 @@ body.dark-mode .footer-col a:hover {
 body.dark-mode .footer-bottom {
   border-top: 1px solid rgba(207, 233, 255, 0.18); /* Keeps the top border in Dark Mode but makes it subtle and visible */
 }
+
+/* ABOUT US PAGE DARK MODE */
+
+body.dark-mode .about-row,
+body.dark-mode .mission-vision { /* This is for the general background for About Us Page sections that are light-blue in light mode */
+  background-color: #0b1220;
+}
+
+body.dark-mode .about-text-block h1,
+body.dark-mode .about-text-block h2 { /* This is for the About Us headings and paragraphs */
+  color: #7cc0ff;
+}
+
+body.dark-mode .about-text-block p {
+  color: #cbd5e1;
+}
+
+/* WHY TECCI SECTION */ 
+body.dark-mode .why-tecci {
+  background-color: #0f3a66; /* This creates slightly darker blue tones */
+  color: #e5e7eb;
+}
+
+body.dark-mode .why-heading-wrap::before { /* This is for the Curved Shape behind Why Tecci heading */
+  background-color: #071426;
+}
+
+body.dark-mode .why-heading-wrap h2 { /* This is for the Why Tecci heading */
+  color: #e5e7eb;
+}
+
+body.dark-mode .why-icon { /* This is for the Why Tecci icon circles and icons */
+  border-color: #cfe9ff;
+}
+
+body.dark-mode .why-icon i {
+  color: #cfe9ff;
+}
+
+body.dark-mode .why-content h3 { /* This is for the Why Tecci content text */
+  color: #f3f4f6;
+}
+
+body.dark-mode .why-content p {
+  color: #cbd5e1;
+}
+
+/* MISSION AND VISION CARD SECTIONS */ 
+
+body.dark-mode .mission-vision { /* This creates a colour with gradient darker for dark mode */
+  background: linear-gradient(to bottom, #0b1220, #0f1f35);
+}
+
+body.dark-mode .mission-card,
+body.dark-mode .vision-card {
+  background-color: #0f3a66;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .mission-card h2,
+body.dark-mode .vision-card h2 {
+  color: #cfe9ff;
+}
+
+body.dark-mode .mission-card p,
+body.dark-mode .vision-card p {
+  color: #e5e7eb;
+}
