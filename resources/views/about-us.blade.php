@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="homestyle.css" />
     <link rel="stylesheet" href="contactstyle.css" />
     <link rel="stylesheet" href="Aboutstyle.css" />
+    <link rel="stylesheet" href="Dark-Mode.css" />
     <!--Google Font-->
     <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
     <!--Font Awesome for Icons-->
@@ -241,6 +242,10 @@
             <p>&copy; 2025 Tecci. All rights reserved.</p>
         </div>
     </footer>
+
+    <!--Link to external JavaScript File-->
+    <script src="Dark-Mode-Theme.js"></script>
+    
 </body>
 
 </html>
