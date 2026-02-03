@@ -1,0 +1,15 @@
+/* DARK/LIGHT MODE BUTTON ICON */
+.theme-toggle {
+  background: transparent; /* This removes any default button background so it looks like an Icon */
+  border: none; /* This removes a default button button border */
+  color: inherit; /* This makes the Icon use the same colour as the header's text, which is white */
+  cursor: pointer; /* This shows the hand cursor when hovering on Dark/Light Mode Icon */
+  padding: 2.4px; /* This give a slightly bigger area to click without changing the layout */
+  font-size: 19px; 
+  transition: transform 0.15s ease, color 0.15s ease; /* This creates a smooth animation when hovering over the Icon */
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px); /* This creates a slight lift effect, matches other existing Icons */
+  color: #e6f3ff;
+}
