@@ -13,3 +13,27 @@
   transform: translateY(-1px); /* This creates a slight lift effect, matches other existing Icons */
   color: #e6f3ff;
 }
+
+/* DARK MODE OVERRIDE FEATURES */
+/* These activate when the body has .dark-mode, so we only apply dark colours when body has a 
+class called dark-mode */
+
+body.dark-mode {
+  background-color: #0b1220; /* This is for the overall background colour in Dark Mode */
+  color: #e5e7eb; /* This is for the default text colour in Dark Mode */
+}
+
+/* HEADER AND NAV SECTION DARK MODE */
+body.dark-mode .main-header { /* This is for the Header and Nav Dark Mode colours */
+  background-color: #071426;
+  border-bottom-color: #0f3a66;
+}
+
+body.dark-mode .main-nav a::after {
+  background-color: #cfe9ff; /* This makes the underline animation a brighter light-blue so it stands out against the dark header */
+}
+
+body.dark-mode .nav-icons a:hover,
+body.dark-mode .theme-toggle:hover {
+  color: #cfe9ff; /* This applies the same hover colour to all the Icons in Nav */
+}
