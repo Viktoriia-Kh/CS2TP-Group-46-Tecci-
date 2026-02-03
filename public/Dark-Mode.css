@@ -201,3 +201,65 @@ body.dark-mode .mission-card p,
 body.dark-mode .vision-card p {
   color: #e5e7eb;
 }
+
+/* CONTACT US PAGE DARK MODE */
+body.dark-mode .contact-section { /* This is for the Contact Page overall Background */
+  background: linear-gradient(to bottom, #0b1220, #0b1625);
+}
+
+/* LEFT FORM CARD SECTION */
+body.dark-mode .contact-form-card { /* This is for the Left Form Card which becomes dark */
+  background-color: #101827;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .form-row label { /* This is for the Form labels and text */
+  color: #e5e7eb;
+}
+
+body.dark-mode .form-row input,
+body.dark-mode .form-row textarea { /* This is for the Text Inputs and Text Area */
+  background-color: #0b1220; /* This creates a dark input surface */
+  color: #e5e7eb; /* This creates a lighter text to make it more readable */
+  border-color: #243043; /* This creates a subtle border */
+}
+
+body.dark-mode .form-row input::placeholder,
+body.dark-mode .form-row textarea::placeholder { /* This is for the Placeholder colour, which creates dim text inside empty fields */
+  color: #94a3b8;
+}
+
+body.dark-mode .form-row input:focus,
+body.dark-mode .form-row textarea:focus { /* This creates a blue glow when an Input Label is clicked on */
+  border-color: #7cc0ff;
+  box-shadow: 0 0 0 2px rgba(124, 192, 255, 0.16);
+}
+
+body.dark-mode .btn-primary { /* This is for the Submit button which stays blue but slightly brighter when in Dark Mode */
+  background-color: #1d6dbd;
+}
+
+body.dark-mode .btn-primary:hover {
+  background-color: #165a9b;
+}
+
+/* RIGHT INFO CARD SECTION */
+body.dark-mode .contact-info-panel { /* This is for the Right Info Card which becomes dark */
+  background-color: #0f1f35;
+}
+
+body.dark-mode .contact-info-inner h2 { /* This is for the Right Card heading and text, making it lighter */
+  color: #7cc0ff;
+}
+
+body.dark-mode .contact-info-text {
+  color: #cbd5e1;
+}
+
+body.dark-mode .contact-info-item { /* This is for the Contact information rows */
+  color: #e5e7eb;
+}
+
+body.dark-mode .contact-info-item i {
+  color: #cfe9ff;
+}
