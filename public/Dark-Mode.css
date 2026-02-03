@@ -119,3 +119,16 @@ body.dark-mode .testimonial-text {
 body.dark-mode .testimonial-quote-icon {
   color: #7cc0ff;
 }
+
+/* FOOTER SECTION DARK MODE */
+body.dark-mode .site-footer {
+  background-color: #071426;
+}
+
+body.dark-mode .footer-col a:hover {
+  color: #cfe9ff;
+}
+
+body.dark-mode .footer-bottom {
+  border-top: 1px solid rgba(207, 233, 255, 0.18); /* Keeps the top border in Dark Mode but makes it subtle and visible */
+}
