@@ -41,6 +41,14 @@
         <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a> <!--fa-heart is a Heart Icon linked from Font Awesome-->
         <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
         <a href="login"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
+
+        <!--Added A Dark/Light Mode Toggle Button-->
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+          <i class="fa-solid fa-moon"></i>
+          <!--fa-moon is a Moon Icon linked from Font Awesome-->
+          <!--class="theme-toggle" lets us style the button using CSS-->
+          <!--id="themeToggle" allows us to use this id in JavaScript-->
+        </button>
       </div>
     </div>
   </header>
