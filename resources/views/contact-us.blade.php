@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!--Link to CSS File for Contact Page-->
   <link rel="stylesheet" href="contactstyle.css" />
+  <link rel="stylesheet" href="Dark-Mode.css" />
   <!--Google Font-->
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
   <!--Font Awesome for Icons-->
@@ -217,6 +218,7 @@
 
   <!--Link to external JavaScript File-->
   <script src="contact-us.js"></script>
+  <script src="Dark-Mode-Theme.js"></script>
 
 </body>
 
