@@ -37,3 +37,85 @@ body.dark-mode .nav-icons a:hover,
 body.dark-mode .theme-toggle:hover {
   color: #cfe9ff; /* This applies the same hover colour to all the Icons in Nav */
 }
+
+/* HERO SECTION DARK MODE */
+body.dark-mode .hero {
+  background: linear-gradient(to right, #0f1f35 40%, #0b1220 40%);
+}
+
+body.dark-mode .hero-text h1 {
+  color: #f3f4f6; /* This makes the Hero Heading light for better contrast */
+}
+
+body.dark-mode .special-word {
+  color: #7cc0ff;
+}
+
+body.dark-mode .hero-subtitle {
+  color: #cbd5e1;
+}
+
+/* BUTTONS DARK MODE */
+body.dark-mode .btn-primary {
+  background-color: #1d6dbd; /* This makes the button brighter in Dark Mode for better contrast against dark backgrounds */
+}
+
+body.dark-mode .btn-primary:hover {
+  background-color: #165a9b;
+}
+
+/* FEATURED PRODUCTS SECTION DARK MODE */
+body.dark-mode .featured-products {
+  background-color: #0f3a66;
+}
+
+body.dark-mode .product-card {
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); /* This creates a stronger shadow due to darker background */
+}
+
+body.dark-mode .product-image-placeholder {
+  background-color: #0b1220;
+}
+
+body.dark-mode .product-price {
+  color: #e5e7eb; /* Ensures prices don't stay black on darker background for better readability */
+}
+
+/* CATEGORIES SECTION DARK MODE */
+body.dark-mode .product-categories {
+  background-color: #0f1f35;
+}
+
+body.dark-mode .category-card {
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .category-card:hover {
+  background-color: #0b1220;
+}
+
+body.dark-mode .category-icon {
+  background-color: #0b1220;
+}
+
+/* TESTIMONIALS SECTION DARK MODE */
+body.dark-mode .testimonials {
+  background: linear-gradient(to bottom, #0b1220, #0f1f35);
+}
+
+body.dark-mode .testimonial-card {
+  background-color: #101827;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .testimonial-text {
+  color: #cbd5e1;
+}
+
+body.dark-mode .testimonial-quote-icon {
+  color: #7cc0ff;
+}
