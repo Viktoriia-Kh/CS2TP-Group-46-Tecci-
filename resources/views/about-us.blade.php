@@ -21,7 +21,7 @@
     <header class="main-header">
         <div class="container nav-container">
 
-            <!-- Logo -->
+        <!-- Logo -->
             <a href="/" class="logo">
                 <!--Using this will make the Logo clickable and takes the user to the Home Page-->
                 <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
@@ -43,6 +43,14 @@
                 <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a> <!--fa-heart is a Heart Icon linked from Font Awesome-->
                 <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
                 <a href="login"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
+
+                <!--Added A Dark/Light Mode Toggle Button-->
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                    <!--fa-moon is a Moon Icon linked from Font Awesome-->
+                    <!--class="theme-toggle" lets us style the button using CSS-->
+                    <!--id="themeToggle" allows us to use this id in JavaScript-->
+                </button>
             </div>
 
         </div>
@@ -245,7 +253,7 @@
 
     <!--Link to external JavaScript File-->
     <script src="Dark-Mode-Theme.js"></script>
-    
+
 </body>
 
 </html>
