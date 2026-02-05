@@ -79,10 +79,8 @@
 
         </section>
 
-    </body>
-
    <!-- creating the footer-->
-    <footer class="main-footer">
+    <footer class="site-footer">
     <div class="container footer-inner">
         <div class="footer-col">
             <h3>TECCI</h3>
@@ -119,4 +117,5 @@
         &copy; 2025 Tecci. All rights reserved.
     </div>
 </footer>
+</body>
 </html>
