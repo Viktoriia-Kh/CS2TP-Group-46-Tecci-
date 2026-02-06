@@ -123,8 +123,7 @@ body:not(.signup-page) {
 
 body.signup-page {
   margin: 0;
-  font-family: "Signika", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  font-family: "Signika";
   background: #4169e1; /* blue background */
   color: #1b1b1f;
 
