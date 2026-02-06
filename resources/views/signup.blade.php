@@ -5,9 +5,19 @@
     <meta charset="UTF-8" />
     <title>Sign Up | Tecci</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{ asset('css/sign-up2style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-      <link rel="stylesheet" href="common-style.css" />
+    <!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- Common styles FIRST -->
+<link rel="stylesheet" href="{{ asset('css/common-style.css') }}">
+
+<!-- Page specific styles SECOND -->
+<link rel="stylesheet" href="{{ asset('css/sign-up2style.css') }}">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
 </head>
 
