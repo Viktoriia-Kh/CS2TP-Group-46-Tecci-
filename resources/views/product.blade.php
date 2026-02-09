@@ -43,52 +43,82 @@
   </header>
 
   <main>
-      <section class="product-detail">
+    <section class="product-detail">
 
-          {{-- Product Name --}}
-          <h1 class="product-name">{{ $product->name }}</h1>
+        <!-- TOP ROW: Name (Left) | Price & Basket (Right) -->
+        <div class="product-header-row">
+            
+            <!-- Name -->
+            <h1 class="product-name">{{ $product->name }}</h1>
 
-          <div class="product-container">
+            <!-- Price & Add to Basket -->
+            <div class="product-actions">
+                <div class="product-price-box">
+                    <span class="price-value">
+                        £{{ number_format($product->price, 2) }}
+                    </span>
+                </div>
+                
+                <a href="{{ route('basket.add', $product->id) }}" class="add-to-basket-btn"> Add to Basket</a>
+            </div>
+        </div>
 
-              {{-- Image --}}
-              <div class="product-image-box">
-                  @if ($product->image_url)
-                      <img src="{{ asset($product->image_url) }}" 
-                          alt="{{ $product->name }}" 
-                          class="product-image">
-                  @else
-                      <img src="{{ asset('images/laptop.jpg') }}" 
-                          class="product-image">
-                  @endif
-              </div>
+        <!-- MAIN CONTENT GRID -->
+        <div class="product-container">
+            <!-- LEFT COLUMN: Images & Rating -->
+            <div class="left-column">
+                <!-- Image Area: Thumbnails + Main Image -->
+                <div class="image-gallery-wrapper">
+                    <div class="thumbnails-column">
+                        <!-- Placeholder loop for thumbnails based on sketch -->
+                        @for($i = 0; $i < 3; $i++)
+                            <div class="thumb">
+                                <!-- Replace with actual gallery images -->
+                                <img src="{{ asset('images/placeholder-thumb.jpg') }}">
+                            </div>
+                        @endfor
+                    </div>
 
-              {{-- Info --}}
-              <div class="product-info-box">
+                    <!-- Main Image -->
+                    <div class="product-image-box">
+                        @if ($product->image_url)
+                            <img src="{{ asset($product->image_url) }}" 
+                                 alt="{{ $product->name }}" 
+                                 class="product-image">
+                        @else
+                            <img src="{{ asset('images/laptop.jpg') }}" 
+                                 class="product-image">
+                        @endif
+                    </div>
+                </div>
 
-                  <div class="product-price-box">
-                      <span class="price-label">Price:</span>
-                      <span class="price-value">£{{ number_format($product->price, 2) }}</span>
-                  </div>
+                <!-- Rating Section -->
+                <div class="product-rating-box">
+                    <span class="rating-label">Rating:</span>
+                    <!-- Placeholder stars -->
+                    <span class="stars">★★★★☆</span>
+                </div>
+            </div>
 
-                  <div class="product-description-box">
-                      <h3>Description</h3>
-                      <p>{{ $product->description }}</p>
-                  </div>
+            <!-- RIGHT COLUMN: Product Details & Stock -->
+            <div class="right-column" ">
+                
+                <div class="product-description-box">
+                    <h3 style="margin-top: 0;">Description</h3>
+                    <p>{{ $product->description }}</p>
+                </div>
 
-                  {{-- Stock --}}
-                  <div class="product-stock-box">
-                      <h3>Stock Status</h3>
-                      <p>
-                          {{ $product->stock_status }}
-                      </p>
-                  </div>
-                  
-                 <a href="{{ route('basket.add', $product->id) }}" class="add-to-cart-btn"> Add to Cart</a>
+                <!-- Stock Status  -->
+                <div class="product-stock-box" >
+                    <span class="stock-status">
+                        {{ $product->stock_status }}
+                    </span>
+                </div>
 
-              </div>
-          </div>
-      </section>
-  </main>
+            </div>
+        </div>
+    </section>
+</main>
 
     <!--FOOTER-->
   <footer class="site-footer">

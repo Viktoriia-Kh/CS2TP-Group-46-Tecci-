@@ -1,349 +1,207 @@
-
 /* Product Detail Section */
 .product-detail {
-    background-color: rgb(255, 255, 255);
-    padding: 4rem 2rem;
+  background-color: #e6f3ff;
+  padding: 1rem 2rem 4rem;
+}
+
+/* --- Header Row (Name Left / Price & Button Right) --- */
+.product-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto 2rem auto;
+  border-bottom: 2px solid #26639f;
+  padding-bottom: 1rem;
 }
 
 .product-name {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 2rem;
-    color: #000000;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+  font-size: 2.5rem;
+  color: #000000;
+  margin: 0; 
 }
 
-.product-container {
-    display: flex;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    align-items: flex-start;
-}
-
-.product-image-box {
-    flex: 1;
-    background-color: #d6d6d6;
-    padding: 2rem;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.product-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-.product-info-box {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.product-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .product-price-box {
-    background-color: #26639f;
-    padding: 1.5rem;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.price-label {
-    font-weight: bold;
-    font-size: 1.2rem;
+  display: flex;
+  align-items: center;
 }
 
 .price-value {
-    font-size: 1.8rem;
-    font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #26639f;
 }
 
-.product-description-box {
-    background-color: #d6d6d6;
-    padding: 2rem;
-    border-radius: 8px;
+.add-to-basket-btn {
+  background-color: #26639f;
+  color: white;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-basket-btn:hover {
+  background-color: #1d4a78;
+}
+
+/* --- Main Grid Layout --- */
+.product-container {
+  background-color:#fcfeff;
+  display: flex;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: stretch; 
+}
+
+/* --- Left Column (Gallery & Rating) --- */
+.left-column {
+  margin: 0.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-gallery-wrapper {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.thumbnails-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 70px; 
+}
+
+.thumb {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.thumb:hover {
+  border-color: #26639f;
+}
+
+.product-image-box {
+  flex-grow: 1;
+  background-color: #fff;
+  border: 4px solid #26639f; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.product-rating-box {
+  border-radius: 8px;
+  padding: 1rem;
+  align-items: center;
+  color:#fff;
+  background-color: #26639f;
+}
+
+/* --- Right Column (Details & Stock) --- */
+.right-column {
+  margin: 0.5rem;
+  flex: 1;
+  border: 4px solid #26639f;
+  padding: 2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #26639f;
 }
 
 .product-description-box h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #26639f;
+  font-size: 1.8rem; 
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #e6f3ff;
 }
 
 .product-description-box p {
-    line-height: 1.8;
-    color: #000000;
+  line-height: 1.6;
+  color: #fff;
+  margin-bottom: 1rem;
 }
 
-.add-to-cart-btn {
-    background-color: #26639f;
-    color: white;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.add-to-cart-btn:hover {
-    background-color: #1d4a78;
-}
-
-
-
-
-/* --- Discount Component For Basket Styles --- */
-.discount-wrapper {
-    margin-bottom: 20px; 
-    border-top: 1px solid #eee; 
-    padding-top: 15px;
-}
-
-.discount-container {
-    display: flex; 
-    gap: 10px;
-}
-
-#discount-input {
-    flex-grow: 1; 
-    padding: 10px; 
-    border: 1px solid #ccc; 
-    border-radius: 5px;
-}
-
-#apply-btn {
-    padding: 10px 15px; 
-    background: #333; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer;
-}
-
-#apply-btn:hover {
-    background: #555; 
-}
-
-#message-area {
-    font-size: 0.9rem; 
-    margin-top: 5px; 
-    min-height: 1.5em; 
-    margin-bottom: 0;
-}
-
-/* BASKET - Remove Item Link Styling */
-.remove-item-link {
-    text-decoration: none;
-    color: #999;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: color 0.2s;
-    display: inline-block;
-    margin-top: 10px; /* Spacing from the quantity box */
-}
-
-.remove-item-link:hover {
-    color: #dc3545; /* Red on hover */
-    cursor: pointer;
-}
-
-.x-icon {
-    font-size: 1.2rem;
-    margin-left: 3px;
-    font-weight: bold;
-}
-
-/* BASKET - Next Day Delivery Toggle Styles */
-.next-day-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #eee;
-}
-
-.next-day-input {
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-}
-
-.next-day-label {
-    font-size: 0.875rem; 
-    font-weight: 500;
-    color: #374151;      
-    cursor: pointer;
-    user-select: none;   
-}
-
-/* ========================================= */
-/* UPDATED BASKET DELIVERY STYLES      */
-/* ========================================= */
-
-/* Delivery Section Wrapper */
-.delivery-selection-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;              
-    width: 100%;
-    margin-bottom: 1.5rem;
-}
-
-/* 1. Header Text - HUGE */
-.delivery-header {
-    font-size: 2.4rem;      /* ~38px */
-    font-weight: 800;
-    color: #222;
-    margin: 0 0 20px 0;      
-    text-align: left;       
-}
-
-/* 2. Individual Checkbox Rows */
-.delivery-row {
-    display: flex;
-    align-items: flex-start;    
-    padding: 20px 0;        
-    border-bottom: 1px solid #e0e0e0; 
-}
-
-/* 3. The Checkbox Itself - HUGE */
-.delivery-checkbox {
-    width: 35px;            /* 35px Square */
-    height: 35px;           
-    min-width: 35px;        
-    cursor: pointer;
-    margin-right: 15px;
-    accent-color: #007bff;  
-}
-
-/* 4. The Label Text - HUGE */
-.delivery-label {
-    font-size: 1.8rem;      /* ~29px */
-    font-weight: 600;       
-    color: #000;            
-    cursor: pointer;
-    user-select: none;
-    line-height: 1.2;       
-    padding-top: 5px;       
-}
-
-/* Error Message */
-.delivery-error {
-    color: #dc3545; 
-    font-weight: bold;
-    font-size: 1.2rem;      
-    margin-top: 15px;
-    display: none; 
-}
-
-/* --- EMPTY BASKET STYLING --- */
-
-.empty-basket-message {
-    text-align: center;          
-    padding: 150px 20px;         /* Huge vertical spacing to center it visually */
-    display: flex;
-    flex-direction: column;      
-    align-items: center;         
-    justify-content: center;
-    gap: 30px;                   /* Space between text and button */
-}
-
-.empty-basket-message h2 {
-    font-size: 2.5rem;          
-    font-weight: 700;
-    color: #333;
-    margin: 0;
-}
-
-/* Specific styling for the 'Start Shopping' button in this section */
-.empty-basket-message .btn-continue-top {
-    font-size: 1.5rem;           
-    padding: 20px 50px;         
-    background-color: #03315b;   
-    color: white;
-    border-radius: 50px;         /* Fully rounded corners */
-    text-transform: uppercase;
-    font-weight: bold;
-    transition: transform 0.2s ease, background-color 0.2s;
-    text-decoration: none;
-}
-
-.empty-basket-message .btn-continue-top:hover {
-    transform: scale(1.05);      /* Slight grow effect on hover */
-    background-color: #005baf;   /* Lighter blue on hover */
+/* The Stock Box (Bottom Right) */
+.product-stock-box {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  border-top: 2px solid #26639f;
+  border-left: 2px solid #26639f;
+  padding: 0.8rem 2rem;
+  font-weight: bold;
+  color: #333;
 }
 
 /* RESPONSIVENESS */
 
 /* For Tablets/Small Laptops (Max Width 900px) */
 @media (max-width: 900px) {
-  
-  /* HERO SECTION */
   .hero-inner {
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 32px;
     min-height: auto;
-    
-    /* Fixed the "32 px" typo here */
     width: min(1200px, 100% - 32px);
     margin-inline: auto;
     padding-left: 0;
   }
-
   .hero-text {
     max-width: 100%;
     align-items: center;
   }
-
   .hero-banner {
     width: 100%;
     height: auto;
   }
-
   .hero-image {
     height: auto;
   }
-
-  /* FEATURED PRODUCTS GRID */
   .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  /* PRODUCT CATEGORIES GRID */
   .category-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-
-  /* TESTIMONIALS GRID */
   .testimonial-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-} /* <--- CLOSES TABLET QUERY HERE. DO NOT REMOVE */
-
+} 
 
 /* For Mobile Phones (Max Width 600px) */
 @media (max-width: 600px) {
-
-  /* HEADER SECTION */
   .nav-container {
     flex-wrap: wrap;
     align-items: center;
     gap: 8px 12px;
     padding-inline: 8px;
   }
-
   .logo {
     font-size: 26px;
     display: flex;
@@ -351,11 +209,9 @@
     gap: 6px;
     flex: 1 0 50%;
   }
-
   .logo img {
     height: 32px;
   }
-
   .nav-icons {
     display: flex;
     justify-content: flex-end;
@@ -363,12 +219,10 @@
     font-size: 17px;
     gap: 12px;
   }
-
   .main-nav {
     order: 3;
     width: 100%;
   }
-
   .main-nav ul {
     display: flex;
     justify-content: center;
@@ -376,91 +230,76 @@
     gap: 12px;
     font-size: 15px;
   }
-
-  /* HERO */
   .hero {
     padding: 24px 0 32px;
   }
-
   .hero-inner {
     gap: 24px;
   }
-
   .hero-text h1 {
     font-size: clamp(28px, 7vw, 34px);
   }
-
   .hero-subtitle {
     font-size: 14px;
   }
-
   .hero-image {
     height: auto;
   }
-
   .hero-banner {
     min-height: 0;
   }
-
   .banner-slide {
     flex-direction: column;
     text-align: left;
     gap: 16px;
   }
-
   .banner-image {
     order: -1;
   }
-
-  /* GRIDS: MAKE SINGLE COLUMN */
   .product-grid,
   .category-grid,
   .testimonial-grid {
     grid-template-columns: 1fr;
   }
-
   .featured-products,
   .product-categories,
   .testimonials {
     padding: 32px 0 40px;
   }
-
-  /* FOOTER */
   .footer-inner {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-
   .footer-col {
     text-align: center;
   }
-
   .footer-bottom {
     font-size: 12px;
   }
-} /* <--- CLOSES MOBILE QUERY HERE. DO NOT REMOVE */
+} 
 
-
-/* --- ==============================================================================================================================--- */
-
+/* --- UPDATED PRODUCT DETAIL RESPONSIVE --- */
 @media (max-width: 768px) {
-    /* Product Detail Responsive */
-    .product-name {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
+    /* Stack the Header Row */
+    .product-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
     }
 
+    .product-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    /* Stack the Main Columns */
     .product-container {
         flex-direction: column;
         gap: 2rem;
     }
 
-    .product-image-box {
-        order: 2;
+    /* Adjust the Right Column (Details) */
+    .right-column {
+        padding-bottom: 4rem; /* Make room for stock box on mobile */
     }
-
-    .product-info-box {
-        order: 3;
-    }
-} 
-
+}
