@@ -129,10 +129,15 @@
               <span style="font-size: 1.5rem; font-weight: bold; color: #005baf;">£{{ number_format($total, 2) }}</span>
             </div>
 
-            <button onclick="alert('Payment functionality is currently disabled.')" 
-                    style="width: 100%; padding: 15px; background: #005baf; color: white; border: none; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background 0.2s;">
-              Pay Now
+          
+          <form action="{{ route('checkout.process') }}" method="POST">
+           @csrf
+            <button type="submit" 
+              style="width: 100%; padding: 15px; background: #005baf; color: white; border: none; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background 0.2s;">
+               Pay Now
             </button>
+          </form>
+            
             
             <p style="text-align: center; font-size: 0.8rem; color: #999; margin-top: 15px;">
               <i class="fa-solid fa-lock"></i> Secure Checkout

@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
@@ -148,5 +149,13 @@ Route::get('/product/{product}', [ProductController::class, 'show'])
     ->name('product.detail');
 
 // Checkout route
-Route::get('checkout', [CheckoutController::class, 'checkout']);
+Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout')
+      ->middleware('auth'); // This redirects them to login if they aren't signed in
+      
+Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 
+// Show list of all orders
+Route::get('/my-orders', [OrderController::class, 'index'])->name('orders.index');
+
+// Show details of one specific order
+Route::get('/my-orders/{id}', [OrderController::class, 'show'])->name('orders.show');
