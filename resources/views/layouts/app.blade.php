@@ -22,7 +22,7 @@
         <div class="container nav-container">
 
             {{-- Logo --}}
-            <a href="{{ url('/') }}" class="logo">
+            <a href="{{ route('home') }}" class="logo">
                 <img src="{{ asset('images/Logo.png') }}" alt="Tecci Logo">
                 <span class="logo-text">TECCI</span>
             </a>
@@ -30,18 +30,38 @@
             {{-- Navigation --}}
             <nav class="main-nav">
                 <ul>
-                    <li><a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">Home</a></li>
-                    <li><a href="#" >About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Products</a></li>
+                    {{-- Home: Uses route('home') --}}
+                    <li>
+                        <a href="{{ route('home') }}" class="{{ Request::routeIs('home') ? 'active' : '' }}">Home</a>
+                    </li>
+                    
+                    {{-- About: Uses url('/about-us') because it has no name in web.php --}}
+                    <li>
+                        <a href="{{ url('/about-us') }}" class="{{ Request::is('about-us') ? 'active' : '' }}">About</a>
+                    </li>
+                    
+                    {{-- Contact: Uses route('contact.form') --}}
+                    <li>
+                        <a href="{{ route('contact.form') }}" class="{{ Request::routeIs('contact.form') ? 'active' : '' }}">Contact</a>
+                    </li>
+                    
+                    {{-- Products: Uses route('products.index') --}}
+                    <li>
+                        <a href="{{ route('products.index') }}" class="{{ Request::routeIs('products.index') ? 'active' : '' }}">Products</a>
+                    </li>
                 </ul>
             </nav>
 
             {{-- Icons --}}
             <div class="nav-icons">
+                {{-- Wishlist: Placeholder (No route in web.php yet) --}}
                 <a href="#"><i class="fa-regular fa-heart"></i></a>
+                
+                {{-- Basket: Uses route('basket.index') --}}
                 <a href="{{ route('basket.index') }}"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="#"><i class="fa-regular fa-user"></i></a>
+                
+                {{-- Login: Uses route('login') --}}
+                <a href="{{ route('login') }}"><i class="fa-regular fa-user"></i></a>
             </div>
 
         </div>
