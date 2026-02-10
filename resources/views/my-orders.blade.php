@@ -5,49 +5,14 @@
   <title>Tecci | Your Shopping Cart</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!--Links to HTML/CSS Files-->
-  <link rel="stylesheet" href="{{ asset('checkoutstyle.css') }}" />
-  <link rel="stylesheet" href="{{ asset('contactstyle.css') }}" />
+  <link rel="stylesheet" href="{{ asset('common-style.css') }}" />
+  <link rel="stylesheet" href="{{ asset('myordersstyle.css') }}" />
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <style>
-        .orders-container { max-width: 1000px; margin: 50px auto; padding: 0 20px; }
-        .order-card {
-            background: #fff;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 6px solid #005baf;
-        }
-        .order-info h3 { color: #03315b; margin-bottom: 5px; }
-        .order-meta { color: #777; font-size: 0.9rem; }
-        .order-total { font-weight: bold; font-size: 1.2rem; color: #333; }
-        .order-status {
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .status-placed { background: #e3f2fd; color: #005baf; }
-        .status-delivered { background: #e8f5e9; color: #2e7d32; }
-        
-        .btn-view {
-            background: #03315b;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .btn-view:hover { background: #005baf; }
-    </style>
+   
 </head>
 <body>
 
@@ -99,5 +64,54 @@
         @endforelse
     </div>
 
+  <!--FOOTER-->
+  <footer class="site-footer">
+    <div class="container footer-inner"> <!--footer-inner used to create multi-column layout-->
+      <div class="footer-col">
+        <h3>TECCI</h3>
+        <p>
+          Smart Tech at Smart Prices.<br>
+          Tecci makes premium devices accessible to<br>
+          students and customers across the UK.
+        </p>
+
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="about-us">About</a></li>
+          <li><a href="contact-us">Contact</a></li>
+          <li><a href="{{ route('products.index') }}">Products</a></li>
+          <li><a href="{{ route('basket.index') }}">Basket</a></li>
+          <li><a href="login">My Account</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <ul class="contact-list">
+          <li>
+            <i class="fa-solid fa-location-dot"></i> 
+            <span>0121 555 0198</span><br><br>
+          </li>
+          <li>
+            <i class="fa-solid fa-phone"></i>
+            <span>Tecci_Queries@net.com</span><br><br>
+          </li>
+          <li>
+            <i class="fa-regular fa-envelope"></i>
+            <span>Birmingham, B4 7ET</span><br><br>
+          </li>
+        </ul>
+      </div>
+    </div> 
+    <div class="footer-bottom">
+      <p>&copy; 2025 Tecci. All rights reserved.</p>
+    </div>
+  </footer>
+
 </body>
+
 </html>
