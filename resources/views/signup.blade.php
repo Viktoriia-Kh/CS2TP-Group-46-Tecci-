@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <!-- Common styles FIRST -->
-<link rel="stylesheet" href="{{ asset('css/common-style.css') }}">
+<link rel="stylesheet" href="{{ asset('common-style.css') }}">
 
 <!-- Page specific styles SECOND -->
 <link rel="stylesheet" href="{{ asset('css/sign-up2style.css') }}">
@@ -27,7 +27,7 @@
     <header class="main-header">
         <div class="container nav-container">
 
-            <a href="{{ url('/') }}" class="logo">
+            <a href="/" class="logo">
                 <img src="{{ asset('images/Logo.png') }}" alt="Tecci Logo">
                 <span class="logo-text">TECCI</span>
             </a>
@@ -118,7 +118,7 @@
         </div>
     </main>
 
-   <footer class="main-footer">
+   <footer class="site-footer">
     <div class="container footer-inner">
         <div class="footer-col">
             <h3>TECCI</h3>
@@ -144,14 +144,23 @@
         <div class="footer-col">
             <h4>Contact Info</h4>
             <ul class="contact-list">
-                <li><i class="fa-solid fa-location-dot"></i> Birmingham, B4 7ET</li>
-                <li><i class="fa-solid fa-phone"></i> 0121 555 0198</li>
-                <li><i class="fa-regular fa-envelope"></i> Tecci_Queries@net.com</li>
+                <li>
+                    <i class="fa-solid fa-location-dot"></i> <!--fa-loocation-dot is a Location Icon linked from Font Awesome-->
+                    <span>0121 555 0198</span><br><br>
+                </li>
+                <li>
+                    <i class="fa-solid fa-phone"></i> <!--fa-phone is a Phone Icon linked from Font Awesome-->
+                    <span>Tecci_Queries@net.com</span><br><br>
+                </li>
+                <li>
+                    <i class="fa-regular fa-envelope"></i> <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
+                    <span>Birmingham, B4 7ET</span><br><br>
+                </li>
             </ul>
         </div>
     </div>
 
     <div class="footer-bottom">
-        &copy; 2025 Tecci. All rights reserved.
+        <p>&copy; 2025 Tecci. All rights reserved.</p>
     </div>
 </footer>
