@@ -50,16 +50,50 @@
     {{-- PAGE CONTENT --}}
     @yield('content')
 
-    {{-- GLOBAL FOOTER --}}
-    <footer class="main-footer">
-        <div class="container footer-inner">
-            <p class="footer-copy">© {{ date('Y') }} Tecci. All rights reserved.</p>
+    {{-- GLOBAL FOOTER (Updated from Display Products Page) --}}
+    <footer class="site-footer">
+        <div class="container footer-inner"> <div class="footer-col">
+                <h3>TECCI</h3>
+                <p>
+                    Smart Tech at Smart Prices.<br>
+                    Tecci makes premium devices accessible to<br>
+                    students and customers across the UK.
+                </p>
+            </div>
 
-            <ul class="footer-links">
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Terms</a></li>
-                <li><a href="#">Support</a></li>
-            </ul>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{{ url('/') }}">Home</a></li>
+                    <li><a href="{{ url('/about-us') }}">About</a></li>
+                    <li><a href="{{ url('/contact-us') }}">Contact</a></li>
+                    <li><a href="{{ route('products.index') }}">Products</a></li>
+                    <li><a href="{{ route('basket.index') }}">Basket</a></li>
+                    <li><a href="{{ url('/login') }}">My Account</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <ul class="contact-list">
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>0121 555 0198</span><br><br>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Tecci_Queries@net.com</span><br><br>
+                    </li>
+                    <li>
+                        <i class="fa-regular fa-envelope"></i>
+                        <span>Birmingham, B4 7ET</span><br><br>
+                    </li>
+                </ul>
+            </div>
+        </div> 
+
+        <div class="footer-bottom">
+            <p>&copy; {{ date('Y') }} Tecci. All rights reserved.</p>
         </div>
     </footer>
 
