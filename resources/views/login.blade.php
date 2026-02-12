@@ -65,7 +65,10 @@
                 <div>
                     <!-- this is where the user will enter their password-->
                     <label for="password">Password:</label>
-                    <input type="password" name="password" id="password" required>
+                    <div class="password-wrapper">
+                        <input type="password" name="password" id="password" required>
+                        <i class="fa-regular fa-eye toggle-icon" id="togglePassword"></i>  <!-- font awesome eye icon is added-->
+                    </div>
                 </div>
 
                 <button type="submit">Login</button> <!-- allows the user to login-->
@@ -117,5 +120,22 @@
         &copy; 2025 Tecci. All rights reserved.
     </div>
 </footer>
+
+<!-- javascript for the eye icon -->
+<script>
+    const toggleButton = document.querySelector('#togglePassword');
+    const passwordInput = document.querySelector('#password');
+
+    toggleButton.addEventListener('click', function() {
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPassword ? 'text': 'password');
+
+        // swap between the eye icons
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    })
+</script>
+
+
 </body>
 </html>

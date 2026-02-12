@@ -195,6 +195,29 @@ body {
     color: white;
 }
 
+/* styling for eye icon in login form */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* placing eye icon on right side of password input box */
+.toggle-icon {
+    position: absolute;
+    right: 16px;
+    top: 18px;
+    cursor: pointer;
+    color: black;
+    font-size: 14px;
+    z-index: 2;
+}
+
+/* prevent the user input going behind the eye icon */
+.password-wrapper input{
+    padding-right: 45px;
+    margin-bottom: 15px; /* existing spacing maintained */
+}
+
 
 
 /* footer styling */
