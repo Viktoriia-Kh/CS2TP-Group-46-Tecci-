@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; // enables me to use database queries
 use Illuminate\Support\Facades\Hash; // for password hashing
 use Illuminate\Support\Facades\Auth; // checks the user credentials and starts a session
+use Illuminate\Support\Facades\Password; // allows user to reset their password
 
 class LoginController extends Controller
 {
@@ -49,4 +50,40 @@ class LoginController extends Controller
         }
         return view('login', ['error_messages' => $error_messages]); // login page refreshes with the error message showing
     }
+    // display the forgot password page
+    public function showForgotPassword() {
+        return view('auth.forgot-password');
+    }
+
+    // function which handles sending the reset link
+    public function sendResetPasswordLink(Request $request) {
+        $request->validate(['email_address' => 'required|email']);
+        $request_status = Password::sendResetLink(['email' => $request ->email]); // sends a reset email to the user
+
+        return $request_status === Password::RESET_LINK_SENT
+            ? back()->with(['status' => __($request_status)])
+            : back()->withErrors(['email' => __($request_status)]);
+    }
+
+    // this will show the form where the user can change their password
+    public function showPasswordResetForm(Request $request, $token) {
+        return view('auth.reset-password', ['token' => $token, 'email' => $request->email]);
+    }
+
+    // function which updates users password in the database
+    public function updatePassword(Request $request) {
+        $request->validate(['token' => 'required', 'email' => 'required|email', 'password' => 'required|min:8|confirmed']);
+        $request_status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function($user, $password) {
+                $user->forceFill(['password' => Hash::make($password)])->save();
+            }
+        );
+
+        return $request_status === Password::PASSWORD_RESET
+            ? redirect()->route('login')->with('status', __($request_status))
+            : back()->withErrors(['email' => [__($request_status)]]);
+    }
+
+
 }
