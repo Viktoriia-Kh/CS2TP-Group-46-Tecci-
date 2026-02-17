@@ -16,6 +16,8 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ChatbotController;
+
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
@@ -150,3 +152,10 @@ Route::get('/product/{product}', [ProductController::class, 'show'])
 // Checkout route
 Route::get('checkout', [CheckoutController::class, 'checkout']);
 
+
+
+Route::prefix('chatbot')->group(function () {
+    Route::get('/categories', [ChatbotController::class, 'categories'])->name('chatbot.categories');
+    Route::get('/categories/{category}/faqs', [ChatbotController::class, 'faqsByCategory'])->name('chatbot.faqsByCategory');
+    Route::get('/faqs/{faq}', [ChatbotController::class, 'faqAnswer'])->name('chatbot.faqAnswer');
+});
