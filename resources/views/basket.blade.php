@@ -13,6 +13,25 @@
     {{-- wrapper with margin-top to prevent the fixed header from covering basket content --}}
     <div style="margin-top: 120px; min-height: 80vh; padding-bottom: 50px;">
 
+    <div class="checkout-progress-container">
+            <div class="progress-step active">
+             <div class="step-icon">1</div>
+            <div class="step-label">Basket</div>
+        </div>
+        
+        <div class="progress-line"></div>
+            <div class="progress-step">
+            <div class="step-icon">2</div>
+            <div class="step-label">Delivery</div>
+        </div>
+   
+        <div class="progress-line"></div>
+            <div class="progress-step">
+            <div class="step-icon">3</div>
+            <div class="step-label">Payment</div>
+        </div>
+    </div>
+
         <div class="basket-wrapper">
             
             <div class="basket-header-row">

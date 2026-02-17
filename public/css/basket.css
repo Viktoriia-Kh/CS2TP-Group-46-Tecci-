@@ -2,6 +2,68 @@
    BASKET PAGE STYLE
 ================================== */
 
+/* --- Progress Bar --- */
+.checkout-progress-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    max-width: 600px;
+    font-family: 'Signika', sans-serif;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 2;
+}
+
+.step-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #e2e8f0;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.step-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Active State (Current Page) */
+.progress-step.active .step-icon {
+    background-color: #03315b;
+    color: white;
+    box-shadow: 0 4px 10px rgba(3, 49, 91, 0.3);
+    transform: scale(1.1);
+}
+
+.progress-step.active .step-label {
+    color: #03315b;
+}
+
+/* Connecting Lines */
+.progress-line {
+    flex: 1;
+    height: 2px;
+    background-color: #e2e8f0;
+    margin: 0 15px;
+    margin-bottom: 20px; /* Aligns line with the circle, not label */
+}
+
 /* Main Container */
 .basket-wrapper {
     width: 90%;
