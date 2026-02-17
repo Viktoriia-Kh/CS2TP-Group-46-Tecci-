@@ -48,6 +48,11 @@
         </div>
         <div>
             £{{ number_format($item->price * $item->quantity, 2) }}
+              <button type="submit" 
+              style="width: 80%; padding: 5px; background: #005baf; color: white; border: none; font-size: 0.8rem; font-weight: bold; border-radius: 2px; cursor: pointer; transition: background 0.2s;">
+               Return item
+            </button>
+            
         </div>
     </div>
     @endforeach
