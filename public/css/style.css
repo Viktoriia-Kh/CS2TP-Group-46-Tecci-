@@ -124,19 +124,20 @@ body:not(.signup-page) {
 
 .cart-badge {
     position: absolute;
-    top: -8px;    /* Moves it up */
-    right: -10px; /* Moves it to the right corner */
-    background-color: #dc3545; /* Bright Red */
+    top: -10px;    /* Moved up slightly more */
+    right: -12px;  /* Moved right slightly more */
+    background-color: #dc3545;
     color: white;
-    font-size: 10px;
-    font-weight: bold;
-    border-radius: 50%; /* Makes it a perfect circle */
-    width: 18px;
-    height: 18px;
+    font-size: 12px; /* Increased from 10px for readability */
+    font-weight: 800; /* Extra bold */
+    border-radius: 50%;
+    width: 22px;   /* Increased from 18px */
+    height: 22px;  /* Increased from 18px */
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid white; /* Small white border makes it pop against dark headers */
+    border: 2px solid white; /* Thicker border makes it pop more */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Added shadow for depth */
 }
 
 /* ================================
