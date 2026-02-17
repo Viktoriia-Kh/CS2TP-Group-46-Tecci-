@@ -472,6 +472,79 @@
 .pay-icon:hover { transform: scale(1.1); }
 .pay-icon.fa-cc-klarna, .pay-icon.fa-klarna, .pay-icon.fa-brands.fa-klarna { font-size: 30px; }
 
+/* ================================
+   EMPTY BASKET STATE
+================================== */
+
+.empty-basket-message {
+    text-align: center;
+    padding: 100px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* The Icon Container */
+.empty-basket-icon {
+    font-size: 80px; 
+    color: #e2e8f0;  /* Very Light Grey */
+    background-color: #f8fafc; 
+    width: 160px;
+    height: 160px;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect: Icon turns Tecci Blue */
+.empty-basket-message:hover .empty-basket-icon {
+    color: #03315b;
+    background-color: #e6f3ff;
+    transform: scale(1.05);
+}
+
+.empty-basket-message h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin: 0;
+    font-weight: 700;
+}
+
+.empty-basket-message p {
+    font-size: 16px;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+/* The Start Shopping Button */
+.empty-basket-message .btn-continue-top {
+    font-size: 1.2rem;
+    padding: 15px 50px;
+    background-color: #03315b;
+    color: white;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(3, 49, 91, 0.3);
+    text-decoration: none;
+}
+
+.empty-basket-message .btn-continue-top:hover {
+    background-color: #022241;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(3, 49, 91, 0.4);
+}
+
+/* Smooth Fade In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* --- Mobile Responsiveness --- */
 @media (max-width: 900px) {
     .basket-footer-grid { grid-template-columns: 1fr; gap: 30px; }

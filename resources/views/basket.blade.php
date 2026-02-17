@@ -49,7 +49,15 @@
 
             @if(empty($basket) || count($basket) == 0)
                 <div class="empty-basket-message">
+                    {{-- Custom Icon using Font Awesome stacks --}}
+                    <div class="empty-basket-icon">
+                        {{-- have to use the word cart here instead of basket as thats the Font Awesome name --}}
+                        <i class="fa-solid fa-cart-plus"></i>
+                    </div>
+
                     <h2>Your basket is currently empty</h2>
+                    <p>Looks like you haven't made your choice yet.</p>
+
                     <a href="{{ route('products.index') }}" class="btn-continue-top">Start Shopping</a>
                 </div>
             @else
