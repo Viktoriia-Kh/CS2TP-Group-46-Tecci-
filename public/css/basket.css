@@ -46,7 +46,7 @@
 /* Buttons */
 .btn-continue-top, .btn-checkout-top, 
 .btn-continue-bottom, .btn-checkout-bottom {
-    padding: 12px 25px;
+    padding: 8px 20px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
@@ -55,6 +55,7 @@
     display: inline-block;
     cursor: pointer;
     transition: background 0.2s;
+    line-height: 1.2;
 }
 
 .btn-continue-top, .btn-continue-bottom {
