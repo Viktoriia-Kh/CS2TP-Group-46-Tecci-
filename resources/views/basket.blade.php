@@ -22,7 +22,9 @@
                         <i class="fas fa-truck"></i> Spend £60.00 or more for FREE delivery
                     </span>
                     <a href="{{ route('products.index') }}" class="btn-continue-top">CONTINUE SHOPPING</a>
-                    <a href="/checkout" class="btn-checkout-top">CHECKOUT NOW</a>
+
+                    {{-- Added checkout-validate class to prevent users being able to checkout without selecting delivery option --}}
+                    <a href="/checkout" class="btn-checkout-top checkout-validate">CHECKOUT NOW</a>
                 </div>
             </div>
 
@@ -137,7 +139,9 @@
 
                         <div class="final-actions">
                             <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE SHOPPING</a>
-                            <a href="/checkout" class="btn-checkout-top">CHECKOUT NOW</a>
+                            
+                            {{-- Added 'checkout-validate' class to prevent users from checking out without selecting delivery options --}}
+                            <a href="/checkout" class="btn-checkout-bottom checkout-validate">CHECKOUT NOW</a>
                         </div>
                     </div>
                 </div>
