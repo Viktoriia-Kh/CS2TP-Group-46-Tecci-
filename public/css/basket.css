@@ -113,31 +113,61 @@
 }
 
 /* --- Items List --- */
+/* Items List Headers */
 .basket-table-headers {
-    display: grid;
+    display: grid; 
+    
+    /* Uses the same columns as the card rows */
     grid-template-columns: 140px 1fr 120px;
     gap: 30px;
-    padding: 15px 0;
-    border-bottom: 1px solid #e5e7eb;
+    
+    /* Matches the Card Padding for alignment */
+    padding: 0 25px; 
+    
+    margin-bottom: 15px;
     color: black;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
-.basket-item-row {
-    display: grid;
-    grid-template-columns: 140px 1fr 120px;
-    gap: 30px;
-    padding: 30px 0;
-    border-bottom: 1px solid #f3f4f6;
-    align-items: center; /* Center items vertically */
-    transition: background-color 0.2s ease;
+/* Forces product to span across the Image (column 1) & Description (col 2) */
+.header-desc {
+    grid-column: 1 / span 2; 
 }
 
+/* Forces price to sit in the last column and align right */
+.header-price {
+    grid-column: 3;
+    text-align: right;
+}
+
+/* Floating Product Card */
+.basket-item-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 120px; /* Image | Details | Price */
+    gap: 30px;
+    
+    /* Card Styling */
+    background-color: #ffffff;
+    border: 1px solid #f1f1f1;
+    border-radius: 16px; /* Smooth corners */
+    padding: 25px;       /* Breathing room inside the card */
+    margin-bottom: 20px; /* Space between cards */
+    
+    /* Animation Prep */
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+}
+
+/* Lift Effect */
 .basket-item-row:hover {
-    background-color: #fafbfd; /* Subtle highlight on hover */
+    transform: translateY(-7px); /* Moves the card up */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08); /* Casts a soft shadow down */
+    border-color: transparent;
+    z-index: 10;
 }
 
 /* Product Image */
@@ -445,7 +475,11 @@
 /* --- Mobile Responsiveness --- */
 @media (max-width: 900px) {
     .basket-footer-grid { grid-template-columns: 1fr; gap: 30px; }
-    .basket-item-row { grid-template-columns: 80px 1fr; gap: 15px; align-items: start; }
+    .basket-item-row { 
+        grid-template-columns: 100px 1fr; /* Image | Details */
+        gap: 20px; 
+        padding: 20px; /* Slightly smaller padding on mobile */
+    }
     .basket-product-image { height: 80px; width: 80px; }
     .item-col-price { grid-column: 2; text-align: left; margin-top: 5px; }
     .basket-table-headers { display: none; }

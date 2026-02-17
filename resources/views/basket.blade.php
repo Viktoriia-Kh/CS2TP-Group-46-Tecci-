@@ -54,8 +54,8 @@
                 </div>
             @else
                 <div class="basket-table-headers">
-                    <span class="header-desc">item description</span>
-                    <span class="header-price">price</span>
+                    <span class="header-desc">Product</span>
+                    <span class="header-price">Price</span>
                 </div>
 
                 <div class="basket-items-list">
