@@ -7,6 +7,9 @@
 {{-- this section gets injected into the middle of the page --}}
 @section('content')
 
+    {{-- Load specific styles for Basket --}}
+    <link rel="stylesheet" href="{{ asset('css/basket.css') }}">
+
     {{-- wrapper with margin-top to prevent the fixed header from covering basket content --}}
     <div style="margin-top: 120px; min-height: 80vh; padding-bottom: 50px;">
 
