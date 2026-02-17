@@ -1,259 +1,392 @@
 /* ================================
-   BASKET PAGE SPECIFIC STYLES
+   BASKET PAGE STYLE
 ================================== */
 
+/* Main Container */
 .basket-wrapper {
     width: 90%;
     max-width: 1200px;
-    margin: 0 auto 60px auto;
+    margin: 0 auto 80px auto;
     background-color: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    /* shadow to make it pop against the grey background */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+    padding: 40px;
+    border-radius: 12px;
+    /* Soft shadow for depth */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Header Row */
+/* --- Header Section --- */
 .basket-header-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #eee;
+    padding-bottom: 25px;
+    border-bottom: 2px solid #f0f0f0;
 }
 
 .basket-title {
-    font-size: 32px;
-    color: #333;
+    font-size: 36px;
+    color: #03315b; /* Tecci Blue */
     margin: 0;
     font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .header-actions {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     align-items: center;
 }
 
 .free-delivery-text {
-    color: #2ecc71; /* Green */
-    font-weight: bold;
+    color: #27ae60; /* Fresh Green */
+    font-weight: 600;
     font-size: 14px;
-    margin-right: 15px;
-}
-
-/* Buttons */
-.btn-continue-top, .btn-checkout-top, 
-.btn-continue-bottom, .btn-checkout-bottom {
-    padding: 8px 20px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 13px;
-    display: inline-block;
-    cursor: pointer;
-    transition: background 0.2s;
-    line-height: 1.2;
-}
-
-.btn-continue-top, .btn-continue-bottom {
-    background-color: #f8f9fa;
-    color: #333;
-    border: 1px solid #ddd;
-}
-
-.btn-checkout-top, .btn-checkout-bottom {
-    background-color: #33a8ff; /* Tecci Blue */
-    color: white;
-    border: 1px solid #33a8ff;
-}
-
-.btn-continue-top:hover { background-color: #e2e6ea; }
-.btn-checkout-top:hover { background-color: #1a8de0; }
-
-/* Empty Basket */
-.empty-basket-message {
-    text-align: center;
-    padding: 80px 20px;
+    background-color: #eafaf1;
+    padding: 8px 15px;
+    border-radius: 20px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 8px;
 }
-.empty-basket-message h2 { font-size: 2rem; color: #333; margin-bottom: 10px; }
-.empty-basket-message .btn-continue-top { font-size: 1.2rem; padding: 15px 40px; background-color: #03315b; color: white; border: none; }
 
-/* Items List */
+/* --- Items List --- */
 .basket-table-headers {
     display: grid;
-    grid-template-columns: 150px 1fr 100px;
+    grid-template-columns: 140px 1fr 120px;
     gap: 30px;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+    border-bottom: 1px solid #e5e7eb;
     color: black;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 700;
-    margin-bottom: 20px;
+    letter-spacing: 1px;
 }
 
 .basket-item-row {
     display: grid;
-    grid-template-columns: 150px 1fr 100px;
+    grid-template-columns: 140px 1fr 120px;
     gap: 30px;
-    padding-bottom: 30px;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #f5f5f5;
-    align-items: start;
+    padding: 30px 0;
+    border-bottom: 1px solid #f3f4f6;
+    align-items: center; /* Center items vertically */
+    transition: background-color 0.2s ease;
 }
 
+.basket-item-row:hover {
+    background-color: #fafbfd; /* Subtle highlight on hover */
+}
+
+/* Product Image */
 .basket-product-image {
     width: 100%;
-    border-radius: 8px;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
     border: 1px solid #eee;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 10px;
+    background: #fff;
 }
 
+/* Product Details */
 .item-col-desc h3 {
-    font-size: 18px;
-    color: #333;
+    font-size: 20px;
+    color: #111827;
     text-transform: capitalize;
-    margin: 0 0 10px 0;
+    margin: 0 0 12px 0;
     font-weight: 700;
+    line-height: 1.3;
 }
 
+/* --- Quantity Controls --- */
 .item-controls {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 10px;
-    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.item-controls label {
+    font-size: 12px;
+    color: black;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 
 .qty-box {
     display: flex;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
     overflow: hidden;
+    background-color: #fff;
 }
 
 .qty-box input {
-    width: 40px;
+    width: 45px;
     text-align: center;
     border: none;
-    padding: 5px;
-    font-weight: bold;
+    padding: 8px 0;
+    font-weight: 600;
+    color: #374151;
+    font-size: 15px;
 }
 
 .qty-arrows {
     display: flex;
     flex-direction: column;
-    background: #f8f9fa;
-    border-left: 1px solid #ddd;
+    border-left: 1px solid #d1d5db;
+    width: 24px;
 }
 
 .qty-arrows a {
-    padding: 0 6px;
-    font-size: 10px;
-    color: #333;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    color: #4b5563;
     text-decoration: none;
-    cursor: pointer;
+    background-color: #f9fafb;
+    transition: background 0.1s;
 }
 
-.qty-arrows a:hover { background: #e2e6ea; }
+.qty-arrows a:first-child { border-bottom: 1px solid #d1d5db; }
+.qty-arrows a:hover { background-color: #e5e7eb; color: #000; }
 
 .remove-item-link {
-    color: #e74c3c;
+    color: #ef4444; /* Soft Red */
     text-decoration: none;
     font-size: 13px;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     font-weight: 600;
-    margin-top: 5px;
+    transition: color 0.2s;
 }
+
+.remove-item-link:hover { color: #dc2626; }
 
 .item-col-price {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     text-align: right;
-    color: #333;
+    color: #111827;
 }
 
-/* Footer Grid inside Basket */
+/* --- Footer Layout --- */
 .basket-footer-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1.2fr;
-    gap: 40px;
-    margin-top: 40px;
+    grid-template-columns: 1fr 1fr 1.3fr; /* Wider column for totals */
+    gap: 50px;
+    margin-top: 50px;
+    align-items: start;
 }
 
-.delivery-header { font-size: 16px; margin-bottom: 15px; font-weight: 700; }
-.delivery-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 14px;}
-.delivery-error { color: #dc3545; font-size: 13px; margin-top: 5px; display: none; font-weight: bold; }
+/* Delivery Section */
+.delivery-header {
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #374151;
+}
 
-/* --- Payment Icons --- */
+.delivery-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #4b5563;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.delivery-checkbox {
+    accent-color: #03315b; /* Tecci Blue checkmark */
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.delivery-error {
+    color: #ef4444;
+    font-size: 13px;
+    margin-top: 10px;
+    display: none;
+    font-weight: 600;
+    background-color: #fef2f2;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border-left: 3px solid #ef4444;
+}
+
+/* Payment Icons */
+.footer-col-payments h4 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #374151;
+}
+
 .payment-icons-grid {
     display: flex;
-    gap: 20px;       /* Space between icons */
-    margin-top: 10px;
+    gap: 15px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
-.pay-icon {
-    font-size: 42px; /* Make them large and visible */
-    background: transparent; /* Remove old grey background */
-    padding: 0;      /* Remove old padding */
-    transition: transform 0.2s;
-    cursor: default;
-}
-
-.pay-icon:hover {
-    transform: scale(1.1); /* Slight pop effect */
-}
-
-/* Totals Box */
+/* --- Totals 'Receipt' Box --- */
 .footer-col-totals {
-    background: #f9f9f9;
-    padding: 25px;
-    border-radius: 8px;
+    background-color: #f8fafc; /* Very light blue/grey */
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
 }
 
 .totals-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     font-size: 15px;
-    text-transform: uppercase;
-    color: #555;
+    color: #64748b;
+    text-transform: capitalize;
+}
+
+.totals-row span:last-child {
+    font-weight: 600;
+    color: #334155;
 }
 
 .grand-total {
-    font-size: 22px;
-    font-weight: 800;
-    color: #333;
-    border-top: 2px solid #ddd;
-    padding-top: 15px;
-    margin-top: 15px;
+    font-size: 24px;
+    color: #03315b !important;
+    border-top: 2px solid #cbd5e1;
+    padding-top: 20px;
+    margin-top: 20px;
+    align-items: flex-end;
 }
 
-.discount-container { display: flex; gap: 10px; margin-bottom: 10px; }
-.discount-container input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-.discount-container button { padding: 10px 15px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer; }
+.grand-total span:last-child {
+    font-weight: 800;
+    font-size: 28px;
+}
 
-.final-actions {
+/* Discount Input */
+.discount-wrapper {
+    margin: 25px 0;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.discount-container {
     display: flex;
     gap: 10px;
-    justify-content: flex-end;
-    margin-top: 20px;
 }
 
-/* Mobile Basket */
+.discount-container input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.discount-container input:focus {
+    border-color: #03315b;
+}
+
+.discount-container button {
+    padding: 0 20px;
+    background-color: #334155;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.discount-container button:hover {
+    background-color: #1e293b;
+}
+
+#message-area {
+    font-size: 13px;
+    margin-top: 8px;
+    min-height: 20px;
+    font-weight: 500;
+}
+
+/* --- Action Buttons --- */
+.final-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    align-items: stretch;
+    margin-top: 25px;
+}
+
+.btn-continue-top, .btn-continue-bottom,
+.btn-checkout-top, .btn-checkout-bottom {
+    padding: 8px 24px;
+    border-radius: 99px; /* Pill shape */
+
+    text-align: center;
+    line-height: 1.2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 99px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    min-width: 160px;
+}
+
+.btn-continue-top, .btn-continue-bottom {
+    background-color: white;
+    color: #64748b;
+    border: 1px solid #cbd5e1;
+}
+
+.btn-continue-top:hover, .btn-continue-bottom:hover {
+    border-color: #94a3b8;
+    color: #334155;
+    background-color: #f8fafc;  
+}
+
+.btn-checkout-top, .btn-checkout-bottom {
+    background-color: #03315b;
+    color: white;
+    border: 1px solid #03315b;
+    box-shadow: 0 4px 6px rgba(3, 49, 91, 0.2);
+}
+
+.btn-checkout-top:hover, .btn-checkout-bottom:hover {
+    background-color: #022241;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 10px rgba(3, 49, 91, 0.25);
+}
+
+/* --- Icons Resize --- */
+.pay-icon { font-size: 42px; transition: transform 0.2s; }
+.pay-icon:hover { transform: scale(1.1); }
+.pay-icon.fa-cc-klarna, .pay-icon.fa-klarna, .pay-icon.fa-brands.fa-klarna { font-size: 30px; }
+
+/* --- Mobile Responsiveness --- */
 @media (max-width: 900px) {
-    .basket-footer-grid { grid-template-columns: 1fr; }
-    .basket-item-row { grid-template-columns: 100px 1fr; gap: 15px; }
-    .item-col-price { grid-column: 2; text-align: left; margin-top: 10px; }
+    .basket-footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .basket-item-row { grid-template-columns: 80px 1fr; gap: 15px; align-items: start; }
+    .basket-product-image { height: 80px; width: 80px; }
+    .item-col-price { grid-column: 2; text-align: left; margin-top: 5px; }
     .basket-table-headers { display: none; }
+    .final-actions { flex-direction: column-reverse; width: 100%; }
+    .btn-checkout-bottom, .btn-continue-bottom { width: 100%; text-align: center; }
 }

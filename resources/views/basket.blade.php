@@ -24,7 +24,7 @@
                     <a href="{{ route('products.index') }}" class="btn-continue-top">CONTINUE SHOPPING</a>
 
                     {{-- Added checkout-validate class to prevent users being able to checkout without selecting delivery option --}}
-                    <a href="/checkout" class="btn-checkout-top checkout-validate">CHECKOUT NOW</a>
+                    <a href="/checkout" class="btn-checkout-top checkout-validate">CHECKOUT</a>
                 </div>
             </div>
 
@@ -142,10 +142,10 @@
                         </div>
 
                         <div class="final-actions">
-                            <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE SHOPPING</a>
+                            <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE<br>SHOPPING</a>
 
                             {{-- Added 'checkout-validate' class to prevent users from checking out without selecting delivery options --}}
-                            <a href="/checkout" class="btn-checkout-bottom checkout-validate">CHECKOUT NOW</a>
+                            <a href="/checkout" class="btn-checkout-bottom checkout-validate">CHECKOUT</a>
                         </div>
                     </div>
                 </div>
