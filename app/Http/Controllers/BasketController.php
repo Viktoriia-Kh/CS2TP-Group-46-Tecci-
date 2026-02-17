@@ -62,6 +62,11 @@ class BasketController extends Controller
             session()->put('basket', $basket);
         }
 
+        // If basket is now empty, clear the discount 
+        if (empty($basket)) {
+            session()->forget(['discount_code', 'discount_multiplier']);
+        }
+
         return redirect()->back();
  
     }
@@ -82,6 +87,12 @@ class BasketController extends Controller
         }
 
         session()->put('basket', $basket);
+
+        //If basket is now empty, clear the discount
+        if (empty($basket)) {
+            session()->forget(['discount_code', 'discount_multiplier']);
+        }
+
         return redirect()->back();
     }
 
