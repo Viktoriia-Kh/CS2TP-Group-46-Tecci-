@@ -102,10 +102,14 @@
                     <div class="footer-col-payments">
                         <h4>We accept</h4>
                         <div class="payment-icons-grid">
-                            <div class="pay-icon">VISA</div>
-                            <div class="pay-icon">MC</div>
-                            <div class="pay-icon">PAYPAL</div>
-                            <div class="pay-icon">Apple Pay</div>
+                            <i class="fa-brands fa-cc-visa pay-icon" style="color: #1A1F71;"></i>
+                            <!-- Mastercard -->
+                            <i class="fa-brands fa-cc-mastercard pay-icon" style="color: #EB001B;"></i>
+                            <!-- PayPal -->
+                            <i class="fa-brands fa-cc-paypal pay-icon" style="color: #003087;"></i>
+                            <!-- Apple Pay -->
+                            <i class="fa-brands fa-cc-apple-pay pay-icon" style="color: #000000;"></i>
+                            <div class="pay-icon">Klarna</div>
                         </div>
                     </div>
 
@@ -139,7 +143,7 @@
 
                         <div class="final-actions">
                             <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE SHOPPING</a>
-                            
+
                             {{-- Added 'checkout-validate' class to prevent users from checking out without selecting delivery options --}}
                             <a href="/checkout" class="btn-checkout-bottom checkout-validate">CHECKOUT NOW</a>
                         </div>

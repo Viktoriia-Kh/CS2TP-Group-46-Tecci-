@@ -91,7 +91,7 @@
     gap: 30px;
     padding: 10px 0;
     border-bottom: 1px solid #eee;
-    color: #999;
+    color: black;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 700;
@@ -193,8 +193,25 @@
 .delivery-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 14px;}
 .delivery-error { color: #dc3545; font-size: 13px; margin-top: 5px; display: none; font-weight: bold; }
 
-.payment-icons-grid { display: flex; gap: 10px; margin-top: 10px; }
-.pay-icon { background: #eee; padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #555; }
+/* --- Payment Icons --- */
+.payment-icons-grid {
+    display: flex;
+    gap: 20px;       /* Space between icons */
+    margin-top: 10px;
+    align-items: center;
+}
+
+.pay-icon {
+    font-size: 42px; /* Make them large and visible */
+    background: transparent; /* Remove old grey background */
+    padding: 0;      /* Remove old padding */
+    transition: transform 0.2s;
+    cursor: default;
+}
+
+.pay-icon:hover {
+    transform: scale(1.1); /* Slight pop effect */
+}
 
 /* Totals Box */
 .footer-col-totals {
