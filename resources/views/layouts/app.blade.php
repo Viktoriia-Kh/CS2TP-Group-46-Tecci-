@@ -59,8 +59,18 @@
                 {{-- Wishlist: Placeholder (No route in web.php yet) --}}
                 <a href="#"><i class="fa-regular fa-heart"></i></a>
                 
-                {{-- Basket: Uses route('basket.index') --}}
-                <a href="{{ route('basket.index') }}"><i class="fa-solid fa-cart-shopping"></i></a>
+                {{-- Basket Icon with Notification Badge --}}
+                <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
+                <i class="fa-solid fa-cart-shopping"></i>
+    
+                {{-- Logic: Only show badge if basket session exists and has items --}}
+                @if(session('basket') && count(session('basket')) > 0)
+                <span class="cart-badge">
+                {{-- Calculate Total Quantity (not just rows) --}}
+                {{ array_sum(array_column(session('basket'), 'quantity')) }}
+                </span>
+                @endif
+                </a>
                 
                 {{-- Login: Uses route('login') --}}
                 <a href="{{ route('login') }}"><i class="fa-regular fa-user"></i></a>

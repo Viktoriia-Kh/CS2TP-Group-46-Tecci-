@@ -116,6 +116,29 @@ body:not(.signup-page) {
   color: #e6f3ff;
 }
 
+/* --- Basket Notification Badge --- */
+.cart-icon-wrapper {
+    position: relative; /* Allows positioning of the badge relative to the icon */
+    display: inline-block;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;    /* Moves it up */
+    right: -10px; /* Moves it to the right corner */
+    background-color: #dc3545; /* Bright Red */
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 50%; /* Makes it a perfect circle */
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white; /* Small white border makes it pop against dark headers */
+}
+
 /* ================================
    SIGNUP + VERIFY PAGES
    (body has class="signup-page")
