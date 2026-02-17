@@ -13,8 +13,12 @@ class BasketController extends Controller
         // Get the basket data from the session
         // If it doesn't exist yet, we use an empty list []
         $basket = session()->get('basket', []);
+
+        //  Retrieves discount data from session so it stays on refresh
+        $discountCode = session()->get('discount_code', null);
+        $discountMultiplier = session()->get('discount_multiplier', 1);
         
-        return view('basket', compact('basket'));
+        return view('basket', compact('basket', 'discountCode', 'discountMultiplier'));
     }
 
     // Add Item To Basket Logic
@@ -79,5 +83,34 @@ class BasketController extends Controller
 
         session()->put('basket', $basket);
         return redirect()->back();
+    }
+
+    // Apply Discount
+    public function applyDiscount(Request $request)
+    {
+        $code = strtolower(trim($request->input('code')));
+
+        //Hardcoded valid discount codes
+       $validCodes = [
+        'xmas10' => 0.90, //10% off
+        'welcome20' => 0.80 //20% off
+    ];
+
+    if (array_key_exists($code, $validCodes)){
+        // Save to Session
+            session()->put('discount_code', $code);
+            session()->put('discount_multiplier', $validCodes[$code]);
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Discount applied!',
+            ]);
+    }
+
+    return response()->json([
+            'success' => false,
+            'message' => 'Invalid discount code.'
+        ], 400); // Returns 400 error for invalid code
+
     }
 }

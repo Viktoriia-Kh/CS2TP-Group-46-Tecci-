@@ -30,7 +30,7 @@ Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
 Route::get('/add-to-basket/{id}', [BasketController::class, 'add'])->name('basket.add');
 Route::get('/remove-from-basket/{id}', [BasketController::class, 'remove'])->name('basket.remove');
 Route::get('/decrease-quantity/{id}', [BasketController::class, 'decrease'])->name('basket.decrease');
-
+Route::post('/apply-discount', [BasketController::class, 'applyDiscount'])->name('basket.discount');
 
 Route::get('/login', function () {
     return view('login');

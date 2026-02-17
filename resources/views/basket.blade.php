@@ -120,6 +120,10 @@
                         
                         <div class="discount-wrapper">
                             <div class="discount-container">
+                                {{-- HIDDEN INPUTS: Pass Session Data to JavaScript --}}
+                                <input type="hidden" id="session-discount-code" value="{{ $discountCode ?? '' }}">
+                                <input type="hidden" id="session-discount-multiplier" value="{{ $discountMultiplier ?? 1 }}">
+                                
                                 <input type="text" id="discount-input" placeholder="Enter Discount Code (e.g. xmas10)">
                                 <button type="button" id="apply-btn">Apply</button>
                             </div>
