@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="footer-col-payments">
-                        <h4>we accept</h4>
+                        <h4>We accept</h4>
                         <div class="payment-icons-grid">
                             <div class="pay-icon">VISA</div>
                             <div class="pay-icon">MC</div>
