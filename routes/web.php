@@ -31,6 +31,8 @@ Route::get('/add-to-basket/{id}', [BasketController::class, 'add'])->name('baske
 Route::get('/remove-from-basket/{id}', [BasketController::class, 'remove'])->name('basket.remove');
 Route::get('/decrease-quantity/{id}', [BasketController::class, 'decrease'])->name('basket.decrease');
 Route::post('/apply-discount', [BasketController::class, 'applyDiscount'])->name('basket.discount');
+// AJAX Basket Update
+Route::post('/basket/update-ajax', [BasketController::class, 'updateAjax'])->name('basket.update.ajax');
 
 Route::get('/login', function () {
     return view('login');

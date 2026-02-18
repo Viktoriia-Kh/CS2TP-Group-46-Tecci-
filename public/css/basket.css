@@ -324,6 +324,33 @@
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
+/* ================================
+   AJAX BUTTON OVERRIDES
+   ----------------------------
+   Switched from <a> tags to <button> tags for AJAX,
+   needed to strip default "grey box" styling browsers apply
+   to buttons so they look just like text/links.
+================================== */
+
+/* 1 - Reset default button styles */
+.ajax-qty-btn, .ajax-remove-btn {
+    background: none; /* Removes default grey background */
+    border: none; /* Removes default button border */
+    cursor: pointer; /* Restores 'hand' cursor on hover */
+    font-family: inherit; /* Forces button to use page's font */
+    padding: 0; /* Removes built in padding so it fits in tight spaces */
+    color: inherit; /* Inherits text color from parent */
+}
+
+/* 2 - Quantity Box Alignment */
+.qty-arrows .ajax-qty-btn {
+    display: flex; /* Enables Flexbox for centering content */
+    align-items: center; /* Vertically centers arrow symbol */
+    justify-content: center; /* Horizontally centers arrow symbol */
+    height: 50%; /* Each button takes up half the box height */
+    width: 100%; /* Full width of the arrow column */
+}
+
 /* --- Mobile Responsiveness --- */
 @media (max-width: 900px) {
     .basket-layout-grid { grid-template-columns: 1fr; } 
@@ -333,19 +360,60 @@
     .basket-table-headers { display: none; }
 }
 
-
-/* --- DEBUGGING ONLY 
-.payment-icons-grid {
-    border: 2px solid red;     
-    background: #ffe6e6;       
-    min-height: 50px;           
+/* ================================
+   TOAST NOTIFICATION
+================================== */
+#toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 99999; /* High to sit on top of everything */
+    
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px 20px;
+    min-width: 300px;
+    max-width: 400px;
+    
+    /* Glassmorphism Style */
+    background: rgba(255, 255, 255, 0.95); /* White with slight transparency */
+    backdrop-filter: blur(10px); /* The "frosted glass" blur effect */
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255,255,255,0.5);
+    
+    /* Animation: Slide In */
+    animation: toastSlideIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    
+    /* Transition: Slide Out (Handled by JS later) */
+    transition: transform 0.5s ease-in-out;
 }
 
-.pay-icon {
-    border: 1px solid blue;     
-    background: yellow;        
-    min-width: 30px;            
-    min-height: 30px;           
-    display: inline-block;      
+/* The Slide-In Keyframes */
+@keyframes toastSlideIn {
+    from { transform: translateX(120%); opacity: 0; } /* Start off-screen right */
+    to   { transform: translateX(0);    opacity: 1; } /* End in position */
 }
-    --- */
+
+/* Icon & Text Styling */
+.toast-icon { font-size: 24px; display: flex; align-items: center; }
+.toast-content { display: flex; flex-direction: column; flex: 1; }
+.toast-title { font-weight: 800; font-size: 14px; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+.toast-message { font-size: 13px; color: #64748b; font-weight: 500; }
+
+/* The 3-Second Countdown Bar */
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    /* Width animates from 100% to 0% */
+    animation: toastTimer 3s linear forwards; 
+}
+
+@keyframes toastTimer {
+    from { width: 100%; }
+    to   { width: 0%; }
+}

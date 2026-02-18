@@ -78,15 +78,18 @@
                                         <div class="item-controls">
                                             <label>quantity:</label>
                                             <div class="qty-box">
-                                                <input type="text" value="{{ $details['quantity'] }}" readonly>
+                                                {{-- Added ID for JS targeting --}}
+                                                <input type="text" id="qty-input-{{ $id }}" value="{{ $details['quantity'] }}" readonly>
                                                 <div class="qty-arrows">
-                                                    <a href="{{ route('basket.add', $id) }}">▲</a>
-                                                    <a href="{{ route('basket.decrease', $id) }}">▼</a>
-                                                </div>
+                                                    {{-- Buttons with Data Attributes --}}
+                                                    <button type="button" class="ajax-qty-btn" data-id="{{ $id }}" data-action="increase">▲</button>
+                                                    <button type="button" class="ajax-qty-btn" data-id="{{ $id }}" data-action="decrease">▼</button>
                                             </div>
                                         </div>
-                                        <a href="{{ route('basket.remove', $id) }}" class="remove-item-link">remove item <span class="x-icon">×</span></a>
                                     </div>
+                                        {{-- Remove Button --}}
+                                        <button type="button" class="remove-item-link ajax-remove-btn" data-id="{{ $id }}"> remove item <span class="x-icon">×</span></button>
+                                        </div>
 
                                     <div class="item-col-price">
                                         £{{ number_format($details['price'], 2) }}

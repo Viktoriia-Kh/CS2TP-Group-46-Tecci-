@@ -124,4 +124,56 @@ class BasketController extends Controller
         ], 400); // Returns 400 error for invalid code
 
     }
+
+    // --- AJAX Update Method ---
+    public function updateAjax(Request $request)
+    {
+        $id = $request->input('id');
+        $action = $request->input('action');
+        
+        $basket = session()->get('basket', []);
+        
+        // 1 - Process the Action
+        if(isset($basket[$id])) {
+            if($action === 'increase') {
+                $basket[$id]['quantity']++;
+            } elseif($action === 'decrease') {
+                if($basket[$id]['quantity'] > 1) {
+                    $basket[$id]['quantity']--;
+                } else {
+                    unset($basket[$id]);
+                    $action = 'remove'; // Treat as removal if quantity goes to 0
+                }
+            } elseif($action === 'remove') {
+                unset($basket[$id]);
+            }
+        }
+
+        // 2 - Save Session
+        session()->put('basket', $basket);
+        
+        // Clear discount if empty
+        if (empty($basket)) {
+            session()->forget(['discount_code', 'discount_multiplier']);
+        }
+
+        // 3 - Recalculate Totals
+        $total = 0;
+        $totalQty = 0;
+        foreach($basket as $item) {
+            $total += $item['price'] * $item['quantity'];
+            $totalQty += $item['quantity'];
+        }
+
+        // 4 - Return Data to JS
+        return response()->json([
+            'success' => true,
+            'action' => $action, // increase, decrease, or remove
+            'newQuantity' => isset($basket[$id]) ? $basket[$id]['quantity'] : 0,
+            'subtotal' => number_format($total, 2),
+            'subtotalRaw' => $total, // For JS math (delivery threshold)
+            'totalQty' => $totalQty, // For the Header Badge
+            'itemCount' => count($basket) // To check if empty
+        ]);
+    }
 }
