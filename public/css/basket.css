@@ -1,5 +1,5 @@
 /* ================================
-   BASKET PAGE STYLE
+   BASKET PAGE STYLE - STICKY LAYOUT
 ================================== */
 
 /* --- Progress Bar --- */
@@ -43,439 +43,243 @@
     letter-spacing: 0.5px;
 }
 
-/* Active State (Current Page) */
+/* Active State */
 .progress-step.active .step-icon {
     background-color: #03315b;
     color: white;
     box-shadow: 0 4px 10px rgba(3, 49, 91, 0.3);
     transform: scale(1.1);
 }
+.progress-step.active .step-label { color: #03315b; }
 
-.progress-step.active .step-label {
-    color: #03315b;
-}
-
-/* Connecting Lines */
 .progress-line {
     flex: 1;
     height: 2px;
     background-color: #e2e8f0;
     margin: 0 15px;
-    margin-bottom: 20px; /* Aligns line with the circle, not label */
+    margin-bottom: 20px;
 }
 
-/* Main Container */
+/* --- Main Layout --- */
 .basket-wrapper {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto 80px auto;
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 12px;
-    /* Soft shadow for depth */
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    background-color: transparent; 
 }
 
-/* --- Header Section --- */
+/* Header */
 .basket-header-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
     padding-bottom: 25px;
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 2px solid #e5e7eb;
 }
 
 .basket-title {
     font-size: 36px;
-    color: #03315b; /* Tecci Blue */
+    color: #03315b;
     margin: 0;
     font-weight: 700;
     letter-spacing: -0.5px;
 }
 
-.header-actions {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
+.header-actions { display: flex; gap: 20px; align-items: center; }
 .free-delivery-text {
-    color: #27ae60; /* Fresh Green */
+    color: #27ae60;
     font-weight: 600;
-    font-size: 14px;
-    background-color: #eafaf1;
+    font-size: 16px;
     padding: 8px 15px;
     border-radius: 20px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
 }
 
-/* --- Items List --- */
-/* Items List Headers */
+/* ================================
+  2-COLUMN GRID LAYOUT
+================================== */
+.basket-layout-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr; 
+    gap: 40px;
+    align-items: start; 
+}
+
+/* --- LEFT COLUMN (Main Content) --- */
+.basket-main-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Headers */
 .basket-table-headers {
-    display: grid; 
-    
-    /* Uses the same columns as the card rows */
+    display: grid;
     grid-template-columns: 140px 1fr 120px;
     gap: 30px;
-    
-    /* Matches the Card Padding for alignment */
-    padding: 0 25px; 
-    
-    margin-bottom: 15px;
-    color: black;
+    padding: 0 25px 15px 25px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #000; /* Fixed: Explicit Black */
     text-transform: uppercase;
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
-/* Forces product to span across the Image (column 1) & Description (col 2) */
-.header-desc {
-    grid-column: 1 / span 2; 
-}
+.header-desc { grid-column: 1 / span 2; }
+.header-price { grid-column: 3; text-align: right; }
 
-/* Forces price to sit in the last column and align right */
-.header-price {
-    grid-column: 3;
-    text-align: right;
-}
-
-/* Floating Product Card */
+/* Floating Cards */
 .basket-item-row {
     display: grid;
-    grid-template-columns: 140px 1fr 120px; /* Image | Details | Price */
+    grid-template-columns: 140px 1fr 120px;
     gap: 30px;
-    
-    /* Card Styling */
     background-color: #ffffff;
     border: 1px solid #f1f1f1;
-    border-radius: 16px; /* Smooth corners */
-    padding: 25px;       /* Breathing room inside the card */
-    margin-bottom: 20px; /* Space between cards */
-    
-    /* Animation Prep */
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 20px;
     align-items: center;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
 }
 
-/* Lift Effect */
 .basket-item-row:hover {
-    transform: translateY(-7px); /* Moves the card up */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08); /* Casts a soft shadow down */
+    transform: translateY(-7px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
     border-color: transparent;
     z-index: 10;
 }
 
-/* Product Image */
-.basket-product-image {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    border-radius: 12px;
-    border: 1px solid #eee;
-    object-fit: contain;
-    padding: 10px;
-    background: #fff;
-}
+.basket-product-image { width: 100%; aspect-ratio: 1/1; border-radius: 12px; border: 1px solid #eee; object-fit: contain; padding: 5px; }
+.item-col-desc h3 { font-size: 20px; color: #111827; text-transform: capitalize; margin: 0 0 12px 0; font-weight: 700; }
+.item-col-price { font-size: 20px; font-weight: 700; text-align: right; color: #111827; }
 
-/* Product Details */
-.item-col-desc h3 {
-    font-size: 20px;
-    color: #111827;
-    text-transform: capitalize;
-    margin: 0 0 12px 0;
-    font-weight: 700;
-    line-height: 1.3;
-}
-
-/* --- Quantity Controls --- */
-.item-controls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.item-controls label {
-    font-size: 12px;
-    color: black;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.qty-box {
-    display: flex;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    overflow: hidden;
-    background-color: #fff;
-}
-
-.qty-box input {
-    width: 45px;
-    text-align: center;
-    border: none;
-    padding: 8px 0;
-    font-weight: 600;
-    color: #374151;
-    font-size: 15px;
-}
-
-.qty-arrows {
-    display: flex;
-    flex-direction: column;
-    border-left: 1px solid #d1d5db;
-    width: 24px;
-}
-
-.qty-arrows a {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 8px;
-    color: #4b5563;
-    text-decoration: none;
-    background-color: #f9fafb;
-    transition: background 0.1s;
-}
-
+/* Controls */
+.item-controls { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+.item-controls label { font-size: 12px; color: #000; text-transform: uppercase; font-weight: 600; }
+.qty-box { display: flex; border: 1px solid #d1d5db; border-radius: 6px; overflow: hidden; background-color: #fff; }
+.qty-box input { width: 45px; text-align: center; border: none; padding: 8px 0; font-weight: 600; font-size: 15px; }
+.qty-arrows { display: flex; flex-direction: column; border-left: 1px solid #d1d5db; width: 24px; }
+.qty-arrows a { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 8px; color: #4b5563; text-decoration: none; background-color: #f9fafb; }
 .qty-arrows a:first-child { border-bottom: 1px solid #d1d5db; }
-.qty-arrows a:hover { background-color: #e5e7eb; color: #000; }
-
-.remove-item-link {
-    color: #ef4444; /* Soft Red */
-    text-decoration: none;
-    font-size: 13px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 600;
-    transition: color 0.2s;
-}
-
+.remove-item-link { color: #ef4444; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; transition: color 0.2s; }
 .remove-item-link:hover { color: #dc2626; }
 
-.item-col-price {
-    font-size: 20px;
-    font-weight: 700;
-    text-align: right;
-    color: #111827;
-}
-
-/* --- Footer Layout --- */
-.basket-footer-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1.3fr; /* Wider column for totals */
-    gap: 50px;
-    margin-top: 50px;
-    align-items: start;
-}
-
-/* Delivery Section */
-.delivery-header {
-    font-size: 16px;
-    margin-bottom: 20px;
-    font-weight: 700;
-    color: #374151;
-}
-
-.delivery-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-    font-size: 14px;
-    color: #4b5563;
-    padding: 8px 0;
-    cursor: pointer;
-}
-
-.delivery-checkbox {
-    accent-color: #03315b; /* Tecci Blue checkmark */
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-}
-
-.delivery-error {
-    color: #ef4444;
-    font-size: 13px;
-    margin-top: 10px;
-    display: none;
-    font-weight: 600;
-    background-color: #fef2f2;
-    padding: 8px 12px;
-    border-radius: 4px;
-    border-left: 3px solid #ef4444;
-}
+/* Delivery */
+.delivery-section { margin-top: 40px; padding-top: 30px; border-top: 1px solid #f0f0f0; }
+.delivery-header { font-size: 16px; margin-bottom: 20px; font-weight: 700; color: #374151; }
+.delivery-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 14px; color: #4b5563; padding: 5px 0; cursor: pointer; }
+.delivery-checkbox { width: 18px; height: 18px; cursor: pointer; accent-color: #03315b; }
+.delivery-error { color: #ef4444; font-size: 13px; margin-top: 10px; display: none; font-weight: 600; background: #fef2f2; padding: 10px; border-radius: 6px; }
 
 /* Payment Icons */
-.footer-col-payments h4 {
-    font-size: 16px;
-    margin-bottom: 20px;
-    font-weight: 700;
-    color: #374151;
+.payment-section { margin-top: 30px; }
+.payment-section h4 { font-size: 20px; margin-bottom: 20px; font-weight: 700; color: #374151; }
+.payment-icons-grid { display: flex; gap: 20px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
+.pay-icon { font-size: 52px; background: transparent; padding: 0; transition: transform 0.2s; cursor: default; }
+.pay-icon:hover { transform: scale(1.1); }
+
+/* Klarna Styling */
+.pay-icon.klarna-svg {
+    width: 95px; /* Wider to fit the full name Klarna instead of 'K' */
+    height: auto; /* Maintains perfect aspect ratio */
+    vertical-align: middle; /* Aligns with other icons */
+    border-radius: 4px; /* Round corners to match other payment icons */
+    margin-top: -2px; /* Slight adjustment to ensure it sits perfectly on the line */
 }
 
-.payment-icons-grid {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    flex-wrap: wrap;
+
+/* --- RIGHT COLUMN 'Sticky Sidebar' --- */
+.basket-sidebar {
+    position: sticky;
+    top: 120px; 
+    align-self: start;
+    z-index: 100;
 }
 
-/* --- Totals 'Receipt' Box --- */
-.footer-col-totals {
-    background-color: #f8fafc; /* Very light blue/grey */
+.order-summary-box {
+    background-color: white;
     padding: 30px;
     border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     border: 1px solid #e2e8f0;
 }
 
-.totals-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 18px;
-    font-size: 15px;
-    color: #64748b;
-    text-transform: capitalize;
+.summary-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #03315b;
+    margin: 0 0 25px 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
 }
 
-.totals-row span:last-child {
-    font-weight: 600;
-    color: #334155;
-}
+/* Totals Rows */
+.totals-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 15px; color: #64748b; text-transform: capitalize; }
+.totals-row span:last-child { font-weight: 600; color: #334155; }
 
 .grand-total {
-    font-size: 24px;
+    font-size: 20px;
     color: #03315b !important;
-    border-top: 2px solid #cbd5e1;
+    border-top: 2px solid #e2e8f0;
     padding-top: 20px;
     margin-top: 20px;
     align-items: flex-end;
 }
+.grand-total span:last-child { font-weight: 800; font-size: 28px; }
 
-.grand-total span:last-child {
-    font-weight: 800;
-    font-size: 28px;
-}
+/* Discount */
+.discount-wrapper { margin: 25px 0; padding-top: 20px; border-top: 1px solid #f0f0f0; }
+.discount-container { display: flex; gap: 10px; }
+.discount-container input { flex: 1; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; }
+.discount-container input:focus { border-color: #03315b; }
+.discount-container button { padding: 0 20px; background-color: #334155; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+#message-area { font-size: 13px; margin-top: 8px; font-weight: 500; }
 
-/* Discount Input */
-.discount-wrapper {
-    margin: 25px 0;
-    padding-top: 20px;
-    border-top: 1px solid #e2e8f0;
-}
-
-.discount-container {
+/* Stacked Buttons in Sidebar */
+.final-actions-stacked {
     display: flex;
-    gap: 10px;
-}
-
-.discount-container input {
-    flex: 1;
-    padding: 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-.discount-container input:focus {
-    border-color: #03315b;
-}
-
-.discount-container button {
-    padding: 0 20px;
-    background-color: #334155;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.discount-container button:hover {
-    background-color: #1e293b;
-}
-
-#message-area {
-    font-size: 13px;
-    margin-top: 8px;
-    min-height: 20px;
-    font-weight: 500;
-}
-
-/* --- Action Buttons --- */
-.final-actions {
-    display: flex;
+    flex-direction: column;
     gap: 15px;
-    justify-content: flex-end;
-    align-items: stretch;
     margin-top: 25px;
 }
 
-.btn-continue-top, .btn-continue-bottom,
-.btn-checkout-top, .btn-checkout-bottom {
-    padding: 8px 24px;
-    border-radius: 99px; /* Pill shape */
-
+.btn-checkout-bottom, .btn-continue-bottom {
+    width: 100%; 
+    padding: 14px;
+    border-radius: 8px; 
     text-align: center;
-    line-height: 1.2;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 99px;
-    text-decoration: none;
     font-weight: 700;
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 0.5px;
-    transition: all 0.2s ease;
-    min-width: 160px;
+    display: block;
+    text-decoration: none;
+    transition: all 0.2s;
 }
 
-.btn-continue-top, .btn-continue-bottom {
+.btn-checkout-bottom {
+    background-color: #03315b;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 10px rgba(3, 49, 91, 0.3);
+}
+.btn-checkout-bottom:hover { background-color: #022241; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(3, 49, 91, 0.4); }
+
+.btn-continue-bottom {
     background-color: white;
     color: #64748b;
     border: 1px solid #cbd5e1;
 }
+.btn-continue-bottom:hover { border-color: #94a3b8; color: #334155; background-color: #f8fafc; }
 
-.btn-continue-top:hover, .btn-continue-bottom:hover {
-    border-color: #94a3b8;
-    color: #334155;
-    background-color: #f8fafc;  
-}
 
-.btn-checkout-top, .btn-checkout-bottom {
-    background-color: #03315b;
-    color: white;
-    border: 1px solid #03315b;
-    box-shadow: 0 4px 6px rgba(3, 49, 91, 0.2);
-}
-
-.btn-checkout-top:hover, .btn-checkout-bottom:hover {
-    background-color: #022241;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 10px rgba(3, 49, 91, 0.25);
-}
-
-/* --- Icons Resize --- */
-.pay-icon { font-size: 42px; transition: transform 0.2s; }
-.pay-icon:hover { transform: scale(1.1); }
-.pay-icon.fa-cc-klarna, .pay-icon.fa-klarna, .pay-icon.fa-brands.fa-klarna { font-size: 30px; }
-
-/* ================================
-   EMPTY BASKET STATE
-================================== */
-
+/* --- Empty Basket --- */
 .empty-basket-message {
     text-align: center;
     padding: 100px 20px;
@@ -484,12 +288,13 @@
     align-items: center;
     gap: 25px;
     animation: fadeIn 0.8s ease-out;
+    background: white; 
+    border-radius: 12px;
 }
 
-/* The Icon Container */
 .empty-basket-icon {
     font-size: 80px; 
-    color: #e2e8f0;  /* Very Light Grey */
+    color: #e2e8f0;
     background-color: #f8fafc; 
     width: 160px;
     height: 160px;
@@ -497,31 +302,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Fixed truncated line */
     transition: all 0.3s ease;
 }
 
-/* Hover Effect: Icon turns Tecci Blue */
-.empty-basket-message:hover .empty-basket-icon {
-    color: #03315b;
-    background-color: #e6f3ff;
-    transform: scale(1.05);
-}
+.empty-basket-message:hover .empty-basket-icon { color: #03315b; background-color: #e6f3ff; transform: scale(1.05); }
+.empty-basket-message h2 { font-size: 2.5rem; color: #333; margin: 0; font-weight: 700; }
+.empty-basket-message p { font-size: 16px; color: #64748b; margin-bottom: 10px; }
 
-.empty-basket-message h2 {
-    font-size: 2.5rem;
-    color: #333;
-    margin: 0;
-    font-weight: 700;
-}
-
-.empty-basket-message p {
-    font-size: 16px;
-    color: #64748b;
-    margin-bottom: 10px;
-}
-
-/* The Start Shopping Button */
 .empty-basket-message .btn-continue-top {
     font-size: 1.2rem;
     padding: 15px 50px;
@@ -532,30 +320,32 @@
     box-shadow: 0 4px 15px rgba(3, 49, 91, 0.3);
     text-decoration: none;
 }
+.empty-basket-message .btn-continue-top:hover { background-color: #022241; transform: translateY(-2px); }
 
-.empty-basket-message .btn-continue-top:hover {
-    background-color: #022241;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(3, 49, 91, 0.4);
-}
-
-/* Smooth Fade In Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* --- Mobile Responsiveness --- */
 @media (max-width: 900px) {
-    .basket-footer-grid { grid-template-columns: 1fr; gap: 30px; }
-    .basket-item-row { 
-        grid-template-columns: 100px 1fr; /* Image | Details */
-        gap: 20px; 
-        padding: 20px; /* Slightly smaller padding on mobile */
-    }
-    .basket-product-image { height: 80px; width: 80px; }
-    .item-col-price { grid-column: 2; text-align: left; margin-top: 5px; }
+    .basket-layout-grid { grid-template-columns: 1fr; } 
+    .basket-sidebar { position: static; margin-top: 30px; } 
+    .basket-item-row { grid-template-columns: 100px 1fr; gap: 20px; }
+    .item-col-price { grid-column: 2; text-align: left; margin-top: 10px; }
     .basket-table-headers { display: none; }
-    .final-actions { flex-direction: column-reverse; width: 100%; }
-    .btn-checkout-bottom, .btn-continue-bottom { width: 100%; text-align: center; }
 }
+
+
+/* --- DEBUGGING ONLY 
+.payment-icons-grid {
+    border: 2px solid red;     
+    background: #ffe6e6;       
+    min-height: 50px;           
+}
+
+.pay-icon {
+    border: 1px solid blue;     
+    background: yellow;        
+    min-width: 30px;            
+    min-height: 30px;           
+    display: inline-block;      
+}
+    --- */

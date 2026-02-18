@@ -1,181 +1,174 @@
-{{-- copies the Header, Footer, and CSS from the Master File --}}
 @extends('layouts.app')
 
-{{-- sets the page title in the browser tab --}}
 @section('title', 'Your Basket - Tecci')
 
-{{-- this section gets injected into the middle of the page --}}
 @section('content')
 
     {{-- Load specific styles for Basket --}}
     <link rel="stylesheet" href="{{ asset('css/basket.css') }}">
 
-    {{-- wrapper with margin-top to prevent the fixed header from covering basket content --}}
     <div style="margin-top: 120px; min-height: 80vh; padding-bottom: 50px;">
 
-    <div class="checkout-progress-container">
+        {{-- Progress Tracker --}}
+        <div class="checkout-progress-container">
             <div class="progress-step active">
-             <div class="step-icon">1</div>
-            <div class="step-label">Basket</div>
-        </div>
-        
-        <div class="progress-line"></div>
+                <div class="step-icon">1</div>
+                <div class="step-label">Basket</div>
+            </div>
+            <div class="progress-line"></div>
             <div class="progress-step">
-            <div class="step-icon">2</div>
-            <div class="step-label">Delivery</div>
-        </div>
-   
-        <div class="progress-line"></div>
+                <div class="step-icon">2</div>
+                <div class="step-label">Delivery</div>
+            </div>
+            <div class="progress-line"></div>
             <div class="progress-step">
-            <div class="step-icon">3</div>
-            <div class="step-label">Payment</div>
+                <div class="step-icon">3</div>
+                <div class="step-label">Payment</div>
+            </div>
         </div>
-    </div>
 
         <div class="basket-wrapper">
             
+            {{-- Main Page Header --}}
             <div class="basket-header-row">
                 <h1 class="basket-title">Your basket</h1>
                 <div class="header-actions">
                     <span class="free-delivery-text">
                         <i class="fas fa-truck"></i> Spend £60.00 or more for FREE delivery
                     </span>
-                    <a href="{{ route('products.index') }}" class="btn-continue-top">CONTINUE SHOPPING</a>
-
-                    {{-- Added checkout-validate class to prevent users being able to checkout without selecting delivery option --}}
-                    <a href="/checkout" class="btn-checkout-top checkout-validate">CHECKOUT</a>
                 </div>
             </div>
 
             @if(empty($basket) || count($basket) == 0)
                 <div class="empty-basket-message">
-                    {{-- Custom Icon using Font Awesome stacks --}}
                     <div class="empty-basket-icon">
-                        {{-- have to use the word cart here instead of basket as thats the Font Awesome name --}}
                         <i class="fa-solid fa-cart-plus"></i>
                     </div>
-
-                    <h2>Your basket is currently empty</h2>
+                    <h2>Your basket is empty</h2>
                     <p>Looks like you haven't made your choice yet.</p>
-
                     <a href="{{ route('products.index') }}" class="btn-continue-top">Start Shopping</a>
                 </div>
             @else
-                <div class="basket-table-headers">
-                    <span class="header-desc">Product</span>
-                    <span class="header-price">Price</span>
-                </div>
-
-                <div class="basket-items-list">
-                    @php $total = 0; @endphp
-                    @foreach($basket as $id => $details)
-                        @php $total += $details['price'] * $details['quantity']; @endphp
+                
+                {{-- 2-Column Grid --}}
+                <div class="basket-layout-grid">
+                    
+                    {{-- LEFT COLUMN - Products & Delivery --}}
+                    <div class="basket-main-content">
                         
-                        <div class="basket-item-row">
-                            <div class="item-col-image">
-                                <img src="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}" alt="{{ $details['name'] }}" class="basket-product-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/150';">
-                            </div>
+                        {{-- Product Headers --}}
+                        <div class="basket-table-headers">
+                            <span class="header-desc">Product</span>
+                            <span class="header-price">Price</span>
+                        </div>
 
-                            <div class="item-col-desc">
-                                <h3 class="item-name">{{ strtolower($details['name']) }}</h3>
+                        {{-- Product List --}}
+                        <div class="basket-items-list">
+                            @php $total = 0; @endphp
+                            @foreach($basket as $id => $details)
+                                @php $total += $details['price'] * $details['quantity']; @endphp
+                                
+                                <div class="basket-item-row">
+                                    <div class="item-col-image">
+                                        <img src="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}" alt="{{ $details['name'] }}" class="basket-product-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/150';">
+                                    </div>
 
-                                <div class="item-controls">
-                                    <label>quantity:</label>
-                                    <div class="qty-box">
-                                        <input type="text" value="{{ $details['quantity'] }}" readonly>
-                                        <div class="qty-arrows">
-                                            <a href="{{ route('basket.add', $id) }}">▲</a>
-                                            <a href="{{ route('basket.decrease', $id) }}">▼</a>
+                                    <div class="item-col-desc">
+                                        <h3 class="item-name">{{ strtolower($details['name']) }}</h3>
+                                        <div class="item-controls">
+                                            <label>quantity:</label>
+                                            <div class="qty-box">
+                                                <input type="text" value="{{ $details['quantity'] }}" readonly>
+                                                <div class="qty-arrows">
+                                                    <a href="{{ route('basket.add', $id) }}">▲</a>
+                                                    <a href="{{ route('basket.decrease', $id) }}">▼</a>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <a href="{{ route('basket.remove', $id) }}" class="remove-item-link">remove item <span class="x-icon">×</span></a>
+                                    </div>
+
+                                    <div class="item-col-price">
+                                        £{{ number_format($details['price'], 2) }}
                                     </div>
                                 </div>
-                                
-                                <a href="{{ route('basket.remove', $id) }}" class="remove-item-link">remove item <span class="x-icon">×</span></a>
-                            </div>
+                            @endforeach
+                        </div>
 
-                            <div class="item-col-price">
-                                £{{ number_format($details['price'], 2) }}
+                        {{-- Delivery Options (left column) --}}
+                        <div class="delivery-section">
+                            <h4 class="delivery-header">Delivery Options</h4>
+                            <div class="delivery-selection-wrapper">
+                                <div class="delivery-row">
+                                    <input type="checkbox" id="delivery-standard" class="delivery-checkbox delivery-group-checkbox">
+                                    <label for="delivery-standard" class="delivery-label">
+                                        UK Standard 3-5 working days (FREE over £60) - £3.99
+                                    </label>
+                                </div>
+                                <div class="delivery-row">
+                                    <input type="checkbox" id="delivery-premium" class="delivery-checkbox delivery-group-checkbox">
+                                    <label for="delivery-premium" class="delivery-label">
+                                        UK Next Day - £4.99
+                                    </label>
+                                </div>
+                                <div id="delivery-error-msg" class="delivery-error"></div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
 
-                <div class="basket-footer-grid">
+                        {{-- Payment Icons (left column) --}}
+                        <div class="payment-section">
+                            <h4>We accept</h4>
+                            <div class="payment-icons-grid">
+                                <i class="fa-brands fa-cc-visa pay-icon" style="color: #1A1F71;"></i>
+                                <i class="fa-brands fa-cc-mastercard pay-icon" style="color: #EB001B;"></i>
+                                <i class="fa-brands fa-cc-paypal pay-icon" style="color: #003087;"></i>
+                                <i class="fa-brands fa-cc-apple-pay pay-icon" style="color: #000000;"></i>
+                                <img src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg" alt="Klarna" class="pay-icon klarna-svg">
+                            </div>
+                        </div>
 
-                    <div class="footer-col-delivery">
-                        <div class="delivery-selection-wrapper">
+                    </div> {{-- End Left Column --}}
+
+
+                    {{-- RIGHT COLUMN - Sticky Order Summary --}}
+                    <div class="basket-sidebar">
+                        <div class="order-summary-box">
+                            <h3 class="summary-title">Order Summary</h3>
                             
-                            <h4 class="delivery-header">Delivery Options - select before check out</h4>
-
-                            <div class="delivery-row">
-                                <input type="checkbox" id="delivery-standard" class="delivery-checkbox delivery-group-checkbox">
-                                <label for="delivery-standard" class="delivery-label">
-                                    UK Standard 3-5 working days (FREE over £60) - £3.99
-                                </label>
+                            <div class="totals-row">
+                                <span>subtotal</span>
+                                <span class="price-text" id="subtotal-amount">£{{ number_format($total, 2) }}</span>
                             </div>
 
-                            <div class="delivery-row">
-                                <input type="checkbox" id="delivery-premium" class="delivery-checkbox delivery-group-checkbox">
-                                <label for="delivery-premium" class="delivery-label">
-                                    UK Next Day - £4.99
-                                </label>
+                            <div class="totals-row">
+                                <span>delivery</span>
+                                <span class="price-text" id="delivery-cost">--</span>
+                            </div>
+                            
+                            <div class="discount-wrapper">
+                                <div class="discount-container">
+                                    <input type="hidden" id="session-discount-code" value="{{ $discountCode ?? '' }}">
+                                    <input type="hidden" id="session-discount-multiplier" value="{{ $discountMultiplier ?? 1 }}">
+                                    
+                                    <input type="text" id="discount-input" placeholder="Promo Code">
+                                    <button type="button" id="apply-btn">Apply</button>
+                                </div>
+                                <p id="message-area"></p>
                             </div>
 
-                            <div id="delivery-error-msg" class="delivery-error"></div>
-
-                        </div>
-                    </div>
-
-                    <div class="footer-col-payments">
-                        <h4>We accept</h4>
-                        <div class="payment-icons-grid">
-                            <i class="fa-brands fa-cc-visa pay-icon" style="color: #1A1F71;"></i>
-                            <!-- Mastercard -->
-                            <i class="fa-brands fa-cc-mastercard pay-icon" style="color: #EB001B;"></i>
-                            <!-- PayPal -->
-                            <i class="fa-brands fa-cc-paypal pay-icon" style="color: #003087;"></i>
-                            <!-- Apple Pay -->
-                            <i class="fa-brands fa-cc-apple-pay pay-icon" style="color: #000000;"></i>
-                            <div class="pay-icon">Klarna</div>
-                        </div>
-                    </div>
-
-                    <div class="footer-col-totals">
-                        <div class="totals-row">
-                            <span>subtotal</span>
-                            <span class="price-text" id="subtotal-amount">£{{ number_format($total, 2) }}</span>
-                        </div>
-
-                        <div class="totals-row">
-                            <span>delivery</span>
-                            <span class="price-text" id="delivery-cost">--</span>
-                        </div>
-                        
-                        <div class="discount-wrapper">
-                            <div class="discount-container">
-                                {{-- HIDDEN INPUTS: Pass Session Data to JavaScript --}}
-                                <input type="hidden" id="session-discount-code" value="{{ $discountCode ?? '' }}">
-                                <input type="hidden" id="session-discount-multiplier" value="{{ $discountMultiplier ?? 1 }}">
-                                
-                                <input type="text" id="discount-input" placeholder="Enter Discount Code (e.g. xmas10)">
-                                <button type="button" id="apply-btn">Apply</button>
+                            <div class="totals-row grand-total">
+                                <span>Total</span>
+                                <span class="price-text" id="checkout-total">£{{ number_format($total, 2) }}</span>
                             </div>
-                            <p id="message-area"></p>
-                        </div>
 
-                        <div class="totals-row grand-total">
-                            <span>grand total</span>
-                            <span class="price-text" id="checkout-total">£{{ number_format($total, 2) }}</span>
+                            <div class="final-actions-stacked">
+                                <a href="/checkout" class="btn-checkout-bottom checkout-validate">CHECKOUT NOW</a>
+                                <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE SHOPPING</a>
+                            </div>
                         </div>
+                    </div> {{-- End Right Column --}}
 
-                        <div class="final-actions">
-                            <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE<br>SHOPPING</a>
-
-                            {{-- Added 'checkout-validate' class to prevent users from checking out without selecting delivery options --}}
-                            <a href="/checkout" class="btn-checkout-bottom checkout-validate">CHECKOUT</a>
-                        </div>
-                    </div>
-                </div>
+                </div> {{-- End Layout Grid --}}
             @endif
         </div>
         
