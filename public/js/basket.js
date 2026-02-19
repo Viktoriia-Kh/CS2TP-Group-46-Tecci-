@@ -1,54 +1,34 @@
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("✅ basket.js loaded - HYBRID Version (Original Logic + AJAX)");
+    console.log("basket.js loaded - Dynamic Names Version");
 
-    // --- SECTION 1 - ELEMENT SELECTION ---
+    // --- 1. Select Elements ---
     const checkoutBtns = document.querySelectorAll('.checkout-validate'); 
     const subtotalEl = document.getElementById('subtotal-amount');
     const deliveryCostEl = document.getElementById('delivery-cost');
     const totalEl = document.getElementById('checkout-total');
-    
-    // Discount Elements
     const applyButton = document.getElementById('apply-btn');
     const inputField = document.getElementById('discount-input');
     const messageArea = document.getElementById('message-area');
-
-    // Delivery Elements
     const checkboxes = document.querySelectorAll('.delivery-group-checkbox');
     const deliveryErrorMsg = document.getElementById('delivery-error-msg');
-    
-    // Header Badge (The little red circle in the nav)
     const cartBadge = document.querySelector('.cart-badge');
-
-    // Meta Data
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
     
     // Server State
-    const sessionCode = document.getElementById('session-discount-code')?.value;
     const sessionMultiplier = document.getElementById('session-discount-multiplier')?.value;
+    const sessionCode = document.getElementById('session-discount-code')?.value;
     let discountMultiplier = sessionMultiplier ? parseFloat(sessionMultiplier) : 1;
 
-
-    // --- SECTION 2 - CORE CALCULATIONS (Merged) ---
-    
-    // Updated function to accept an optional 'serverSubtotal'
-    // Allows AJAX update to pass new price directly
+    // --- 2. Shared Calculation Logic ---
     function updateTotals(serverSubtotal = null) {
         if (!subtotalEl) return false;
+        if (serverSubtotal !== null) subtotalEl.innerText = '£' + parseFloat(serverSubtotal).toFixed(2);
 
-        // 1. If AJAX provided a new number, update the text first
-        if (serverSubtotal !== null) {
-            subtotalEl.innerText = '£' + parseFloat(serverSubtotal).toFixed(2);
-        }
-
-        // 2. Read Subtotal from DOM
-        let subtotalRaw = parseFloat(subtotalEl.innerText.replace(/[£,]/g, ''));
-        if (isNaN(subtotalRaw)) subtotalRaw = 0;
-
+        let subtotalRaw = parseFloat(subtotalEl.innerText.replace(/[£,]/g, '')) || 0;
         let deliveryPrice = 0;
         let deliveryText = "--";
         let isDeliverySelected = false;
 
-        // 3. Delivery Logic
         if (checkboxes.length > 0) {
             checkboxes.forEach(box => {
                 if (box.checked) {
@@ -69,42 +49,32 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
 
-        // 4. Update Delivery Text
         if (deliveryCostEl) {
             deliveryCostEl.innerText = deliveryText;
             deliveryCostEl.style.color = (deliveryText === "FREE") ? "#2ecc71" : "#64748b"; 
             deliveryCostEl.style.fontWeight = (deliveryText === "FREE") ? "700" : "400";
         }
 
-        // 5. Grand Total Calculation
-        let discountedSubtotal = subtotalRaw * discountMultiplier;
-        let finalTotal = discountedSubtotal + deliveryPrice;
-
-        if (totalEl) {
-            totalEl.innerText = '£' + finalTotal.toFixed(2);
-        }
-
+        const discountMult = parseFloat(document.getElementById('session-discount-multiplier')?.value || 1);
+        let finalTotal = (subtotalRaw * discountMult) + deliveryPrice;
+        if (totalEl) totalEl.innerText = '£' + finalTotal.toFixed(2);
         return isDeliverySelected;
     }
 
-    // --- SECTION 3 - AJAX LOGIC ---
-    function sendBasketUpdate(productId, action) {
+    // --- 3. AJAX Logic (Updated for Product Names) ---
+    // We added 'productName' as a 3rd argument here
+    function sendBasketUpdate(productId, action, productName, productImage) {
         fetch('/basket/update-ajax', {
             method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json', 
-                'X-CSRF-TOKEN': csrfToken 
-            },
+            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
             body: JSON.stringify({ id: productId, action: action })
         })
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                // A. Update Quantity Input Box
                 const input = document.getElementById(`qty-input-${productId}`);
                 if (input && data.newQuantity > 0) input.value = data.newQuantity;
 
-                // B. Handle Item Removal
                 if (action === 'remove' || data.action === 'remove') {
                     const btn = document.querySelector(`.ajax-remove-btn[data-id="${productId}"]`);
                     if(btn) {
@@ -113,31 +83,91 @@ document.addEventListener("DOMContentLoaded", function() {
                         row.style.opacity = '0';
                         setTimeout(() => row.remove(), 300);
                     }
-                    showToast("Item removed from basket", "error");
+                    // DYNAMIC REMOVE MESSAGE
+                    showToast("Item Removed", `${productName} was removed from your basket`, "error", productImage);
                 } else {
-                    showToast("Basket updated successfully", "success");
+                    // DYNAMIC UPDATE MESSAGE
+                    showToast("Basket Updated", `Updated quantity for ${productName}`, "success", productImage);
                 }
 
-                // C. Update Header Badge
                 if (cartBadge) {
                     cartBadge.innerText = data.totalQty;
                     cartBadge.style.display = data.totalQty > 0 ? 'flex' : 'none';
                 }
-
-                // D. Update Money (Pass raw subtotal to trigger Free Delivery check)
                 updateTotals(data.subtotalRaw);
-
-                // E. Reload if empty (to show "Your basket is empty" screen)
-                if (data.itemCount === 0) setTimeout(() => location.reload(), 500);
+                if (data.itemCount === 0) setTimeout(() => location.reload(), 1500);
             }
         })
         .catch(err => console.error("AJAX Error:", err));
     }
 
+    // --- 4. Event Listeners ---
+    document.querySelectorAll('.ajax-qty-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Pass the name from the data attribute
+            sendBasketUpdate(this.dataset.id, this.dataset.action, this.dataset.name, this.dataset.image);
+        });
+    });
 
-    // --- SECTION 4 - RESTORED ORIGINAL FEATURES ---
+    document.querySelectorAll('.ajax-remove-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Pass the name from the data attribute
+            sendBasketUpdate(this.dataset.id, 'remove', this.dataset.name, this.dataset.image);
+        });
+    });
 
-    // Feature A: Restore Discount UI
+    checkboxes.forEach(box => {
+        box.addEventListener('change', function() {
+            if(this.checked) {
+                checkboxes.forEach(other => { if(other !== this) other.checked = false; });
+                if(deliveryErrorMsg) deliveryErrorMsg.style.display = 'none';
+            }
+            updateTotals();
+        });
+    });
+
+    if (applyButton) {
+        applyButton.addEventListener('click', function() {
+            const code = inputField.value.trim();
+            if (!code) return;
+            if (!csrfToken) return; // Silent fail if no token
+
+            fetch('/apply-discount', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
+                body: JSON.stringify({ code: code })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) location.reload(); 
+                else {
+                    messageArea.textContent = data.message || "Invalid Code";
+                    messageArea.style.color = "#dc3545";
+                }
+            })
+            .catch(err => console.error(err));
+        });
+    }
+
+    if (checkoutBtns.length > 0) {
+        checkoutBtns.forEach(btn => {
+            btn.addEventListener('click', function(event) {
+                const isSelected = updateTotals();
+                if (!isSelected) { 
+                    event.preventDefault(); 
+                    if (deliveryErrorMsg) {
+                        deliveryErrorMsg.style.display = 'block';
+                        deliveryErrorMsg.innerText = "Please select a delivery method";
+                        deliveryErrorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            });
+        });
+    }
+
+    // --- 5. Restore UI ---
     function restoreDiscountUI() {
         if (discountMultiplier < 1 && inputField && applyButton) {
             inputField.value = sessionCode || '';
@@ -151,120 +181,38 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Feature B: Apply Discount Listener
-    if (applyButton) {
-        applyButton.addEventListener('click', function() {
-            const code = inputField.value.trim();
-            if (!code) return;
-
-            if (!csrfToken) {
-                messageArea.textContent = "System Error: Cannot verify security token.";
-                messageArea.style.color = "#dc3545";
-                return;
-            }
-
-            fetch('/apply-discount', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                body: JSON.stringify({ code: code })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    location.reload(); 
-                } else {
-                    messageArea.textContent = data.message || "Invalid Code";
-                    messageArea.style.color = "#dc3545";
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                messageArea.textContent = "Connection Error.";
-                messageArea.style.color = "#dc3545";
-            });
-        });
-    }
-
-    // Feature C: Delivery Checkboxes
-    if (checkboxes.length > 0) {
-        checkboxes.forEach((checkbox) => {
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    checkboxes.forEach((other) => {
-                        if (other !== this) other.checked = false;
-                    });
-                    if (deliveryErrorMsg) deliveryErrorMsg.style.display = 'none';
-                }
-                updateTotals();
-            });
-        });
-    }
-
-    // Feature D: Checkout Validation
-    if (checkoutBtns.length > 0) {
-        checkoutBtns.forEach(btn => {
-            btn.addEventListener('click', function(event) {
-                const isSelected = updateTotals();
-                if (isSelected === false) { 
-                    event.preventDefault(); 
-                    if (deliveryErrorMsg) {
-                        deliveryErrorMsg.style.display = 'block';
-                        deliveryErrorMsg.innerText = "Please select a delivery method";
-                        deliveryErrorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                }
-            });
-        });
-    }
-
-    // --- SECTION 5 - NEW EVENT LISTENERS ---
-    
-    // AJAX Quantity Buttons
-    document.querySelectorAll('.ajax-qty-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            sendBasketUpdate(this.dataset.id, this.dataset.action);
-        });
-    });
-
-    // AJAX Remove Buttons
-    document.querySelectorAll('.ajax-remove-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            sendBasketUpdate(this.dataset.id, 'remove');
-        });
-    });
-
-    // --- SECTION 6 - TOAST NOTIFICATIONS ---
-    function showToast(message, type = 'success') {
+    // --- 6. Toast Notification ---
+    function showToast(title, message, type = 'success', imageUrl = null) {
         const toast = document.createElement('div');
         toast.id = 'toast-notification';
         toast.className = 'toast-visible';
         
         const color = type === 'success' ? '#2ecc71' : '#e74c3c';
         const icon = type === 'success' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-trash-alt"></i>';
+
+        // If an image exists, build HTML for it. Otherwise leave blank.
+        const imageHtml = imageUrl ? `<img src="${imageUrl}" class="toast-product-image" alt="Product">` : '';
         
+        // Use CSS Animation instead of JS for slide-in
+        // We add the class directly
         toast.style.borderLeft = `5px solid ${color}`;
         toast.innerHTML = `
             <div class="toast-icon" style="color: ${color}">${icon}</div>
             <div class="toast-content">
-                <span class="toast-title" style="color: #333">${type === 'success' ? 'Success' : 'Removed'}</span>
-                <span class="toast-message">${message}</span>
+                <span class="toast-title" style="color: #333">${title}</span>
+                <span class="toast-message" style="text-transform: capitalize;">${message}</span>
             </div>
-            <div class="toast-progress" style="background-color: ${color}"></div>
+            ${imageHtml}<div class="toast-progress" style="background-color: ${color}"></div>
         `;
         document.body.appendChild(toast);
         
+        // Remove after 3.5s
         setTimeout(() => {
-            toast.style.transform = "translateX(120%)";
+            toast.style.transform = "translateX(120%)"; // Slide out
             setTimeout(() => toast.remove(), 500);
         }, 3000);
     }
 
-    // --- Initial Run ---
     restoreDiscountUI(); 
     updateTotals();      
 });

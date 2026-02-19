@@ -77,18 +77,35 @@
                                         <h3 class="item-name">{{ strtolower($details['name']) }}</h3>
                                         <div class="item-controls">
                                             <label>quantity:</label>
+
                                             <div class="qty-box">
                                                 {{-- Added ID for JS targeting --}}
                                                 <input type="text" id="qty-input-{{ $id }}" value="{{ $details['quantity'] }}" readonly>
                                                 <div class="qty-arrows">
+
                                                     {{-- Buttons with Data Attributes --}}
-                                                    <button type="button" class="ajax-qty-btn" data-id="{{ $id }}" data-action="increase">▲</button>
-                                                    <button type="button" class="ajax-qty-btn" data-id="{{ $id }}" data-action="decrease">▼</button>
+                                                    <button type="button" class="ajax-qty-btn"
+                                                     data-id="{{ $id }}"
+                                                     data-name="{{ $details['name'] }}"
+                                                     data-image="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}"
+                                                     data-action="increase">▲</button>
+
+                                                    <button type="button" class="ajax-qty-btn"
+                                                     data-id="{{ $id }}"
+                                                     data-name="{{ $details['name'] }}"
+                                                     data-image="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}"
+                                                     data-action="decrease">▼</button>
                                             </div>
                                         </div>
                                     </div>
+
                                         {{-- Remove Button --}}
-                                        <button type="button" class="remove-item-link ajax-remove-btn" data-id="{{ $id }}"> remove item <span class="x-icon">×</span></button>
+                                        <button type="button" class="remove-item-link ajax-remove-btn"
+                                         data-id="{{ $id }}"
+                                         data-name="{{ $details['name'] }}"
+                                         data-image="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}">
+                                         remove item <span class="x-icon">×</span>
+                                        </button>
                                         </div>
 
                                     <div class="item-col-price">

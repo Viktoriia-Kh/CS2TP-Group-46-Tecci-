@@ -351,14 +351,6 @@
     width: 100%; /* Full width of the arrow column */
 }
 
-/* --- Mobile Responsiveness --- */
-@media (max-width: 900px) {
-    .basket-layout-grid { grid-template-columns: 1fr; } 
-    .basket-sidebar { position: static; margin-top: 30px; } 
-    .basket-item-row { grid-template-columns: 100px 1fr; gap: 20px; }
-    .item-col-price { grid-column: 2; text-align: left; margin-top: 10px; }
-    .basket-table-headers { display: none; }
-}
 
 /* ================================
    TOAST NOTIFICATION
@@ -416,4 +408,31 @@
 @keyframes toastTimer {
     from { width: 100%; }
     to   { width: 0%; }
+}
+
+/* Toast Product Thumbnail */
+.toast-product-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 6px; /* Soft edges */
+    object-fit: contain; /* Prevents distortion */
+    background-color: white; /* Looks clean if image has a transparent background */
+    border: 1px solid rgba(0,0,0,0.05); /* Subtle border */
+    margin-left: auto; /* Automatically pushes image to the far right */
+}
+
+
+
+
+
+
+
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 900px) {
+    .basket-layout-grid { grid-template-columns: 1fr; } 
+    .basket-sidebar { position: static; margin-top: 30px; } 
+    .basket-item-row { grid-template-columns: 100px 1fr; gap: 20px; }
+    .item-col-price { grid-column: 2; text-align: left; margin-top: 10px; }
+    .basket-table-headers { display: none; }
 }

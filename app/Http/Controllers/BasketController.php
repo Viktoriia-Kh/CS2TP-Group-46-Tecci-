@@ -48,8 +48,8 @@ class BasketController extends Controller
     // Save the updated basket back to the session
     session()->put('basket', $basket);
 
-    // Go back to the page with a success message
-    return redirect()->back()->with('success', 'Product added to basket successfully!');
+    // Mentions the specific product in 'toast' notification
+    return redirect()->back()->with('success',$product->name . ' added to your basket!');
     }
 
     // Remove Items
