@@ -181,20 +181,25 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // --- 6. Toast Notification ---
+    // --- 6 - Toast Notification ---
     function showToast(title, message, type = 'success', imageUrl = null) {
+        
+        // a) Finds the container, or creates it if it doesn't exist yet
+        let container = document.getElementById('toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'toast-container';
+            document.body.appendChild(container);
+        }
+
+        // b) Creates the individual Toast
         const toast = document.createElement('div');
-        toast.id = 'toast-notification';
-        toast.className = 'toast-visible';
+        toast.className = 'toast-notification'; 
         
         const color = type === 'success' ? '#2ecc71' : '#e74c3c';
         const icon = type === 'success' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-trash-alt"></i>';
-
-        // If an image exists, build HTML for it. Otherwise leave blank.
         const imageHtml = imageUrl ? `<img src="${imageUrl}" class="toast-product-image" alt="Product">` : '';
         
-        // Use CSS Animation instead of JS for slide-in
-        // We add the class directly
         toast.style.borderLeft = `5px solid ${color}`;
         toast.innerHTML = `
             <div class="toast-icon" style="color: ${color}">${icon}</div>
@@ -202,14 +207,26 @@ document.addEventListener("DOMContentLoaded", function() {
                 <span class="toast-title" style="color: #333">${title}</span>
                 <span class="toast-message" style="text-transform: capitalize;">${message}</span>
             </div>
-            ${imageHtml}<div class="toast-progress" style="background-color: ${color}"></div>
+            ${imageHtml}
+            <div class="toast-progress" style="background-color: ${color}"></div>
         `;
-        document.body.appendChild(toast);
         
-        // Remove after 3.5s
+        // c) Appends to the CONTAINER, not the body
+        container.appendChild(toast);
+        
+        // d) Removes notifications gracefully
         setTimeout(() => {
-            toast.style.transform = "translateX(120%)"; // Slide out
-            setTimeout(() => toast.remove(), 500);
+            toast.style.transform = "translateX(120%)"; // Slide out to the right
+            toast.style.opacity = "0"; // Fade out
+            
+            // Wait for slide out, then shrink the margin so the notifications below slide UP smoothly
+            setTimeout(() => {
+                toast.style.marginTop = `-${toast.offsetHeight + 15}px`; 
+                
+                // Finally remove it from the DOM
+                setTimeout(() => toast.remove(), 400); 
+            }, 400); 
+            
         }, 3000);
     }
 
