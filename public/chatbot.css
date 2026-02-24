@@ -1,0 +1,126 @@
+.tecci-chatbot {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 9999;
+  font-family: 'Signika', sans-serif;
+}
+
+/* Floating circle button */
+.tecci-chatbot__launcher {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: #1e66ff;
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tecci-chatbot__launcher i {
+  font-size: 20px;
+}
+
+/* Chat window */
+.tecci-chatbot__window {
+  position: absolute;
+  right: 0;
+  bottom: 70px;
+  width: 340px;
+  height: 460px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.tecci-chatbot__window--hidden {
+  display: none;
+}
+
+.tecci-chatbot__window--expanded {
+  width: 420px;
+  height: 600px;
+}
+
+/* Header */
+.tecci-chatbot__header {
+  background: #1e66ff;
+  color: #fff;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tecci-chatbot__header-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.tecci-chatbot__controls button {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Messages */
+.tecci-chatbot__messages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  background: #f4f6fb;
+  font-size: 13px;
+}
+
+.tecci-chatbot__bubble {
+  background: #fff;
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Quick buttons */
+.tecci-chatbot__quick button {
+  margin: 4px 4px 0 0;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: #fff;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* Input */
+.tecci-chatbot__form {
+  padding: 10px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+}
+
+.tecci-chatbot__input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.tecci-chatbot__send {
+  margin-left: 6px;
+  padding: 8px 10px;
+  background: #1e66ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
