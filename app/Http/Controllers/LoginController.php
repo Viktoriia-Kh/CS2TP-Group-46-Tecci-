@@ -58,7 +58,7 @@ class LoginController extends Controller
     // function which handles sending the reset link
     public function sendResetPasswordLink(Request $request) {
         $request->validate(['email_address' => 'required|email']);
-        $request_status = Password::sendResetLink(['email' => $request ->email]); // sends a reset email to the user
+        $request_status = Password::sendResetLink(['email' => $request ->email_address]); // sends a reset email to the user
 
         return $request_status === Password::RESET_LINK_SENT
             ? back()->with(['status' => __($request_status)])
