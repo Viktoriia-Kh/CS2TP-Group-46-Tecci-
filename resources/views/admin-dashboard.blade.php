@@ -18,7 +18,7 @@
     <header class="main-header">
         <div class="container nav-container">
             <!--Logo-->
-            <a href="TP2_Home.html" class="logo">
+            <a href="admin-dashboard.blade.php" class="logo">
                 <!--Using this will make the Logo clickable and takes the user to the Home Page-->
                 <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
                 <span class="logo-text">TECCI</span> <!--span is an inline element used for short text-->
@@ -46,3 +46,19 @@
             </div>
         </div>
     </header>
+    
+    <!--MAIN DASHBOARD LAYOUT-->
+    <main class="admin-shell"> <!--This is a layout wrapper which contains the Sidebar and Content Area-->
+        <!--SIDEBAR-->
+        <aside class="admin-sidebar" id="adminSidebar"> <!--aside represents the secondary content, side navigation-->
+            <div class="admin-profile">
+                <div class="profile-avatar">
+                    <i class="fa-solid fa-user-tie"></i>  <!--fa-user-tie is a User/Avatar Icon linked from Font Awesome-->
+                </div>
+                <div class="profile-meta"> <!--Using this will allow the Avatar/Profile to stay visible while hiding the text, which is all done in CSS-->
+                    <p class="profile-name">Full Name</p>
+                    <p class="profile-role">Admin</p>
+                </div>
+            </div>
+            
+            <a class="sidebar-logout" href="admin-dashboard.blade.php">LOGOUT</a>
