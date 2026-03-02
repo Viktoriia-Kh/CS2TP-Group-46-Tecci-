@@ -386,3 +386,59 @@ body.sidebar-collapsed .site-footer {
   font-weight: 900;
   color: #03315b;
 }
+
+/* ACTIVITY TIMELINE PANEL */
+.activity-panel {
+  min-height: 265px; /* This makes sure there is a consistent height next to metric cards */
+}
+
+.activity-timeline { /* This stacks the Timeline items vertically */
+  position: relative;
+  padding-left: 6px;
+  display: flex; /* This turns the <ul. into a flex container */
+  flex-direction: column;
+  gap: 18px;
+}
+
+.activity-item {
+  display: grid; /* This turns each activity item into a grid layout */
+  grid-template-columns: 64px 16px 1fr; /* This creates a 3 column structure */
+  align-items: start; /* This aligns the grid items to the top of their cells */
+  gap: 10px; /* This adds spacing between the columns */
+  position: relative;
+}
+
+.activity-time {
+  font-size: 13px; 
+  color: #03315b;
+  opacity: 0.95;
+}
+
+.activity-dot { /* This creates a circular Timeline dot */
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #03315b;
+  margin-top: 4px; /* This moves the dot down slightly so it lines up nicely beside the text */
+  position: relative;
+}
+
+.activity-item:not(:last-child) .activity-dot::after { /* This means that after every activity item except the last one, add a pseudo-element */
+  content: ""; /* This creates an invisible element */
+  position: absolute; /* This allows for precise positioning */
+  left: 50%; /* This and the line below is for positions below the dot */
+  top: 12px;
+  transform: translateX(-50%); /* This centres the line horizontally below the dot */
+  width: 3px;
+  height: 34px;
+  background: #03315b;
+  opacity: 0.9;
+  border-radius: 99px;
+}
+
+.activity-text {
+  font-size: 12px;
+  color: #03315b;
+  opacity: 0.95;
+  line-height: 1.35;
+}
