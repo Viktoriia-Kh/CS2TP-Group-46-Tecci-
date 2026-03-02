@@ -315,3 +315,10 @@
               </table>
             </div>
           </section>
+
+          <div class="right-spacer"></div> <!--This intentionally added to leave white space on the right side of Top-Selling section-->
+        </div>
+
+      </div>
+    </section>
+  </main>
