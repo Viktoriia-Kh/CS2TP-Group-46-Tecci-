@@ -164,10 +164,88 @@
                 <p>Some features and design</p>
               </div>
 
+              <!-- put the data -->
               <div id="reviews" class="tab-pane">
-                <h3>Customer Reviews</h3>
-                <p>some customer reviews</p>
+                <h3 class="tab-title">Customer Reviews</h3>
+
+                <div class="reviews-list">
+                    
+                  <div class="review-item">
+                    <div class="review-header">
+                      <span class="reviewer-name">Alex M.</span>
+                      <span class="review-date">15/05/2023</span>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">An excellent laptop! Very fast, bright screen. Loads all programs instantly. Highly recommended!</p>
+                  </div>
+
+                  <div class="review-item">
+                    <div class="review-header">
+                      <span class="reviewer-name">Sarah K.</span>
+                      <span class="review-date">02/04/2023</span>
+                    </div>
+                    <div class="review-stars">★★★★☆</div>
+                    <p class="review-text">Good quality for the money. The only problem is that it gets a little warm during heavy gaming, but it's not critical.</p>
+                  </div>
+                </div>
+
+                <hr class="review-divider">
+
+                <div class="add-review-section">
+                  <h4 class="form-title">Leave a Review</h4>
+                  
+                      <div class="form-group">
+                          <label>Rating</label>
+                          <div class="star-rating">
+                              <input type="radio" id="star5" name="rating" value="5" required />
+                              <label for="star5" title="5 stars">
+                                  <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                              </label>
+
+                              <input type="radio" id="star4" name="rating" value="4" />
+                              <label for="star4" title="4 stars">
+                                  <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                              </label>
+                              
+                              <input type="radio" id="star3" name="rating" value="3" />
+                              <label for="star3" title="3 stars">
+                                  <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                              </label>
+                              
+                              <input type="radio" id="star2" name="rating" value="2" />
+                              <label for="star2" title="2 stars">
+                                  <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                              </label>
+                              
+                              <input type="radio" id="star1" name="rating" value="1" />
+                              <label for="star1" title="1 star">
+                                  <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                              </label>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="comment">Your Review</label>
+                          <textarea name="comment" id="comment" rows="6" required class="form-control" placeholder="Share your thoughts about the product"></textarea>
+                      </div>
+
+                      <div class="media-upload-group">
+                        <input type="file" id="review-media" name="media[]" accept="image/*,video/*" multiple class="hidden-file-input">
+                        
+                        <label for="review-media" class="add-media-btn">
+                            <svg class="camera-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M23 19V5H19L17.17 3H6.83L5 5H1V19H23ZM12 8C14.21 8 16 9.79 16 12C16 14.21 14.21 16 12 16C9.79 16 8 14.21 8 12C8 9.79 9.79 8 12 8Z" fill="#3B82F6"/>
+                            </svg>
+                            <span class="btn-text">Add picture</span>
+                        </label>
+                        
+                        <div id="file-chosen-text" class="file-chosen-text">No file chosen</div>
+                    </div>
+
+                      <button type="submit" class="submit-review-btn">Submit Review</button>
+                  </form>
               </div>
+            </div>
 
             </div>
           </div>
@@ -241,4 +319,21 @@
     
     evt.currentTarget.classList.add('active');
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('review-media');
+    const fileText = document.getElementById('file-chosen-text');
+
+    if(fileInput) {
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 1) {
+                fileText.textContent = `Files chosen: ${this.files.length}`;
+            } else if (this.files && this.files.length === 1) {
+                fileText.textContent = this.files[0].name;
+            } else {
+                fileText.textContent = 'No file chosen';
+            }
+        });
+    }
+});
 </script>
