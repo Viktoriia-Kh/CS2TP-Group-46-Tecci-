@@ -211,6 +211,49 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Tech specs */
+.tab-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.specs-table tr {
+    border-bottom: 1px solid #eeeeee;
+}
+
+.specs-table tr:nth-child(even) {
+    background-color: #fcfcfc;
+}
+
+.specs-table th.spec-name {
+    width: 35%; 
+    padding: 15px 10px;
+    text-align: left;
+    font-weight: 600;
+    color: #555;
+    vertical-align: top; 
+}
+
+.specs-table td.spec-value {
+    width: 65%;
+    padding: 15px 10px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.no-data-msg {
+    color: #777;
+    font-style: italic;
+}
+
 /* RESPONSIVENESS */
 
 /* For Tablets/Small Laptops (Max Width 900px) */
