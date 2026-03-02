@@ -515,3 +515,44 @@ body.sidebar-collapsed .site-footer {
 .traffic-empty {
   height: 270px;
 }
+
+/* BOTTOM GRID (TOP-SELLING) */
+
+.dash-bot-grid { /* This targets the Top-Selling Products panel on the left and the empty spacing column on the right */
+  display: grid;
+  grid-template-columns: 1fr 0.95fr; /* This creates 2 columns */
+  gap: 18px; /* This is the space between the 2 columns */
+  margin-top: 18px; /* This adds space above this whole bottom section */
+}
+
+.top-selling-panel { /* This targets the panel box itself */
+  background: #03315b;
+  padding: 16px;
+}
+
+.top-selling-panel .panel-header h2 { /* This targets only the <h2> inside .panel-header inside .top-selling panel */
+  color: #ffffff;
+}
+
+.dash-table-products td:first-child,
+.dash-table-products th:first-child { /* This selects the first <td> cell in each row of the products table, and the first <th> header cell */
+  width: 110px;
+}
+
+.product-thumbnail { /* This targets the fake preview box inside the first column */
+  width: 70px;
+  height: 70px;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #03315b;
+  display: grid;
+  place-items: center;
+  text-align: center; /* his centres the multi-line text horizontally */
+  font-size: 10px;
+  font-weight: 800;
+  border: 2px solid rgba(255, 100, 100, 0.55); /* This adds a slightly transparent border (NOTE: Will be removed when image products are added */
+}
+
+.right-spacer { /* This targets the empty blank right-side column */
+  background: transparent; /* This makes sure it stays invisible */
+}
