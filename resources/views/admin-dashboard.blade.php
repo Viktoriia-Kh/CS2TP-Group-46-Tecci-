@@ -186,3 +186,62 @@
                     </ul>
                 </aside>
             </div>
+            
+            <!--MIDDLE GRID: RECENT SALES + TRAFFIC-->
+            <div class="dash-mid-grid"> <!--This is a container for the middle section of the Dashboard-->
+                <section class="panel table-panel">
+                    <div class="panel-header">
+                        <h2>Recent Sales | Today</h2>
+                    </div>
+                    
+                    <div class="table-wrap">
+                        <table class="dash-table">
+                            <thead> <!--thead defines the header section-->
+                                <tr> <!--tr is for the table row-->
+                                    <th>#</th> <!--th is for the header cells-->
+                                    <th>Customer</th>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody> <!--tbody represents the actual data-->
+                                <tr>
+                                    <td>#2049</td> <!--td represents the table data cells-->
+                                    <td>Ashleigh Langosh</td>
+                                    <td>Budget Laptop</td>
+                                    <td>£499.99</td>
+                                    <td><span class="pill pill-approved">APPROVED</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#2048</td>
+                                    <td>Bridie Kessler</td>
+                                    <td>Tablet</td>
+                                    <td>£399.99</td>
+                                    <td><span class="pill pill-pending">PENDING</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#2047</td>
+                                    <td>Brandon Jacob</td>
+                                    <td>Smartphone</td>
+                                    <td>£450.99</td>
+                                    <td><span class="pill pill-approved">APPROVED</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#2046</td>
+                                    <td>Angus Grady</td>
+                                    <td>Accessories Pack</td>
+                                    <td>£299.99</td>
+                                    <td><span class="pill pill-approved">APPROVED</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#2045</td>
+                                    <td>Raheem Lehner</td>
+                                    <td>Headphones</td>
+                                    <td>£199.99</td>
+                                    <td><span class="pill pill-pending">PENDING</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
