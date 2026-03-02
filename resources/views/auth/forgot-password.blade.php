@@ -43,6 +43,18 @@
         <section class="section-form">
             <h2>Reset Your Password</h2>
             <p class="welcome-sub-message">Enter your email address to reset your password.</p>
+
+            {{-- This will display a success message to the user--}}
+            @if (session('status'))
+                <div class="success-messages">
+                    {{session('status')}}
+                </div>
+
+            @endif
+
+
+
+
             {{-- This will display error messages to the user--}}
             @if (!empty($error_messages))
                 <ul class="error-messages">

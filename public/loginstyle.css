@@ -101,6 +101,16 @@ body {
     list-style-type: none;
 }
 
+/* applying styling to the success messages */
+.success-message {
+    color: darkgreen;
+    background-color: mediumseagreen;
+    margin-bottom: 20px;
+    font-size: 12px;
+    padding: 10px;
+    border: 1px solid lightgreen;
+}
+
 .main-header {
     background-color: #03315b;
     color: white;
