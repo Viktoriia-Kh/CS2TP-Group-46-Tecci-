@@ -145,3 +145,44 @@
                         </div>
                     </article>
                 </div>
+                
+                <!--panel is a shared styling class, used so any element with class panel gets a blue background, rounded corners, and padding-->
+                <aside class="panel activity-panel"> <!--aside represents the secondary content-->
+                    <div class="panel-header">
+                        <h2>Recent Activity | Today</h2>
+                    </div>
+                    
+                    <ul class="activity-timeline">
+                        <li class="activity-item">
+                            <span class="activity-time">32 min</span>
+                            <span class="activity-dot"></span>
+                            <p class="activity-text">Order #2049 was marked as <strong>Approved</strong>.</p>
+                        </li>
+                        <li class="activity-item">
+                            <span class="activity-time">56 min</span>
+                            <span class="activity-dot"></span>
+                            <p class="activity-text">Low stock warning: <strong>Wireless Headphones</strong>.</p>
+                        </li>
+                        <li class="activity-item">
+                            <span class="activity-time">2 hrs</span>
+                            <span class="activity-dot"></span>
+                            <p class="activity-text">New customer account created.</p>
+                        </li>
+                        <li class="activity-item">
+                            <span class="activity-time">1 day</span>
+                            <span class="activity-dot"></span>
+                            <p class="activity-text">Shipment processed for Order #2038.</p>
+                        </li>
+                        <li class="activity-item">
+                            <span class="activity-time">2 days</span>
+                            <span class="activity-dot"></span>
+                            <p class="activity-text">Product updated: <strong>Budget Laptop</strong>.</p>
+                        </li>
+                        <li class="activity-item">
+                            <span class="activity-time">4 weeks</span>
+                            <span class="activity-dot"></span>
+                            <p class="activity-text">Monthly inventory report generated.</p>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
