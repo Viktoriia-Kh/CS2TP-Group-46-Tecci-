@@ -314,3 +314,18 @@ body.sidebar-collapsed .site-footer {
   line-height: 1.05;
   color: #03315b;
 }
+
+/* PANELS/CARDS */
+
+.panel { /* This is used by Activity Panel, Traffic Panel, Table Panels (which are then overriden), and Top Selling Panel */
+  background: #7fc0ff;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.panel-header h2 { /* This styles the headings inside the Panels */
+  font-size: 18px;
+  color: #03315b;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
