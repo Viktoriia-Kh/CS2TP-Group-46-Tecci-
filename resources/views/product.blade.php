@@ -117,6 +117,31 @@
 
             </div>
         </div>
+        <div class="product-tabs-section">
+          <div class="tabs-nav">
+            <button class="tab-btn active" onclick="openTab(event, 'tech-specs')">Tech Specs</button>
+            <button class="tab-btn" onclick="openTab(event, 'features-design')">Features & Design</button>
+            <button class="tab-btn" onclick="openTab(event, 'reviews')">Reviews</button>
+          </div>
+
+          <div class="tabs-content"> 
+              <div id="tech-specs" class="tab-pane active">
+                  <h3>Technical Specifications</h3>
+                  <p>Some technical specs</p>
+              </div>
+
+              <div id="features-design" class="tab-pane">
+                  <h3>Features & Design</h3>
+                  <p>Some features and design</p>
+              </div>
+
+              <div id="reviews" class="tab-pane">
+                  <h3>Customer Reviews</h3>
+                  <p>some customer reviews</p>
+              </div>
+
+            </div>
+          </div>
     </section>
 </main>
 
@@ -169,3 +194,4 @@
   </footer>
 </body>
 </html>
+
