@@ -1,0 +1,9 @@
+/* Basic reset and default Styles */
+
+/* Using '*' selects every element */
+
+*, *::before, *::after {
+  box-sizing: border-box; /* This makes the width easier to work with */
+  margin: 0; /* This removes browser default spacing so you have full control */
+  padding: 0;
+}
