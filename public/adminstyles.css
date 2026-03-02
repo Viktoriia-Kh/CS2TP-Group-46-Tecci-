@@ -443,7 +443,7 @@ body.sidebar-collapsed .site-footer {
   line-height: 1.35;
 }
 
-/* MIDDLE GRID (TABLE + TRAFFIC)*/
+/* MIDDLE GRID (TABLE + TRAFFIC) */
 
 .dash-mid-grid {
   display: grid;
@@ -504,4 +504,14 @@ body.sidebar-collapsed .site-footer {
 .pill-pending {
   background: #f59e0b;
   color: #111827; /* This makes the text a dark colour */
+}
+
+/* TRAFFIC PANEL */
+
+.traffic-panel {
+  min-height: 345px; /* This sets minimum height so the empty traffic box still appears large */
+}
+
+.traffic-empty {
+  height: 270px;
 }
