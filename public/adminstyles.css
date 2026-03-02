@@ -35,3 +35,35 @@ ul {
   width: min(1200px, 100% - 32px); /* This sets the maximum width of the content, has consistent padding */
   margin-inline: auto; /* This centres .container horizontally */
 }
+
+/* HEADER & NAVBAR SECTION */
+
+.main-header {
+  background-color: #03315b;
+  color: #ffffff; /* This sets the default text colour inside the Header to white */
+  border-bottom: 15px solid #085296;
+  position: sticky; /* This makes the header stick when scrolling */
+  top: 0; /* This tells the sticky element where to stick, which in this case is at the top of the screen */
+  z-index: 1000; /* This controls the stacking order, to prevent content from overlapping the header */
+}
+
+.nav-container {
+  display: flex; /* This turns the container into a flexbox row, allowing the logo, nav, and icons to sit horizontally */
+  align-items: center; 
+  justify-content: space-between; /* This pushes the Logo to the far left, Icons to the far right. Nav Menu in the middle: Creating a 3-Part Layout */
+  padding: 12px 0; /* This adds vertical spacing */
+  gap: 20px; /* This adds space between the 3 Sections inside the Nav */
+}
+
+.logo {
+  display: flex; /* This places the Logo and Text side by side */
+  align-items: center; 
+  gap: 9.6px; /* This adds space between Logo and Tecci Text */
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.logo img {
+  height: 44px;
+}
