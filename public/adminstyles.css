@@ -296,3 +296,21 @@ body.sidebar-collapsed .admin-content {
 body.sidebar-collapsed .site-footer {
   margin-left: 90px; /* This matches the collapsed width */
 }
+
+/* TITLES */
+
+.dash-title {
+  margin: 8px 0 18px; /* This creates space above and below the page title */
+}
+
+.dash-kicker { /* This creates a smaller heading above main title */
+  font-weight: 700;
+  color: #03315b;
+  font-size: 18px;
+}
+
+.dash-title h1 {
+  font-size: 44px;
+  line-height: 1.05;
+  color: #03315b;
+}
