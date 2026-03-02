@@ -101,3 +101,13 @@
                 </a>
             </nav>
         </aside>
+        
+        <!--CONTENT-->
+        <section class="admin-content">
+            <div class="admin-content-inner">
+                
+            <!--PAGE TITLE-->
+            <div class="dash-title">
+                <p class="dash-kicker">This Is Your Dashboard</p> <!--class="dash-kicker" is used to separate the small contextual label from large headline-->
+                <h1>Hello Admin</h1>
+            </div>
