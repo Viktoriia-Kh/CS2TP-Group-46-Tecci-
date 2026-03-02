@@ -255,3 +255,63 @@
             <div class="traffic-empty"></div> <!--This is empty for now to reserve space for future chart-->
           </aside>
         </div>
+
+        <!--BOTTOM GRID: TOP SELLING + SPACING COLUMN-->
+        <div class="dash-bot-grid"> <!--This is the layout wrapper for the bottom row of the dashboard-->
+          <section class="panel top-selling-panel">
+            <div class="panel-header">
+              <h2>Top-Selling Products | Today</h2>
+            </div>
+
+            <div class="table-wrap">
+              <table class="dash-table dash-table-products">
+                <thead> <!--thead defines the header section-->
+                  <tr> <!--tr is for the table row-->
+                    <th> <!--th is for the header cells-->
+                    <th>Preview</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Sold</th>
+                    <th>Revenue</th>
+                  </tr>
+                </thead>
+                <tbody> <!--tbody represents the actual data-->
+                  <tr>
+                    <td><div class="product-thumbnail">Product<br>Image 1</div></td> <!--td represents the table data cells-->
+                    <td>Lorem Ipsum</td>
+                    <td>£499.99</td>
+                    <td>124</td>
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td><div class="product-thumbnail">Product<br>Image 2</div></td>
+                    <td>Lorem Ipsum 2</td>
+                    <td>£399.99</td>
+                    <td>98</td>
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td><div class="product-thumbnail">Product<br>Image 3</div></td>
+                    <td>Lorem Ipsum 3</td>
+                    <td>£450.99</td>
+                    <td>74</td>
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td><div class="product-thumbnail">Product<br>Image 4</div></td>
+                    <td>Lorem Ipsum 4</td>
+                    <td>£299.99</td>
+                    <td>63</td>
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td><div class="product-thumbnail">Product<br>Image 5</div></td>
+                    <td>Lorem Ipsum 5</td>
+                    <td>£199.99</td>
+                    <td>41</td>
+                    <td>X</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
