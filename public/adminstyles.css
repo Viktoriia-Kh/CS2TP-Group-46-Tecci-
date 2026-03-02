@@ -618,3 +618,82 @@ body.sidebar-collapsed .site-footer {
   font-size: 13px;
   color: #ffffff;
 }
+
+/* RESPONSIVENESS */
+
+@media (max-width: 980px) { /* This starts a media query that only applies when the viewport is 980px or smaller */
+  .dash-title h1 { /* This targets the big page heading */
+    font-size: 38px; /* This makes it smaller on smaller screens */
+  }
+
+  .dash-top-grid,
+  .dash-mid-grid,
+  .dash-bot-grid {
+    grid-template-columns: 1fr; /* This turns the 2 column grids into 1 column */
+  }
+
+  .traffic-panel,
+  .activity-panel { /* This targets both Panels to remove the fixed minimum height */
+    min-height: auto;
+  }
+
+  .traffic-empty { /* This targets the empty filler inside the Traffic Panel */
+    height: 220px;
+  }
+
+  .admin-content-inner { /* This targets the padding on the content inner wrapper */
+    width: min(980px, 100% - 24px); /* This reduces padding from 32px to 24px */
+  }
+}
+
+@media (max-width: 860px) { /* This is applied when the viewport is 860px or smaller */
+  .admin-shell { /* This targets the main container that holds the Sidebar and content */
+    flex-direction: column; /* This changes the alyout from side-by-side to stacked vertically */
+  }
+
+  .admin-sidebar { /* This targets the Sidebar */
+    position: relative; /* This removes the fixed behaviour, so it scrolls normally in stacked mode */
+    width: 100%;
+    height: auto; /* This means that the height grows based on content */
+    top: auto; /* This cancels the ealier fixed positions */
+    left: auto;
+    border-bottom: 15px solid #085296; /* This adds a Tecci stripe under the stacked Sidebar */
+  }
+
+  .admin-content {
+    margin-left: 0; /* This removes the space reserved for the Sidebar */
+    padding-top: 16px; /* This adds a little spacing after the stacked sidebar */
+  }
+
+  .site-footer {
+    margin-left: 0;
+  }
+
+  body.sidebar-collapsed .site-footer {
+    margin-left: 0; /* This makes sure the collapse state doesn't shift the footer on small screens */
+  }
+}
+
+@media (max-width: 600px) { /* This is for the responsiveness for Phone screens */
+  .logo {
+    font-size: 30px; /* This reduces Tecci text size */
+  }
+
+  .search-wrap {
+    max-width: 260px; /* This keeps the search from overflowing */
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr; /* This turns the Footer into a 1 column stack */
+    gap: 24px; /* This creates smaller spacing */
+  }
+
+  .footer-col {
+    text-align: center; /* This centres each column's text */
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+  }
+}
+
