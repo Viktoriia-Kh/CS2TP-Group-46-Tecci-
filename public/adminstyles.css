@@ -329,3 +329,11 @@ body.sidebar-collapsed .site-footer {
   font-weight: 800;
   margin-bottom: 10px;
 }
+
+/* TOP GRID LAYOUT SECTION */
+.dash-top-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.95fr; /* This creates two columns */
+  gap: 18px; /* This is for the spacing between the two Panels */
+  align-items: start; /* This aligns both Panels to the top */
+}
