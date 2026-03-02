@@ -442,3 +442,66 @@ body.sidebar-collapsed .site-footer {
   opacity: 0.95;
   line-height: 1.35;
 }
+
+/* MIDDLE GRID (TABLE + TRAFFIC)*/
+
+.dash-mid-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.95fr; /* This makes column 1 slightly larger than column 2 */
+  gap: 18px; /* This is the space between the table panel and the traffic panel */
+  margin-top: 18px; /* This adds space above the middle grid section so it doesn't stick to the top grid */
+  align-items: start; /* This prevents the shorter panel from strethcing to match the taller one */
+}
+
+.table-panel { /* This overrides the original .panel { background: #7fc0ff; } */
+  background: #03315b;
+  padding: 16px; /* This keeps the inside spacing consistent */
+}
+
+.table-panel .panel-header h2 {
+  color: #ffffff; /* This overrides the dark blue .panel-header h2 */
+}
+
+.table-wrap {
+  overflow-x: auto; /* This means that the browser will add a orizontal scroll bar, if the table is wider than the container, without breaking layout */
+  border-top: 2px solid rgba(255, 255, 255, 0.6); /* This adds a divideer line under the panel header and above the table */
+  padding-top: 12px; /* This is the space between the divider line and the first row of the table */
+}
+
+.dash-table {
+  width: 100%; /* This makes the table fill the available width of its container */
+  border-collapse: collapse; /* This removes the default gap betwen cell borders */
+  color: #e6f3ff;
+  font-size: 13px;
+}
+
+.dash-table th,
+.dash-table td { /* This applies to all the header cells and data cells */
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(230, 243, 255, 0.35); /* This adds a row separator line which is transparent */
+  vertical-align: middle; /* This makes sure the text and badges sit vertically centred in each cell */
+}
+
+.dash-table th { /* This targets the header cell styling */
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.pill {
+  display: inline-block; /* This is used so you can apply padding properly */
+  padding: 4px 10px;
+  border-radius: 999px; /* This creates a pill shape */
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+.pill-approved {
+  background: #16a34a;
+  color: #ffffff; /* This makes the text white */
+}
+
+.pill-pending {
+  background: #f59e0b;
+  color: #111827; /* This makes the text a dark colour */
+}
