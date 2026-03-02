@@ -117,6 +117,7 @@
 
             </div>
         </div>
+        <!-- Tech specs, features and review tabs -->
         <div class="product-tabs-section">
           <div class="tabs-nav">
             <button class="tab-btn active" onclick="openTab(event, 'tech-specs')">Tech Specs</button>
@@ -126,18 +127,46 @@
 
           <div class="tabs-content"> 
               <div id="tech-specs" class="tab-pane active">
-                  <h3>Technical Specifications</h3>
-                  <p>Some technical specs</p>
+                <h3 class="tab-title">Technical Specifications</h3>
+                <!-- put the data  -->
+                <table class="specs-table"> 
+                  <tbody>
+                    <tr>
+                      <th class="spec-name">Processor</th>
+                      <td class="spec-value">Intel Core i7-12700H (14 cores, up to 4.7GHz)</td>
+                    </tr>
+                    <tr>
+                      <th class="spec-name">Memory (RAM)</th>
+                      <td class="spec-value">16GB DDR5 4800MHz</td>
+                    </tr>
+                    <tr>
+                      <th class="spec-name">Storage</th>
+                      <td class="spec-value">1TB NVMe M.2 SSD</td>
+                    </tr>
+                    <tr>
+                      <th class="spec-name">Graphics</th>
+                      <td class="spec-value">NVIDIA GeForce RTX 3060 6GB</td>
+                    </tr>
+                    <tr>
+                      <th class="spec-name">Display</th>
+                      <td class="spec-value">15.6" FHD (1920x1080) 144Hz IPS</td>
+                    </tr>
+                    <tr>
+                      <th class="spec-name">Operating System</th>
+                      <td class="spec-value">Windows 11 Home</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
               <div id="features-design" class="tab-pane">
-                  <h3>Features & Design</h3>
-                  <p>Some features and design</p>
+                <h3>Features & Design</h3>
+                <p>Some features and design</p>
               </div>
 
               <div id="reviews" class="tab-pane">
-                  <h3>Customer Reviews</h3>
-                  <p>some customer reviews</p>
+                <h3>Customer Reviews</h3>
+                <p>some customer reviews</p>
               </div>
 
             </div>
