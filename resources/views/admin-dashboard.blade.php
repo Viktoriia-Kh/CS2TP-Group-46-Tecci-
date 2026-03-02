@@ -111,3 +111,37 @@
                 <p class="dash-kicker">This Is Your Dashboard</p> <!--class="dash-kicker" is used to separate the small contextual label from large headline-->
                 <h1>Hello Admin</h1>
             </div>
+            
+            <!--TOP GRID: CARDS + ACTIVITY-->
+            <div class="dash-top-grid">
+                <div class="dash-cards">
+                    <article class="metric-card"> <!--article means that the content for this block is conceptually independant-->
+                        <p class="metric-label">Sales | Today</p> <!--Using the word metric to represent a value which tracks performance-->
+                        <div class="metric-body">
+                            <div class="metric-icon">
+                                <i class="fa-solid fa-cart-shopping"></i> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
+                            </div>
+                            <p class="metric-value">145</p>
+                        </div>
+                    </article>
+                    
+                    <article class="metric-card">
+                        <p class="metric-label">Revenue | This Month</p>
+                        <div class="metric-body">
+                            <div class="metric-icon">
+                                <i class="fa-solid fa-circle-dollar-to-slot"></i> <!--fa-circle-dollar-to-slot is a Circle Dollar Icon linked from Font Awesome-->
+                            </div>
+                            <p class="metric-value">£3,264</p>
+                        </div>
+                    </article>
+
+                    <article class="metric-card metric-wide">
+                        <p class="metric-label">Customers | This Year</p>
+                        <div class="metric-body">
+                            <div class="metric-icon">
+                                <i class="fa-solid fa-users"></i> <!--fa-users is a User Icon linked from Font Awesome-->
+                            </div>
+                            <p class="metric-value">1,244</p>
+                        </div>
+                    </article>
+                </div>
