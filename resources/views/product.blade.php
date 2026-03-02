@@ -195,3 +195,21 @@
 </body>
 </html>
 
+<script>
+  //Show the clicked tab
+  function openTab(evt, tabName) {
+    let tabPanes = document.querySelectorAll('.tab-pane');
+    tabPanes.forEach(function(pane) {
+        pane.classList.remove('active');
+    });
+
+    let tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(function(btn) {
+        btn.classList.remove('active');
+    });
+
+    document.getElementById(tabName).classList.add('active');
+    
+    evt.currentTarget.classList.add('active');
+}
+</script>
