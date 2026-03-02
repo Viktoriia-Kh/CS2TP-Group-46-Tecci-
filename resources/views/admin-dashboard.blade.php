@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    
 <head>
-  <meta charset="UTF-8" />
-  <title>Tecci | Admin Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!--Links to HTML/CSS Files-->
-  <link rel="stylesheet" href="adminstyles.css" />
-  <!--Google Font-->
-  <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
-  <!--Font Awesome for Icons-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  
+    <meta charset="UTF-8" />
+    <title>Tecci | Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Links to HTML/CSS Files-->
+    <link rel="stylesheet" href="adminstyles.css" />
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
+    <!--Font Awesome for Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
 </head>
+
+<body>
+    <header class="main-header">
+        <div class="container nav-container">
+            <!--Logo-->
+            <a href="TP2_Home.html" class="logo">
+                <!--Using this will make the Logo clickable and takes the user to the Home Page-->
+                <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
+                <span class="logo-text">TECCI</span> <!--span is an inline element used for short text-->
+            </a>
