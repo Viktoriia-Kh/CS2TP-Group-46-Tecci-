@@ -160,4 +160,8 @@ Route::get('/my-orders', [OrderController::class, 'index'])->name('orders.index'
 // Show details of one specific order
 Route::get('/my-orders/{id}', [OrderController::class, 'show'])->name('orders.show');
 
-Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
+// Show the payment form
+Route::get('/checkout/payment', [CheckoutController::class, 'showPaymentForm'])->name('checkout.payment');
+
+// Validate payment and THEN process the order
+Route::post('/checkout/payment/validate', [CheckoutController::class, 'processPayment'])->name('payment.validate');

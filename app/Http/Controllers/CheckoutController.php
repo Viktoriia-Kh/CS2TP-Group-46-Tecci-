@@ -13,67 +13,76 @@ class CheckoutController extends Controller
 {
     public function checkout()
     {
-        // Fetch the basket from the session (same way BasketController does)
-        // If 'basket' doesn't exist, use empty array []
         $cart = session()->get('basket', []);
 
-        // Safety Check - If basket empty, redirect to basket page
         if(empty($cart)) {
             return redirect()->route('basket.index')->with('error', 'Your basket is empty!');
         }
 
-        // Calculate the Total
-        // Session data is an Array, loop through it
         $total = 0;
         foreach($cart as $id => $details) {
             $total += $details['price'] * $details['quantity'];
         }
 
-         // Fetch 4 products for the featured section
         $featuredProducts = Product::latest()->take(4)->get();
 
-        // Send data to view
-        // Pass 'cart' & 'total' so the checkout page displays items
         return view('checkout', compact('cart', 'total', 'featuredProducts'));
     }
 
-
-    public function process(Request $request)
+    public function showPaymentForm()
     {
         $cart = session()->get('basket', []);
+        if(empty($cart)) return redirect()->route('basket.index');
 
-        if(empty($cart)) {
-            return redirect()->route('basket.index');
-        }
+        return view('payment');
+    }
 
-        // Calculate Total again for security
+    // ---  This validates the card and THEN saves the order ---
+    public function processPayment(Request $request)
+    {
+        //  Strict Validation for Card Details
+        $request->validate([
+            'card_name'   => 'required|string|max:255',
+            'card_number' => 'required|digits:16', // Exactly 16 numbers
+            'expiry_date' => ['required', 'regex:/^(0[1-9]|1[0-2])\/?([0-9]{2})$/'], // MM/YY format
+            'cvv'         => 'required|digits:3', // Exactly 3 numbers
+        ], [
+            'card_number.digits' => 'The card number must be exactly 16 digits.',
+            'cvv.digits'         => 'The CVV must be exactly 3 digits.',
+            'expiry_date.regex'  => 'Use the format MM/YY (e.g., 12/26).'
+        ]);
+
+        return $this->saveOrder($request);
+    }
+
+    protected function saveOrder(Request $request)
+    {
+        $cart = session()->get('basket', []);
+        
         $total = 0;
         foreach($cart as $details) {
             $total += $details['price'] * $details['quantity'];
         }
 
         $order = Order::create([
-            'user_id' => \Illuminate\Support\Facades\Auth::id(),
+            'user_id'     => Auth::id(),
             'total_price' => $total,
-            'status' => 'Placed',
+            'status'      => 'Placed',
         ]);
-
 
         foreach($cart as $id => $details) {
             OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $id,
+                'order_id'     => $order->id,
+                'product_id'   => $id,
                 'product_name' => $details['name'],
-                'quantity' => $details['quantity'],
-                'price' => $details['price'],
-                'image_url' => $details['image'] ?? null,
-
+                'quantity'     => $details['quantity'],
+                'price'        => $details['price'],
+                'image_url'    => $details['image'] ?? null,
             ]);
         }
 
         session()->forget('basket');
 
-        return redirect()->route('orders.index')->with('success', 'Order placed successfully!');
+        return redirect()->route('orders.index')->with('success', 'Payment Authorized! Order placed successfully.');
     }
-
 }
