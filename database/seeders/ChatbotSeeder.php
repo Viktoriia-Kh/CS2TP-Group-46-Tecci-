@@ -18,6 +18,7 @@ class ChatbotSeeder extends Seeder
         $delivery = ChatCategory::create(['title' => 'Delivery', 'sort_order' => 2]);
         $Account = ChatCategory::create(['title' => 'Account', 'sort_order' => 3]);
         $Payment = ChatCategory::create(['title' => 'Payment', 'sort_order' => 4]);
+        $Support = ChatCategory::create(['title' => 'Support', 'sort_order' => 5]);
 
 
         ChatFaq::create([
@@ -102,6 +103,37 @@ class ChatbotSeeder extends Seeder
             'answer' => 'You can cancel your payment in the "My Account" section.',
             'sort_order' => 3
         ]);
+
+        
+          ChatFaq::create([
+            'category_id' => $Payment->id,
+            'question' => 'How do I cancel my payment?',
+            'answer' => 'You can cancel your payment in the "My Account" section.',
+            'sort_order' => 3
+        ]);
+
+         ChatFaq::create([
+            'category_id' => $Support->id,
+            'question' => 'How do I contact support?',
+            'answer' => 'You can contact support via the "Contact Us" page or by emailing Tecci_Queries@net.com.',
+            'sort_order' => 1
+        ]); 
+
+         ChatFaq::create([
+            'category_id' => $Support->id,
+            'question' => 'What are your support hours?',
+            'answer' => 'Our support team is available Monday to Friday, 9 AM to 5 PM EST.',
+            'sort_order' => 2
+        ]); 
+        
+         ChatFaq::create([
+            'category_id' => $Support->id,
+            'question' => 'Do you offer live chat support?',
+            'answer' => 'Yes, we offer live chat support during our support hours.',
+            'sort_order' => 3
+        ]);
+
+
 
     }
 }
