@@ -61,15 +61,26 @@
                 
                 {{-- Basket Icon with Notification Badge --}}
                 <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
-                <i class="fa-solid fa-cart-shopping"></i>
+                    <i class="fa-solid fa-cart-shopping"></i>
     
-                {{-- Logic: Only show badge if basket session exists and has items --}}
-                @if(session('basket') && count(session('basket')) > 0)
-                <span class="cart-badge">
-                {{-- Calculate Total Quantity (not just rows) --}}
-                {{ array_sum(array_column(session('basket'), 'quantity')) }}
-                </span>
-                @endif
+                    {{-- Get basket count from DB instead of session --}}
+                    @php
+                        use App\Models\BasketItem;
+                        
+                        // Get total quantity from database
+                        if (Auth::check()) {
+                            // For logged-in users
+                            $basketCount = BasketItem::where('user_id', Auth::id())->sum('quantity');
+                        } else {
+                            // For guests
+                            $basketCount = BasketItem::where('session_id', session()->getId())->sum('quantity');
+                        }
+                    @endphp
+                    
+                    {{-- Only show badge if there are items --}}
+                    @if($basketCount > 0)
+                        <span class="cart-badge">{{ $basketCount }}</span>
+                    @endif
                 </a>
                 
                 {{-- Login: Uses route('login') --}}
