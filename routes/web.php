@@ -154,6 +154,8 @@ Route::get('checkout', [CheckoutController::class, 'checkout']);
 
 
 
+
+
 Route::prefix('chatbot')->group(function () {
     Route::get('/categories', [ChatbotController::class, 'categories'])->name('chatbot.categories');
     Route::get('/categories/{category}/faqs', [ChatbotController::class, 'faqsByCategory'])->name('chatbot.faqsByCategory');

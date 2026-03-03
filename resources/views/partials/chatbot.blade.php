@@ -5,8 +5,10 @@
     <i class="fa-solid fa-robot"></i>
   </button>
 
-  
-  <section id="tecci-chatbot-window" class="tecci-chatbot__window tecci-chatbot__window--hidden" aria-label="Tecci chatbot window">
+  <section id="tecci-chatbot-window"
+           class="tecci-chatbot__window tecci-chatbot__window--hidden"
+           aria-label="Tecci chatbot window">
+
     <header class="tecci-chatbot__header">
       <div class="tecci-chatbot__title">
         <div class="tecci-chatbot__avatar">
@@ -31,21 +33,8 @@
       </div>
     </header>
 
-    <div id="tecci-chatbot-messages" class="tecci-chatbot__messages">
-      <div class="tecci-chatbot__msg tecci-chatbot__msg--bot">
-        <div class="tecci-chatbot__bubble">
-          Hi! I’m the Tecci Assistant 🤖<br>
-          Pick an option below or type your question.
-        </div>
-      </div>
-
-      <div class="tecci-chatbot__quick">
-        <button class="tecci-chatbot__chip" type="button" data-action="refunds">Refunds</button>
-        <button class="tecci-chatbot__chip" type="button" data-action="stock">Product stock</button>
-        <button class="tecci-chatbot__chip" type="button" data-action="forgot_password">Forgot password</button>
-        <button class="tecci-chatbot__chip" type="button" data-action="forgot_email">Forgot email</button>
-      </div>
-    </div>
+    <!-- ONE messages container only -->
+    <div id="tecci-chatbot-messages" class="tecci-chatbot__messages"></div>
 
     <form id="tecci-chatbot-form" class="tecci-chatbot__form" autocomplete="off">
       <input id="tecci-chatbot-input" class="tecci-chatbot__input" type="text" placeholder="Type a message…" />

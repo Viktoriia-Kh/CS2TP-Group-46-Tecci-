@@ -124,3 +124,108 @@
   border-radius: 10px;
   cursor: pointer;
 }
+/* --- Message rows (bot vs user) --- */
+.tecci-chatbot__msg{
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.tecci-chatbot__msg--bot{
+  justify-content: flex-start;
+}
+
+.tecci-chatbot__msg--user{
+  justify-content: flex-end;
+}
+
+.tecci-chatbot__msg--bot .tecci-chatbot__bubble{
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  color: #111;
+  max-width: 85%;
+}
+
+.tecci-chatbot__msg--user .tecci-chatbot__bubble{
+  background: #1e66ff;
+  border: 1px solid rgba(0,0,0,0.08);
+  color: #fff;
+  max-width: 85%;
+}
+
+/* Remove your old bubble spacing control (we handle spacing via msg rows) */
+.tecci-chatbot__bubble{
+  margin-bottom: 0;
+}
+
+/* --- Chips (option buttons inside the chat) --- */
+.tecci-chatbot__chips{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 85%;
+}
+
+.tecci-chatbot__chip{
+  appearance: none;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
+}
+
+.tecci-chatbot__chip:hover{
+  background: rgba(0,0,0,0.03);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+  transform: translateY(-1px);
+}
+
+.tecci-chatbot__chip:active{
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+/* --- Header layout polish (matches your HTML classes) --- */
+.tecci-chatbot__title{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tecci-chatbot__avatar{
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tecci-chatbot__name{
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.1;
+}
+
+.tecci-chatbot__status{
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.tecci-chatbot__iconbtn{
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tecci-chatbot__iconbtn:hover{
+  background: rgba(255,255,255,0.12);
+}

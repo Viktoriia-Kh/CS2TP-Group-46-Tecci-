@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('chat_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('title');              // e.g. Refunds
+            $table->string('title');              // Refunds
             $table->unsignedInteger('sort_order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
