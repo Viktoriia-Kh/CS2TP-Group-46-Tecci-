@@ -87,84 +87,12 @@
             Confirm & Pay
         </button>
     </form>
-</div>
+</div>  
   </div>
   <!-- CHECKOUT SECTION END -->
 
 
 
-</div>
-
-  <!--FEATURED PRODUCTS-->
- <section class="featured-products" id="featured">
-    <div class="container">
-      <h2>Featured Products</h2>
-      <div class="card-grid product-grid">
-
-    @forelse ($featuredProducts as $product)
-        <a href="{{ url('product/' . $product->id) }}" class="product-card">
-
-            <div class="product-image-placeholder">
-                @if ($product->image_url)
-                    <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}">
-                @else
-                    <img src="{{ asset('images/Laptop.PNG') }}" alt="{{ $product->name }}">
-                @endif
-            </div>
-
-            <div class="product-info">
-                <p class="product-name">{{ $product->name }}</p>
-                <p class="product-price">£{{ number_format($product->price, 2) }}</p>
-            </div>
-
-        </a>
-    @empty
-        <p>No products available.</p>
-    @endforelse
-  </section>
-
-  <!--PRODUCT CATEGORIES-->
-  <section class="product-categories">
-    <div class="container">
-      <h2>Shop All Products Now</h2>
-      <div class="card-grid category-grid">
-        <a href="{{ route('products.index') }}" class="category-card">
-          <div class="category-icon">
-            <i class="fa-solid fa-laptop"></i>
-          </div>
-          <p>Laptops</p>
-        </a>
-
-        <a href="{{ route('products.index') }}" class="category-card">
-          <div class="category-icon">
-            <i class="fa-solid fa-desktop"></i>
-          </div>
-          <p>PCs</p>
-        </a>
-
-        <a href="{{ route('products.index') }}" class="category-card">
-          <div class="category-icon">
-            <i class="fa-solid fa-mobile-screen-button"></i>
-          </div>
-          <p>Smartphones</p>
-        </a>
-
-        <a href="{{ route('products.index') }}" class="category-card">
-          <div class="category-icon">
-            <i class="fa-solid fa-tablet-screen-button"></i>
-          </div>
-          <p>Tablets</p>
-        </a>
-
-        <a href="{{ route('products.index') }}" class="category-card">
-          <div class="category-icon">
-            <i class="fa-solid fa-headphones"></i>
-          </div>
-          <p>Accessories</p>
-        </a>
-      </div>
-    </div>
-  </section>
 
 
 

@@ -30,14 +30,18 @@ class CheckoutController extends Controller
     }
 
     public function showPaymentForm()
-    {
-        $cart = session()->get('basket', []);
-        if(empty($cart)) return redirect()->route('basket.index');
-
-        return view('payment');
+{
+    $cart = session()->get('basket', []);
+    
+    if(empty($cart)) {
+        return redirect()->route('basket.index');
     }
 
-    // ---  This validates the card and THEN saves the order ---
+    $featuredProducts = Product::latest()->take(4)->get();
+
+    return view('payment', compact('featuredProducts'));
+}
+
     public function processPayment(Request $request)
     {
         //  Strict Validation for Card Details
