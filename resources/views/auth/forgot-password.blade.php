@@ -74,7 +74,7 @@
                     <input type="email" name="email_address" id="email_address" required>
                 </div>
 
-                <button type="submit">Send Reset Link</button> <!-- allows the user to login-->
+                <button type="submit">Send Reset Link</button> <!-- sends the reset link once clicked-->
 
                 <p class="signup-message">
                     <a href="{{ url('login')}}">Return to Login</a> <!-- this will redirect the user back to the login page-->
