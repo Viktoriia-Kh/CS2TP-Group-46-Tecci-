@@ -6,7 +6,13 @@
        <link rel="stylesheet" href="{{asset('style.css') }}"> <!-- created a link to the stylesheet-->
        <!-- Google font -->
        <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
-   </head>
+          <link rel="stylesheet" href="{{ asset('chatbot.css') }}">
+
+</head>
+<!-- Linking the chatbot-->
+ @include('partials.chatbot')
+<script src="{{ asset('chatbot.js') }}"></script>
+
    <body>
    <!-- adding simple nav bar to the login page-->
    <nav class="login-navbar">

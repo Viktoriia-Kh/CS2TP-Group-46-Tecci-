@@ -11,8 +11,14 @@
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+      <link rel="stylesheet" href="{{ asset('chatbot.css') }}">
 
 </head>
+<!-- Linking the chatbot-->
+ @include('partials.chatbot')
+<script src="{{ asset('chatbot.js') }}"></script>
+
+
 <body>
     <header class="main-header">
     <div class="container nav-container">
