@@ -15,14 +15,35 @@
 }
 
 /* FILTER SIDEBAR */
+/* Оновлений FILTER SIDEBAR - тепер це просто рамка */
 .filters-sidebar {
   flex: 0 0 280px;
   background-color: #03315b;
   border-radius: 18px;
   padding: 28px 20px;
-  height: fit-content;
   top: 20px;
   position: sticky;
+  max-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-section {
+  overflow-y: auto;
+  flex: 1; 
+  padding-right: 12px;
+}
+
+.filter-section::-webkit-scrollbar {
+  width: 6px;
+}
+.filter-section::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+.filter-section::-webkit-scrollbar-thumb {
+  background: #26639f;
+  border-radius: 10px;
 }
 
 .filter-section h3 {

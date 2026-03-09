@@ -61,9 +61,9 @@
           <!-- Filter Categories  -->
           <div class="filter-group">
             <h4>Price Range</h4>
-            <input type="range" min="0" max="2000" value="2000" class="price-slider">
+            <input type="range" min="0" max="1000" value="1000" class="price-slider">
             <div class="price-range-display">
-              <span>£0</span> - <span>£2000</span>
+              <span>£0</span> - <span>£1000</span>
             </div>
           </div>
 
@@ -77,6 +77,24 @@
             </label>
             <label class="checkbox-label">
               <input type="checkbox" value="refurbished"> Refurbished
+            </label>
+          </div>
+          <div class="filter-group">
+            <h4>Rating</h4>
+            <label class="checkbox-label">
+              <input type="checkbox" value="5"> 5 Stars ★★★★★
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="4"> 4 Stars ★★★★☆
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="3"> 3 Stars ★★★☆☆
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="2"> 2 Stars ★★☆☆☆
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="1"> 1 Star ★☆☆☆☆
             </label>
           </div>
 
@@ -177,8 +195,9 @@
 
   let currentCategory = "all";
   let currentSortOption = "featured";
-  let priceRange = 2000;
+  let priceRange = 1000;
   let selectedConditions = [];
+  let selectedRatings = [];
 
   // Category tab functionality
   document.querySelectorAll(".tab-button").forEach(button => {
@@ -211,6 +230,8 @@
   // Apply filters button
   document.querySelector(".confirm-filter-btn").addEventListener("click", () => {
     selectedConditions = Array.from(document.querySelectorAll(".checkbox-label input[type='checkbox']:checked"))
+      .map(cb => cb.value);
+    selectedRatings = Array.from(document.querySelectorAll(".checkbox-label input[type='checkbox']:checked"))
       .map(cb => cb.value);
     displayProducts();
   });
