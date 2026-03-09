@@ -154,3 +154,6 @@ Route::get('checkout', [CheckoutController::class, 'checkout']);
 Route::get('/forgot-password', [LoginController::class, 'showForgotPassword']);
 Route::post('/forgot-password', [LoginController::class, 'sendResetPasswordLink']);
 
+// reset password routes
+Route::get('/reset-password/{token}', [LoginController:: class, 'showPasswordResetForm'])->name('password.reset');
+Route::post('/reset-password', [LoginController::class, 'updatePassword'])->name('password.update'); // saves the new password to database
