@@ -228,8 +228,20 @@
   box-sizing: border-box;
 }
 
+.product-item-name {
+  font-size: 15;
+  font-weight: bold;
+}
+
 .product-item-info {
   padding: 16px 14px;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 5px;
 }
 
 .product-short-desc {
