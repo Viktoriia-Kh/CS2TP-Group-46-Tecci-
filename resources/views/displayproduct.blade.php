@@ -297,12 +297,13 @@
 
 
     productCard.innerHTML = `
-      <a href="/product/${product.id}" class="product-link">
+      <a href="/product/${product.id}" class="product-link" style="text-decoration: none;">
         <div class="product-image-placeholder">
           <img src="${product.image_url}" alt="${product.name}">
         </div>
         <div class="product-item-info">
           <h4>${product.name}</h4>
+          <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
           <p class="product-item-price">£${product.price.toFixed(2)}</p>
           <a href="/add-to-basket/${product.id}" class="add-to-cart-quick">Add to Cart</a>
         </div>
