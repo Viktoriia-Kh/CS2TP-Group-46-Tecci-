@@ -121,7 +121,6 @@
         <div class="product-tabs-section">
           <div class="tabs-nav">
             <button class="tab-btn active" onclick="openTab(event, 'tech-specs')">Tech Specs</button>
-            <button class="tab-btn" onclick="openTab(event, 'features-design')">Features & Design</button>
             <button class="tab-btn" onclick="openTab(event, 'reviews')">Reviews</button>
           </div>
 
@@ -157,11 +156,6 @@
                     </tr>
                   </tbody>
                 </table>
-              </div>
-
-              <div id="features-design" class="tab-pane">
-                <h3>Features & Design</h3>
-                <p>Some features and design</p>
               </div>
 
               <!-- put the data -->
