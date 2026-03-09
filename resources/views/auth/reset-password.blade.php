@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Reset Your Password</title>
-        <link rel="stylesheet" href="loginstyle.css"> <!-- added a link to the stylesheet-->
-        <link rel="stylesheet" href="common-style.css">
+        <link rel="stylesheet" href="{{asset('loginstyle.css')}}"> <!-- added a link to the stylesheet-->
+        <link rel="stylesheet" href="{{asset('common-style.css')}}">
         <!-- Google font-->
         <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
         <!-- Font awesome for icons-->
