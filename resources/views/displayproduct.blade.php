@@ -318,7 +318,7 @@
 
 
     productCard.innerHTML = `
-      <a href="/product/${product.id}" class="product-link" style="text-decoration: none;">
+      <a <div onclick="window.location.href='/product/${product.id}'" class="product-link" style="text-decoration: none;">
         <div class="product-image-placeholder">
           <img src="${product.image_url}" alt="${product.name}">
         </div>
@@ -328,9 +328,12 @@
           <p class="star-rating">★★★★☆</p>
           <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
           <p class="product-item-price">£${product.price.toFixed(2)}</p>
-          <a href="/add-to-basket/${product.id}" class="add-to-cart-quick">Add to Cart</a>
+          <form action="/add-to-basket/${product.id}" method="GET" class="cart-action-group" onclick="event.stopPropagation();">
+            <input type="number" name="quantity" class="qty-input" value="1" min="1" max="99" title="Quantity">
+            <button type="submit" class="add-to-cart-quick">Add to Basket</button>
+          </form>
         </div>
-      </a>
+      </div>
     `;
 
       grid.appendChild(productCard);

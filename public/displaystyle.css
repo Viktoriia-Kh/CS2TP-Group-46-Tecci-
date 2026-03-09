@@ -296,6 +296,38 @@
   margin-bottom: 12px;
 }
 
+
+
+/* Container for quantity */
+.cart-action-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+
+
+.qty-input {
+  width: 60px;
+  padding: 8px;
+  border: 1px solid #d4e8ff;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+  color: #000000;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.qty-input:focus {
+  border-color: #26639f;
+}
+
+
+.add-to-cart-quick {
+  flex: 1; 
+}
+
 .add-to-cart-quick {
   width: 100%;
   padding: 8px 12px;
