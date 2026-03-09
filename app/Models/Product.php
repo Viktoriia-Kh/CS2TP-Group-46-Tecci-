@@ -19,20 +19,36 @@ class Product extends Model
         'image_url',
     ];
 
-
-    // A product BELONGS TO one category.
+    // Product belongs to one category
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    // Product can only have one inventory record
+    // Product has one inventory record
     public function inventory()
     {
         return $this->hasOne(Inventory::class);
     }
 
-    // Allows us to keep track of our stock logic
+    // FinalSub: Product can have many images
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    // FinalSub: Product can have many specs
+    public function specs()
+    {
+        return $this->hasMany(ProductSpec::class);
+    }
+
+    // FinalSub: Product can have many reviews
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
     public function getStockStatusAttribute()
     {
         if (!$this->inventory) {
