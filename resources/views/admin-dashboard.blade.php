@@ -92,11 +92,6 @@
           <span class="nav-ico"><i class="fa-solid fa-user-group"></i></span> <!--fa-user-group is a User (Group) Icon linked from Font Awesome-->
         </a>
 
-        <a href="TP2_Admin_Reports.html">
-          <span class="nav-text">Reports</span>
-          <span class="nav-ico"><i class="fa-solid fa-file-lines"></i></span> <!--fa-file-lines is a File Icon linked from Font Awesome-->
-        </a>
-
         <a href="TP2_Admin_Settings.html">
           <span class="nav-text">Admin Settings</span>
           <span class="nav-ico"><i class="fa-solid fa-gear"></i></span> <!--fa-gear is a Gear/Settings Icon linked from Font Awesome-->
