@@ -8,11 +8,12 @@ use App\Models\ChatFaq;
 
 class ChatbotSeeder extends Seeder
 {
-    public function run(): void
-    {
-        // Wipe old data (optional; good for re-running)
-        ChatFaq::query()->delete();
-        ChatCategory::query()->delete();
+   public function run(): void
+{
+    $this->call([
+        ChatbotSeeder::class,
+    ]);
+
 
         $refunds = ChatCategory::create(['title' => 'Refunds', 'sort_order' => 1]);
         $delivery = ChatCategory::create(['title' => 'Delivery', 'sort_order' => 2]);
