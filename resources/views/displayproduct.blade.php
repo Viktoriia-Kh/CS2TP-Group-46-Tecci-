@@ -61,9 +61,9 @@
           <!-- Filter Categories  -->
           <div class="filter-group">
             <h4>Price Range</h4>
-            <input type="range" min="0" max="2000" value="2000" class="price-slider">
+            <input type="range" min="0" max="1000" value="1000" class="price-slider">
             <div class="price-range-display">
-              <span>£0</span> - <span>£2000</span>
+              <span>£0</span> - <span>£1000</span>
             </div>
           </div>
 
@@ -77,6 +77,24 @@
             </label>
             <label class="checkbox-label">
               <input type="checkbox" value="refurbished"> Refurbished
+            </label>
+          </div>
+          <div class="filter-group">
+            <h4>Rating</h4>
+            <label class="checkbox-label">
+              <input type="checkbox" value="5"> 5 Stars ★★★★★
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="4"> 4 Stars ★★★★☆
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="3"> 3 Stars ★★★☆☆
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="2"> 2 Stars ★★☆☆☆
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="1"> 1 Star ★☆☆☆☆
             </label>
           </div>
 
@@ -177,8 +195,9 @@
 
   let currentCategory = "all";
   let currentSortOption = "featured";
-  let priceRange = 2000;
+  let priceRange = 1000;
   let selectedConditions = [];
+  let selectedRatings = [];
 
   // Category tab functionality
   document.querySelectorAll(".tab-button").forEach(button => {
@@ -211,6 +230,8 @@
   // Apply filters button
   document.querySelector(".confirm-filter-btn").addEventListener("click", () => {
     selectedConditions = Array.from(document.querySelectorAll(".checkbox-label input[type='checkbox']:checked"))
+      .map(cb => cb.value);
+    selectedRatings = Array.from(document.querySelectorAll(".checkbox-label input[type='checkbox']:checked"))
       .map(cb => cb.value);
     displayProducts();
   });
@@ -297,16 +318,22 @@
 
 
     productCard.innerHTML = `
-      <a href="/product/${product.id}" class="product-link">
+      <a <div onclick="window.location.href='/product/${product.id}'" class="product-link" style="text-decoration: none;">
         <div class="product-image-placeholder">
           <img src="${product.image_url}" alt="${product.name}">
         </div>
         <div class="product-item-info">
-          <h4>${product.name}</h4>
+          <p class="product-item-name">${product.name}</p>
+            <!-- Placeholder stars -->
+          <p class="star-rating">★★★★☆</p>
+          <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
           <p class="product-item-price">£${product.price.toFixed(2)}</p>
-          <a href="/add-to-basket/${product.id}" class="add-to-cart-quick">Add to Cart</a>
+          <form action="/add-to-basket/${product.id}" method="GET" class="cart-action-group" onclick="event.stopPropagation();">
+            <input type="number" name="quantity" class="qty-input" value="1" min="1" max="99" title="Quantity">
+            <button type="submit" class="add-to-cart-quick">Add to Basket</button>
+          </form>
         </div>
-      </a>
+      </div>
     `;
 
       grid.appendChild(productCard);
