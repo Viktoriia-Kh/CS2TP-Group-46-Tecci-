@@ -27,4 +27,24 @@ class OrderController extends Controller
         
         return view('order-details', compact('order'));
     }
+
+    public function requestReturn(Request $request, $id){
+        
+        $request->validate([
+            'return_reason' => 'required|string|max:500'
+        ]);
+
+        
+        $item = OrderItem::findOrFail($id);
+
+       
+        $item->update([
+            'return_reason' => $request->return_reason,
+            'return_status' => 'Requested'
+        ]);
+
+        
+        return back()->with('success', 'Return requested successfully. Our team will review it.');
+    }
+
 }

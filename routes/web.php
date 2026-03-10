@@ -165,3 +165,6 @@ Route::get('/checkout/payment', [CheckoutController::class, 'showPaymentForm'])-
 
 // Validate payment and THEN process the order
 Route::post('/checkout/payment/validate', [CheckoutController::class, 'processPayment'])->name('payment.validate');
+
+// Route to submit a return request for a specific item
+Route::post('/order-item/{id}/return', [OrderController::class, 'requestReturn'])->name('item.return');
