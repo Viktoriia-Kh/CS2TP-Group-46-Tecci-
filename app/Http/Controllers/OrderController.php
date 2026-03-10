@@ -35,16 +35,13 @@ class OrderController extends Controller
         ]);
 
         
-        $item = OrderItem::findOrFail($id);
-
-       
+        $item = \App\Models\OrderItem::findOrFail($id);
         $item->update([
             'return_reason' => $request->return_reason,
             'return_status' => 'Requested'
         ]);
 
-        
-        return back()->with('success', 'Return requested successfully. Our team will review it.');
+    return back()->with('success', 'Return request sent!');
     }
 
 }
