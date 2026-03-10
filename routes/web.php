@@ -151,7 +151,7 @@ Route::get('/product/{product}', [ProductController::class, 'show'])
 Route::get('checkout', [CheckoutController::class, 'checkout']);
 
 // forgot password route
-Route::get('/forgot-password', [LoginController::class, 'showForgotPassword']);
+Route::get('/forgot-password', [LoginController::class, 'showForgotPassword'])->name('password.request');
 Route::post('/forgot-password', [LoginController::class, 'sendResetPasswordLink']);
 
 // reset password routes

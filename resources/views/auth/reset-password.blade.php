@@ -79,6 +79,7 @@
                 <button type="submit">Update Password</button>
             </form>
         </section>
+
  <!-- creating the footer-->
     <footer class="site-footer">
     <div class="container footer-inner">

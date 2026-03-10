@@ -71,6 +71,11 @@
                     </div>
                 </div>
 
+                {{-- forgot password link on form--}}
+                <div class="forgot-password-option">
+                    <a href="{{route('password.request')}}" class="forgot-password-link">Forgot Password?</a>
+                </div>
+
                 <button type="submit">Login</button> <!-- allows the user to login-->
 
                 <p class="signup-message">
