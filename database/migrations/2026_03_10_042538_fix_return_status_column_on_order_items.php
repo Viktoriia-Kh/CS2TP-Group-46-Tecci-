@@ -8,12 +8,12 @@ return new class extends Migration
 {
     public function up(){
         Schema::table('order_items', function (Blueprint $table) {
-            // 1. Drop the old column with the restricted rules
+           
             $table->dropColumn('return_status');
         });
 
         Schema::table('order_items', function (Blueprint $table) {
-            // 2. Re-add it as a plain string that allows any word
+            
             $table->string('return_status')->nullable()->default('none');
         });
     }
