@@ -79,13 +79,42 @@
                 <button type="submit">Update Password</button>
             </form>
         </section>
+ <!-- creating the footer-->
+    <footer class="site-footer">
+    <div class="container footer-inner">
+        <div class="footer-col">
+            <h3>TECCI</h3>
+            <p>
+                Smart Tech at Smart Prices.<br>
+                Tecci makes premium devices accessible to<br>
+                students and customers across the UK.
+            </p>
+        </div>
 
-        <footer class="site-footer">
-            <div class="footer-bottom">
-                &copy; 2025 Tecci. All rights reserved.
-            </div>
-        </footer>
+         <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about-us">About</a></li>
+                <li><a href="/contact-us">Contact</a></li>
+                <li><a href="/displayproduct">Products</a></li>
+                <li><a href="/basket">Basket</a></li>
+                <li><a href="/login">My Account</a></li>
+            </ul>
+        </div>
 
-    </body>
+        <div class="footer-col">
+            <h4>Contact Info</h4>
+            <ul class="contact-list">
+                <li><i class="fa-solid fa-location-dot"></i> Birmingham, B4 7ET</li>
+                <li><i class="fa-solid fa-phone"></i> 0121 555 0198</li>
+                <li><i class="fa-regular fa-envelope"></i> Tecci_Queries@net.com</li>
+            </ul>
+        </div>
+    </div>
 
-</html>
+    <div class="footer-bottom">
+        &copy; 2025 Tecci. All rights reserved.
+    </div>
+</footer>
+
