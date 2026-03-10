@@ -13,7 +13,7 @@
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  background: #1e66ff;
+  background: #0b3d63;
   color: #fff;
   box-shadow: 0 12px 30px rgba(0,0,0,0.25);
   display: flex;
@@ -52,7 +52,7 @@
 
 /* Header */
 .tecci-chatbot__header {
-  background: #1e66ff;
+  background: #0b3d63;   /* same blue as your navbar */
   color: #fff;
   padding: 12px;
   display: flex;
@@ -118,7 +118,7 @@
 .tecci-chatbot__send {
   margin-left: 6px;
   padding: 8px 10px;
-  background: #1e66ff;
+  background: #0b3d63;
   color: white;
   border: none;
   border-radius: 10px;
@@ -146,7 +146,7 @@
 }
 
 .tecci-chatbot__msg--user .tecci-chatbot__bubble{
-  background: #1e66ff;
+  background: #0b3d63;
   border: 1px solid rgba(0,0,0,0.08);
   color: #fff;
   max-width: 85%;
