@@ -87,6 +87,25 @@ body {
     cursor: pointer;
 }
 
+.forgot-password-option {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.forgot-password-link {
+    font-family: 'Signika', sans-serif;
+    font-size: 14px;
+    color: royalblue;
+    text-decoration: none;
+    font-weight: 300;
+}
+
+.forgot-password-link:hover {
+    color: #3549b3;
+    text-decoration: underline;
+}
+
 /* applying styling to error messages */
 .error-messages {
     color: red;
