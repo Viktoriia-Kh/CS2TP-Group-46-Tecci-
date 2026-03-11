@@ -19,36 +19,38 @@ class Product extends Model
         'image_url',
     ];
 
-    // Product belongs to one category
+
+    // A product BELONGS TO one category.
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    // Product has one inventory record
+    // Product can only have one inventory record
     public function inventory()
     {
         return $this->hasOne(Inventory::class);
     }
 
-    // FinalSub: Product can have many images
+    // Multiple images for each product
     public function images()
     {
         return $this->hasMany(ProductImage::class);
     }
 
-    // FinalSub: Product can have many specs
-    public function specs()
-    {
-        return $this->hasMany(ProductSpec::class);
-    }
-
-    // FinalSub: Product can have many reviews
+    // Reviews for the product
     public function reviews()
     {
         return $this->hasMany(Review::class);
     }
 
+    // Specs for the product
+    public function specs()
+    {
+        return $this->hasMany(ProductSpec::class);
+    }
+
+    // Allows us to keep track of our stock logic
     public function getStockStatusAttribute()
     {
         if (!$this->inventory) {
@@ -67,5 +69,11 @@ class Product extends Model
         }
 
         return 'in_stock';
+    }
+
+    // Average rating
+    public function getAverageRatingAttribute()
+    {
+        return $this->reviews()->avg('rating');
     }
 }

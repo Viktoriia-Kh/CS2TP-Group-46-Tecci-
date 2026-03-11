@@ -71,12 +71,11 @@
                 <div class="image-gallery-wrapper">
                     <div class="thumbnails-column">
                         <!-- Placeholder loop for thumbnails based on sketch -->
-                        @for($i = 0; $i < 3; $i++)
-                            <div class="thumb">
-                                <!-- Replace with actual gallery images -->
-                                <img src="{{ asset('images/placeholder-thumb.jpg') }}">
-                            </div>
-                        @endfor
+                      @foreach($product->images as $image)
+                      <div class="thumb">
+                          <img src="{{ asset($image->image_url) }}">
+                      </div>
+                      @endforeach   
                     </div>
 
                     <!-- Main Image -->
@@ -130,30 +129,14 @@
                 <!-- put the data  -->
                 <table class="specs-table"> 
                   <tbody>
+                    <tbody>
+                    @foreach($product->specs as $spec)
                     <tr>
-                      <th class="spec-name">Processor</th>
-                      <td class="spec-value">Intel Core i7-12700H (14 cores, up to 4.7GHz)</td>
+                    <th class="spec-name">{{ $spec->spec_name }}</th>
+                    <td class="spec-value">{{ $spec->spec_value }}</td>
                     </tr>
-                    <tr>
-                      <th class="spec-name">Memory (RAM)</th>
-                      <td class="spec-value">16GB DDR5 4800MHz</td>
-                    </tr>
-                    <tr>
-                      <th class="spec-name">Storage</th>
-                      <td class="spec-value">1TB NVMe M.2 SSD</td>
-                    </tr>
-                    <tr>
-                      <th class="spec-name">Graphics</th>
-                      <td class="spec-value">NVIDIA GeForce RTX 3060 6GB</td>
-                    </tr>
-                    <tr>
-                      <th class="spec-name">Display</th>
-                      <td class="spec-value">15.6" FHD (1920x1080) 144Hz IPS</td>
-                    </tr>
-                    <tr>
-                      <th class="spec-name">Operating System</th>
-                      <td class="spec-value">Windows 11 Home</td>
-                    </tr>
+                    @endforeach
+                    </tbody>
                   </tbody>
                 </table>
               </div>
@@ -164,23 +147,30 @@
 
                 <div class="reviews-list">
                     
-                  <div class="review-item">
-                    <div class="review-header">
-                      <span class="reviewer-name">Alex M.</span>
-                      <span class="review-date">15/05/2023</span>
-                    </div>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">An excellent laptop! Very fast, bright screen. Loads all programs instantly. Highly recommended!</p>
-                  </div>
+                  <div class="reviews-list">
 
-                  <div class="review-item">
+                    @forelse($product->reviews as $review)
+
+                    <div class="review-item">
+
                     <div class="review-header">
-                      <span class="reviewer-name">Sarah K.</span>
-                      <span class="review-date">02/04/2023</span>
+                    <span class="reviewer-name">User</span>
+                    <span class="review-date">{{ $review->created_at->format('d/m/Y') }}</span>
                     </div>
-                    <div class="review-stars">★★★★☆</div>
-                    <p class="review-text">Good quality for the money. The only problem is that it gets a little warm during heavy gaming, but it's not critical.</p>
-                  </div>
+
+                    <div class="review-stars">
+                    {{ str_repeat('★', $review->rating) }}
+                    </div>
+
+                    <p class="review-text">{{ $review->comment }}</p>
+
+                    </div>
+
+                    @empty
+                    <p>No reviews yet.</p>
+                    @endforelse
+
+                    </div>
                 </div>
 
                 <hr class="review-divider">
