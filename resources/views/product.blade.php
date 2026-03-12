@@ -73,7 +73,7 @@
                         <!-- Placeholder loop for thumbnails based on sketch -->
                       @foreach($product->images as $image)
                       <div class="thumb">
-                          <img src="{{ asset($image->image_path) }}">
+                          <img src="{{ asset($image->image_url) }}">
                       </div>
                       @endforeach   
                     </div>
@@ -150,12 +150,12 @@
                     <div class="review-item">
 
                     <div class="review-header">
-                    <span class="reviewer-name">User</span>
+                    <span class="reviewer-name">{{ $review->user->name ?? 'User' }}</span>
                     <span class="review-date">{{ $review->created_at->format('d/m/Y') }}</span>
                     </div>
 
                     <div class="review-stars">
-                    {{ str_repeat('★', $review->rating) }}
+                    {{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}
                     </div>
 
                     <p class="review-text">{{ $review->review_text }}</p>
