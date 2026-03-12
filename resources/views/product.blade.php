@@ -94,8 +94,20 @@
                 <!-- Rating Section -->
                 <div class="product-rating-box">
                     <span class="rating-label">Rating:</span>
-                    <!-- Placeholder stars -->
-                    <span class="stars">★★★★☆</span>
+
+                    @php
+                        $avgRating = round($product->reviews->avg('rating'));
+                        $reviewCount = $product->reviews->count();
+                    @endphp
+
+                    <span class="stars">
+                        {{ str_repeat('★', $avgRating) }}
+                        {{ str_repeat('☆', 5 - $avgRating) }}
+                    </span>
+
+                    <span class="review-count">
+                        ({{ $reviewCount }} reviews)
+                    </span>
                 </div>
             </div>
 
@@ -172,6 +184,10 @@
                 <hr class="review-divider">
 
                 <div class="add-review-section">
+
+                  <form action="{{ route('reviews.store', $product->id) }}" method="POST">
+                  @csrf
+                  
                   <h4 class="form-title">Leave a Review</h4>
                   
                       <div class="form-group">

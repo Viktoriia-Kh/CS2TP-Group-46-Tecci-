@@ -16,6 +16,8 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ReviewController;
+
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
@@ -150,3 +152,7 @@ Route::get('/product/{product}', [ProductController::class, 'show'])
 // Checkout route
 Route::get('checkout', [CheckoutController::class, 'checkout']);
 
+
+// Reviews routee
+Route::post('/product/{product}/review', [ReviewController::class, 'store'])
+    ->name('reviews.store');
