@@ -73,7 +73,7 @@
                         <!-- Placeholder loop for thumbnails based on sketch -->
                       @foreach($product->images as $image)
                       <div class="thumb">
-                          <img src="{{ asset($image->image_url) }}">
+                          <img src="{{ asset($image->image_path) }}">
                       </div>
                       @endforeach   
                     </div>
@@ -100,7 +100,7 @@
             </div>
 
             <!-- RIGHT COLUMN: Product Details & Stock -->
-            <div class="right-column" ">
+            <div class="right-column">
                 
                 <div class="product-description-box">
                     <h3 style="margin-top: 0;">Description</h3>
@@ -128,7 +128,6 @@
                 <h3 class="tab-title">Technical Specifications</h3>
                 <!-- put the data  -->
                 <table class="specs-table"> 
-                  <tbody>
                     <tbody>
                     @foreach($product->specs as $spec)
                     <tr>
@@ -137,15 +136,12 @@
                     </tr>
                     @endforeach
                     </tbody>
-                  </tbody>
                 </table>
               </div>
 
               <!-- put the data -->
               <div id="reviews" class="tab-pane">
                 <h3 class="tab-title">Customer Reviews</h3>
-
-                <div class="reviews-list">
                     
                   <div class="reviews-list">
 
@@ -162,7 +158,7 @@
                     {{ str_repeat('★', $review->rating) }}
                     </div>
 
-                    <p class="review-text">{{ $review->comment }}</p>
+                    <p class="review-text">{{ $review->review_text }}</p>
 
                     </div>
 
@@ -171,7 +167,7 @@
                     @endforelse
 
                     </div>
-                </div>
+                
 
                 <hr class="review-divider">
 
