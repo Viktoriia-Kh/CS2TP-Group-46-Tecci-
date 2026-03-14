@@ -101,3 +101,14 @@
             </a>
         </nav>
     </aside>
+    
+    <!--PAGE CONTENT (THIS PART CHANGES)-->
+    <!-- PAGE CONTENT GOES HERE -->
+     <section class="admin-content">
+        <div class="admin-content-inner">
+            
+        <!-- PAGE TITLE -->
+         <div class="dash-title orders-title">
+            <p class="dash-kicker">Hello Admin</p>
+            <h1>Orders</h1>
+        </div>
