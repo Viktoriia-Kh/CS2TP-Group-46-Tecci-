@@ -112,3 +112,39 @@
             <p class="dash-kicker">Hello Admin</p>
             <h1>Orders</h1>
         </div>
+        
+        <!-- FILTER BAR -->
+         <div class="orders-filter-bar">
+            <div class="orders-filter-left">
+                <div class="filter-select-wrap">
+                    <select aria-label="Filter by order status">
+                        <option selected>Any Status</option>
+                        <option>Paid</option>
+                        <option>Delivered</option>
+                        <option>Completed</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                
+                <div class="filter-select-wrap">
+                    <select aria-label="Filter by price range">
+                        <option selected>£0 - £100</option>
+                        <option>£100 - £500</option>
+                        <option>£500 - £1000</option>
+                        <option>£1000 - £1500</option>
+                        <option>£1500+</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+            
+            <div class="orders-filter-right">
+                <div class="filter-select-wrap sort-select">
+                    <select aria-label="Sort orders">
+                        <option selected>Sort by Date</option>
+                        <option>Sort by Price</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
