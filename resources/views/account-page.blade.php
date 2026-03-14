@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>My Tecci Account</title>
-        <link rel="stylesheet" href="loginstyle.css"> <!-- created a link to the stylesheet-->
+        <link rel="stylesheet" href="accountstyle.css"> <!-- created a link to the stylesheet-->
         <link rel="stylesheet" href="common-style.css">
         <!-- Google font-->
         <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
@@ -28,7 +28,51 @@
                         <li><a href="displayproduct">Products</a></li>
                     </ul>
                 </nav>
+
+                <!-- icons on the nav bar-->
+                <div class="nav-icons">
+                    <a href="#"><i class="fa-regular fa-heart"></i></a>
+                    <a href="{{ url('basket')}}"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a href="{{ url('account')}}"><i class="fa-regular fa-user"></i></a>
+                </div>
+
+
             </div>
         </header>
+
+        <main>
+            <section>
+                <h2>My Account</h2>
+                <p>Manage your personal information.</p>
+            </section>
+
+            {{-- user can update and view their information here--}}
+            <form method="POST" action="{{ route('account.update')}}">
+                @csrf {{-- added this token for the security of the form--}}
+                @method('PATCH') {{-- allows the user to make the partial changes--}}
+
+                <div>
+                    <!-- this is where the user will enter their full name-->
+                    <label for="name">Full Name:</label>
+                    <input type="text" name="name" id="name" value="{{ $user->name}}" required>
+                </div>
+
+                <div>
+                    <!-- this is where the user will enter the email address-->
+                    <label for="email">Email Address:</label>
+                    <input type="email" name="email_address" id="email_address" value="{{ $user->email}}" required>
+                </div>
+
+                <button type="submit">Update Information</button>
+            </form>
+
+            {{-- logout button--}}
+            <form action="{{ route('logout')}}" method="POST">
+                @csrf
+                <button type="submit">Logout</button>
+            </form>
+        </main>
+
+
     </body>
 </html>
