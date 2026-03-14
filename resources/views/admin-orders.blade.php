@@ -41,3 +41,13 @@
             <input type="text" placeholder="Search" aria-label="Search (visual only)">
         </div>
     </div>
+    
+    <!--Icons-->
+    <div class="nav-icons admin-top-icons">
+        <a href="TP2_Notifications.html" aria-label="Notifications"><i class="fa-regular fa-bell"></i></a>  <!--fa-bell is a Bell Icon linked from Font Awesome-->
+        <a href="TP2_Messages.html" aria-label="Messages"><i class="fa-regular fa-envelope"></i></a>  <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
+        <a href="TP2_Home.html" aria-label="Home"><i class="fa-solid fa-house"></i></a>  <!--fa-house is a House Icon linked from Font Awesome-->
+    </div>
+
+</div>
+</header>
