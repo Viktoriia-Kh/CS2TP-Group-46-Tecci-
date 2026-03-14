@@ -51,3 +51,19 @@
 
 </div>
 </header>
+
+<!--MAIN ADMIN LAYOUT-->
+<main class="admin-shell"> <!--This is a layout wrapper which contains the Sidebar and Content Area-->
+    <!--SIDEBAR-->
+    <aside class="admin-sidebar" id="adminSidebar"> <!--aside represents the secondary content, side navigation-->
+        <div class="admin-profile">
+            <div class="profile-avatar">
+                <i class="fa-solid fa-user-tie"></i>  <!--fa-user-tie is a User/Avatar Icon linked from Font Awesome-->
+            </div>
+            <div class="profile-meta"> <!--Using this will allow the Avatar/Profile to stay visible while hiding the text, which is all done in CSS-->
+                <p class="profile-name">Full Name</p>
+                <p class="profile-role">Admin</p>
+            </div>
+        </div>
+        
+        <a class="sidebar-logout" href="TP2_Home.html">LOGOUT</a>
