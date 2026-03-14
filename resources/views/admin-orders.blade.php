@@ -148,3 +148,99 @@
                 </div>
             </div>
         </div>
+
+         <!-- ORDERS TABLE PANEL -->
+        <section class="orders-panel">
+            <div class="orders-table-wrap">
+            <table class="orders-table">
+              <thead>
+                <tr>
+                  <th class="checkbox-col"></th>
+                  <th>Order</th>
+                  <th>Customer</th>
+                  <th>Status</th>
+                  <th>Price</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Ramsha Ahmed"></td>
+                  <td>#2049</td>
+                  <td>Ramsha Ahmed</td>
+                  <td><span class="status-pill status-paid">PAID</span></td>
+                  <td>£950.99</td>
+                  <td>Jan 8</td>
+                </tr>
+
+                <tr>
+                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Manrohit Bahia"></td>
+                  <td>#2049</td>
+                  <td>Manrohit Bahia</td>
+                  <td><span class="status-pill status-delivered">DELIVERED</span></td>
+                  <td>£350.99</td>
+                  <td>Jan 6</td>
+                </tr>
+
+                <tr>
+                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Jayden Dunkley Singh"></td>
+                  <td>#2049</td>
+                  <td>Jayden Dunkley Singh</td>
+                  <td><span class="status-pill status-paid">PAID</span></td>
+                  <td>£499.99</td>
+                  <td>Jan 5</td>
+                </tr>
+
+                <tr>
+                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Muhammad Ibrahim"></td>
+                  <td>#2049</td>
+                  <td>Muhammad Ibrahim</td>
+                  <td><span class="status-pill status-paid">PAID</span></td>
+                  <td>£599.99</td>
+                  <td>Jan 2</td>
+                </tr>
+
+                <tr>
+                  <td class="checkbox-col"><input type="checkbox" checked aria-label="Select order 2049 Viktoriia Kharchenko"></td>
+                  <td>#2049</td>
+                  <td>Viktoriia Kharchenko</td>
+                  <td><span class="status-pill status-completed">COMPLETED</span></td>
+                  <td>£799.99</td>
+                  <td>Dec 28</td>
+                </tr>
+
+                <tr>
+                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Ryan Njualem"></td>
+                  <td>#2049</td>
+                  <td>Ryan Njualem</td>
+                  <td><span class="status-pill status-paid">PAID</span></td>
+                  <td>£299.99</td>
+                  <td>Dec 26</td>
+                </tr>
+
+                <tr>
+                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Kirpal Sangha"></td>
+                  <td>#2049</td>
+                  <td>Kirpal Sangha</td>
+                  <td><span class="status-pill status-delivered">DELIVERED</span></td>
+                  <td>£750.99</td>
+                  <td>Dec 22</td>
+                </tr>
+
+                <tr>
+                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Musa Abid Waheed"></td>
+                  <td>#2049</td>
+                  <td>Musa Abid Waheed</td>
+                  <td><span class="status-pill status-completed">COMPLETED</span></td>
+                  <td>£650.99</td>
+                  <td>Dec 19</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
