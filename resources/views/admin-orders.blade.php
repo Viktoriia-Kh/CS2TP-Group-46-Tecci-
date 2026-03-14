@@ -20,10 +20,17 @@
 <!--HEADER (REUSABLE)-->
 <header class="main-header">
     <div class="container nav-container">
-
-      <!--Logo-->
-      <a href="TP2_Home.html" class="logo">
+        
+    <!--Logo-->
+    <a href="TP2_Home.html" class="logo">
         <!--Using this will make the Logo clickable and takes the user to the Home Page-->
         <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
         <span class="logo-text">TECCI</span> <!--span is an inline element used for short text-->
-      </a>
+    </a>
+    
+    <!--ADMIN HEADER CONTROLS (MENU + SEARCH)-->
+    <div class="admin-header-controls">
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
+            <!--id="menuBtn" connects to the JS, for it to work-->
+            <i class="fa-solid fa-bars"></i> <!--fa-bars is a Menu Icon linked from Font Awesome-->
+        </button>
