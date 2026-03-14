@@ -293,3 +293,8 @@
         <p>&copy; 2025 Tecci. All rights reserved.</p>
     </div>
 </footer>
+
+<!--Link to external JavaScript File-->
+<script src="TP2_Admin_Dashboard.js"></script>
+</body>
+</html>
