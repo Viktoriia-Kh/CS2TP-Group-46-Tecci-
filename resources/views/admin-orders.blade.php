@@ -14,3 +14,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   
 </head>
+
+<body>
+
+<!--HEADER (REUSABLE)-->
+<header class="main-header">
+    <div class="container nav-container">
+
+      <!--Logo-->
+      <a href="TP2_Home.html" class="logo">
+        <!--Using this will make the Logo clickable and takes the user to the Home Page-->
+        <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
+        <span class="logo-text">TECCI</span> <!--span is an inline element used for short text-->
+      </a>
