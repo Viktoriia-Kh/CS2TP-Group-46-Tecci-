@@ -92,3 +92,28 @@ ul {
   background: rgba(230, 243, 255, 0.12); /* This makes a light transparent background when hovering */
   transform: translateY(-1px); /* This moves Button slightly upwards, for a lift effect */
 }
+
+.search-wrap {
+  display: flex; /* This places Icons and input inline */
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  color: #111827;
+  border-radius: 4px;
+  padding: 8px 10px; /* This is for internal spacing */
+  width: 100%;
+  max-width: 420px; /* This prevents the Search from becoming too wide */
+}
+
+.search-wrap i {
+  color: #03315b;
+  font-size: 14px;
+}
+
+.search-wrap input { /* This targets the Search Text Box */
+  border: none; /* This removes the browser border */
+  outline: none; /* This removes the highlight border on click */
+  width: 100%; 
+  font-family: inherit;
+  font-size: 14px;
+}
