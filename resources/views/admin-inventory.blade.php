@@ -188,7 +188,7 @@
             productCard.className = "product-card-item";
 
             productCard.innerHTML = `
-                <a <div onclick="window.location.href='/product/${product.id}'" class="product-link" style="text-decoration: none;">
+                <div onclick="window.location.href='/product/${product.id}'" class="product-link" style="text-decoration: none;">
                     <div class="product-image-placeholder">
                         <img src="${product.image_url}" alt="${product.name}">
                     </div>
