@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Basket;
+use App\Models\BasketItem;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -11,9 +11,33 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
+    /* Get basket items from database (same logic as BasketController) */
+    private function getBasketItems()
+    {
+        if (Auth::check()) {
+            $items = BasketItem::where('user_id', Auth::id())->with('product')->get();
+        } else {
+            $items = BasketItem::where('session_id', session()->getId())->with('product')->get();
+        }
+        
+        // Transform to match the format expected by checkout view
+        $basket = [];
+        foreach ($items as $item) {
+            $basket[$item->product_id] = [
+                'name' => $item->product->name,
+                'quantity' => $item->quantity,
+                'price' => $item->product->price,
+                'image' => $item->product->image_url,
+            ];
+        }
+        
+        return $basket;
+    }
+
     public function checkout()
     {
-        $cart = session()->get('basket', []);
+        // Get basket from DATABASE instead of session
+        $cart = $this->getBasketItems();
 
         if(empty($cart)) {
             return redirect()->route('basket.index')->with('error', 'Your basket is empty!');
@@ -30,21 +54,22 @@ class CheckoutController extends Controller
     }
 
     public function showPaymentForm()
-{
-    $cart = session()->get('basket', []);
-    
-    if(empty($cart)) {
-        return redirect()->route('basket.index');
+    {
+        // Get basket from DATABASE instead of session
+        $cart = $this->getBasketItems();
+        
+        if(empty($cart)) {
+            return redirect()->route('basket.index');
+        }
+
+        $featuredProducts = Product::latest()->take(4)->get();
+
+        return view('payment', compact('featuredProducts'));
     }
-
-    $featuredProducts = Product::latest()->take(4)->get();
-
-    return view('payment', compact('featuredProducts'));
-}
 
     public function processPayment(Request $request)
     {
-        //  Strict Validation for Card Details
+        // Strict Validation for Card Details
         $request->validate([
             'card_name'   => 'required|string|max:255',
             'card_number' => 'required|digits:16', // Exactly 16 numbers
@@ -61,7 +86,8 @@ class CheckoutController extends Controller
 
     protected function saveOrder(Request $request)
     {
-        $cart = session()->get('basket', []);
+        // Get basket from DATABASE instead of session
+        $cart = $this->getBasketItems();
         
         $total = 0;
         foreach($cart as $details) {
@@ -69,7 +95,7 @@ class CheckoutController extends Controller
         }
 
         $order = Order::create([
-            'user_id'     => Auth::id(),
+            'user_id'     => Auth::id(), // Will be NULL for guests
             'total_price' => $total,
             'status'      => 'Placed',
         ]);
@@ -85,7 +111,15 @@ class CheckoutController extends Controller
             ]);
         }
 
-        session()->forget('basket');
+        // Clear basket from DATABASE after successful order
+        if (Auth::check()) {
+            BasketItem::where('user_id', Auth::id())->delete();
+        } else {
+            BasketItem::where('session_id', session()->getId())->delete();
+        }
+
+        // Also clear any discount codes
+        session()->forget(['discount_code', 'discount_multiplier']);
 
         return redirect()->route('orders.index')->with('success', 'Payment Authorized! Order placed successfully.');
     }

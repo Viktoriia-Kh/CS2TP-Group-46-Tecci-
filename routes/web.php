@@ -56,11 +56,14 @@ Route::get('/auth/google/callback', function () {
         ['email' => $googleUser->getEmail()],
         [
             'name'     => $googleUser->getName() ?? $googleUser->getNickname() ?? 'Google User',
-            'password' => bcrypt(Str::random(32)), // random, they’ll log in via Google
+            'password' => bcrypt(Str::random(32)), // random, they'll log in via Google
         ]
     );
 
     Auth::login($user);
+    
+    // Merge guest basket into user basket after OAuth login
+    app(BasketController::class)->mergeGuestBasketOnLogin();
 
     // After login, send them home (change if you want)
     return redirect('/');   // or route('signup.form')
@@ -95,6 +98,9 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) 
     }
     // log them in so they're authenticated after clicking
     Auth::login($user);
+    
+    // Merge guest basket after email verification login
+    app(BasketController::class)->mergeGuestBasketOnLogin();
 
     return redirect('/signup')->with('success', 'Email verified successfully!');
 })->middleware(['signed', 'throttle:6,1'])
@@ -150,9 +156,9 @@ Route::get('displayproduct', [DisplayProductController::class, 'DisplayProductCo
 Route::get('/product/{product}', [ProductController::class, 'show'])
     ->name('product.detail');
 
-// Checkout route
+// Checkout route - REQUIRES LOGIN
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout')
-      ->middleware('auth'); // This redirects them to login if they aren't signed in
+      ->middleware('auth'); // Users must be logged in to checkout
       
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 

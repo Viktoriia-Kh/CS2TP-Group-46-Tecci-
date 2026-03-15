@@ -181,8 +181,27 @@
                                 <span class="price-text" id="checkout-total">£{{ number_format($total, 2) }}</span>
                             </div>
 
+                            {{-- LOGIN WARNING for GUESTS --}}
+                            @guest
+                                <div style="background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 12px; margin-bottom: 16px; text-align: center;">
+                                    <i class="fas fa-exclamation-triangle" style="color: #856404; margin-right: 8px;"></i>
+                                    <span style="color: #856404; font-size: 13px; font-weight: 500;">
+                                        Please <a href="{{ route('login') }}" style="color: #007bff; text-decoration: underline;">log in</a> or 
+                                        <a href="{{ route('signup.form') }}" style="color: #007bff; text-decoration: underline;">sign up</a> to checkout
+                                    </span>
+                                </div>
+                            @endguest
+
                             <div class="final-actions-stacked">
-                                <a href="/checkout" class="btn-checkout-bottom checkout-validate">CHECKOUT NOW</a>
+                                @auth
+                                    {{-- Logged in users can checkout --}}
+                                    <a href="/checkout" class="btn-checkout-bottom checkout-validate">CHECKOUT NOW</a>
+                                @else
+                                    {{-- Guest users see disabled button that redirects to login --}}
+                                    <a href="{{ route('login') }}" class="btn-checkout-bottom" style="background: #95a5a6; cursor: not-allowed;">
+                                        LOGIN TO CHECKOUT
+                                    </a>
+                                @endauth
                                 <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE SHOPPING</a>
                             </div>
                         </div>
