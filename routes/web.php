@@ -28,7 +28,7 @@ Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name
 
 // Basket Logic (Viewing, Adding, Removing)
 Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
-Route::get('/add-to-basket/{id}', [BasketController::class, 'add'])->name('basket.add');
+Route::match(['get', 'post'], '/add-to-basket/{id}', [BasketController::class, 'add'])->name('basket.add');
 Route::get('/remove-from-basket/{id}', [BasketController::class, 'remove'])->name('basket.remove');
 Route::get('/decrease-quantity/{id}', [BasketController::class, 'decrease'])->name('basket.decrease');
 Route::post('/apply-discount', [BasketController::class, 'applyDiscount'])->name('basket.discount');

@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class BasketController extends Controller
 {
-    /**
-     * HELPER - Get the identifier for the current basket
-     * Returns ['type' => 'user'|'session', 'id' => userId|sessionId]
+    /* HELPER - Get the identifier for the current basket
+     Returns ['type' => 'user'|'session', 'id' => userId|sessionId]
      */
     private function getBasketIdentifier()
     {
@@ -23,9 +22,7 @@ class BasketController extends Controller
         return ['type' => 'session', 'id' => session()->getId()];
     }
 
-    /**
-     * HELPER - Get basket items from database (replaces session()->get('basket'))
-     */
+    /* HELPER - Get basket items from database (replaces session()->get('basket')) */
     private function getBasketItems()
     {
         $identifier = $this->getBasketIdentifier();
@@ -65,51 +62,62 @@ class BasketController extends Controller
         return view('basket', compact('basket', 'discountCode', 'discountMultiplier'));
     }
 
-    /**
-     * Add Item To Basket
-     */
-    public function add($id)
-    {
-        // Find product in the DB
-        $product = Product::findOrFail($id);
-        
-        $identifier = $this->getBasketIdentifier();
-        
-        // Build data array
-        $data = [
-            'product_id' => $product->id,
-            'quantity' => 1,
-        ];
-        
-        if ($identifier['type'] === 'user') {
-            $data['user_id'] = $identifier['id'];
-            $data['session_id'] = null;
-        } else {
-            $data['session_id'] = $identifier['id'];
-            $data['user_id'] = null;
-        }
-        
-        // Check if item already exists
-        if ($identifier['type'] === 'user') {
-            $existingItem = BasketItem::where('user_id', $identifier['id'])
-                                      ->where('product_id', $product->id)
-                                      ->first();
-        } else {
-            $existingItem = BasketItem::where('session_id', $identifier['id'])
-                                      ->where('product_id', $product->id)
-                                      ->first();
-        }
-        
-        if ($existingItem) {
-            // Increment quantity
-            $existingItem->increment('quantity');
-        } else {
-            // Create new basket item
-            BasketItem::create($data);
-        }
-        
-        return redirect()->back()->with('success', $product->name . ' added to your basket!');
+    /* Add Item To Basket */
+    public function add($id, Request $request)
+{
+    // Find product in the DB
+    $product = Product::findOrFail($id);
+    
+    // Get quantity from request, default to 1 if not provided
+    $quantity = (int) $request->input('quantity', 1);
+    
+    // Validate quantity is at least 1
+    if ($quantity < 1) {
+        $quantity = 1;
     }
+    
+    $identifier = $this->getBasketIdentifier();
+    
+    // Build data array
+    $data = [
+        'product_id' => $product->id,
+        'quantity' => $quantity, // Use requested quantity instead of hardcoded 1
+    ];
+    
+    if ($identifier['type'] === 'user') {
+        $data['user_id'] = $identifier['id'];
+        $data['session_id'] = null;
+    } else {
+        $data['session_id'] = $identifier['id'];
+        $data['user_id'] = null;
+    }
+    
+    // Check if item already exists
+    if ($identifier['type'] === 'user') {
+        $existingItem = BasketItem::where('user_id', $identifier['id'])
+                                  ->where('product_id', $product->id)
+                                  ->first();
+    } else {
+        $existingItem = BasketItem::where('session_id', $identifier['id'])
+                                  ->where('product_id', $product->id)
+                                  ->first();
+    }
+    
+    if ($existingItem) {
+        // Add the requested quantity to existing quantity
+        $existingItem->increment('quantity', $quantity);
+    } else {
+        // Create new basket item with requested quantity
+        BasketItem::create($data);
+    }
+    
+    // Dynamic success message based on quantity
+    $message = $quantity > 1 
+        ? "{$quantity} × {$product->name} added to your basket!" 
+        : "{$product->name} added to your basket!";
+    
+    return redirect()->back()->with('success', $message);
+}
 
     /**
      * Remove Item from Basket
