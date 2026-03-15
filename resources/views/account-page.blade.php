@@ -71,6 +71,22 @@
                 @csrf
                 <button type="submit">Logout</button>
             </form>
+
+            {{--the user will be able to delete their account here--}}
+            <form id="delete-form" action="{{ route('account.destroy')}}" method="POST">
+                @csrf
+                @method('DELETE') {{-- allows the user to delete their account--}}
+                <button type="button" onclick="confirmAccountDeletion()">Delete Account</button>
+            </form>
+
+            {{-- javascript to handle the account deletion--}}
+            <script>
+                function confirmAccountDeletion() {
+                    if(confirm('Are you sure you want to delete your Tecci account?')) {
+                        document.getElementById('delete-form').submit();
+                    }
+                }
+            </script>
         </main>
 
 
