@@ -117,3 +117,20 @@ ul {
   font-family: inherit;
   font-size: 14px;
 }
+
+.admin-top-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 19px;
+}
+
+.admin-top-icons a { /* This targets each clickable Icon link */
+  padding: 2.4px;
+  transition: transform 0.15s ease, color 0.15s ease; /* This creates a smooth hover animation */
+}
+
+.admin-top-icons a:hover {
+  transform: translateY(-1px); /* This creates a lift effect */
+  color: #e6f3ff;
+}
