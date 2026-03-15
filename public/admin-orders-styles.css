@@ -238,3 +238,35 @@ ul {
   color: #e6f3ff;
   opacity: 0.95;
 }
+
+/* COLLAPSED SIDE BAR STATE */
+body.sidebar-collapsed .admin-sidebar {
+  width: 90px; /* This shrinks the side bar from 270px to 90px*/
+}
+
+body.sidebar-collapsed .nav-text {
+  display: none; /* This hides the text when the Sidebar collapses, but the Icons remain */
+}
+
+body.sidebar-collapsed .admin-nav a {
+  justify-content: center; /* This centres the Icon when Sidebar is collapsed */
+  padding: 12px 0; 
+}
+
+body.sidebar-collapsed .profile-meta,
+body.sidebar-collapsed .sidebar-logout { /* This hides the Name and Logout Button Text when Sidebar collapses */
+  font-size: 0;
+  padding: 0;
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+body.sidebar-collapsed .admin-profile { /* This targets .admin-profile only when the <body has the class sidebar-collpased */
+  justify-content: center;
+}
+
+body.sidebar-collapsed .admin-nav {
+  margin-top: 18px; /* This increases to balance the vertical layout */
+  gap: 14px;
+}
