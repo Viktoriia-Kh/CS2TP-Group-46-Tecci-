@@ -108,6 +108,15 @@
                <p class="dash-kicker">Hello Admin</p>
                <h1>Inventory</h1>
             </div>
+            <div class="category-tabs">
+                <button class="tab-button active" data-category="all">All Products</button>
+                <button class="tab-button" data-category="desktops">PCs</button>
+                <button class="tab-button" data-category="laptops">Laptops</button>
+                <button class="tab-button" data-category="phones">Phones</button>
+                <button class="tab-button" data-category="tablets">Tablets</button>
+                <button class="tab-button" data-category="accessories">Accessories</button>
+            </div>
+
             <div class="inventory-controls">
             
             <div class="filter-group">
@@ -139,13 +148,13 @@
 
         </div>
 
-        <div class="featured-items-section"></div>
-            <!-- PAGE CONTENT GOES HERE -->
-            <div class="featured-items-section">
-                <div class="featured-grid">
-                </div>
+        
+        <!-- PAGE CONTENT GOES HERE -->
+        <div class="featured-items-section">
+            <div class="featured-grid">
             </div>
         </div>
+        
     </section>
 
 </main>
@@ -240,7 +249,21 @@
 <script src="admin-dashboard.js"></script>
 <script>
     const allProducts = @json($productsForJs ?? []);
+    let activeCategory = "all";
+    document.querySelectorAll(".tab-button").forEach(button => {
+        button.addEventListener("click", (e) => {
+            document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+            
+            e.target.classList.add("active");
 
+            activeCategory = e.target.dataset.category;
+            
+            console.log("Вибрано вкладку:", activeCategory);
+            
+            applyFilters();
+        });
+    });
+    
     // Filters
     function applyFilters() {
         // Getting data
@@ -257,6 +280,9 @@
             const nameMatches = product.name.toLowerCase().includes(searchTerm);
             const passesSearch = nameMatches;
 
+            // Category check
+            const passesCategory = (activeCategory === "all") || (product.category === activeCategory);
+
             // Stock check
             const isInStock = product.stock_status === 'in_stock' || product.stock_quantity > 0;
             let passesStatus = true;
@@ -269,7 +295,7 @@
             // Quantity check
             const passesStock = product.stock_quantity >= stockMin && product.stock_quantity <= stockMax;
 
-            return passesSearch && passesStatus && passesPrice && passesStock;
+            return passesSearch && passesCategory && passesStatus && passesPrice && passesStock;
         });
 
         renderAllProducts(filteredProducts);

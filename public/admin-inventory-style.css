@@ -295,3 +295,41 @@
 .btn-reset:hover {
     background: #d0d0d0;
 }
+
+/* Category tabs */
+.category-tabs {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.tab-button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #ffffff;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.tab-button:hover {
+    background-color: #e6f3ff;
+    border-color: #26639f;
+    color: #26639f;
+}
+
+.tab-button.active {
+    background-color: #26639f;
+    color: #ffffff;
+    border-color: #26639f;
+}
