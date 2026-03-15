@@ -6,8 +6,8 @@
   <title>Tecci | Admin Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Shared Admin CSS -->
-  <link rel="stylesheet" href="TP2_Admin_Common.css">
-  <link rel="stylesheet" href="admin-orders.styles">
+  <link rel="stylesheet" href="admin-common-style.css">
+  <link rel="stylesheet" href="admin-orders-styles.css">
   <!--Google Font-->
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
   <!--Font Awesome for Icons-->
@@ -46,7 +46,7 @@
     <div class="nav-icons admin-top-icons">
         <a href="TP2_Notifications.html" aria-label="Notifications"><i class="fa-regular fa-bell"></i></a>  <!--fa-bell is a Bell Icon linked from Font Awesome-->
         <a href="TP2_Messages.html" aria-label="Messages"><i class="fa-regular fa-envelope"></i></a>  <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
-        <a href="home-page.blade.php" aria-label="Home"><i class="fa-solid fa-house"></i></a>  <!--fa-house is a House Icon linked from Font Awesome-->
+        <a href="TP2_Home.html" aria-label="Home"><i class="fa-solid fa-house"></i></a>  <!--fa-house is a House Icon linked from Font Awesome-->
     </div>
 
 </div>
@@ -295,6 +295,6 @@
 </footer>
 
 <!--Link to external JavaScript File-->
-<script src="admin-dashbaord.js"></script>
+<script src="TP2_Admin_Dashboard.js"></script>
 </body>
 </html>
