@@ -38,7 +38,7 @@
         <div class="search-wrap"> <!--This is a wrapper for styling purpose of the Search Bar-->
           <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
           <i class="fa-solid fa-magnifying-glass"></i> <!--This creates a Magnifying Glass Icon which is just purely visual for now-->
-          <input type="text" placeholder="Search" aria-label="Search (visual only)">
+          <input type="text" id="searchInput" placeholder="Search" aria-label="Search (visual only)" oninput="applyFilters()">
         </div>
       </div>
 
@@ -108,6 +108,38 @@
                <p class="dash-kicker">Hello Admin</p>
                <h1>Inventory</h1>
             </div>
+            <div class="inventory-controls">
+            
+            <div class="filter-group">
+                <label for="filterStatus">Status:</label>
+                <select id="filterStatus" class="filter-input" onchange="applyFilters()">
+                    <option value="all">All Statuses</option>
+                    <option value="in_stock">In Stock</option>
+                    <option value="out_of_stock">Out of Stock</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Price (£):</label>
+                <input type="number" id="priceMin" class="filter-input-small" placeholder="Min" min="0" oninput="applyFilters()">
+                <span>-</span>
+                <input type="number" id="priceMax" class="filter-input-small" placeholder="Max" min="0" oninput="applyFilters()">
+            </div>
+
+            <div class="filter-group">
+                <label>Stock:</label>
+                <input type="number" id="stockMin" class="filter-input-small" placeholder="Min" min="0" oninput="applyFilters()">
+                <span>-</span>
+                <input type="number" id="stockMax" class="filter-input-small" placeholder="Max" min="0" oninput="applyFilters()">
+            </div>
+
+            <button onclick="resetFilters()" class="btn-reset">
+                <i class="fa-solid fa-rotate-right"></i> Reset
+            </button>
+
+        </div>
+
+        <div class="featured-items-section"></div>
             <!-- PAGE CONTENT GOES HERE -->
             <div class="featured-items-section">
                 <div class="featured-grid">
@@ -208,6 +240,52 @@
 <script src="admin-dashboard.js"></script>
 <script>
     const allProducts = @json($productsForJs ?? []);
+
+    // Filters
+    function applyFilters() {
+        // Getting data
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const status = document.getElementById('filterStatus').value;
+        const priceMin = parseFloat(document.getElementById('priceMin').value) || 0;
+        const priceMax = parseFloat(document.getElementById('priceMax').value) || Infinity;
+        const stockMin = parseInt(document.getElementById('stockMin').value) || 0;
+        const stockMax = parseInt(document.getElementById('stockMax').value) || Infinity;
+
+        // Filter
+        const filteredProducts = allProducts.filter(product => {
+            // Search check
+            const nameMatches = product.name.toLowerCase().includes(searchTerm);
+            const passesSearch = nameMatches;
+
+            // Stock check
+            const isInStock = product.stock_status === 'in_stock' || product.stock_quantity > 0;
+            let passesStatus = true;
+            if (status === 'in_stock') passesStatus = isInStock;
+            if (status === 'out_of_stock') passesStatus = !isInStock;
+
+            // Price check
+            const passesPrice = product.price >= priceMin && product.price <= priceMax;
+
+            // Quantity check
+            const passesStock = product.stock_quantity >= stockMin && product.stock_quantity <= stockMax;
+
+            return passesSearch && passesStatus && passesPrice && passesStock;
+        });
+
+        renderAllProducts(filteredProducts);
+    }
+
+    // Reset filters
+    function resetFilters() {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('filterStatus').value = 'all';
+        document.getElementById('priceMin').value = '';
+        document.getElementById('priceMax').value = '';
+        document.getElementById('stockMin').value = '';
+        document.getElementById('stockMax').value = '';
+        
+        renderAllProducts(allProducts);
+    }
 
     function renderAllProducts(products) {
         const grid = document.querySelector(".featured-grid");
