@@ -67,3 +67,28 @@ ul {
 .logo img {
   height: 44px;
 }
+
+/* ADMIN HEADER CONTROLS (MENU + SEARCH) */
+.admin-header-controls {
+  display: flex; /* This places the Menu and Search horizontally */
+  align-items: center;
+  gap: 14px; /* This is the space between Menu Button and Search */
+  flex: 1; /* This allows this section to expand, so it helps balance spacing in the Header */
+  max-width: 560px; /* This prevents the Search from becoming too wide */
+}
+
+.menu-btn {
+  background: transparent; /* This removes the defauly grey button background */
+  border: none; /* This removes the default button border */
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer; /* This changes cursor to hand when hovering */
+  padding: 6px 8px; /* This adds clickable space around Icon */
+  border-radius: 8px; /* This creates rounded corners for hover background */
+  transition: background 0.15s ease, transform 0.15s ease; /* This creates a smooth animation when hoveing */
+}
+
+.menu-btn:hover {
+  background: rgba(230, 243, 255, 0.12); /* This makes a light transparent background when hovering */
+  transform: translateY(-1px); /* This moves Button slightly upwards, for a lift effect */
+}
