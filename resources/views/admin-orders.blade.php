@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Shared Admin CSS -->
   <link rel="stylesheet" href="TP2_Admin_Common.css">
-  <link rel="stylesheet" href="TP2_Admin_Orders.css">
+  <link rel="stylesheet" href="admin-orders-styles.css">
   <!--Google Font-->
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
   <!--Font Awesome for Icons-->
