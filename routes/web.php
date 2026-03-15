@@ -150,3 +150,10 @@ Route::get('/product/{product}', [ProductController::class, 'show'])
 // Checkout route
 Route::get('checkout', [CheckoutController::class, 'checkout']);
 
+Route::get('admin-dashboard', function () {
+    return view('admin-dashboard');
+});
+
+Route::get('admin-orders', function () {
+    return view('admin-orders');
+});
