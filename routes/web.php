@@ -2,7 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BasketController; 
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DisplayProductController;
@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AccountController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
@@ -70,7 +71,7 @@ Route::get('/auth/microsoft', function () {
 Route::get('/auth/microsoft/callback', function () {
     return redirect('/')->with('success', 'Logged in with Microsoft!');
 })->name('auth.microsoft.callback');
- 
+
 // Show "verify your email" page
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -140,7 +141,7 @@ Route::get('product', function () {
     return view('product');
 });
 
-// Products listing page 
+// Products listing page
 Route::get('displayproduct', [DisplayProductController::class, 'DisplayProductController'])->name('products.index');
 
 // Single product details page
@@ -150,3 +151,9 @@ Route::get('/product/{product}', [ProductController::class, 'show'])
 // Checkout route
 Route::get('checkout', [CheckoutController::class, 'checkout']);
 
+// account page routes
+Route::middleware('auth')->group(function (){ // requires user to be logged in
+    Route::get('/account', [AccountController::class, 'show'])->name('account.show'); // view account page
+    Route::patch('/account/update', [AccountController::class, 'update'])->name('account.update'); // update the account details
+    Route::delete('/account/delete', [AccountController::class, 'destroy'])->name('account.destroy'); // deletes the account
+});
