@@ -50,3 +50,53 @@
 
     </div>
   </header>
+
+  <!--MAIN ADMIN LAYOUT-->
+  <main class="admin-shell"> <!--This is a layout wrapper which contains the Sidebar and Content Area-->
+    <!--SIDEBAR-->
+    <aside class="admin-sidebar" id="adminSidebar"> <!--aside represents the secondary content, side navigation-->
+      <div class="admin-profile">
+        <div class="profile-avatar">
+          <i class="fa-solid fa-user-tie"></i>  <!--fa-user-tie is a User/Avatar Icon linked from Font Awesome-->
+        </div>
+        <div class="profile-meta"> <!--Using this will allow the Avatar/Profile to stay visible while hiding the text, which is all done in CSS-->
+          <p class="profile-name">Full Name</p>
+          <p class="profile-role">Admin</p>
+        </div>
+      </div>
+
+      <a class="sidebar-logout" href="TP2_Home.html">LOGOUT</a>
+
+      <!--NAV TEXT (SIDEBAR) + ICONS ON THE RIGHT-->
+      <nav class="admin-nav">
+        <a class="active" href="TP2_Admin_Dashboard.html">
+          <span class="nav-text">Dashboard</span> <!--span will allow the text in the Sidebar to be hidden when it collapses, which is done in CSS-->
+          <span class="nav-ico"><i class="fa-solid fa-chart-line"></i></span> <!--fa-chart-line is a Chart Icon linked from Font Awesome-->
+        </a>
+
+        <a href="TP2_Admin_Orders.html">
+          <span class="nav-text">Orders</span>
+          <span class="nav-ico"><i class="fa-solid fa-receipt"></i></span> <!--fa-receipt is a Receipt Icon linked from Font Awesome-->
+        </a>
+
+        <a href="TP2_Admin_Products.html">
+          <span class="nav-text">Products</span>
+          <span class="nav-ico"><i class="fa-solid fa-box"></i></span> <!--fa-vox is a Box Icon linked from Font Awesome-->
+        </a>
+
+        <a href="TP2_Admin_Inventory.html">
+          <span class="nav-text">Inventory</span>
+          <span class="nav-ico"><i class="fa-solid fa-warehouse"></i></span> <!--fa-warehouse is a Warehouse Icon linked from Font Awesome-->
+        </a>
+
+        <a href="TP2_Admin_Customers.html">
+          <span class="nav-text">Customers</span>
+          <span class="nav-ico"><i class="fa-solid fa-user-group"></i></span> <!--fa-user-group is a User (Group) Icon linked from Font Awesome-->
+        </a>
+
+        <a href="TP2_Admin_Settings.html">
+          <span class="nav-text">Admin Settings</span>
+          <span class="nav-ico"><i class="fa-solid fa-gear"></i></span> <!--fa-gear is a Gear/Settings Icon linked from Font Awesome-->
+        </a>
+      </nav>
+    </aside>
