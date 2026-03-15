@@ -21,6 +21,7 @@ class AdminInventoryController extends Controller
                                 ? strtolower(str_replace(' ', '', $p->category->name))
                                 : 'uncategorised',
                 'condition' => $p->condition ?? 'new',
+                'description'    => $p->description,
                 'image_url' => $p->image_url
                     ? asset($p->image_url)
                     : asset('images/Laptop.jpg'),

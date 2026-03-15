@@ -11,7 +11,7 @@
   <!--Google Font-->
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
   <!--Font Awesome for Icons-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>nav>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   
 </head>
 
@@ -117,7 +117,43 @@
     </section>
 
 </main>
+<!-- EDIT PRODUCT MODAL -->
+<div id="editProductModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Edit Product</h2>
+            <button class="close-modal-btn" onclick="closeEditModal()">&times;</button>
+        </div>
+        <form id="editProductForm">
+            <input type="hidden" id="edit-product-id">
 
+            <div class="form-group">
+                <label for="edit-name">Product Name</label>
+                <input type="text" id="edit-name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-price">Price (£)</label>
+                <input type="number" id="edit-price" name="price" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-stock">Stock Quantity</label>
+                <input type="number" id="edit-stock" name="stock_quantity" required>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-desc">Description</label>
+                <textarea id="edit-desc" name="description" rows="3"></textarea>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+                <button type="submit" class="btn-save">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
 <!--FOOTER (REUSABLE)-->
 <footer class="site-footer">
     <div class="container footer-inner"> <!--footer-inner used to create multi-column layout-->
@@ -204,12 +240,39 @@
                         <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
                         <p class="product-item-price">£${product.price.toFixed(2)}</p>
                         <p class="product-item-stock">Stock: ${product.stock_quantity}</p>
+                        <button class="edit-btn" onclick="event.stopPropagation(); openEditModal(${product.id})">
+                            <i class="fa-solid fa-pen"></i> Edit
+                        </button>
                     </div>
                 </div>
             `;
             grid.appendChild(productCard);
         });
     }
+
+
+    // Edit window open logic
+    function openEditModal(productId) {
+        const product = allProducts.find(p => p.id === productId);
+        if (!product) return;
+
+        
+        document.getElementById('edit-product-id').value = product.id;
+        document.getElementById('edit-name').value = product.name;
+        document.getElementById('edit-price').value = product.price;
+        document.getElementById('edit-stock').value = product.stock_quantity;
+
+        document.getElementById('edit-desc').value = product.description || '';
+
+        document.getElementById('editProductModal').style.display = 'flex';
+    }
+
+    // Close the edit window
+    function closeEditModal() {
+        document.getElementById('editProductModal').style.display = 'none';
+    }
+
+    
 
     renderAllProducts(allProducts);
 </script>
