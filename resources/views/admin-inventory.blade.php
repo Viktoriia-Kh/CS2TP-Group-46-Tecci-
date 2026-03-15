@@ -11,7 +11,7 @@
   <!--Google Font-->
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
   <!--Font Awesome for Icons-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>nav>
   
 </head>
 
@@ -187,18 +187,23 @@
             const productCard = document.createElement("div");
             productCard.className = "product-card-item";
 
+            const isInStock = product.stock_status === 'in_stock' || product.stock_quantity > 0;
+            const badgeText = isInStock ? 'In Stock' : 'Out of Stock';
+            const badgeClass = isInStock ? 'badge-in-stock' : 'badge-out-of-stock';
+
             productCard.innerHTML = `
                 <div onclick="window.location.href='/product/${product.id}'" class="product-link" style="text-decoration: none;">
+                    <div class="stock-badge ${badgeClass}">${badgeText}</div>
                     <div class="product-image-placeholder">
                         <img src="${product.image_url}" alt="${product.name}">
                     </div>
                     <div class="product-item-info">
-                    <p class="product-item-name">${product.name}</p>
-                        <!-- Placeholder stars -->
-                    <p class="star-rating">★★★★☆</p>
-                    <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
-                    <p class="product-item-price">£${product.price.toFixed(2)}</p>
-                    
+                        <p class="product-item-name">${product.name}</p>
+                            <!-- Placeholder stars -->
+                        <p class="star-rating">★★★★☆</p>
+                        <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
+                        <p class="product-item-price">£${product.price.toFixed(2)}</p>
+                        <p class="product-item-stock">Stock: ${product.stock_quantity}</p>
                     </div>
                 </div>
             `;

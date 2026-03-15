@@ -151,9 +151,5 @@ Route::get('/product/{product}', [ProductController::class, 'show'])
 // Checkout route
 Route::get('checkout', [CheckoutController::class, 'checkout']);
 
-Route::get('admin-inventory', function () {
-    return view('admin-inventory');
-});
-
-Route::get('admin-inventory', [AdminInventoryController::class, 'AdminInventoryController'])->name('products.index');
+Route::get('admin-inventory', [AdminInventoryController::class, 'AdminInventoryController'])->name('admin.inventory');
 

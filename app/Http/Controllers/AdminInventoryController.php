@@ -8,8 +8,8 @@ class AdminInventoryController extends Controller
 {
     public function AdminInventoryController()
     {
-        // Load all products with category
-        $products = Product::with('category')->get();
+        // Load all products with category and inventory
+        $products = Product::with('category', 'inventory')->get();
 
         // Convert DB products
         $productsForJs = $products->map(function ($p) {
@@ -24,6 +24,8 @@ class AdminInventoryController extends Controller
                 'image_url' => $p->image_url
                     ? asset($p->image_url)
                     : asset('images/Laptop.jpg'),
+                'stock_quantity' => $p->inventory ? $p->inventory->quantity_available : 0,
+                'stock_status' => $p->stock_status,
             ];
         });
 
