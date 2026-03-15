@@ -270,3 +270,29 @@ body.sidebar-collapsed .admin-nav {
   margin-top: 18px; /* This increases to balance the vertical layout */
   gap: 14px;
 }
+
+/* CONTENT AREA OFFSET */
+.admin-content { /* This manually pushes content to the right since the Sidebar is fixed */
+  margin-left: 270px; /* This moves the content to the right of the Sidebar, otherwise content would sit underneath the Sidebar */
+  width: 100%;
+  padding: 24px 0 48px; /* This is for the top and bottom spacing */
+  transition: margin-left 0.2s ease; /* This gives a smooth slide animation when Sidebar collapses */
+}
+
+body.sidebar-collapsed .admin-content {
+  margin-left: 90px; /* This adjusts when Sidebar collapses */
+}
+
+.admin-content-inner {
+  width: min(980px, 100% - 32px); /* This shifts the full width content area to the right because of the Sidebar */
+  margin-inline: auto;
+}
+
+.site-footer {
+  margin-left: 270px; /* This prevents the footer from going under the Sidebar */
+  transition: margin-left 0.2s ease;
+}
+
+body.sidebar-collapsed .site-footer {
+  margin-left: 90px; /* This matches the collapsed width */
+}
