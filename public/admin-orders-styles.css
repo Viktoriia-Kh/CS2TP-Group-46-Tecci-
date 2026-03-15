@@ -317,3 +317,59 @@ body.sidebar-collapsed .site-footer {
 .orders-title {
   margin-bottom: 18px;
 }
+
+/* ORDERS FILTER BAR */
+.orders-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.orders-filter-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.orders-filter-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filter-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.filter-select-wrap select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #3aa0ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 42px 11px 16px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 146px;
+}
+
+.filter-select-wrap i {
+  position: absolute;
+  right: 14px;
+  pointer-events: none;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.sort-select select {
+  min-width: 150px;
+}
+
