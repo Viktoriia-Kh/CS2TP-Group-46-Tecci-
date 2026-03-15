@@ -100,3 +100,21 @@
         </a>
       </nav>
     </aside>
+    
+    <!--PAGE CONTENT (THIS PART CHANGES)-->
+    
+    <section class="admin-content">
+    <div class="admin-content-inner">
+        
+    <!-- PAGE TITLE -->
+     <div class="dash-title">
+        <p class="dash-kicker">Admin Section</p>
+        <h1>Page Title</h1>
+    </div>
+    
+    <!-- PAGE CONTENT GOES HERE -->
+    
+</div>
+</section>
+
+</main>
