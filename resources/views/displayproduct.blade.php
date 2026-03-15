@@ -5,6 +5,10 @@
   <meta charset="UTF-8" />
   <title>Tecci | Affordable Tech for Students</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  {{-- ADDED: CSRF Token for future POST requests --}}
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  
   <!--Links to HTML/CSS Files-->
   <link rel="stylesheet" href="common-style.css" />
   <link rel="stylesheet" href="displaystyle.css" />
@@ -12,6 +16,92 @@
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  {{-- ADDED: Toast Notification Styles --}}
+  <style>
+    /* Toast Container - Positioned at top right */
+    #toast-container {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        pointer-events: none;
+    }
+
+    /* Individual Toast Notification */
+    .toast-notification {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        padding: 16px 20px;
+        min-width: 320px;
+        max-width: 400px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        position: relative;
+        overflow: hidden;
+        transform: translateX(120%);
+        animation: slideIn 0.4s ease forwards;
+        pointer-events: auto;
+        transition: transform 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+    }
+
+    @keyframes slideIn {
+        to { transform: translateX(0); }
+    }
+
+    /* Toast Icon */
+    .toast-icon {
+        font-size: 24px;
+        flex-shrink: 0;
+    }
+
+    /* Toast Content */
+    .toast-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .toast-title {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .toast-message {
+        font-size: 13px;
+        color: #666;
+    }
+
+    /* Toast Product Image */
+    .toast-product-image {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 8px;
+        flex-shrink: 0;
+    }
+
+    /* Progress Bar */
+    .toast-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 4px;
+        width: 100%;
+        animation: shrink 3s linear forwards;
+    }
+
+    @keyframes shrink {
+        to { width: 0%; }
+    }
+  </style>
 
 </head>
 
@@ -38,7 +128,30 @@
       <!--Icons-->
       <div class="nav-icons">
         <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a> <!--fa-heart is a Heart Icon linked from Font Awesome-->
-        <a href="{{ route('basket.index') }}"><i class="fa-solid fa-cart-shopping"></i></a> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
+        
+        {{-- UPDATED: Basket icon with dynamic badge count from database --}}
+        <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
+            <i class="fa-solid fa-cart-shopping"></i>
+            
+            @php
+                use App\Models\BasketItem;
+                
+                // Get total quantity from database
+                if (Auth::check()) {
+                    // For logged-in users
+                    $basketCount = BasketItem::where('user_id', Auth::id())->sum('quantity');
+                } else {
+                    // For guests
+                    $basketCount = BasketItem::where('session_id', session()->getId())->sum('quantity');
+                }
+            @endphp
+            
+            {{-- Only show badge if there are items --}}
+            @if($basketCount > 0)
+                <span class="cart-badge">{{ $basketCount }}</span>
+            @endif
+        </a>
+        
         <a href="login"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
       </div>
     </div>
@@ -312,6 +425,58 @@
       grid.appendChild(productCard);
     });
   }
+
+  {{-- ADDED: Toast Notification Function --}}
+  function showToast(title, message, type = 'success', imageUrl = null) {
+    // Find or create toast container
+    let container = document.getElementById('toast-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toast-container';
+      document.body.appendChild(container);
+    }
+
+    // Create toast element
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification'; 
+    
+    const color = type === 'success' ? '#2ecc71' : '#e74c3c';
+    const icon = type === 'success' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-exclamation-circle"></i>';
+    const imageHtml = imageUrl ? `<img src="${imageUrl}" class="toast-product-image" alt="Product">` : '';
+    
+    toast.style.borderLeft = `5px solid ${color}`;
+    toast.innerHTML = `
+      <div class="toast-icon" style="color: ${color}">${icon}</div>
+      <div class="toast-content">
+        <span class="toast-title" style="color: #333">${title}</span>
+        <span class="toast-message">${message}</span>
+      </div>
+      ${imageHtml}
+      <div class="toast-progress" style="background-color: ${color}"></div>
+    `;
+    
+    // Add to container
+    container.appendChild(toast);
+    
+    // Remove after animation
+    setTimeout(() => {
+      toast.style.transform = "translateX(120%)";
+      toast.style.opacity = "0";
+      
+      setTimeout(() => {
+        toast.style.marginTop = `-${toast.offsetHeight + 15}px`; 
+        setTimeout(() => toast.remove(), 400); 
+      }, 400); 
+    }, 3000);
+  }
+
+  {{-- ADDED: Show toast on page load if success message exists --}}
+  @if(session('success'))
+    document.addEventListener('DOMContentLoaded', function() {
+      const message = "{{ session('success') }}";
+      showToast("Success", message, "success");
+    });
+  @endif
 
   // Initialize display
   displayProducts();
