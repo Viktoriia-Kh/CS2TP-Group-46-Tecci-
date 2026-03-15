@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Shared Admin CSS -->
   <link rel="stylesheet" href="admin-common-style.css" />
+  <link rel="stylesheet" href="admin-inventory-style.css" />
   <!--Google Font-->
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
   <!--Font Awesome for Icons-->
@@ -101,18 +102,19 @@
     <!--PAGE CONTENT (THIS PART CHANGES)-->
     
     <section class="admin-content">
-    <div class="admin-content-inner">
-        
-    <!-- PAGE TITLE -->
-     <div class="dash-title">
-        <p class="dash-kicker">Admin Section</p>
-        <h1>Page Title</h1>
-    </div>
-    
-    <!-- PAGE CONTENT GOES HERE -->
-    
-</div>
-</section>
+        <div class="admin-content-inner">
+            <!-- PAGE TITLE -->
+            <div class="dash-title">
+               <p class="dash-kicker">Hello Admin</p>
+               <h1>Inventory</h1>
+            </div>
+            <!-- PAGE CONTENT GOES HERE -->
+            <div class="featured-items-section">
+                <div class="featured-grid">
+                </div>
+            </div>
+        </div>
+    </section>
 
 </main>
 
@@ -168,5 +170,43 @@
 <!--Link to external JavaScript File-->
 
 <script src="admin-dashboard.js"></script>
+<script>
+    const allProducts = @json($productsForJs ?? []);
+
+    function renderAllProducts(products) {
+        const grid = document.querySelector(".featured-grid");
+        
+        grid.innerHTML = "";
+
+        if (products.length === 0) {
+            grid.innerHTML = '<p style="padding: 20px;">No products found in database.</p>';
+            return;
+        }
+
+        products.forEach(product => {
+            const productCard = document.createElement("div");
+            productCard.className = "product-card-item";
+
+            productCard.innerHTML = `
+                <a <div onclick="window.location.href='/product/${product.id}'" class="product-link" style="text-decoration: none;">
+                    <div class="product-image-placeholder">
+                        <img src="${product.image_url}" alt="${product.name}">
+                    </div>
+                    <div class="product-item-info">
+                    <p class="product-item-name">${product.name}</p>
+                        <!-- Placeholder stars -->
+                    <p class="star-rating">★★★★☆</p>
+                    <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
+                    <p class="product-item-price">£${product.price.toFixed(2)}</p>
+                    
+                    </div>
+                </div>
+            `;
+            grid.appendChild(productCard);
+        });
+    }
+
+    renderAllProducts(allProducts);
+</script>
 </body>
 </html>
