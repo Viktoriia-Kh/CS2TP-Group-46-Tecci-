@@ -373,3 +373,96 @@ body.sidebar-collapsed .site-footer {
   min-width: 150px;
 }
 
+/* ORDERS PANEL */
+.orders-panel {
+  background: #0b5aa2;
+  border-radius: 10px;
+  padding: 18px 20px 22px;
+}
+
+.orders-table-wrap {
+  overflow-x: auto;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #e6f3ff;
+  font-size: 14px;
+  min-width: 720px;
+}
+
+.orders-table thead th {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 6px 10px 14px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.orders-table tbody td {
+  padding: 14px 10px;
+  font-weight: 600;
+  color: #d9e8f5;
+}
+
+.orders-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.orders-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.checkbox-col {
+  width: 34px;
+}
+
+.orders-table input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #dcecff;
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.orders-table input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: -3px;
+  left: 3px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.status-pill {
+  display: inline-block;
+  min-width: 92px;
+  text-align: center;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.status-paid {
+  background: #f1c40f;
+  color: #ffffff;
+}
+
+.status-delivered {
+  background: #cc5a37;
+  color: #ffffff;
+}
+
+.status-completed {
+  background: #1cc95b;
+  color: #ffffff;
+}
+
