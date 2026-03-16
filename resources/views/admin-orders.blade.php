@@ -17,141 +17,149 @@
 
 <body>
 
+<body>
+
 <!--HEADER (REUSABLE)-->
 <header class="main-header">
     <div class="container nav-container">
+      <!--The Logo and Menu Button are now grouped together on the left-->
+      <div class="header-left-group">
+        <!--Logo-->
+        <a href="TP2_Home.html" class="logo">
+          <!--Using this will make the Logo clickable and takes the user to the Home Page-->
+          <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
+          <span class="logo-text">TECCI</span> <!--span is an inline element used for short text-->
+        </a>
         
-    <!--Logo-->
-    <a href="TP2_Home.html" class="logo">
-        <!--Using this will make the Logo clickable and takes the user to the Home Page-->
-        <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
-        <span class="logo-text">TECCI</span> <!--span is an inline element used for short text-->
-    </a>
-    
-    <!--ADMIN HEADER CONTROLS (MENU + SEARCH)-->
-    <div class="admin-header-controls">
         <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
-            <!--id="menuBtn" connects to the JS, for it to work-->
-            <i class="fa-solid fa-bars"></i> <!--fa-bars is a Menu Icon linked from Font Awesome-->
+          <!--id="menuBtn" connects to the JS, for it to work-->
+          <i class="fa-solid fa-bars"></i> <!--fa-bars is a Menu Icon linked from Font Awesome-->
         </button>
-        
-        <div class="search-wrap"> <!--This is a wrapper for styling purpose of the Search Bar-->
-            <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
-            <i class="fa-solid fa-magnifying-glass"></i> <!--This creates a Magnifying Glass Icon which is just purely visual for now-->
-            <input type="text" placeholder="Search" aria-label="Search (visual only)">
-        </div>
-    </div>
-    
-    <!--Icons-->
-    <div class="nav-icons admin-top-icons">
+      </div>
+      
+      <div class="admin-header-spacer"></div>
+
+      <!--Icons-->
+      <div class="nav-icons admin-top-icons">
         <a href="TP2_Notifications.html" aria-label="Notifications"><i class="fa-regular fa-bell"></i></a>  <!--fa-bell is a Bell Icon linked from Font Awesome-->
         <a href="TP2_Messages.html" aria-label="Messages"><i class="fa-regular fa-envelope"></i></a>  <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
         <a href="TP2_Home.html" aria-label="Home"><i class="fa-solid fa-house"></i></a>  <!--fa-house is a House Icon linked from Font Awesome-->
-    </div>
+      </div>
 
-</div>
-</header>
+    </div>
+  </header>
+
 
 <!--MAIN ADMIN LAYOUT-->
-<main class="admin-shell"> <!--This is a layout wrapper which contains the Sidebar and Content Area-->
+  <main class="admin-shell"> <!--This is a layout wrapper which contains the Sidebar and Content Area-->
     <!--SIDEBAR-->
     <aside class="admin-sidebar" id="adminSidebar"> <!--aside represents the secondary content, side navigation-->
-        <div class="admin-profile">
-            <div class="profile-avatar">
-                <i class="fa-solid fa-user-tie"></i>  <!--fa-user-tie is a User/Avatar Icon linked from Font Awesome-->
-            </div>
-            <div class="profile-meta"> <!--Using this will allow the Avatar/Profile to stay visible while hiding the text, which is all done in CSS-->
-                <p class="profile-name">Full Name</p>
-                <p class="profile-role">Admin</p>
-            </div>
+      <div class="admin-profile">
+        <div class="profile-avatar">
+          <i class="fa-solid fa-user-tie"></i>  <!--fa-user-tie is a User/Avatar Icon linked from Font Awesome-->
         </div>
-        
-        <a class="sidebar-logout" href="TP2_Home.html">LOGOUT</a>
-        
-        <!--NAV TEXT (SIDEBAR) + ICONS ON THE RIGHT-->
-        <nav class="admin-nav">
-            <a href="TP2_Admin_Dashboard.html">
-                <span class="nav-text">Dashboard</span> <!--span will allow the text in the Sidebar to be hidden when it collapses, which is done in CSS-->
-                <span class="nav-ico"><i class="fa-solid fa-chart-line"></i></span> <!--fa-chart-line is a Chart Icon linked from Font Awesome-->
-            </a>
+        <div class="profile-meta"> <!--Using this will allow the Avatar/Profile to stay visible while hiding the text, which is all done in CSS-->
+          <p class="profile-name">Full Name</p>
+          <p class="profile-role">Admin</p>
+        </div>
+      </div>
 
-            <a class="active" href="TP2_Admin_Orders.html">
-                <span class="nav-text">Orders</span>
-                <span class="nav-ico"><i class="fa-solid fa-receipt"></i></span> <!--fa-receipt is a Receipt Icon linked from Font Awesome-->
-            </a>
+      <a class="sidebar-logout" href="TP2_Home.html">LOGOUT</a>
 
-            <a href="TP2_Admin_Products.html">
-                <span class="nav-text">Products</span>
-                <span class="nav-ico"><i class="fa-solid fa-box"></i></span> <!--fa-vox is a Box Icon linked from Font Awesome-->
-            </a>
+      <!--NAV TEXT (SIDEBAR) + ICONS ON THE RIGHT-->
+      <nav class="admin-nav">
+        <a href="TP2_Admin_Dashboard.html">
+          <span class="nav-text">Dashboard</span> <!--span will allow the text in the Sidebar to be hidden when it collapses, which is done in CSS-->
+          <span class="nav-ico"><i class="fa-solid fa-chart-line"></i></span> <!--fa-chart-line is a Chart Icon linked from Font Awesome-->
+        </a>
 
-            <a href="TP2_Admin_Inventory.html">
-                <span class="nav-text">Inventory</span>
-                <span class="nav-ico"><i class="fa-solid fa-warehouse"></i></span> <!--fa-warehouse is a Warehouse Icon linked from Font Awesome-->
-            </a>
+        <a class="active" href="TP2_Admin_Orders.html">
+          <span class="nav-text">Orders</span>
+          <span class="nav-ico"><i class="fa-solid fa-receipt"></i></span> <!--fa-receipt is a Receipt Icon linked from Font Awesome-->
+        </a>
 
-            <a href="TP2_Admin_Customers.html">
-                <span class="nav-text">Customers</span>
-                <span class="nav-ico"><i class="fa-solid fa-user-group"></i></span> <!--fa-user-group is a User (Group) Icon linked from Font Awesome-->
-            </a>
+        <a href="TP2_Admin_Products.html">
+          <span class="nav-text">Products</span>
+          <span class="nav-ico"><i class="fa-solid fa-box"></i></span> <!--fa-vox is a Box Icon linked from Font Awesome-->
+        </a>
 
-            <a href="TP2_Admin_Settings.html">
-                <span class="nav-text">Admin Settings</span>
-                <span class="nav-ico"><i class="fa-solid fa-gear"></i></span> <!--fa-gear is a Gear/Settings Icon linked from Font Awesome-->
-            </a>
-        </nav>
+        <a href="TP2_Admin_Inventory.html">
+          <span class="nav-text">Inventory</span>
+          <span class="nav-ico"><i class="fa-solid fa-warehouse"></i></span> <!--fa-warehouse is a Warehouse Icon linked from Font Awesome-->
+        </a>
+
+        <a href="TP2_Admin_Customers.html">
+          <span class="nav-text">Customers</span>
+          <span class="nav-ico"><i class="fa-solid fa-user-group"></i></span> <!--fa-user-group is a User (Group) Icon linked from Font Awesome-->
+        </a>
+
+        <a href="TP2_Admin_Settings.html">
+          <span class="nav-text">Admin Settings</span>
+          <span class="nav-ico"><i class="fa-solid fa-gear"></i></span> <!--fa-gear is a Gear/Settings Icon linked from Font Awesome-->
+        </a>
+      </nav>
     </aside>
-    
-    <!--PAGE CONTENT (THIS PART CHANGES)-->
-    <!-- PAGE CONTENT GOES HERE -->
-     <section class="admin-content">
-        <div class="admin-content-inner">
-            
+
+<!--PAGE CONTENT (THIS PART CHANGES)-->
+<!-- PAGE CONTENT GOES HERE -->
+ <section class="admin-content">
+      <div class="admin-content-inner">
+
         <!-- PAGE TITLE -->
-         <div class="dash-title orders-title">
-            <p class="dash-kicker">Hello Admin</p>
-            <h1>Orders</h1>
-        </div>
-        
-        <!-- FILTER BAR -->
-         <div class="orders-filter-bar">
-            <div class="orders-filter-left">
-                <div class="filter-select-wrap">
-                    <select aria-label="Filter by order status">
-                        <option selected>Any Status</option>
-                        <option>Paid</option>
-                        <option>Delivered</option>
-                        <option>Completed</option>
-                    </select>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                
-                <div class="filter-select-wrap">
-                    <select aria-label="Filter by price range">
-                        <option selected>£0 - £100</option>
-                        <option>£100 - £500</option>
-                        <option>£500 - £1000</option>
-                        <option>£1000 - £1500</option>
-                        <option>£1500+</option>
-                    </select>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-            </div>
-            
-            <div class="orders-filter-right">
-                <div class="filter-select-wrap sort-select">
-                    <select aria-label="Sort orders">
-                        <option selected>Sort by Date</option>
-                        <option>Sort by Price</option>
-                    </select>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-            </div>
+        <div class="dash-title orders-title">
+          <p class="dash-kicker">Hello Admin</p>
+          <h1>Orders</h1>
         </div>
 
-         <!-- ORDERS TABLE PANEL -->
+        <!--The Search Bar has been moved uner the page heading-->  
+        <div class="orders-search-row"> <!--This is a wrapper for styling purpose of the Search Bar-->
+          <div class="page-search-wrap">
+          <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
+          <i class="fa-solid fa-magnifying-glass"></i> <!--This creates a Magnifying Glass Icon which is just purely visual for now-->
+          <input type="text" placeholder="Search" aria-label="Search (visual only)">
+        </div>
+      </div>
+
+
+        <!-- FILTER BAR -->
+        <div class="orders-filter-bar">
+          <div class="orders-filter-left">
+            <div class="filter-select-wrap">
+              <select aria-label="Filter by order status">
+                <option selected>Any Status</option>
+                <option>Paid</option>
+                <option>Delivered</option>
+                <option>Completed</option>
+              </select>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+
+            <div class="filter-select-wrap">
+              <select aria-label="Filter by price range">
+                <option selected>£0 - £100</option>
+                <option>£100 - £500</option>
+                <option>£500 - £1000</option>
+                <option>£1000 - £1500</option>
+                <option>£1500+</option>
+              </select>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+
+          <div class="orders-filter-right">
+            <div class="filter-select-wrap sort-select">
+              <select aria-label="Sort orders">
+                <option selected>Sort by Date</option>
+                <option>Sort by Price</option>
+              </select>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- ORDERS TABLE PANEL -->
         <section class="orders-panel">
-            <div class="orders-table-wrap">
+          <div class="orders-table-wrap">
             <table class="orders-table">
               <thead>
                 <tr>
@@ -244,9 +252,9 @@
       </div>
     </section>
   </main>
-  
-  <!--FOOTER (REUSABLE)-->
-  <footer class="site-footer">
+
+<!--FOOTER (REUSABLE)-->
+<footer class="site-footer">
     <div class="container footer-inner"> <!--footer-inner used to create multi-column layout-->
         <div class="footer-col">
             <h3>TECCI</h3>
