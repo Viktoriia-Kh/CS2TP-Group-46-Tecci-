@@ -55,6 +55,16 @@ ul {
   gap: 20px; /* This adds space between the 3 Sections inside the Nav */
 }
 
+.header-left-group { /* This grous the Logo and Menu Button together */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-header-spacer { /* This fills the middle header space after removing the Search Bar */
+  flex: 1;
+}
+
 .logo {
   display: flex; /* This places the Logo and Text side by side */
   align-items: center; 
@@ -68,14 +78,7 @@ ul {
   height: 44px;
 }
 
-/* ADMIN HEADER CONTROLS (MENU + SEARCH) */
-.admin-header-controls {
-  display: flex; /* This places the Menu and Search horizontally */
-  align-items: center;
-  gap: 14px; /* This is the space between Menu Button and Search */
-  flex: 1; /* This allows this section to expand, so it helps balance spacing in the Header */
-  max-width: 560px; /* This prevents the Search from becoming too wide */
-}
+/* ADMIN HEADER CONTROLS (MENU) */
 
 .menu-btn {
   background: transparent; /* This removes the defauly grey button background */
@@ -297,6 +300,7 @@ body.sidebar-collapsed .site-footer {
   margin-left: 90px; /* This matches the collapsed width */
 }
 
+
 /* TITLES */
 .dash-title {
   margin: 8px 0 18px;
@@ -316,6 +320,37 @@ body.sidebar-collapsed .site-footer {
 
 .orders-title {
   margin-bottom: 18px;
+}
+
+.orders-search-row { /* This is for the Search Row below the title */
+  margin-bottom: 18px;
+}
+
+.page-search-wrap { /* This is for the new search page search styling */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  color: #111827;
+  border: 2px solid #d8e6f4;
+  border-radius: 4px;
+  padding: 10px 12px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.page-search-wrap i {
+  color: #03315b;
+  font-size: 14px;
+}
+
+.page-search-wrap input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+  font-size: 16px;
+  background: transparent;
 }
 
 /* ORDERS FILTER BAR */
@@ -616,5 +651,3 @@ body.sidebar-collapsed .site-footer {
     width: 100%;
   }
 }
-
-
