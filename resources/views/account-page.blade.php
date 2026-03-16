@@ -42,9 +42,26 @@
 
         <main>
             <section>
-                <h2>My Account</h2>
+                <h2>My Tecci Account</h2>
                 <p>Manage your personal information.</p>
             </section>
+
+            {{-- adding a success message for the user--}}
+            @if (session('success'))
+                <div class="success-messages">
+                    {{session('success')}}
+                </div>
+            @endif
+
+            {{-- adding error messages--}}
+            @if ($errors->any())
+                <ul class="error-messages">
+                    @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            @endif
+
 
             {{-- user can update and view their information here--}}
             <form method="POST" action="{{ route('account.update')}}">
