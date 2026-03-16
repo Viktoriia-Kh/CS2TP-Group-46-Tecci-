@@ -333,3 +333,88 @@
     color: #ffffff;
     border-color: #26639f;
 }
+
+/* Add and delete buttons */
+
+.btn-add-product {
+    background-color: #26639f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-add-product:hover {
+    background-color: #1a4977;
+}
+
+.card-action-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+
+.card-action-buttons .edit-btn {
+    margin-top: 0; 
+    flex: 1; 
+}
+
+.delete-btn {
+    background-color: #fff;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    flex: 1;
+}
+
+.delete-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+
+.hidden-file-input {
+    display: none;
+}
+
+.add-media-btn {
+    background-color: #2a303c;
+    color: white;
+    padding: 12px 20px;
+    font-size: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-flex; 
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.add-media-btn:hover {
+    background-color: #1e242f;
+}
+
+.camera-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.file-chosen-text {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+    font-style: italic;
+}

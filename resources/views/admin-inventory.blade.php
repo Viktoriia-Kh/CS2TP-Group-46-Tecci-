@@ -108,6 +108,9 @@
                <p class="dash-kicker">Hello Admin</p>
                <h1>Inventory</h1>
             </div>
+            <button class="btn-add-product" onclick="openAddModal()">
+                    <i class="fa-solid fa-plus"></i> Add New Product
+                </button>
             <div class="category-tabs">
                 <button class="tab-button active" data-category="all">All Products</button>
                 <button class="tab-button" data-category="desktops">PCs</button>
@@ -175,7 +178,7 @@
 
             <div class="form-group">
                 <label for="edit-price">Price (£)</label>
-                <input type="number" id="edit-price" name="price" step="0.01" required>
+                <input type="number" id="edit-price" name="price" step="1" required>
             </div>
 
             <div class="form-group">
@@ -191,6 +194,60 @@
             <div class="modal-actions">
                 <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
                 <button type="submit" class="btn-save">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Add product modal -->
+<div id="addProductModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Add New Product</h2>
+            <button class="close-modal-btn" onclick="closeAddModal()">&times;</button>
+        </div>
+        <form id="addProductForm" onsubmit="submitNewProduct(event)">
+            <div class="form-group">
+                <label for="add-name">Product Name</label>
+                <input type="text" id="add-name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="add-category">Category</label>
+                <select id="add-category" class="filter-input" style="width: 100%;" required>
+                    <option value="desktops">PCs</option>
+                    <option value="laptops">Laptops</option>
+                    <option value="phones">Phones</option>
+                    <option value="tablets">Tablets</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="add-price">Price (£)</label>
+                <input type="number" id="add-price" name="price" step="1" required>
+            </div>
+            <div class="form-group">
+                <label for="add-stock">Stock Quantity</label>
+                <input type="number" id="add-stock" name="stock_quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="add-desc">Description</label>
+                <textarea id="add-desc" name="description" rows="3"></textarea>
+            </div>
+            <div class="media-upload-group">
+                <input type="file" id="review-media" name="media[]" accept="image/*,video/*" multiple class="hidden-file-input">
+                
+                <label for="review-media" class="add-media-btn">
+                    <svg class="camera-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23 19V5H19L17.17 3H6.83L5 5H1V19H23ZM12 8C14.21 8 16 9.79 16 12C16 14.21 14.21 16 12 16C9.79 16 8 14.21 8 12C8 9.79 9.79 8 12 8Z" fill="#3B82F6"/>
+                    </svg>
+                    <span class="btn-text">Add picture</span>
+                </label>
+                
+                <div id="file-chosen-text" class="file-chosen-text">No file chosen</div>
+                </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="closeAddModal()">Cancel</button>
+                <button type="submit" class="btn-save">Add Product</button>
             </div>
         </form>
     </div>
@@ -344,9 +401,14 @@
                         <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
                         <p class="product-item-price">£${product.price.toFixed(2)}</p>
                         <p class="product-item-stock">Stock: ${product.stock_quantity}</p>
-                        <button class="edit-btn" onclick="event.stopPropagation(); openEditModal(${product.id})">
-                            <i class="fa-solid fa-pen"></i> Edit
-                        </button>
+                        <div class="card-action-buttons">
+                            <button class="edit-btn" onclick="event.stopPropagation(); openEditModal(${product.id})">
+                                <i class="fa-solid fa-pen"></i> Edit
+                            </button>
+                            <button class="delete-btn" onclick="event.stopPropagation(); deleteProduct(${product.id})">
+                                <i class="fa-solid fa-trash"></i> Delete
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -376,7 +438,80 @@
         document.getElementById('editProductModal').style.display = 'none';
     }
 
-    
+    // ADD PRODUCT LOGIC 
+    function openAddModal() {
+        document.getElementById('addProductForm').reset();
+        document.getElementById('addProductModal').style.display = 'flex';
+    }
+
+    function closeAddModal() {
+        document.getElementById('addProductModal').style.display = 'none';
+    }
+
+    function submitNewProduct(event) {
+        event.preventDefault(); // Prevent page reload
+        
+        // Create a fake ID for now (highest current ID + 1)
+        const newId = allProducts.length > 0 ? Math.max(...allProducts.map(p => p.id)) + 1 : 1;
+        
+        const fileInput = document.getElementById('review-media');
+        let imageUrl = 'https://via.placeholder.com/200?text=No+Image';
+        
+        // temporary link to the image
+        if (fileInput.files && fileInput.files.length > 0) {
+            imageUrl = URL.createObjectURL(fileInput.files[0]);
+        }
+
+        const newProduct = {
+            id: newId,
+            name: document.getElementById('add-name').value,
+            category: document.getElementById('add-category').value,
+            price: parseFloat(document.getElementById('add-price').value),
+            stock_quantity: parseInt(document.getElementById('add-stock').value),
+            description: document.getElementById('add-desc').value,
+            image_url: imageUrl,
+            stock_status: parseInt(document.getElementById('add-stock').value) > 0 ? 'in_stock' : 'out_of_stock'
+        };
+        //!!!!! Only adds the product visually !!!!!
+        allProducts.push(newProduct); // Add to our list
+
+        document.getElementById('file-chosen-text').textContent = 'No file chosen';
+
+        closeAddModal();
+        applyFilters();
+        alert("Product added successfully!");
+    }
+
+    //  DELETE PRODUCT LOGIC
+    function deleteProduct(productId) {
+        if (confirm("Are you sure you want to delete this product?")) {
+            // Find the index of the product and remove it
+            //!!!!!Now it only removes visually, not from the database!!!!!
+            const index = allProducts.findIndex(p => p.id === productId);
+            if (index > -1) {
+                allProducts.splice(index, 1); 
+                applyFilters(); 
+            }
+        }
+    }
+
+    // Adding images in add product
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.getElementById('review-media');
+        const fileText = document.getElementById('file-chosen-text');
+
+        if(fileInput) {
+            fileInput.addEventListener('change', function() {
+                if (this.files && this.files.length > 1) {
+                    fileText.textContent = `Files chosen: ${this.files.length}`;
+                } else if (this.files && this.files.length === 1) {
+                    fileText.textContent = this.files[0].name;
+                } else {
+                    fileText.textContent = 'No file chosen';
+                }
+            });
+        }
+    });
 
     renderAllProducts(allProducts);
 </script>
