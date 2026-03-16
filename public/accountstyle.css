@@ -1,0 +1,137 @@
+/* BASE STYLES */
+.container {
+    width: min(1200px, 100% - 32px); /* This sets the maximum width of the content, has consistent padding */
+    margin-inline: auto; /* This centres .container horizontally */
+}
+
+/* background for the whole page*/
+body {
+    margin: 0;
+    padding: 0;
+    background-color: royalblue;
+    font-family: 'Signika', sans-serif;
+}
+
+.account-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 60px;
+}
+
+.account-header {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.account-header h2 {
+    color: royalblue;
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.account-header p {
+    color: grey;
+    font-size: 16px;
+}
+
+/* styling for the card */
+.section-form {
+    background-color: white;
+    padding: 40px;
+    width: 380px;
+    border-radius: 20px;
+    text-align: left;
+    margin: 20px auto 80px;
+}
+
+/* styling the labels for each input */
+.section-form label {
+    font-size: 15px;
+    font-family: Signika;
+    font-weight: bold;
+    color: black;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* styling the input boxes */
+.section-form input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid lightgrey;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* styling for the buttons */
+.section-form button{
+    background-color: royalblue;
+    color: aliceblue;
+    font-weight: bold;
+    font-family: Signika;
+    font-size: 15px;
+    width: 100%;
+    padding: 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    margin-top: 12px;
+}
+
+.section-form button:hover{
+    background-color: mediumblue;
+}
+
+/* styling for the form divider */
+.divide-form{
+    border: 0;
+    border-top: 1px solid lightgrey;
+    margin: 25px 0;
+}
+
+/* adding specific styling for the logout button and the delete account */
+.logout-button{
+    background-color: dimgrey !important; /* overrides previous button styling */
+}
+
+/* overriding default button style to make delete button stand out*/
+.delete-button{
+    background-color: transparent !important;
+    color: red !important;
+    border: 1px solid red !important;
+}
+
+.delete-button:hover{
+    background-color: red !important;
+    color: white !important;
+}
+
+/* styling for the error messages */
+.error-messages{
+    color: red;
+    background-color: mistyrose;
+    font-size: 12px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid indianred;
+}
+
+.error-messages li {
+    list-style-type: none;
+}
+
+/* styling the success messages */
+.success-messages{
+    color: darkgreen;
+    background-color: mediumseagreen;
+    margin-bottom: 20px;
+    font-size: 12px;
+    padding: 10px;
+    border: 1px solid lightgreen;
+    text-align: center;
+}
+
+
