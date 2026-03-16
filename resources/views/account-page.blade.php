@@ -40,8 +40,8 @@
             </div>
         </header>
 
-        <main>
-            <section>
+        <div class="account-container">
+            <section class="account-header">
                 <h2>My Tecci Account</h2>
                 <p>Manage your personal information.</p>
             </section>
@@ -62,50 +62,87 @@
                 </ul>
             @endif
 
+            <div class="section-form">
+                {{-- user can update and view their information here--}}
+                <form method="POST" action="{{ route('account.update')}}">
+                    @csrf {{-- added this token for the security of the form--}}
+                    @method('PATCH') {{-- allows the user to make the partial changes--}}
 
-            {{-- user can update and view their information here--}}
-            <form method="POST" action="{{ route('account.update')}}">
-                @csrf {{-- added this token for the security of the form--}}
-                @method('PATCH') {{-- allows the user to make the partial changes--}}
-
-                <div>
                     <!-- this is where the user will enter their full name-->
                     <label for="name">Full Name:</label>
                     <input type="text" name="name" id="name" value="{{ $user->name}}" required>
-                </div>
 
-                <div>
                     <!-- this is where the user will enter the email address-->
                     <label for="email">Email Address:</label>
                     <input type="email" name="email_address" id="email_address" value="{{ $user->email}}" required>
-                </div>
 
-                <button type="submit">Update Information</button>
-            </form>
+                    <button type="submit">Update Information</button>
+                </form>
+
+            <hr class="divide-form"> {{-- organises the form--}}
 
             {{-- logout button--}}
             <form action="{{ route('logout')}}" method="POST">
                 @csrf
-                <button type="submit">Logout</button>
+                <button type="submit" class="logout-button">Logout</button>
             </form>
 
             {{--the user will be able to delete their account here--}}
             <form id="delete-form" action="{{ route('account.destroy')}}" method="POST">
                 @csrf
                 @method('DELETE') {{-- allows the user to delete their account--}}
-                <button type="button" onclick="confirmAccountDeletion()">Delete Account</button>
+                <button type="button" class="delete-button" onclick="confirmAccountDeletion()">Delete Account</button>
             </form>
+        </div>
+   </div>
 
-            {{-- javascript to handle the account deletion--}}
-            <script>
-                function confirmAccountDeletion() {
-                    if(confirm('Are you sure you want to delete your Tecci account?')) {
-                        document.getElementById('delete-form').submit();
-                    }
+
+
+    <!-- creating the footer-->
+    <footer class="main-footer">
+    <div class="container footer-inner">
+        <div class="footer-col">
+            <h3>TECCI</h3>
+            <p>
+                Smart Tech at Smart Prices.<br>
+                Tecci makes premium devices accessible to<br>
+                students and customers across the UK.
+            </p>
+        </div>
+
+         <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about-us">About</a></li>
+                <li><a href="/contact-us">Contact</a></li>
+                <li><a href="/displayproduct">Products</a></li>
+                <li><a href="/basket">Basket</a></li>
+                <li><a href="/login">My Account</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact Info</h4>
+            <ul class="contact-list">
+                <li><i class="fa-solid fa-location-dot"></i> Birmingham, B4 7ET</li>
+                <li><i class="fa-solid fa-phone"></i> 0121 555 0198</li>
+                <li><i class="fa-regular fa-envelope"></i> Tecci_Queries@net.com</li>
+            </ul>
+        </div>
+    </div>
+
+        <div class="footer-bottom">
+            &copy; 2025 Tecci. All rights reserved.
+        </div>
+    </footer>
+{{-- javascript to handle the account deletion--}}
+        <script>
+            function confirmAccountDeletion() {
+                if(confirm('Are you sure you want to delete your Tecci account?')) {
+                    document.getElementById('delete-form').submit();
                 }
-            </script>
-        </main>
-
-
+            }
+        </script>
     </body>
 </html>
