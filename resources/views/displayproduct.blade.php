@@ -315,30 +315,47 @@
       const productCard = document.createElement("div");
       productCard.className = "product-card-item";
 
+      const isInStock = product.stock_status === 'in_stock' || product.stock_quantity > 0;
+      const isLowStock = product.stock_quantity > 0 && product.stock_quantity < 5;
 
+      let badgeText;
+      let badgeClass;
 
-    productCard.innerHTML = `
-      <a <div onclick="window.location.href='/product/${product.id}'" class="product-link" style="text-decoration: none;">
-        <div class="product-image-placeholder">
-          <img src="${product.image_url}" alt="${product.name}">
+      // Check the stock states in order
+      if (!isInStock) {
+          badgeText = 'Out of Stock';
+          badgeClass = 'badge-out-of-stock';
+      } else if (isLowStock) {
+          badgeText = 'Low Stock';
+          badgeClass = 'badge-low-stock';
+      } else {
+          badgeText = 'In Stock';
+          badgeClass = 'badge-in-stock';
+      } 
+
+      productCard.innerHTML = `
+        <a <div onclick="window.location.href='/product/${product.id}'" class="product-link" style="text-decoration: none;">
+          <div class="stock-badge ${badgeClass}">${badgeText}</div>
+          <div class="product-image-placeholder">
+            <img src="${product.image_url}" alt="${product.name}">
+          </div>
+          <div class="product-item-info">
+            <p class="product-item-name">${product.name}</p>
+              <!-- Placeholder stars -->
+            <p class="star-rating">★★★★☆</p>
+            <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
+            <p class="product-item-price">£${product.price.toFixed(2)}</p>
+            <form action="/add-to-basket/${product.id}" method="GET" class="cart-action-group" onclick="event.stopPropagation();">
+              <input type="number" name="quantity" class="qty-input" value="1" min="1" max="99" title="Quantity">
+              <button type="submit" class="add-to-cart-quick">Add to Basket</button>
+            </form>
+          </div>
         </div>
-        <div class="product-item-info">
-          <p class="product-item-name">${product.name}</p>
-            <!-- Placeholder stars -->
-          <p class="star-rating">★★★★☆</p>
-          <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
-          <p class="product-item-price">£${product.price.toFixed(2)}</p>
-          <form action="/add-to-basket/${product.id}" method="GET" class="cart-action-group" onclick="event.stopPropagation();">
-            <input type="number" name="quantity" class="qty-input" value="1" min="1" max="99" title="Quantity">
-            <button type="submit" class="add-to-cart-quick">Add to Basket</button>
-          </form>
-        </div>
-      </div>
-    `;
+      `;
 
-      grid.appendChild(productCard);
-    });
-  }
+        grid.appendChild(productCard);
+      });
+    }
 
   // Initialize display
   displayProducts();

@@ -44,6 +44,7 @@ class DisplayProductController extends Controller
                 'description'  => $p->description,
                 'brand'        => $p->brand,
                 'student_price'=> $p->student_price,
+                'stock_quantity' => $p->inventory ? $p->inventory->quantity_available : 0,
                 'stock_status' => $p->stock_status,
                 'avg_rating'   => $averageRating,
                 'review_count' => $p->reviews->count(),
