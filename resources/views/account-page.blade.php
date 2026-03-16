@@ -33,7 +33,13 @@
                 <div class="nav-icons">
                     <a href="#"><i class="fa-regular fa-heart"></i></a>
                     <a href="{{ url('basket')}}"><i class="fa-solid fa-cart-shopping"></i></a>
-                    <a href="{{ url('account')}}"><i class="fa-regular fa-user"></i></a>
+
+                    {{-- if the user is logged in, the profile icon should direct them to account page--}}
+                    @if(Auth::check())
+                        <a href="{{ url('account')}}"><i class="fa-regular fa-user"></i></a>
+                    @else
+                        <a href="{{ url('login')}}"><i class="fa-regular fa-user"></i></a>
+                    @endif
                 </div>
 
 
