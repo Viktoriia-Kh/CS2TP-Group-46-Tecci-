@@ -31,15 +31,15 @@ class OrderController extends Controller
     public function requestReturn(Request $request, $id){
         
         $request->validate([
-            'return_reason' => 'required|string|max:500'
+         'return_reason' => 'required|in:Wrong item sent,Item is defective,Missed delivery date,No reason given'
         ]);
 
-        
-        $item = \App\Models\OrderItem::findOrFail($id);
-        $item->update([
-            'return_reason' => $request->return_reason,
-            'return_status' => 'Requested'
-        ]);
+    $item = \App\Models\OrderItem::findOrFail($id);
+    
+    $item->update([
+        'return_reason' => $request->return_reason,
+        'return_status' => 'Requested'
+    ]);
 
     return back()->with('success', 'Return request sent!');
     }

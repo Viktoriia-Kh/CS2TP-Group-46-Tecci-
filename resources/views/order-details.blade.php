@@ -67,21 +67,28 @@
 </div>
 
 <div id="return-form-{{ $item->id }}" style="display: none; width: 100%; margin-top: 20px; background: #fdfdfd; padding: 20px; border: 1px dashed #cbd5e0; border-radius: 8px;">
-  <form action="{{ route('item.return', $item->id) }}" method="POST">
-      @csrf
-      <label style="display: block; font-weight: bold; margin-bottom: 10px; color: #03315b;">Reason for Return</label>
-      <textarea name="return_reason" required placeholder="Example: The item arrived with a scratch on the screen..." 
-                style="width: 100%; min-height: 100px; padding: 12px; border: 1px solid #e2e8f0; border-radius: 6px; font-family: inherit; margin-bottom: 15px; resize: vertical;"></textarea>
-      
-      <div style="display: flex; gap: 10px;">
-          <button type="submit" style="background: #03315b; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;">
-              Confirm Return Request
-          </button>
-          <button type="button" onclick="toggleReturnForm({{ $item->id }})" style="background: none; border: 1px solid #ccc; padding: 10px 20px; border-radius: 6px; cursor: pointer;">
-              Cancel
-          </button>
-      </div>
-  </form>
+    <form action="{{ route('item.return', $item->id) }}" method="POST">
+        @csrf
+        <label style="display: block; font-weight: bold; margin-bottom: 10px; color: #03315b;">Reason for Return</label>
+        
+        <select name="return_reason" required 
+                style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 6px; font-family: inherit; margin-bottom: 15px; background-color: white;">
+            <option value="" disabled selected>Please select a reason...</option>
+            <option value="Wrong item sent">Wrong item sent</option>
+            <option value="Item is defective">Item is defective</option>
+            <option value="Missed delivery date">Missed delivery date</option>
+            <option value="No reason given">No reason given</option>
+        </select>
+        
+        <div style="display: flex; gap: 10px;">
+            <button type="submit" style="background: #03315b; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                Confirm Return Request
+            </button>
+            <button type="button" onclick="toggleReturnForm({{ $item->id }})" style="background: none; border: 1px solid #ccc; padding: 10px 20px; border-radius: 6px; cursor: pointer;">
+                Cancel
+            </button>
+        </div>
+    </form>
 </div>
 </div>
 @endforeach 
