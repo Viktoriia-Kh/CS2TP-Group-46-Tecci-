@@ -101,6 +101,36 @@
                 </div>
             </div>
 
+            <!--SLIDE 3-->
+            <div class="hero-slide"> <!--This creates one single slide inside the slider-->
+                <div class="container hero-inner">
+
+                    <div class="hero-text"> <!--This is for the left column of the slide-->
+                        <h1>
+                            <span class="special-word">Lock In Your Summer Setup</span>
+                            <span>With 25% Off</span>
+                        </h1>
+
+                        <p class="hero-subtitle">
+                            Get ahead before summer starts. Enjoy <strong>25% off laptops</strong> built for Uni life.
+                        </p>
+
+                        <p class="hero-offer-code">
+                            Use code <strong>SUMMER25</strong> at checkout
+                        </p>
+
+                        <a href="products.html" class="btn btn-primary">View Laptops</a>
+                    </div>
+
+                    <div class="hero-banner">
+                        <img src="C:\Users\rahme\OneDrive\Documents\GitHub\CS2TP-Group-46-Tecci-\public\Images\Rotating Banner Laptop Sale.png"
+                             alt="Tecci big savings laptop promotion"
+                             class="hero-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
   <!--FEATURED PRODUCTS-->
   <section class="featured-products" id="featured">
     <div class="container">
