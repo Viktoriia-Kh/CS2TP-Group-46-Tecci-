@@ -33,7 +33,7 @@ class AccountController extends Controller
             'phone' => $request->input('phone'), // the phone number column gets updated here
         ]);
 
-        return back()->with('success', 'Your details have been updated.'); // success message to the user
+        return back()->with('success', 'Your details have been updated successfully!'); // success message to the user
     }
 
     // function to handle the account deletion
