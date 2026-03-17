@@ -30,6 +30,7 @@ class AccountController extends Controller
         $user->update([
             'name' => $request->input('name'), // the name column gets updated here
             'email' => $request->input('email_address'), // the email column gets updated here
+            'phone' => $request->input('phone'), // the phone number column gets updated here
         ]);
 
         return back()->with('success', 'Your details have been updated.'); // success message to the user
