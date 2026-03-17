@@ -6,7 +6,7 @@
   <title>Tecci | Admin Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Shared Admin CSS -->
-  <link rel="stylesheet" href="admin-common-style.css" />
+ 
   <link rel="stylesheet" href="admin-inventory-style.css" />
   <!--Google Font-->
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
@@ -115,7 +115,7 @@
               <input type="text" placeholder="Search" aria-label="Search (visual only)">
              </div>
             </div>
-            
+
             <button class="btn-add-product" onclick="openAddModal()">
                     <i class="fa-solid fa-plus"></i> Add New Product
                 </button>
