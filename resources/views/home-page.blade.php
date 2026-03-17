@@ -315,6 +315,21 @@
                 <span class="review-label-right">Excellent</span>
             </div>
 
+            <form class="review-form">
+                <label for="reviewMessage" class="review-text-label">Tell us more about your experience</label>
+
+                <textarea
+                    id="reviewMessage"
+                    class="review-textarea"
+                    placeholder="Write your review here..."
+                    rows="7"
+                ></textarea>
+
+                <button type="submit" class="btn btn-primary review-submit-btn">Submit Review</button>
+            </form>
+        </div>
+    </section>
+
   <!--FOOTER-->
   <footer class="site-footer">
     <div class="container footer-inner"> <!--footer-inner used to create multi-column layout-->
