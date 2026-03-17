@@ -132,7 +132,7 @@
 
       <!--Icons-->
       <div class="nav-icons">
-        <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a> <!--fa-heart is a Heart Icon linked from Font Awesome-->
+        <a href="my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
         
         {{-- Basket icon with dynamic badge count from database --}}
         <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
@@ -141,7 +141,7 @@
             @php
                 use App\Models\BasketItem;
                 
-                // Get total quantity from database
+                // Get total quan`tity from database
                 if (Auth::check()) {
                     // For logged-in users
                     $basketCount = BasketItem::where('user_id', Auth::id())->sum('quantity');
