@@ -39,7 +39,13 @@ class LoginController extends Controller
                 // here it will attempt to log the user in
                 if (Auth::attempt(['email' => $email_address, 'password' => $password])) {
                     $request->session()->regenerate(); // the session ID is reset for security purposes
+
+                    // check if the user is an admin
+                    if (Auth::user()->is_admin) {
+                        return redirect()->intended('/admin-dashboard'); // the user will be directed to the dashboard if they are an admin
+                    }
                     return redirect()->intended('/'); // this will redirect the user to the homepage
+
                 } else {
                     $error_messages[] = "Please login with the correct details."; // user gets this message if the login does not work
                 }

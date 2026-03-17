@@ -30,6 +30,7 @@ class SignUpController extends Controller
             'name'     => $validated['name'],
             'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'is_admin' => $request->input('is_admin', 0) // admin setting added (if user is not admin value remains 0)
         ]);
 
         // 3) log them in
