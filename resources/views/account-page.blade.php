@@ -82,6 +82,10 @@
                     <label for="email">Email Address:</label>
                     <input type="email" name="email_address" id="email_address" value="{{ $user->email}}" required>
 
+                    <!-- this is where the user can add a phone number if they wish-->
+                    <label for="phone">Phone Number:</label>
+                    <input type="text" name="phone" id="phone" value="{{ $user->phone}}" placeholder="Enter your phone number">
+
                     <button type="submit">Update Information</button>
                 </form>
 
