@@ -44,29 +44,37 @@
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container hero-inner"> <!--.hero-inner used to turn this into a two column layout-->
+  <!--HERO SECTION-->
+    <section class="hero">
+    <div class="hero-slider"> <!--This wraps the fuller slider system-->
+        <div class="hero-track" id="heroTrack"> /<!--This is the moving strip that contains all slides-->
+            
+            <!--SLIDE 1-->
+            <div class="hero-slide"> <!--This creates one single slide inside the slider-->
+                <div class="container hero-inner">
 
-      <!--Left Side: Text Content-->
-      <div class="hero-text">
-        <h1>
-          <p class="special-word">Affordable<p>
-          <p>Tech.</p>
-          <p class="special-word">Unbeatable</p>
-          <p>Style.</p>
-        </h1>
-        <p class="hero-subtitle">Smart gadgets and sleek devices, priced for University Students.</p>
-        <a href="displayproduct" class="btn btn-primary">Shop Now</a>
-      </div>
+                    <div class="hero-text"> <!--This is for the left column of the slide-->
+                        <h1>
+                            <span class="special-word">Affordable</span>
+                            <span>Tech.</span>
+                            <span class="special-word">Unbeatable</span>
+                            <span>Style.</span>
+                        </h1>
 
-      <!--Right Side: Hero Image-->
-      <div class="hero-banner">
-        <img src="https://i.ibb.co/XfxPXyL5/Hero-Section-Image.webp" alt="Student using a laptop from Tecci"
-          class="hero-image">
-      </div>
-    </div>
-    </div>
-  </section>
+                        <p class="hero-subtitle">
+                            Smart gadgets and sleek devices, priced for University Students.
+                        </p>
+
+                        <a href="products.html" class="btn btn-primary">Shop Now</a>
+                    </div>
+
+                    <div class="hero-banner">
+                        <img src="https://i.ibb.co/XfxPXyL5/Hero-Section-Image.webp"
+                             alt="Student using a laptop from Tecci"
+                             class="hero-image">
+                    </div>
+                </div>
+            </div>
 
   <!--FEATURED PRODUCTS-->
   <section class="featured-products" id="featured">
