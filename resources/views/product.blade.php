@@ -120,10 +120,7 @@
                 </div>
 
                 <!-- Stock Status  -->
-                <div class="product-stock-box" >
-                    <span class="stock-status">
-                        {{ $product->stock_status }}
-                    </span>
+                <div class="product-stock-box" id="dynamic-stock-box">
                 </div>
 
             </div>
@@ -330,6 +327,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 fileText.textContent = 'No file chosen';
             }
         });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const product = {
+        stock_status: "{{ $product->stock_status ?? 'out_of_stock' }}",
+        stock_quantity: parseInt("{{ $product->stock_quantity ?? 0 }}", 10) || 0
+    };
+
+    const isInStock = product.stock_status === 'in_stock' || product.stock_quantity > 0;
+    const isLowStock = product.stock_quantity > 0 && product.stock_quantity < 5;
+
+    let badgeText;
+    let badgeClass;
+
+    if (!isInStock) {
+        badgeText = 'Out of Stock';
+        badgeClass = 'badge-out-of-stock';
+    } else if (isLowStock) {
+        badgeText = 'Low Stock';
+        badgeClass = 'badge-low-stock';
+    } else {
+        badgeText = 'In Stock';
+        badgeClass = 'badge-in-stock';
+    } 
+
+    const stockBox = document.getElementById('dynamic-stock-box');
+    if (stockBox) {
+        stockBox.innerHTML = `<span class="stock-badge ${badgeClass}">${badgeText}</span>`;
     }
 });
 </script>
