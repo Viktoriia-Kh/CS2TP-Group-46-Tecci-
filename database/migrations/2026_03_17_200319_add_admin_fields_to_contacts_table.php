@@ -6,19 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::table('contacts', function (Blueprint $table) {
-            $table->string('status')->default('pending');
-            $table->text('admin_reply')->nullable();
-            $table->timestamp('replied_at')->nullable();
+            //
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::table('contacts', function (Blueprint $table) {
-            $table->dropColumn(['status', 'admin_reply', 'replied_at']);
+            //
         });
     }
 };
