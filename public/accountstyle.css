@@ -144,7 +144,7 @@ body {
 .site-footer {
   background-color: #03315b;          /* same as header */
   color: #ffffff;
-  border-top: 15px solid #085296;     /* same stripe as header */
+  /* border-top: 15px solid #085296; */     /* same stripe as header */
   padding: 40px 0 14px;
   margin-top: 3rem;
 }
@@ -155,7 +155,7 @@ body {
     text-decoration: none;
 }
 
-.main-footer
+/*.main-footer*/
 .site-footer a{
     color: white;
     text-decoration: none;
@@ -234,5 +234,3 @@ body {
     align-items: flex-start;
   }
 }
-
-
