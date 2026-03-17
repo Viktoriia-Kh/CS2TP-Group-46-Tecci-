@@ -70,31 +70,33 @@
           <div class="filter-group">
             <h4>Condition</h4>
             <label class="checkbox-label">
-              <input type="checkbox" value="new"> New
+              <input type="checkbox" class="condition-filter" value="new"> New
             </label>
             <label class="checkbox-label">
-              <input type="checkbox" value="used"> Used
+              <input type="checkbox" class="condition-filter" value="used">
+ Used
             </label>
             <label class="checkbox-label">
-              <input type="checkbox" value="refurbished"> Refurbished
+              <input type="checkbox" class="condition-filter" value="refurbished"> Refurbished
             </label>
           </div>
           <div class="filter-group">
             <h4>Rating</h4>
             <label class="checkbox-label">
-              <input type="checkbox" value="5"> 5 Stars ★★★★★
+              <input type="checkbox" class="rating-filter" value="5">
+ 5 Stars ★★★★★
             </label>
             <label class="checkbox-label">
-              <input type="checkbox" value="4"> 4 Stars ★★★★☆
+              <input type="checkbox" class="rating-filter" value="4"> 4 Stars ★★★★☆
             </label>
             <label class="checkbox-label">
-              <input type="checkbox" value="3"> 3 Stars ★★★☆☆
+              <input type="checkbox" class="rating-filter" value="3"> 3 Stars ★★★☆☆
             </label>
             <label class="checkbox-label">
-              <input type="checkbox" value="2"> 2 Stars ★★☆☆☆
+              <input type="checkbox" class="rating-filter" value="2"> 2 Stars ★★☆☆☆
             </label>
             <label class="checkbox-label">
-              <input type="checkbox" value="1"> 1 Star ★☆☆☆☆
+              <input type="checkbox" class="rating-filter" value="1"> 1 Star ★☆☆☆☆
             </label>
           </div>
 
@@ -228,13 +230,15 @@
   });
 
   // Apply filters button
-  document.querySelector(".confirm-filter-btn").addEventListener("click", () => {
-    selectedConditions = Array.from(document.querySelectorAll(".checkbox-label input[type='checkbox']:checked"))
-      .map(cb => cb.value);
-    selectedRatings = Array.from(document.querySelectorAll(".checkbox-label input[type='checkbox']:checked"))
-      .map(cb => cb.value);
-    displayProducts();
-  });
+document.querySelector(".confirm-filter-btn").addEventListener("click", () => {
+  selectedConditions = Array.from(document.querySelectorAll(".condition-filter:checked"))
+    .map(cb => cb.value);
+
+  selectedRatings = Array.from(document.querySelectorAll(".rating-filter:checked"))
+    .map(cb => Number(cb.value));
+
+  displayProducts();
+});
 
 // Applies star review functionalltiy 
   function renderStars(rating) {
@@ -262,6 +266,19 @@
     // Filter by search term
     if (searchTerm) {
       filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm));
+    }
+
+    // Filter by condition
+    if (selectedConditions.length > 0) {
+      filtered = filtered.filter(p => selectedConditions.includes(p.condition));
+    }
+
+    // Filter by rating
+    if (selectedRatings.length > 0) {
+      filtered = filtered.filter(p => {
+        const roundedRating = Math.round(Number(p.avg_rating) || 0);
+        return selectedRatings.includes(roundedRating);
+      });
     }
 
     return filtered;
