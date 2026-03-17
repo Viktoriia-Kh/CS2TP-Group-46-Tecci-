@@ -111,51 +111,53 @@
           <h1>Orders</h1>
         </div>
 
-        <!--The Search Bar has been moved uner the page heading-->  
-        <div class="orders-search-row"> <!--This is a wrapper for styling purpose of the Search Bar-->
-          <div class="page-search-wrap">
-          <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
-          <i class="fa-solid fa-magnifying-glass"></i> <!--This creates a Magnifying Glass Icon which is just purely visual for now-->
-          <input type="text" placeholder="Search" aria-label="Search (visual only)">
-        </div>
-      </div>
+        <!-- SEARCH BAR (CONNECTED) -->
+  <div class="orders-search-row">
+      <form action="{{ route('admin.orders.index') }}" method="GET" class="page-search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" name="search" placeholder="Search ID or Customer..." value="{{ request('search') }}">
+        <button type="submit" style="display:none;"></button> <!-- Hidden button allows 'Enter' to search -->
+      </form>
+  </div>
 
 
-        <!-- FILTER BAR -->
-        <div class="orders-filter-bar">
-          <div class="orders-filter-left">
-            <div class="filter-select-wrap">
-              <select aria-label="Filter by order status">
-                <option selected>Any Status</option>
-                <option>Paid</option>
-                <option>Delivered</option>
-                <option>Completed</option>
-              </select>
-              <i class="fa-solid fa-chevron-down"></i>
-            </div>
+        <!-- FILTER BAR (FIXED: KEEPS THE SORT BUTTON ON THE RIGHT) -->
+<form action="{{ route('admin.orders.index') }}" method="GET" class="orders-filter-bar">
+  <div class="orders-filter-left">
+    <div class="filter-select-wrap">
+      <select name="status_filter" onchange="this.form.submit()" aria-label="Filter by order status">
+        <option value="">Any Status</option>
+        <option value="Pending" {{ request('status_filter') == 'Pending' ? 'selected' : '' }}>Pending</option>
+        <option value="Approved" {{ request('status_filter') == 'Approved' ? 'selected' : '' }}>Approved</option>
+        <option value="Shipped" {{ request('status_filter') == 'Shipped' ? 'selected' : '' }}>Shipped</option>
+        <option value="Completed" {{ request('status_filter') == 'Completed' ? 'selected' : '' }}>Completed</option>
+        <option value="Cancelled" {{ request('status_filter') == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
+      </select>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
 
-            <div class="filter-select-wrap">
-              <select aria-label="Filter by price range">
-                <option selected>£0 - £100</option>
-                <option>£100 - £500</option>
-                <option>£500 - £1000</option>
-                <option>£1000 - £1500</option>
-                <option>£1500+</option>
-              </select>
-              <i class="fa-solid fa-chevron-down"></i>
-            </div>
-          </div>
+    <div class="filter-select-wrap">
+      <select name="price_filter" onchange="this.form.submit()" aria-label="Filter by price range">
+        <option value="">All Prices</option>
+        <option value="0-100" {{ request('price_filter') == '0-100' ? 'selected' : '' }}>£0 - £100</option>
+        <option value="100-500" {{ request('price_filter') == '100-500' ? 'selected' : '' }}>£100 - £500</option>
+        <option value="500-1000" {{ request('price_filter') == '500-1000' ? 'selected' : '' }}>£500 - £1000</option>
+        <option value="1000+" {{ request('price_filter') == '1000+' ? 'selected' : '' }}>£1000+</option>
+      </select>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </div>
 
-          <div class="orders-filter-right">
-            <div class="filter-select-wrap sort-select">
-              <select aria-label="Sort orders">
-                <option selected>Sort by Date</option>
-                <option>Sort by Price</option>
-              </select>
-              <i class="fa-solid fa-chevron-down"></i>
-            </div>
-          </div>
-        </div>
+  <div class="orders-filter-right">
+    <div class="filter-select-wrap sort-select">
+      <select name="sort" onchange="this.form.submit()" aria-label="Sort orders">
+        <option value="date_desc" {{ request('sort') == 'date_desc' ? 'selected' : '' }}>Sort by Date</option>
+        <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Sort by Price</option>
+      </select>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </div>
+</form>
 
         <!-- ORDERS TABLE PANEL -->
         <section class="orders-panel">
@@ -173,79 +175,41 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Ramsha Ahmed"></td>
-                  <td>#2049</td>
-                  <td>Ramsha Ahmed</td>
-                  <td><span class="status-pill status-paid">PAID</span></td>
-                  <td>£950.99</td>
-                  <td>Jan 8</td>
-                </tr>
-
-                <tr>
-                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Manrohit Bahia"></td>
-                  <td>#2049</td>
-                  <td>Manrohit Bahia</td>
-                  <td><span class="status-pill status-delivered">DELIVERED</span></td>
-                  <td>£350.99</td>
-                  <td>Jan 6</td>
-                </tr>
-
-                <tr>
-                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Jayden Dunkley Singh"></td>
-                  <td>#2049</td>
-                  <td>Jayden Dunkley Singh</td>
-                  <td><span class="status-pill status-paid">PAID</span></td>
-                  <td>£499.99</td>
-                  <td>Jan 5</td>
-                </tr>
-
-                <tr>
-                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Muhammad Ibrahim"></td>
-                  <td>#2049</td>
-                  <td>Muhammad Ibrahim</td>
-                  <td><span class="status-pill status-paid">PAID</span></td>
-                  <td>£599.99</td>
-                  <td>Jan 2</td>
-                </tr>
-
-                <tr>
-                  <td class="checkbox-col"><input type="checkbox" checked aria-label="Select order 2049 Viktoriia Kharchenko"></td>
-                  <td>#2049</td>
-                  <td>Viktoriia Kharchenko</td>
-                  <td><span class="status-pill status-completed">COMPLETED</span></td>
-                  <td>£799.99</td>
-                  <td>Dec 28</td>
-                </tr>
-
-                <tr>
-                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Ryan Njualem"></td>
-                  <td>#2049</td>
-                  <td>Ryan Njualem</td>
-                  <td><span class="status-pill status-paid">PAID</span></td>
-                  <td>£299.99</td>
-                  <td>Dec 26</td>
-                </tr>
-
-                <tr>
-                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Kirpal Sangha"></td>
-                  <td>#2049</td>
-                  <td>Kirpal Sangha</td>
-                  <td><span class="status-pill status-delivered">DELIVERED</span></td>
-                  <td>£750.99</td>
-                  <td>Dec 22</td>
-                </tr>
-
-                <tr>
-                  <td class="checkbox-col"><input type="checkbox" aria-label="Select order 2049 Musa Abid Waheed"></td>
-                  <td>#2049</td>
-                  <td>Musa Abid Waheed</td>
-                  <td><span class="status-pill status-completed">COMPLETED</span></td>
-                  <td>£650.99</td>
-                  <td>Dec 19</td>
-                </tr>
-              </tbody>
+      @forelse($orders as $order)
+        <tr>
+          <td class="checkbox-col"><input type="checkbox"></td>
+          <td>#{{ $order->id }}</td>
+          <td>{{ $order->user->name ?? 'Guest' }}</td>
+          <td>
+            <!-- This form lets you change status and deduct stock automatically -->
+            <form action="{{ route('admin.orders.updateStatus', $order->id) }}" method="POST">
+              @csrf
+              @method('PUT')
+              <select name="status" onchange="this.form.submit()" 
+                      style="border:none; background:transparent; font-weight:bold; cursor:pointer;"
+                      class="status-pill status-{{ strtolower($order->status) }}">
+                <option value="Pending" {{ $order->status == 'Pending' ? 'selected' : '' }}>PENDING</option>
+                <option value="Approved" {{ $order->status == 'Approved' ? 'selected' : '' }}>APPROVED</option>
+                <option value="Shipped" {{ $order->status == 'Shipped' ? 'selected' : '' }}>SHIPPED</option>
+                <option value="Completed" {{ $order->status == 'Completed' ? 'selected' : '' }}>COMPLETED</option>
+                <option value="Cancelled" {{ $order->status == 'Cancelled' ? 'selected' : '' }}>CANCELLED</option>
+              </select>
+            </form>
+          </td>
+          <td>£{{ number_format($order->total_price, 2) }}</td>
+          <td>{{ $order->created_at->format('M d') }}</td>
+        </tr>
+      @empty
+        <tr>
+          <td colspan="6" style="text-align:center; padding: 40px; color: #666;">No orders found matching those filters.</td>
+        </tr>
+      @endforelse
+    </tbody>
             </table>
+          <div class="pagination-wrap" style="padding: 20px;">
+          {{ $orders->appends(request()->query())->links() }}
+          </div>
+
           </div>
         </section>
 
