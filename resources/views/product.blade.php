@@ -73,7 +73,7 @@
                         <!-- Placeholder loop for thumbnails based on sketch -->
                       @foreach($product->images as $image)
                       <div class="thumb">
-                          <img src="{{ asset($image->image_url) }}">
+                          <img src="{{ asset($image->image_path) }}">
                       </div>
                       @endforeach   
                     </div>
@@ -312,6 +312,13 @@
     
     evt.currentTarget.classList.add('active');
 }
+
+// Allows to click to switch between various images
+document.querySelectorAll('.thumb img').forEach(img => {
+    img.addEventListener('click', function() {
+        document.querySelector('.product-image').src = this.src;
+    });
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     const fileInput = document.getElementById('review-media');

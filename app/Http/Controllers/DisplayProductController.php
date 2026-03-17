@@ -35,7 +35,7 @@ class DisplayProductController extends Controller
                                     : 'uncategorised',
                 'condition'    => $p->condition ?? 'new',
                 'image_url'    => $primaryImage
-                                    ? asset('storage/' . $primaryImage->image_path)
+                                    ? asset($primaryImage->image_path)
                                     : ($fallbackImage
                                         ? asset('storage/' . $fallbackImage->image_path)
                                         : ($p->image_url
