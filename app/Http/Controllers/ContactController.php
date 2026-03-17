@@ -10,10 +10,11 @@ class ContactController extends Controller
     /**
      * Show the contact us form.
      */
-    public function showForm()
-    {
-        return view('contact-us'); // resources/views/contact-us.blade.php
-    }
+   public function adminIndex()
+{
+    $contacts = Contact::latest()->get(); // newest first
+    return view('admin.contacts', compact('contacts'));
+}
 
     /**
      * Handle the form submission.
