@@ -76,6 +76,31 @@
                 </div>
             </div>
 
+            <!--SLIDE 2-->
+            <div class="hero-slide"> <!--This creates one single slide inside the slider-->
+                <div class="container hero-inner">
+
+                    <div class="hero-text"> <!--This is for the left column of the slide-->
+                        <h1>
+                            <span class="special-word">Why</span>
+                            <span>Choose Us?</span>
+                        </h1>
+
+                        <p class="hero-subtitle">
+                            We curate tech that balances performance, price and style, so you can focus on your studies, not your budget.
+                        </p>
+
+                        <a href="TP2_About.html" class="btn btn-primary">Learn More</a>
+                    </div>
+
+                    <div class="hero-banner">
+                        <img src="C:\Users\rahme\OneDrive\Documents\GitHub\CS2TP-Group-46-Tecci-\public\Images\Top-Right-Team-Image.png"
+                             alt="Students collaborating around a table"
+                             class="hero-image">
+                    </div>
+                </div>
+            </div>
+
   <!--FEATURED PRODUCTS-->
   <section class="featured-products" id="featured">
     <div class="container">
