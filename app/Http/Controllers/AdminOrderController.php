@@ -41,7 +41,7 @@ class AdminOrderController extends Controller
 
         $orders = $query->paginate(15);
 
-        return view('admin.orders.index', compact('orders'));
+        return view('admin-orders', compact('orders'));
     }
 
     /* Process an order... Following this entry, the stock level will be automatically updated. */
