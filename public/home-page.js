@@ -32,4 +32,11 @@ if (heroTrack && heroNextBtn) {
         }, 5000); /* This ends the interval function and sets the delay to 5000 milliseconds */
     };
 
+/* This creates a function which keeps the timing feeling natural after user interaction */
+    const resetAutoRotate = () => {
+        /* This stops the currently running interval timer */
+        clearInterval(autoRotate);
+        startAutoRotate(); /* This starts a fresh 5 second timer again */
+    };
+
 }
