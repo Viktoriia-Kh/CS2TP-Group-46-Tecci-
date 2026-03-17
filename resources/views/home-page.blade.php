@@ -131,6 +131,12 @@
             </div>
         </div>
 
+        <button class="hero-arrow" id="heroNextBtn" aria-label="Next slide"> <!--This creates the circular right arrow Button-->
+            <i class="fa-solid fa-chevron-right"></i> <!--fa-chevron-right is a Right Arrow Icon linked from Font Awesome-->
+        </button>
+    </div>
+</section>
+
   <!--FEATURED PRODUCTS-->
   <section class="featured-products" id="featured">
     <div class="container">
