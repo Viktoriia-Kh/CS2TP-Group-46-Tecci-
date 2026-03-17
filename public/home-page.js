@@ -16,12 +16,20 @@ if (heroTrack && heroNextBtn) {
         heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
     };
 
-/* This creates a funtion which updates the slide number an then moves the banner */
+/* This creates a funtion which updates the slide number and then moves the banner */
     const goToNextSlide = () => {
         /* This increases the current slide by 1, if it reaches the end, it loops back to 0 */
         currentSlide = (currentSlide + 1) % totalSlides;
         /* This tells the browser to actually display the new slide */
         updateHeroSlide();
+    };
+
+/* This creates a function which handles the automatic slide-changing every few seconds */
+    const startAutoRotate = () => {
+        /* This starts a repeating timer */
+        autoRotate = setInterval(() => {
+            goToNextSlide();
+        }, 5000); /* This ends the interval function and sets the delay to 5000 milliseconds */
     };
 
 }
