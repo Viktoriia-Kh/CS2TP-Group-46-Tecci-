@@ -20,7 +20,7 @@ use App\Http\Controllers\LoginController;
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
 
-
+Route::get('/admin/contacts', [ContactController::class, 'adminIndex'])->name('admin.contacts');
 
 Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('login');
 
