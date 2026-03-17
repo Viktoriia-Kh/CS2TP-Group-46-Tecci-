@@ -114,84 +114,45 @@ ul {
 
 /* HERO SECTION */
 
-.hero {
-  background: linear-gradient(to right, #e6f3ff 40%, #e6f3ff 40%); /* This draws a left-to-right gradient behind the Hero Section */
-  margin: 0; /* Top Padding, Left and Right, Bottom Padding */
-  padding: 0; /* This ensures that there is no internal spacing inside .hero itself */
+.hero { /* This targets the whole Hero Section */
+  background-color: #e6f3ff;
+  margin: 0; /* This removes any outside spacing around the Hero Section */
+  padding: 0; /* This removes any internal spacing inside the hero wrapper itself */
+  overflow: hidden; /* This hides anything that sticks outside the hero box */
 }
 
-.hero-inner {
-  display: flex; /* This turns the container into a horizontal row */
-  gap: 48px; /* Space between two columns */
-  align-items: stretch; /* This makes both columns the same height */
-  min-height: 340px; /* This makes sure that the hero section is at least 340px tall */
-
-  width: 100%; /* This overrides the .container width so the hero section can stretch full width across the screen */
-  margin-inline: 0; /* This overrides the .container, it removes the hero section from being centred so it can take up width completely */
-  padding-left: 16px; /* This makes sure the text doesn't sit right on the very edge of the screen */
+.hero-slider { /* This targets the overall slider container */
+  position: relative;
+  width: 100%; /* This makes the slider take the full avaliable width */
+  overflow: hidden; 
 }
 
-.hero-text {
-  max-width: 320px; /* This restricts the width of the text column */
+.hero-track { /* This targets the strip containing all the slides */
+  display: flex; /* This places all the hero slides in a row horizontally */
+  width: 100%;
+  transition: transform 1s ease-in-out; /* This makes the slide movement smooth when JS changes the transform, which is the property being animated */
+  align-items: stretch; /* This makes all slides stretch to equal height */
+}
+
+.hero-slide { /* This targets each individual slide */
+  min-width: 100%; /* This ensures each slide is at least full width of the slider */
+  flex: 0 0 100%; /* This means the flex-grow is 0, flex-shrink is 0, and flex-basis is 100% */
+  background-color: #e6f3ff;
+  display: flex; /* This allows the slide content to stretch fully */
+}
+
+.hero-slide .hero-inner { 
+  flex: 1; /* This makes each slide fill the full slide height */
+}
+
+.hero-inner { /* This targets the inner content wrapper of each slide */
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.hero-text h1 {
-  font-size: clamp(35px, 3vw, 45px); /* This creates responsive font size: Minimum Size, Preferred (3% Of Viewport Width), Maximum Size */
-  font-weight: 700;
-  line-height: 1.1;
-  color: #000000
-}
-
-.special-word {
-    color: #03315b;
-}
-
-.hero-subtitle {
-  margin: 16px 0 29px; /* Space: Above, Left/Right, Below */
-  font-size: 15px;
-  color: #2e2f33;
-}
-
-.btn {
-  display: inline-block; /* This keeps the Button inline with text-flow */
-  padding: 0.8rem 1.8rem; /* This creates the button shape */
-  border-radius: 999px; /* This creates the rounded shape */
-  font-weight: 600;
-  font-size: 0.95rem;
-  border: none;
-  cursor: pointer; /* This makes the Mouse Pointer change to Hand when hovering */
-  text-align: center;
-}
-
-.btn-primary {
-  background-color: #005baf;
-  color: #ffffff;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* This adds elevation effect */
-  transition: background-color 0.15s ease, transform 0.15s ease, /* This creates the animation for hovering */
-    box-shadow 0.15s ease;
-}
-
-.btn-primary:hover {
-  background-color: #00488c;
-  transform: translateY(-1px); /* This creates the upwards movement of the Button when hovering */
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
-}
-
-/* HERO IMAGE ON THE RIGHT SIDE */
-.hero-banner {
-  flex: 1; /* This lets the image side take up the remaining width */
-  height: 100%; /* This makes .hero-banner match the height of .hero-inner */
- 
-}
-
-.hero-image {
-  width: 100%; /* This fills the available width of the right column */
-  height: 100%; /* This keeps the image from getting too tall */
-  display: block; /* This removes the default inline spacing that images have */
-  object-fit: cover; /* This makes the image fill the box completely, even if it has to be slightly cropped */
+  align-items: stretch; /* This makes both columns strech to equal height */
+  min-height: 340px;
+  width: 100%;
+  margin-inline: auto; /* This centres the block horizontally */
+  padding-left: 0; /* This removes left padding */
+  gap: 0; /* This removes the spacing between the text side and image size */
 }
 
 /* FEATURED PRODUCTS SECTION */
