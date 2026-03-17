@@ -20,6 +20,8 @@
 <!--HEADER (REUSABLE)-->
 <header class="main-header">
     <div class="container nav-container">
+        <!--The Logo and Menu Button are now grouped together on the left-->
+        <div class="header-left-group">
 
       <!--Logo-->
       <a href="TP2_Home.html" class="logo">
@@ -34,13 +36,9 @@
           <!--id="menuBtn" connects to the JS, for it to work-->
           <i class="fa-solid fa-bars"></i> <!--fa-bars is a Menu Icon linked from Font Awesome-->
         </button>
-
-        <div class="search-wrap"> <!--This is a wrapper for styling purpose of the Search Bar-->
-          <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
-          <i class="fa-solid fa-magnifying-glass"></i> <!--This creates a Magnifying Glass Icon which is just purely visual for now-->
-          <input type="text" id="searchInput" placeholder="Search" aria-label="Search (visual only)" oninput="applyFilters()">
-        </div>
       </div>
+
+      <div class="admin-header-spacer"></div>
 
       <!--Icons-->
       <div class="nav-icons admin-top-icons">
@@ -108,6 +106,16 @@
                <p class="dash-kicker">Hello Admin</p>
                <h1>Inventory</h1>
             </div>
+
+            <!--The Search Bar has been moved under the page heading-->  
+            <div class="inventory-search-row"> <!--This is a wrapper for styling purpose of the Search Bar-->
+              <div class="page-search-wrap">
+              <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
+              <i class="fa-solid fa-magnifying-glass"></i> <!--This creates a Magnifying Glass Icon which is just purely visual for now-->
+              <input type="text" placeholder="Search" aria-label="Search (visual only)">
+             </div>
+            </div>
+            
             <button class="btn-add-product" onclick="openAddModal()">
                     <i class="fa-solid fa-plus"></i> Add New Product
                 </button>
