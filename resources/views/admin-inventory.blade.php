@@ -110,9 +110,9 @@
             <!--The Search Bar has been moved under the page heading-->  
             <div class="inventory-search-row"> <!--This is a wrapper for styling purpose of the Search Bar-->
               <div class="page-search-wrap">
-              <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
-              <i class="fa-solid fa-magnifying-glass"></i> <!--This creates a Magnifying Glass Icon which is just purely visual for now-->
-              <input type="text" placeholder="Search" aria-label="Search (visual only)">
+                <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
+                <i class="fa-solid fa-magnifying-glass"></i> <!--This creates a Magnifying Glass Icon which is just purely visual for now-->
+                <input type="text" id="searchInput" placeholder="Search" aria-label="Search (visual only)">
              </div>
             </div>
 
@@ -323,7 +323,6 @@
 
             activeCategory = e.target.dataset.category;
             
-            console.log("Вибрано вкладку:", activeCategory);
             
             applyFilters();
         });
