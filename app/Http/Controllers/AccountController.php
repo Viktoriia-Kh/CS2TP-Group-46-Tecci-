@@ -23,6 +23,7 @@ class AccountController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email_address' => 'required|email|unique:users,email,' . $user->id, // ensures the email is valid
+            'phone' =>'nullable|string|max:20', // added validation for the phone number
         ]);
 
         // save the changes to the database
