@@ -299,7 +299,7 @@ document.querySelector(".confirm-filter-btn").addEventListener("click", () => {
         sorted.sort((a, b) => b.id - a.id);
         break;
       case "rating":
-        sorted.sort((a, b) => b.id - a.id); // Placeholder for rating
+        sorted.sort((a, b) => b.avg_rating - a.avg_rating);
         break;
       case "featured":
       default:
