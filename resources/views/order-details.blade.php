@@ -38,7 +38,6 @@
 <h3 style="margin-top: 30px; border-bottom: 2px solid #03315b; padding-bottom: 10px;">Items Ordered</h3>
 
 @foreach($order->items as $item)
-<p style="color: red;">DEBUG: First item status is: "{{ $order->items->first()->return_status ?? 'NULL' }}"</p>
 <div class="item-card" style="border-bottom: 1px solid #eee; padding: 20px 0; display: flex; flex-direction: column;">
 
 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
