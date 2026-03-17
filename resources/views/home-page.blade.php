@@ -94,7 +94,7 @@
                     </div>
 
                     <div class="hero-banner">
-                        <img src="C:\Users\rahme\OneDrive\Documents\GitHub\CS2TP-Group-46-Tecci-\public\Images\Top-Right-Team-Image.png"
+                        <img src="Images\Top-Right-Team-Image.png"
                              alt="Students collaborating around a table"
                              class="hero-image">
                     </div>
