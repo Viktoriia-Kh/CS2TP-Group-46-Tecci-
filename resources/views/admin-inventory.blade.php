@@ -112,7 +112,7 @@
               <div class="page-search-wrap">
                 <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
                 <i class="fa-solid fa-magnifying-glass"></i> <!--This creates a Magnifying Glass Icon which is just purely visual for now-->
-                <input type="text" id="searchInput" placeholder="Search" aria-label="Search (visual only)">
+                <input type="text" id="searchInput" placeholder="Search" aria-label="Search (visual only)" oninput="applyFilters()">
              </div>
             </div>
 
