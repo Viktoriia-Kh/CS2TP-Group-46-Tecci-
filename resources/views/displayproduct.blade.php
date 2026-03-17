@@ -236,6 +236,12 @@
     displayProducts();
   });
 
+// Applies star review functionalltiy 
+  function renderStars(rating) {
+    const rounded = Math.round(rating || 0);
+    return '★'.repeat(rounded) + '☆'.repeat(5 - rounded);
+}
+
   // Filter products based on criteria
   function filterProducts(searchTerm = "") {
     let filtered = allProducts;
@@ -342,7 +348,7 @@
           <div class="product-item-info">
             <p class="product-item-name">${product.name}</p>
               <!-- Placeholder stars -->
-            <p class="star-rating">★★★★☆</p>
+            ${renderStars(product.avg_rating)} (${product.review_count})
             <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
             <p class="product-item-price">£${product.price.toFixed(2)}</p>
             <form action="/add-to-basket/${product.id}" method="GET" class="cart-action-group" onclick="event.stopPropagation();">
