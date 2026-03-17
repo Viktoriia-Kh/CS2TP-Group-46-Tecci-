@@ -155,6 +155,42 @@ ul {
   gap: 0; /* This removes the spacing between the text side and image size */
 }
 
+.hero-text { /* This targets the left panel */
+  flex: 0 0 37%; /* This makes the text section 37% width, so it won't grow or shrink */
+  max-width: 37%;
+  display: flex; /* This makes the inside content use flex layout */
+  flex-direction: column;
+  justify-content: center;
+  padding: 36px 40px;
+  background-color: #dbeaf8;
+}
+
+.hero-text h1 { 
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(35px, 3vw, 45px); /* This creates responsive font size: Minimum Size, Preferred (3% Of Viewport Width), Maximum Size */
+  font-weight: 700;
+  line-height: 1.1;
+  color: #000000;
+}
+
+.special-word {
+  color: #03315b;
+}
+
+.hero-subtitle {
+  margin: 16px 0 24px; /* Space: Above, Left/Right, Below */
+  font-size: 15px;
+  color: #2e2f33;
+  max-width: 290px;
+}
+
+.hero-offer-code {
+  margin: -6px 0 22px;
+  font-size: 15px;
+  color: #2e2f33;
+}
+
 /* FEATURED PRODUCTS SECTION */
 
 .featured-products {
