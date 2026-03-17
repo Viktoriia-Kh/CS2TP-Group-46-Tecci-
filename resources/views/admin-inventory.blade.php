@@ -24,7 +24,7 @@
         <div class="header-left-group">
 
       <!--Logo-->
-      <a href="TP2_Home.html" class="logo">
+      <a href="/" class="logo">
         <!--Using this will make the Logo clickable and takes the user to the Home Page-->
         <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
         <span class="logo-text">TECCI</span> <!--span is an inline element used for short text-->
@@ -44,7 +44,7 @@
       <div class="nav-icons admin-top-icons">
         <a href="TP2_Notifications.html" aria-label="Notifications"><i class="fa-regular fa-bell"></i></a>  <!--fa-bell is a Bell Icon linked from Font Awesome-->
         <a href="TP2_Messages.html" aria-label="Messages"><i class="fa-regular fa-envelope"></i></a>  <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
-        <a href="TP2_Home.html" aria-label="Home"><i class="fa-solid fa-house"></i></a>  <!--fa-house is a House Icon linked from Font Awesome-->
+        <a href="/" aria-label="Home"><i class="fa-solid fa-house"></i></a>  <!--fa-house is a House Icon linked from Font Awesome-->
       </div>
 
     </div>
@@ -64,33 +64,33 @@
         </div>
       </div>
 
-      <a class="sidebar-logout" href="TP2_Home.html">LOGOUT</a>
+      <a class="sidebar-logout" href="/">LOGOUT</a>
 
       <!--NAV TEXT (SIDEBAR) + ICONS ON THE RIGHT-->
       <nav class="admin-nav">
-        <a  href="TP2_Admin_Dashboard.html">
+        <a  href="/admin-dashboard">
           <span class="nav-text">Dashboard</span> <!--span will allow the text in the Sidebar to be hidden when it collapses, which is done in CSS-->
           <span class="nav-ico"><i class="fa-solid fa-chart-line"></i></span> <!--fa-chart-line is a Chart Icon linked from Font Awesome-->
         </a>
 
-        <a href="TP2_Admin_Orders.html">
+        <a href="/admin-orders">
           <span class="nav-text">Orders</span>
           <span class="nav-ico"><i class="fa-solid fa-receipt"></i></span> <!--fa-receipt is a Receipt Icon linked from Font Awesome-->
         </a>
 
         
 
-        <a class="active" href="TP2_Admin_Inventory.html">
+        <a class="active" href="admin-inventory">
           <span class="nav-text">Inventory</span>
           <span class="nav-ico"><i class="fa-solid fa-warehouse"></i></span> <!--fa-warehouse is a Warehouse Icon linked from Font Awesome-->
         </a>
 
-        <a href="TP2_Admin_Customers.html">
+        <a href="/admin-customers">
           <span class="nav-text">Customers</span>
           <span class="nav-ico"><i class="fa-solid fa-user-group"></i></span> <!--fa-user-group is a User (Group) Icon linked from Font Awesome-->
         </a>
 
-        <a href="TP2_Admin_Settings.html">
+        <a href="/admin-settings">
           <span class="nav-text">Admin Settings</span>
           <span class="nav-ico"><i class="fa-solid fa-gear"></i></span> <!--fa-gear is a Gear/Settings Icon linked from Font Awesome-->
         </a>
@@ -275,12 +275,12 @@
         <div class="footer-col">
             <h4>Quick Links</h4>
             <ul>
-                <li><a href="TP2_Home.html">Home</a></li>
-                <li><a href="TP2_About.html">About</a></li>
-                <li><a href="TP2_Contact.html">Contact</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="basket.html">Basket</a></li>
-                <li><a href="account.html">My Account</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about-us">About</a></li>
+                <li><a href="/contact-us">Contact</a></li>
+                <li><a href="/displayproduct">Products</a></li>
+                <li><a href="/basket">Basket</a></li>
+                <li><a href="/account">My Account</a></li>
             </ul>
         </div>
         
