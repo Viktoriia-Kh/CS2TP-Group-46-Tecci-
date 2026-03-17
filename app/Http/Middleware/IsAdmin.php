@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class IsAdmin
 {
@@ -15,6 +16,13 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        // check if user is logged in and if they are admin
+        if (Auth::check() && Auth::user()->is_admin) {
+            return $next($request); // this will let the user through
+        }
+
+        // if the user is not an admin they are directed to homepage
+        return redirect('/')->with('error', 'Access denied, returning to home.');
     }
+
 }
