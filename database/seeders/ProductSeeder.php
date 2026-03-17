@@ -50,7 +50,7 @@ class ProductSeeder extends Seeder
             'description' => 'A 14-inch laptop with SSD storage that delivers fast boot times, improved system responsiveness, and enhanced durability, making it an excellent choice for students who require dependable performance for schoolwork, research, and everyday tasks.',
             'price'       => 499.99,
             'student_price' => 449.99,
-            'qty'         => 10,
+            'qty'         => 4,
             'image_url'     => 'images/products/teccibook-14.jpg',      
         ]);
 
@@ -61,7 +61,7 @@ class ProductSeeder extends Seeder
             'description' => 'A cost-efficient 15-inch laptop offering a spacious display, dependable processing power, and essential connectivity options, ideal for users who need a capable device without exceeding their budget.',
             'price'       => 399.99,
             'student_price' => 359.99,
-            'qty'         => 8,
+            'qty'         => 0,
             'image_url' => 'images/products/budgetbook-15.jpg',
         ]);
 
