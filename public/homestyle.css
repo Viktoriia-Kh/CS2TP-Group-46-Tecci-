@@ -217,6 +217,19 @@ ul {
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
 }
 
+.hero-banner {
+  flex: 1; /* This lets the image side take up the remaining width */
+  min-height: 340px;
+  position: relative;
+}
+
+.hero-image {
+  width: 100%; /* This fills the available width of the right column */
+  height: 100%; /* This keeps the image from getting too tall */
+  display: block; /* This removes the default inline spacing that images have */
+  object-fit: cover; /* This makes the image fill the box completely, even if it has to be slightly cropped */
+}
+
 /* FEATURED PRODUCTS SECTION */
 
 .featured-products {
