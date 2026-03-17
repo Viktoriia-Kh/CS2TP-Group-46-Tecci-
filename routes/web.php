@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminOrderController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
@@ -150,10 +151,17 @@ Route::get('/product/{product}', [ProductController::class, 'show'])
 // Checkout route
 Route::get('checkout', [CheckoutController::class, 'checkout']);
 
+// ==========================================
+// ADMIN DASHBOARD & ORDERS
+// ==========================================
+
+// Main Admin Dashboard
 Route::get('admin-dashboard', function () {
     return view('admin-dashboard');
-});
+})->name('admin.dashboard');
 
-Route::get('admin-orders', function () {
-    return view('admin-orders');
-});
+// Admin Orders: Main List (Handles Search & Filters)
+Route::get('admin-orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+
+// Admin Orders: Processing (Handles Status Updates & Stock Deduction)
+Route::put('admin-orders/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
