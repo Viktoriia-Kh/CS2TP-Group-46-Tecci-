@@ -292,6 +292,29 @@
     </div> <!--Closes .container-->
   </section>
 
+  <!--LEAVE US A REVIEW-->
+    <section class="review-section">
+        <div class="container review-inner">
+            <h2>Leave Us A Review</h2>
+
+            <p class="review-intro">
+                Based on my visit today, the service provided by Tecci has been...
+            </p>
+
+            <div class="review-rating-wrap">
+                <span class="review-label-left">Poor</span>
+
+                <div class="star-rating" id="starRating">
+                    <i class="fa-regular fa-star star" data-value="1" aria-label="1 star"></i>
+                    <i class="fa-regular fa-star star" data-value="2" aria-label="2 stars"></i>
+                    <i class="fa-regular fa-star star" data-value="3" aria-label="3 stars"></i>
+                    <i class="fa-regular fa-star star" data-value="4" aria-label="4 stars"></i>
+                    <i class="fa-regular fa-star star" data-value="5" aria-label="5 stars"></i>
+                </div>
+
+                <span class="review-label-right">Excellent</span>
+            </div>
+
   <!--FOOTER-->
   <footer class="site-footer">
     <div class="container footer-inner"> <!--footer-inner used to create multi-column layout-->
