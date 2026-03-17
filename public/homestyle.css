@@ -230,6 +230,32 @@ ul {
   object-fit: cover; /* This makes the image fill the box completely, even if it has to be slightly cropped */
 }
 
+.hero-arrow { /* This styles the right arrow button */
+  position: absolute; /* This lets the arrow button be placed exatly on top of slide */
+  top: 50%; /* This moves its top edge halfway down the slider */
+  right: 16px; /* This places it 16px from the right side */
+  transform: translateY(-50%); /* This pulls it upward by half its own height so it becomes perfectly vertically centred */
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 999px;
+  background-color: #7fc0ff;
+  color: #03315b;
+  font-size: 26px;
+  display: flex; /* This lets the Icon be centred */
+  align-items: center;
+  justify-content: center; 
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: background-color 0.15s ease, transform 0.15s ease; /* This creates a smooth hover transition */
+  z-index: 2; /* This keeps the arrow above the image and slide content */
+}
+
+.hero-arrow:hover { /* This is for the hover state of the arrow */
+  background-color: #9bd0ff;
+  transform: translateY(-50%) scale(1.04); /* This keeps is vertically centred and slightly enlarges the button */
+}
+
 /* FEATURED PRODUCTS SECTION */
 
 .featured-products {
