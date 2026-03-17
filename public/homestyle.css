@@ -191,6 +191,32 @@ ul {
   color: #2e2f33;
 }
 
+.btn {
+  display: inline-block; /* This keeps the Button inline with text-flow */
+  padding: 0.8rem 1.8rem; /* This creates the button shape */
+  border-radius: 999px; /* This creates the rounded shape */
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer; /* This makes the Mouse Pointer change to Hand when hovering */
+  text-align: center;
+  width: fit-content;
+}
+
+.btn-primary {
+  background-color: #005baf;
+  color: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* This adds elevation effect */
+  transition: background-color 0.15s ease, transform 0.15s ease, /* This creates the animation for hovering */
+    box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+  background-color: #00488c;
+  transform: translateY(-1px); /* This creates the upwards movement of the Button when hovering */
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+}
+
 /* FEATURED PRODUCTS SECTION */
 
 .featured-products {
