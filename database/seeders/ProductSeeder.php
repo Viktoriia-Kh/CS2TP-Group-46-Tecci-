@@ -72,7 +72,7 @@ class ProductSeeder extends Seeder
             'description' => 'The NovaTech TecciBook Pro features a 14-inch display paired with SSD storage for fast boot times, efficient multitasking, and improved system responsiveness. Designed for everyday productivity, it offers dependable processing power, durable construction, and enough storage for school or work essentials. Ideal for students seeking performance without a premium price tag.',
             'price'       => 450.99,
             'student_price' => 429.99,
-            'qty'         => 8,
+            'qty'         => 0,
             'image_url' => 'images/products/teccibook-pro.jpg',
         ]);
 

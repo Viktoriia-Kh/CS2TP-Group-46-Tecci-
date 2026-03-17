@@ -18,6 +18,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReviewController;
 
+use App\Http\Controllers\AdminInventoryController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
@@ -156,3 +157,11 @@ Route::get('checkout', [CheckoutController::class, 'checkout']);
 // Reviews routee
 Route::post('/product/{product}/review', [ReviewController::class, 'store'])
     ->name('reviews.store');
+
+//Admin Inventory route
+Route::get('admin-inventory', function () {
+    return view('admin-inventory');
+});
+
+Route::get('admin-inventory', [AdminInventoryController::class, 'AdminInventoryController'])->name('products.index');
+
