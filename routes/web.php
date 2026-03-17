@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminInventoryController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
@@ -152,5 +153,13 @@ Route::get('checkout', [CheckoutController::class, 'checkout']);
 
 Route::get('admin-dashboard', function () {
     return view('admin-dashboard');
+});
+
+// Inventory route
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/inventory', [AdminInventoryController::class, 'index'])->name('admin.inventory.index');
+    Route::post('/inventory/store', [AdminInventoryController::class, 'store'])->name('admin.inventory.store');
+    Route::put('/inventory/update/{id}', [AdminInventoryController::class, 'update'])->name('admin.inventory.update');
+    Route::delete('/inventory/destroy/{id}', [AdminInventoryController::class, 'destroy'])->name('admin.inventory.destroy');
 });
 
