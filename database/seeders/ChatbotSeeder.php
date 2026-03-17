@@ -13,11 +13,20 @@ class ChatbotSeeder extends Seeder
         ChatFaq::query()->delete();
         ChatCategory::query()->delete();
 
+<<<<<<< Updated upstream
         $refunds = ChatCategory::create([
             'title' => 'Refunds',
             'sort_order' => 1,
             'is_active' => true,
         ]);
+=======
+        $refunds = ChatCategory::create(['title' => 'Refunds', 'sort_order' => 1]);
+        $delivery = ChatCategory::create(['title' => 'Delivery', 'sort_order' => 2]);
+        $Account = ChatCategory::create(['title' => 'Account', 'sort_order' => 3]);
+        $Payment = ChatCategory::create(['title' => 'Payment', 'sort_order' => 4]);
+        $Support = ChatCategory::create(['title' => 'Support', 'sort_order' => 5]);
+        $Prodcuts = ChatCategory::create(['title' => 'Products', 'sort_order' => 6]);
+>>>>>>> Stashed changes
 
         $delivery = ChatCategory::create([
             'title' => 'Delivery',
