@@ -39,4 +39,13 @@ if (heroTrack && heroNextBtn) {
         startAutoRotate(); /* This starts a fresh 5 second timer again */
     };
 
+/* This attaches an event listner to the arrow button */
+    heroNextBtn.addEventListener("click", () => {
+        goToNextSlide(); /* This moves the slider to the next slider immediately when clicked */
+        resetAutoRotate(); /* This restarts the auto-rotation timer after the click */
+    });
+
+    updateHeroSlide(); /* This makes sure the correct slider position is applied immediately when the page loads */
+    startAutoRotate(); /* This starts the automatic 5 second rotation as soon as the page loads */
+
 }
