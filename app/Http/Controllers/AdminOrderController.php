@@ -86,4 +86,11 @@ class AdminOrderController extends Controller
 
         return redirect()->back()->with('success', 'Order #' . $order->id . ' has been updated to ' . $newStatus . '.');
     }
+
+
+    public function show($id){
+    $order = Order::with(['items.product', 'user'])->findOrFail($id);
+    
+    return view('admin-order-details', compact('order'));
+    }
 }
