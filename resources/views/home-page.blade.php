@@ -123,7 +123,7 @@
                     </div>
 
                     <div class="hero-banner">
-                        <img src="C:\Users\rahme\OneDrive\Documents\GitHub\CS2TP-Group-46-Tecci-\public\Images\Rotating Banner Laptop Sale.png"
+                        <img src="Images\Rotating Banner Laptop Sale.png"
                              alt="Tecci big savings laptop promotion"
                              class="hero-image">
                     </div>
