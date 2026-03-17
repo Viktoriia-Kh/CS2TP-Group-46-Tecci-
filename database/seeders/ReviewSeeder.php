@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Product;
 use App\Models\Review;
 use App\Models\User;
 
@@ -20,15 +21,19 @@ class ReviewSeeder extends Seeder
             ]);
         }
 
-        Review::insert([
-            [
-                'product_id' => 1,
-                'user_id' => $user->id,
-                'rating' => 5,
-                'review_text' => 'Great laptop for students.',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
+        $products = Product::all();
+
+        foreach ($products as $product) {
+            Review::updateOrCreate(
+                [
+                    'product_id' => $product->id,
+                    'user_id' => $user->id,
+                ],
+                [
+                    'rating' => rand(3, 5),
+                    'review_text' => 'Good product for students.',
+                ]
+            );
+        }
     }
 }
