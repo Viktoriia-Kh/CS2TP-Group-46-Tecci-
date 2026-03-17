@@ -2,7 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BasketController; 
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DisplayProductController;
@@ -42,6 +42,9 @@ Route::get('/signup', [SignUpController::class, 'showForm'])
 Route::post('/signup', [SignUpController::class, 'submit'])
     ->name('signup.submit');
 
+Route::get('/admin-signup', [SignUpController::class, 'showForm'])
+    ->name('admin.signup');
+
 Route::get('/auth/google', function () {
     return Socialite::driver('google')->redirect();
 })->name('auth.google');
@@ -70,7 +73,7 @@ Route::get('/auth/microsoft', function () {
 Route::get('/auth/microsoft/callback', function () {
     return redirect('/')->with('success', 'Logged in with Microsoft!');
 })->name('auth.microsoft.callback');
- 
+
 // Show "verify your email" page
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -140,7 +143,7 @@ Route::get('product', function () {
     return view('product');
 });
 
-// Products listing page 
+// Products listing page
 Route::get('displayproduct', [DisplayProductController::class, 'DisplayProductController'])->name('products.index');
 
 // Single product details page
