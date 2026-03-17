@@ -6,10 +6,11 @@
   <title>Tecci | Affordable Tech for Students</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  {{-- ADDED: CSRF Token for future POST requests --}}
+  {{-- CSRF Token for AJAX requests --}}
   <meta name="csrf-token" content="{{ csrf_token() }}">
   
   <!--Links to HTML/CSS Files-->
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
   <link rel="stylesheet" href="common-style.css" />
   <link rel="stylesheet" href="displaystyle.css" />
   <!--Google Font-->
@@ -17,13 +18,13 @@
   <!--Font Awesome for Icons-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  {{-- ADDED: Toast Notification Styles --}}
+  {{-- Toast Notification Styles (Matched to Basket Page) --}}
   <style>
-    /* Toast Container - Positioned at top right */
+    /* Toast Container - Positioned to match basket page */
     #toast-container {
         position: fixed;
-        top: 100px;
-        right: 20px;
+        top: 140px; 
+        right: 30px; 
         z-index: 99999;
         display: flex;
         flex-direction: column;
@@ -31,32 +32,34 @@
         pointer-events: none;
     }
 
-    /* Individual Toast Notification */
+    /* Individual Toast Notification - Made significantly larger */
     .toast-notification {
         background: white;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-        padding: 16px 20px;
-        min-width: 320px;
-        max-width: 400px;
+        min-width: 380px; /* Increased from 320px */
+        padding: 20px 25px; /* Increased padding */
+        border-radius: 12px; 
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18); /* Stronger shadow */
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 20px; /* More space between image and text */
         position: relative;
         overflow: hidden;
-        transform: translateX(120%);
-        animation: slideIn 0.4s ease forwards;
         pointer-events: auto;
-        transition: transform 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+        
+        /* Snappy bounce animation */
+        transform: translateX(120%);
+        opacity: 0;
+        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s ease;
     }
 
-    @keyframes slideIn {
-        to { transform: translateX(0); }
+    .toast-notification.show {
+        transform: translateX(0);
+        opacity: 1;
     }
 
     /* Toast Icon */
     .toast-icon {
-        font-size: 24px;
+        font-size: 32px; /* Larger icon */
         flex-shrink: 0;
     }
 
@@ -65,27 +68,29 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 6px; /* More space between title and message */
     }
 
     .toast-title {
-        font-weight: 600;
-        font-size: 14px;
-        color: #333;
+        font-weight: 700;
+        font-size: 16px; /* Increased from 14px */
+        color: #111827; /* Darker text */
     }
 
     .toast-message {
-        font-size: 13px;
-        color: #666;
+        font-size: 14px; /* Increased from 13px */
+        color: #4b5563;
+        font-weight: 500;
     }
 
     /* Toast Product Image */
     .toast-product-image {
-        width: 50px;
-        height: 50px;
+        width: 60px; /* Increased from 50px */
+        height: 60px; /* Increased from 50px */
         object-fit: cover;
-        border-radius: 8px;
+        border-radius: 8px; 
         flex-shrink: 0;
+        border: 1px solid #e5e7eb;
     }
 
     /* Progress Bar */
@@ -93,7 +98,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        height: 4px;
+        height: 5px; /* Thicker bar */
         width: 100%;
         animation: shrink 3s linear forwards;
     }
@@ -129,7 +134,7 @@
       <div class="nav-icons">
         <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a> <!--fa-heart is a Heart Icon linked from Font Awesome-->
         
-        {{-- UPDATED: Basket icon with dynamic badge count from database --}}
+        {{-- Basket icon with dynamic badge count from database --}}
         <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
             <i class="fa-solid fa-cart-shopping"></i>
             
@@ -285,129 +290,172 @@
 <script>
 
 // Product data with categories and details
-    const allProducts = @json($productsForJs);
+const allProducts = @json($productsForJs);
+const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
+let currentCategory = "all";
+let currentSortOption = "featured";
+let priceRange = 2000;
+let selectedConditions = [];
 
-  let currentCategory = "all";
-  let currentSortOption = "featured";
-  let priceRange = 2000;
-  let selectedConditions = [];
-
-  // Category tab functionality
-  document.querySelectorAll(".tab-button").forEach(button => {
-    button.addEventListener("click", (e) => {
-      document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
-      e.target.classList.add("active");
-      currentCategory = e.target.dataset.category;
-      displayProducts();
-    });
-  });
-
-  // Sort dropdown functionality
-  document.querySelector(".sort-dropdown").addEventListener("change", (e) => {
-    currentSortOption = e.target.value;
+// Category tab functionality
+document.querySelectorAll(".tab-button").forEach(button => {
+  button.addEventListener("click", (e) => {
+    document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+    e.target.classList.add("active");
+    currentCategory = e.target.dataset.category;
     displayProducts();
   });
+});
 
-  // Price range slider
-  document.querySelector(".price-slider").addEventListener("input", (e) => {
-    priceRange = e.target.value;
-    document.querySelectorAll(".price-range-display span")[1].textContent = "£" + priceRange;
-  });
+// Sort dropdown functionality
+document.querySelector(".sort-dropdown").addEventListener("change", (e) => {
+  currentSortOption = e.target.value;
+  displayProducts();
+});
 
-  // Search functionality
-  document.querySelector(".search-input").addEventListener("input", (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    filterAndDisplayProducts(searchTerm);
-  });
+// Price range slider
+document.querySelector(".price-slider").addEventListener("input", (e) => {
+  priceRange = e.target.value;
+  document.querySelectorAll(".price-range-display span")[1].textContent = "£" + priceRange;
+});
 
-  // Apply filters button
-  document.querySelector(".confirm-filter-btn").addEventListener("click", () => {
-    selectedConditions = Array.from(document.querySelectorAll(".checkbox-label input[type='checkbox']:checked"))
-      .map(cb => cb.value);
-    displayProducts();
-  });
+// Search functionality
+document.querySelector(".search-input").addEventListener("input", (e) => {
+  const searchTerm = e.target.value.toLowerCase();
+  filterAndDisplayProducts(searchTerm);
+});
 
-  // Filter products based on criteria
-  function filterProducts(searchTerm = "") {
-    let filtered = allProducts;
+// Apply filters button
+document.querySelector(".confirm-filter-btn").addEventListener("click", () => {
+  selectedConditions = Array.from(document.querySelectorAll(".checkbox-label input[type='checkbox']:checked"))
+    .map(cb => cb.value);
+  displayProducts();
+});
 
-    // Filter by category
-    if (currentCategory !== "all") {
-      filtered = filtered.filter(p => p.category === currentCategory);
-    }
+// Filter products based on criteria
+function filterProducts(searchTerm = "") {
+  let filtered = allProducts;
 
-    // Filter by price range
-    filtered = filtered.filter(p => p.price <= priceRange);
-
-    // Filter by condition
-    if (selectedConditions.length > 0) {
-      filtered = filtered.filter(p => selectedConditions.includes(p.condition));
-    }
-
-    // Filter by search term
-    if (searchTerm) {
-      filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm));
-    }
-
-    return filtered;
+  // Filter by category
+  if (currentCategory !== "all") {
+    filtered = filtered.filter(p => p.category === currentCategory);
   }
 
-  // Sort products
-  function sortProducts(products) {
-    const sorted = [...products];
-    
-    switch(currentSortOption) {
-      case "price-low":
-        sorted.sort((a, b) => a.price - b.price);
-        break;
-      case "price-high":
-        sorted.sort((a, b) => b.price - a.price);
-        break;
-      case "newest":
-        sorted.sort((a, b) => b.id - a.id);
-        break;
-      case "rating":
-        sorted.sort((a, b) => b.id - a.id); // Placeholder for rating
-        break;
-      case "featured":
-      default:
-        // Keep original order
-        break;
+  // Filter by price range
+  filtered = filtered.filter(p => p.price <= priceRange);
+
+  // Filter by condition
+  if (selectedConditions.length > 0) {
+    filtered = filtered.filter(p => selectedConditions.includes(p.condition));
+  }
+
+  // Filter by search term
+  if (searchTerm) {
+    filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm));
+  }
+
+  return filtered;
+}
+
+// Sort products
+function sortProducts(products) {
+  const sorted = [...products];
+  
+  switch(currentSortOption) {
+    case "price-low":
+      sorted.sort((a, b) => a.price - b.price);
+      break;
+    case "price-high":
+      sorted.sort((a, b) => b.price - a.price);
+      break;
+    case "newest":
+      sorted.sort((a, b) => b.id - a.id);
+      break;
+    case "rating":
+      sorted.sort((a, b) => b.id - a.id); // Placeholder for rating
+      break;
+    case "featured":
+    default:
+      // Keep original order
+      break;
+  }
+  
+  return sorted;
+}
+
+// Display products
+function displayProducts() {
+  const filtered = filterProducts();
+  const sorted = sortProducts(filtered);
+  renderProducts(sorted);
+}
+
+// Filter and display with search
+function filterAndDisplayProducts(searchTerm) {
+  const filtered = filterProducts(searchTerm);
+  const sorted = sortProducts(filtered);
+  renderProducts(sorted);
+}
+
+// AJAX Add to Basket (NO PAGE REFRESH!)
+function addToBasketAjax(productId, productName, productImage, quantity = 1) {
+  fetch(`/add-to-basket/${productId}?quantity=${quantity}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': csrfToken,
+      'X-Requested-With': 'XMLHttpRequest', // CRITICAL: Tells Laravel this is AJAX
+      'Accept': 'application/json'          // CRITICAL: Tells Laravel we want JSON back
+    },
+    body: JSON.stringify({ quantity: quantity })
+  })
+  .then(res => {
+      if (!res.ok) throw new Error('Network response was not ok');
+      return res.json();
+  })
+  .then(data => {
+    if (data.success) {
+      // Show toast with product image
+      const message = quantity > 1 
+        ? `${quantity} × ${productName} added to your basket!`
+        : `${productName} added to your basket!`;
+      
+      showToast("Added to Basket", message, "success", productImage);
+      
+      // Update header badge
+      const cartBadge = document.querySelector('.cart-badge');
+      if (cartBadge) {
+        cartBadge.innerText = data.totalQty;
+        cartBadge.style.display = 'flex';
+      } else {
+        // Create badge if it doesn't exist
+        const cartIcon = document.querySelector('.cart-icon-wrapper');
+        if (cartIcon) {
+          const badge = document.createElement('span');
+          badge.className = 'cart-badge';
+          badge.innerText = data.totalQty;
+          cartIcon.appendChild(badge);
+        }
+      }
     }
-    
-    return sorted;
+  })
+  .catch(err => console.error("Add to basket error:", err));
+}
+
+// Render products to the DOM
+function renderProducts(products) {
+  const grid = document.querySelector(".featured-grid");
+  grid.innerHTML = "";
+
+  if (products.length === 0) {
+    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">No products found</p>';
+    return;
   }
 
-  // Display products
-  function displayProducts() {
-    const filtered = filterProducts();
-    const sorted = sortProducts(filtered);
-    renderProducts(sorted);
-  }
-
-  // Filter and display with search
-  function filterAndDisplayProducts(searchTerm) {
-    const filtered = filterProducts(searchTerm);
-    const sorted = sortProducts(filtered);
-    renderProducts(sorted);
-  }
-
-  // Render products to the DOM
-  function renderProducts(products) {
-    const grid = document.querySelector(".featured-grid");
-    grid.innerHTML = "";
-
-    if (products.length === 0) {
-      grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">No products found</p>';
-      return;
-    }
-
-    products.forEach(product => {
-      const productCard = document.createElement("div");
-      productCard.className = "product-card-item";
-
-
+  products.forEach(product => {
+    const productCard = document.createElement("div");
+    productCard.className = "product-card-item";
 
     productCard.innerHTML = `
       <a href="/product/${product.id}" class="product-link">
@@ -417,67 +465,61 @@
         <div class="product-item-info">
           <h4>${product.name}</h4>
           <p class="product-item-price">£${product.price.toFixed(2)}</p>
-          <a href="/add-to-basket/${product.id}" class="add-to-cart-quick">Add to Cart</a>
+          <a href="#" 
+             class="add-to-cart-quick" 
+             data-id="${product.id}"
+             data-name="${product.name}"
+             data-image="${product.image_url}"
+             onclick="event.preventDefault(); addToBasketAjax(${product.id}, '${product.name}', '${product.image_url}', 1);">
+            Add to Cart
+          </a>
         </div>
       </a>
     `;
 
-      grid.appendChild(productCard);
-    });
+    grid.appendChild(productCard);
+  });
+}
+
+// Toast Notification Function (Synced with Basket style)
+function showToast(title, message, type = 'success', imageUrl = null) {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    document.body.appendChild(container);
   }
 
-  {{-- ADDED: Toast Notification Function --}}
-  function showToast(title, message, type = 'success', imageUrl = null) {
-    // Find or create toast container
-    let container = document.getElementById('toast-container');
-    if (!container) {
-      container = document.createElement('div');
-      container.id = 'toast-container';
-      document.body.appendChild(container);
-    }
+  const toast = document.createElement('div');
+  toast.className = 'toast-notification'; 
+  
+  const color = type === 'success' ? '#2ecc71' : '#e74c3c';
+  const icon = type === 'success' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-exclamation-circle"></i>';
+  
+  const imageHtml = imageUrl ? `<img src="${imageUrl}" class="toast-product-image" alt="Product">` : `<div class="toast-icon" style="color: ${color}">${icon}</div>`;
+  
+  toast.style.borderLeft = `5px solid ${color}`;
+  toast.innerHTML = `
+    ${imageHtml}
+    <div class="toast-content">
+      <span class="toast-title" style="color: #333">${title}</span>
+      <span class="toast-message">${message}</span>
+    </div>
+    <div class="toast-progress" style="background-color: ${color}"></div>
+  `;
+  
+  container.appendChild(toast);
+  
+  // Slide In using the new class (matches the basket's cubic-bezier bounce)
+  setTimeout(() => toast.classList.add('show'), 10);
+  
+  // Slide Out & Delete
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 400); 
+  }, 3000);
+}
 
-    // Create toast element
-    const toast = document.createElement('div');
-    toast.className = 'toast-notification'; 
-    
-    const color = type === 'success' ? '#2ecc71' : '#e74c3c';
-    const icon = type === 'success' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-exclamation-circle"></i>';
-    const imageHtml = imageUrl ? `<img src="${imageUrl}" class="toast-product-image" alt="Product">` : '';
-    
-    toast.style.borderLeft = `5px solid ${color}`;
-    toast.innerHTML = `
-      <div class="toast-icon" style="color: ${color}">${icon}</div>
-      <div class="toast-content">
-        <span class="toast-title" style="color: #333">${title}</span>
-        <span class="toast-message">${message}</span>
-      </div>
-      ${imageHtml}
-      <div class="toast-progress" style="background-color: ${color}"></div>
-    `;
-    
-    // Add to container
-    container.appendChild(toast);
-    
-    // Remove after animation
-    setTimeout(() => {
-      toast.style.transform = "translateX(120%)";
-      toast.style.opacity = "0";
-      
-      setTimeout(() => {
-        toast.style.marginTop = `-${toast.offsetHeight + 15}px`; 
-        setTimeout(() => toast.remove(), 400); 
-      }, 400); 
-    }, 3000);
-  }
-
-  {{-- ADDED: Show toast on page load if success message exists --}}
-  @if(session('success'))
-    document.addEventListener('DOMContentLoaded', function() {
-      const message = "{{ session('success') }}";
-      showToast("Success", message, "success");
-    });
-  @endif
-
-  // Initialize display
-  displayProducts();
+// Initialise display
+displayProducts();
 </script>
