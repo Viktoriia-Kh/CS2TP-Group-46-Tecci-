@@ -340,6 +340,9 @@
     </div>
   </footer>
 
+  <!--Link to external JavaScript File-->
+  <script src="home-page.js"></script>
+
 </body>
 
 </html>
