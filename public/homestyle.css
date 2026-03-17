@@ -493,6 +493,47 @@ ul {
   transform: translateY(-1px);
 }
 
+.review-form {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-text-label {
+  font-size: 16px;
+  color: #2e2f33;
+  margin-bottom: 14px;
+}
+
+.review-textarea {
+  width: 100%;
+  min-height: 165px;
+  border: 1px solid #b8b8b8;
+  border-radius: 10px;
+  padding: 16px 14px;
+  font-family: 'Signika';
+  font-size: 16px;
+  resize: vertical;
+  background-color: #ffffff;
+  color: #2e2f33;
+  outline: none;
+  margin-bottom: 20px;
+}
+
+.review-textarea::placeholder {
+  color: #b7b7b7;
+}
+
+.review-textarea:focus {
+  border-color: #085296;
+  box-shadow: 0 0 0 3px rgba(8, 82, 150, 0.12);
+}
+
+.review-submit-btn {
+  align-self: flex-start;
+}
+
 /* FOOTER SECTION */
 
 .site-footer {
