@@ -10,3 +10,9 @@ if (heroTrack && heroNextBtn) {
     const totalSlides = 3; /* This stores how many slides there are in total */
     let autoRotate; /* This declares a variable that will later store the interval timer ID */
 }
+
+/* This creates a function which performs the actual visual movement of the slider */
+    const updateHeroSlide = () => {
+        /* This moves the hero track horizontally using CSS transform */
+        heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    };
