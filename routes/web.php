@@ -33,9 +33,10 @@ Route::get('/remove-from-basket/{id}', [BasketController::class, 'remove'])->nam
 Route::get('/decrease-quantity/{id}', [BasketController::class, 'decrease'])->name('basket.decrease');
 
 
-Route::get('/login', function () {
+/*Route::get('/login', function () {
     return view('login');
 })->name('login');
+*/
 
 Route::get('/signup', [SignUpController::class, 'showForm'])
     ->name('signup.form');
@@ -156,7 +157,7 @@ Route::get('checkout', [CheckoutController::class, 'checkout']);
 
 // admin routes
 Route::middleware(['auth', 'admin'])->group(function (){
-    Route::get('/admin-settings', [AdminSettingsController::class, 'index'])->name('admin.settings');
+    Route::get('/admin-settings', [AdminSettingsController::class, 'showAdminSettings'])->name('admin.settings');
     Route::post('/admin-settings', [AdminSettingsController::class, 'update'])->name('admin.settings.update');
 });
 
