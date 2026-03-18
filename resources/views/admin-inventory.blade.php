@@ -13,6 +13,8 @@
   <!--Font Awesome for Icons-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body>
@@ -242,9 +244,10 @@
                 <textarea id="add-desc" name="description" rows="3"></textarea>
             </div>
             <div class="media-upload-group">
-                <input type="file" id="review-media" name="media[]" accept="image/*,video/*" multiple class="hidden-file-input">
+                <input type="file" id="product-image" name="image" accept="image/*" class="hidden-file-input">
                 
-                <label for="review-media" class="add-media-btn">
+                <!-- now matches pathj -->
+                <label for="product-image" class="add-media-btn">
                     <svg class="camera-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M23 19V5H19L17.17 3H6.83L5 5H1V19H23ZM12 8C14.21 8 16 9.79 16 12C16 14.21 14.21 16 12 16C9.79 16 8 14.21 8 12C8 9.79 9.79 8 12 8Z" fill="#3B82F6"/>
                     </svg>
@@ -455,39 +458,59 @@
         document.getElementById('addProductModal').style.display = 'none';
     }
 
-    function submitNewProduct(event) {
-        event.preventDefault(); // Prevent page reload
+    // ADD PRODUCT LOGIC (NOW SAVES TO DATABASE)
+    async function submitNewProduct(event) {
+        event.preventDefault(); // Stop page refresh
+
+        // Getting form values
+        const name = document.getElementById('add-name').value;
+        const category = document.getElementById('add-category').value;
+        const price = document.getElementById('add-price').value;
+        const stock = document.getElementById('add-stock').value;
+        const description = document.getElementById('add-desc').value;
+
+        // File input 
+        const fileInput = document.getElementById('product-image');
+
+        // sEnd image + data together
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('category', category);
+        formData.append('price', price);
+        formData.append('stock_quantity', stock);
+        formData.append('description', description);
+
         
-        // Create a fake ID for now (highest current ID + 1)
-        const newId = allProducts.length > 0 ? Math.max(...allProducts.map(p => p.id)) + 1 : 1;
-        
-        const fileInput = document.getElementById('review-media');
-        let imageUrl = 'https://via.placeholder.com/200?text=No+Image';
-        
-        // temporary link to the image
-        if (fileInput.files && fileInput.files.length > 0) {
-            imageUrl = URL.createObjectURL(fileInput.files[0]);
+        if (fileInput.files.length > 0) {
+            formData.append('image', fileInput.files[0]);
         }
 
-        const newProduct = {
-            id: newId,
-            name: document.getElementById('add-name').value,
-            category: document.getElementById('add-category').value,
-            price: parseFloat(document.getElementById('add-price').value),
-            stock_quantity: parseInt(document.getElementById('add-stock').value),
-            description: document.getElementById('add-desc').value,
-            image_url: imageUrl,
-            stock_status: parseInt(document.getElementById('add-stock').value) > 0 ? 'in_stock' : 'out_of_stock'
-        };
-        //!!!!! Only adds the product visually !!!!!
-        allProducts.push(newProduct); // Add to our list
+        try {
+            // Sending data to Laravel backend
+            const response = await fetch('/admin-inventory/products', {
+                method: 'POST',
+                headers: {
+                    // CSRF token for Laravel security
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                },
+                body: formData
+            });
 
-        document.getElementById('file-chosen-text').textContent = 'No file chosen';
+            if (response.ok) {
+                // Close modal + refresh page to show new product
+                closeAddModal();
+                location.reload();
+            } else {
+                const errorText = await response.text();
+                console.error("Server response:", errorText);
+                alert("Error adding product. Check console.");
+            }
 
-        closeAddModal();
-        applyFilters();
-        alert("Product added successfully!");
-    }
+        } catch (error) {
+            console.error("Add product failed:", error);
+            alert("Something went wrong.");
+        }
+    }  
 
     //  DELETE PRODUCT LOGIC
     function deleteProduct(productId) {

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Http\Request;
 
 class AdminInventoryController extends Controller
 {
-    public function AdminInventoryController()
+    public function index()
     {
         // Load all products with category and inventory
         $products = Product::with('category', 'inventory')->get();
@@ -21,7 +23,7 @@ class AdminInventoryController extends Controller
                                 ? strtolower(str_replace(' ', '', $p->category->name))
                                 : 'uncategorised',
                 'condition' => $p->condition ?? 'new',
-                'description'    => $p->description,
+                'description' => $p->description,
                 'image_url' => $p->image_url
                     ? asset($p->image_url)
                     : asset('images/Laptop.jpg'),
@@ -33,6 +35,113 @@ class AdminInventoryController extends Controller
         // Render YOUR list page view
         return view('admin-inventory', [
             'productsForJs' => $productsForJs,
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:150',
+            'category' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'stock_quantity' => 'required|integer|min:0',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
+
+        $categoryMap = [
+            'desktops' => 'PCs',
+            'laptops' => 'Laptops',
+            'phones' => 'Phones',
+            'tablets' => 'Tablets',
+            'accessories' => 'Accessories',
+        ];
+
+        $categoryName = $categoryMap[$request->category] ?? null;
+        $category = Category::where('name', $categoryName)->first();
+
+        if (!$category) {
+            return response()->json(['message' => 'Category not found.'], 422);
+        }
+
+        $imagePath = 'images/Laptop.jpg';
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . preg_replace('/\s+/', '-', strtolower($file->getClientOriginalName()));
+            $file->move(public_path('images/products'), $filename);
+            $imagePath = 'images/products/' . $filename;
+        }
+
+        $product = Product::create([
+            'category_id' => $category->id,
+            'name' => $request->name,
+            'brand' => 'Tecci',
+            'description' => $request->description,
+            'price' => $request->price,
+            'student_price' => null,
+            'image_url' => $imagePath,
+        ]);
+
+        $product->inventory()->create([
+            'quantity_available' => $request->stock_quantity,
+            'reorder_threshold' => 5,
+        ]);
+
+        $product->images()->create([
+            'image_path' => $imagePath,
+            'is_primary' => true,
+            'sort_order' => 1,
+        ]);
+
+        return response()->json([
+            'message' => 'Product added successfully.',
+        ]);
+    }
+
+    // updates exisitng products
+    public function update(Request $request, Product $product)
+    {
+        $request->validate([
+            'name' => 'required|string|max:150',
+            'price' => 'required|numeric|min:0',
+            'stock_quantity' => 'required|integer|min:0',
+            'description' => 'nullable|string',
+        ]);
+
+        $product->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description,
+        ]);
+
+        if ($product->inventory) {
+            $product->inventory->update([
+                'quantity_available' => $request->stock_quantity,
+            ]);
+        } else {
+            $product->inventory()->create([
+                'quantity_available' => $request->stock_quantity,
+                'reorder_threshold' => 5,
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Product updated successfully.',
+        ]);
+    }
+
+    // deletes products
+    public function destroy(Product $product)
+    {
+        if ($product->inventory) {
+            $product->inventory->delete();
+        }
+
+        $product->delete();
+
+        return response()->json([
+            'message' => 'Product deleted successfully.',
         ]);
     }
 }
