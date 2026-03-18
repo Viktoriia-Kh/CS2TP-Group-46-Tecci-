@@ -127,6 +127,26 @@
             </div>
 
             <div style="margin-bottom: 16px;">
+              <label style="display:block; margin-bottom:6px; font-weight:700;">Phone</label>
+              <input
+                type="text"
+                name="phone"
+                value="{{ old('phone', $customer->phone) }}"
+                style="width:100%; padding:10px; border:1px solid #d1d5db; border-radius:8px;"
+              >
+            </div>
+
+            <div style="margin-bottom: 16px;">
+              <label style="display:block; margin-bottom:6px; font-weight:700;">Address</label>
+              <input
+                type="text"
+                name="address"
+                value="{{ old('address', $customer->address) }}"
+                style="width:100%; padding:10px; border:1px solid #d1d5db; border-radius:8px;"
+              >
+            </div>
+
+            <div style="margin-bottom: 16px;">
               <label style="display:block; margin-bottom:6px; font-weight:700;">New Password (optional)</label>
               <input
                 type="password"

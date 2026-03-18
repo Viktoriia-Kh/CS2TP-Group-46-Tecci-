@@ -22,6 +22,7 @@ use App\Http\Controllers\LoginController;use
 Route::get('/admin/customers', [AdminCustomerController::class, 'index'])->name('admin.customers');
 Route::get('/admin/customers/{id}/edit', [AdminCustomerController::class, 'edit'])->name('admin.customers.edit');
 Route::put('/admin/customers/{id}', [AdminCustomerController::class, 'update'])->name('admin.customers.update');
+Route::delete('/admin/customers/{id}', [AdminCustomerController::class, 'destroy'])->name('admin.customers.destroy');
 
 Route::get('/admin/contacts', [ContactController::class, 'adminIndex'])->name('admin.contacts');
 Route::post('/admin/contacts/{id}/reply', [ContactController::class, 'reply'])->name('admin.contacts.reply');
