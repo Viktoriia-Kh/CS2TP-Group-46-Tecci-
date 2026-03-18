@@ -12,7 +12,7 @@ class AdminSettingsController extends Controller
     public function showAdminSettings()
     {
         $user = Auth::user(); // the logged-in admin's data is saved here
-        return view('admin.settings', ['user' => $user]);
+        return view('admin-settings', ['user' => $user]);
     }
 
     // function to update the admin email/ name
