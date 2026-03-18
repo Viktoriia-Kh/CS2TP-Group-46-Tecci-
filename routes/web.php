@@ -155,8 +155,4 @@ Route::get('checkout', [CheckoutController::class, 'checkout']);
 
 // admin routes
 Route::middleware(['auth', 'admin'])->group(function (){
-    // making a dashboard placeholder for testing purposes
-    Route::get('/admin-dashboard', function (){
-        return "<h1>Success!</h1>";
-    })->name('admin.dashboard');
 });
