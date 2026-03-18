@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminSettingsController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
@@ -155,4 +156,7 @@ Route::get('checkout', [CheckoutController::class, 'checkout']);
 
 // admin routes
 Route::middleware(['auth', 'admin'])->group(function (){
+    Route::get('/admin-settings', [AdminSettingsController::class, 'index'])->name('admin.settings');
+    Route::post('/admin-settings', [AdminSettingsController::class, 'update'])->name('admin.settings.update');
 });
+
