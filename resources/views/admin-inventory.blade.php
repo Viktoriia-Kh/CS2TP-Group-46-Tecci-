@@ -513,15 +513,34 @@
     }  
 
     //  DELETE PRODUCT LOGIC
-    function deleteProduct(productId) {
-        if (confirm("Are you sure you want to delete this product?")) {
-            // Find the index of the product and remove it
-            //!!!!!Now it only removes visually, not from the database!!!!!
-            const index = allProducts.findIndex(p => p.id === productId);
-            if (index > -1) {
-                allProducts.splice(index, 1); 
-                applyFilters(); 
+    // DELETE PRODUCT (REAL DATABASE DELETE)
+    async function deleteProduct(productId) {
+        if (!confirm("Are you sure you want to delete this product?")) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/admin-inventory/products/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    // CSRF protection
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                // Refresh page
+                location.reload();
+            } else {
+                const errorText = await response.text();
+                console.error(errorText);
+                alert("Failed to delete product.");
             }
+
+        } catch (error) {
+            console.error(error);
+            alert("Error deleting product.");
         }
     }
 

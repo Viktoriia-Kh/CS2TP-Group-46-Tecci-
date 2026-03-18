@@ -50,7 +50,7 @@ class AdminInventoryController extends Controller
         ]);
 
         $categoryMap = [
-            'desktops' => 'PCs',
+            'desktops' => 'Desktops',
             'laptops' => 'Laptops',
             'phones' => 'Phones',
             'tablets' => 'Tablets',
@@ -131,17 +131,22 @@ class AdminInventoryController extends Controller
         ]);
     }
 
-    // deletes products
+    // DELETE PRODUCT (REMOVES FROM DATABASE)
     public function destroy(Product $product)
     {
+        // Delete inventory first (to avoid foreign key issues)
         if ($product->inventory) {
             $product->inventory->delete();
         }
 
+        // Delete related images (optional but good practice)
+        $product->images()->delete();
+
+        // Delete product
         $product->delete();
 
         return response()->json([
-            'message' => 'Product deleted successfully.',
+            'message' => 'Product deleted successfully.'
         ]);
     }
 }
