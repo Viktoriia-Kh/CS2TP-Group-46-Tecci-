@@ -533,6 +533,66 @@ ul {
 .review-submit-btn {
   align-self: flex-start;
 }
+.reviews-carousel-section {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.reviews-carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.reviews-carousel {
+  display: flex;
+  overflow: hidden;
+  width: 900px;
+  scroll-behavior: smooth;
+  gap: 20px;
+}
+
+.review-card {
+  min-width: 280px;
+  max-width: 280px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.review-stars-display {
+  font-size: 22px;
+  color: #f4b400;
+  margin-bottom: 10px;
+}
+
+.review-message {
+  font-size: 16px;
+  color: #1f2937;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.review-name {
+  font-weight: 700;
+  color: #03315b;
+}
+
+.carousel-btn {
+  background: #03315b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  font-size: 20px;
+}
 
 /* FOOTER SECTION */
 

@@ -16,11 +16,14 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ReviewController;
+
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
+Route::post('/submit-review', [ReviewController::class, 'store'])->name('reviews.store');
 
 Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('login');
 

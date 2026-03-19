@@ -329,7 +329,31 @@
             </form>
         </div>
     </section>
+<section class="reviews-carousel-section">
+    <h2>What Our Customers Say</h2>
 
+    @if($reviews->isEmpty())
+        <p>No reviews yet.</p>
+    @else
+        <div class="reviews-carousel-wrapper">
+            <button class="carousel-btn prev" onclick="moveReviewSlide(-1)">&#10094;</button>
+
+            <div class="reviews-carousel" id="reviewsCarousel">
+                @foreach($reviews as $review)
+                    <div class="review-card">
+                        <div class="review-stars-display">
+                            {{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}
+                        </div>
+                        <p class="review-message">"{{ $review->message }}"</p>
+                        <p class="review-name">— {{ $review->name ?? 'Anonymous' }}</p>
+                    </div>
+                @endforeach
+            </div>
+
+            <button class="carousel-btn next" onclick="moveReviewSlide(1)">&#10095;</button>
+        </div>
+    @endif
+</section>
   <!--FOOTER-->
   <footer class="site-footer">
     <div class="container footer-inner"> <!--footer-inner used to create multi-column layout-->
@@ -384,3 +408,30 @@
 </body>
 
 </html>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const stars = document.querySelectorAll('#starRating span');
+    const ratingInput = document.getElementById('ratingInput');
+
+    if (stars.length) {
+        stars.forEach(star => {
+            star.addEventListener('click', function () {
+                const value = this.getAttribute('data-value');
+                ratingInput.value = value;
+
+                stars.forEach(s => {
+                    s.textContent = s.getAttribute('data-value') <= value ? '★' : '☆';
+                });
+            });
+        });
+    }
+});
+
+function moveReviewSlide(direction) {
+    const carousel = document.getElementById('reviewsCarousel');
+    if (!carousel) return;
+
+    const scrollAmount = 320;
+    carousel.scrollLeft += direction * scrollAmount;
+}
+</script>
