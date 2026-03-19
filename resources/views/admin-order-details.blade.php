@@ -5,8 +5,8 @@
 <meta charset="UTF-8" />
 <title>Tecci | Admin Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="TP2_Admin_Common.css">
-<link rel="stylesheet" href="admin-orders-styles.css">
+<link rel="stylesheet" href="{{ asset('common-style.css') }}">
+<link rel="stylesheet" href="{{ asset('admin-orders-styles.css') }}">
 <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
@@ -151,6 +151,7 @@
         </div>
     </div>
 </section>
+</main>
 
 <!--FOOTER (REUSABLE)-->
 <footer class="site-footer">
