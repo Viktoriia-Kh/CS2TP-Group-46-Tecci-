@@ -5,16 +5,14 @@
 <meta charset="UTF-8" />
 <title>Tecci | Admin Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- Shared Admin CSS -->
-<link rel="stylesheet" href="TP2_Admin_Common.css">
-<link rel="stylesheet" href="admin-orders-styles.css">
-<!--Google Font-->
+<link rel="stylesheet" href="{{ asset('common-style.css') }}">
+<link rel="stylesheet" href="{{ asset('admin-orders-styles.css') }}">
 <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
-<!--Font Awesome for Icons-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 </head>
 
+<body>
 
 <body>
 
@@ -94,125 +92,65 @@
     </nav>
   </aside>
 
-<!--PAGE CONTENT (THIS PART CHANGES)-->
-<!-- PAGE CONTENT GOES HERE -->
+
 <section class="admin-content">
     <div class="admin-content-inner">
+        <a href="{{ route('admin.orders.index') }}" style="text-decoration: none; color: #666;">
+            <i class="fa-solid fa-arrow-left"></i> Back to All Orders
+        </a>
 
-      <!-- PAGE TITLE -->
-      <div class="dash-title orders-title">
-        <p class="dash-kicker">Hello Admin</p>
-        <h1>Orders</h1>
-      </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+            <h1>Order #{{ $order->id }} Details</h1>
+            <span class="status-pill status-{{ strtolower($order->status) }}" style="padding: 10px 20px; border-radius: 50px; font-weight: bold;">
+                {{ strtoupper($order->status) }}
+            </span>
+        </div>
 
-      <!-- SEARCH BAR (CONNECTED) -->
-<div class="orders-search-row">
-    <form action="{{ route('admin.orders.index') }}" method="GET" class="page-search-wrap">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" name="search" placeholder="Search ID or Customer..." value="{{ request('search') }}">
-      <button type="submit" style="display:none;"></button> <!-- Hidden button allows 'Enter' to search -->
-    </form>
-</div>
+        <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px; border: 1px solid #eee;">
+            <h3>Customer Information</h3>
+            <p><strong>Name:</strong> {{ $order->user->name ?? 'Guest' }}</p>
+            <p><strong>Email:</strong> {{ $order->user->email ?? 'N/A' }}</p>
+            <p><strong>Date Placed:</strong> {{ $order->created_at->format('d M Y, H:i') }}</p>
+        </div>
 
-
-      <!-- FILTER BAR (FIXED: KEEPS THE SORT BUTTON ON THE RIGHT) -->
-<form action="{{ route('admin.orders.index') }}" method="GET" class="orders-filter-bar">
-<div class="orders-filter-left">
-  <div class="filter-select-wrap">
-    <select name="status_filter" onchange="this.form.submit()" aria-label="Filter by order status">
-      <option value="">Any Status</option>
-      <option value="Pending" {{ request('status_filter') == 'Pending' ? 'selected' : '' }}>Pending</option>
-      <option value="Approved" {{ request('status_filter') == 'Approved' ? 'selected' : '' }}>Approved</option>
-      <option value="Shipped" {{ request('status_filter') == 'Shipped' ? 'selected' : '' }}>Shipped</option>
-      <option value="Completed" {{ request('status_filter') == 'Completed' ? 'selected' : '' }}>Completed</option>
-      <option value="Cancelled" {{ request('status_filter') == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
-    </select>
-    <i class="fa-solid fa-chevron-down"></i>
-  </div>
-
-  <div class="filter-select-wrap">
-    <select name="price_filter" onchange="this.form.submit()" aria-label="Filter by price range">
-      <option value="">All Prices</option>
-      <option value="0-100" {{ request('price_filter') == '0-100' ? 'selected' : '' }}>£0 - £100</option>
-      <option value="100-500" {{ request('price_filter') == '100-500' ? 'selected' : '' }}>£100 - £500</option>
-      <option value="500-1000" {{ request('price_filter') == '500-1000' ? 'selected' : '' }}>£500 - £1000</option>
-      <option value="1000+" {{ request('price_filter') == '1000+' ? 'selected' : '' }}>£1000+</option>
-    </select>
-    <i class="fa-solid fa-chevron-down"></i>
-  </div>
-</div>
-
-<div class="orders-filter-right">
-  <div class="filter-select-wrap sort-select">
-    <select name="sort" onchange="this.form.submit()" aria-label="Sort orders">
-      <option value="date_desc" {{ request('sort') == 'date_desc' ? 'selected' : '' }}>Sort by Date</option>
-      <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Sort by Price</option>
-    </select>
-    <i class="fa-solid fa-chevron-down"></i>
-  </div>
-</div>
-</form>
-
-      <!-- ORDERS TABLE PANEL -->
-      <section class="orders-panel">
-        <div class="orders-table-wrap">
-          <table class="orders-table">
+        <h3 style="margin-top: 30px;">Items in this Order</h3>
+        <table class="orders-table" style="width: 100%; border-collapse: collapse; background: white;">
             <thead>
-              <tr>
-                <th class="checkbox-col"></th>
-                <th>Order</th>
-                <th>Customer</th>
-                <th>Status</th>
-                <th>Price</th>
-                <th>Date</th>
-              </tr>
+                <tr style="background: #f8f9fa; text-align: left;">
+                    <th style="padding: 15px;">Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Return Status</th>
+                </tr>
             </thead>
-
             <tbody>
-    @forelse($orders as $order)
-      <tr>
-        <td class="checkbox-col"><input type="checkbox"></td>
-          <td>
-            <a href="{{ route('admin.orders.show', $order->id) }}" style="color: #03315b; font-weight: bold; text-decoration: underline;">
-      #{{ $order->id }}
-  </a>
-</td>
-        <td>{{ $order->user->name ?? 'Guest' }}</td>
-        <td>
-          <!-- This form lets you change status and deduct stock automatically -->
-          <form action="{{ route('admin.orders.updateStatus', $order->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-            <select name="status" onchange="this.form.submit()" 
-                    style="border:none; background:transparent; font-weight:bold; cursor:pointer;"
-                    class="status-pill status-{{ strtolower($order->status) }}">
-              <option value="Pending" {{ $order->status == 'Pending' ? 'selected' : '' }}>PENDING</option>
-              <option value="Approved" {{ $order->status == 'Approved' ? 'selected' : '' }}>APPROVED</option>
-              <option value="Shipped" {{ $order->status == 'Shipped' ? 'selected' : '' }}>SHIPPED</option>
-              <option value="Completed" {{ $order->status == 'Completed' ? 'selected' : '' }}>COMPLETED</option>
-              <option value="Cancelled" {{ $order->status == 'Cancelled' ? 'selected' : '' }}>CANCELLED</option>
-            </select>
-          </form>
-        </td>
-        <td>£{{ number_format($order->total_price, 2) }}</td>
-        <td>{{ $order->created_at->format('M d') }}</td>
-      </tr>
-    @empty
-      <tr>
-        <td colspan="6" style="text-align:center; padding: 40px; color: #666;">No orders found matching those filters.</td>
-      </tr>
-    @endforelse
-  </tbody>
-          </table>
-        <div class="pagination-wrap" style="padding: 20px;">
-        {{ $orders->appends(request()->query())->links() }}
-        </div>
+                @foreach($order->items as $item)
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 15px; display: flex; align-items: center;">
+                        <img src="{{ asset($item->image_url) }}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
+                        {{ $item->product_name }}
+                    </td>
+                    <td>£{{ number_format($item->price, 2) }}</td>
+                    <td>{{ $item->quantity }}</td>
+                    <td>£{{ number_format($item->price * $item->quantity, 2) }}</td>
+                    <td>
+                        @if($item->return_status && $item->return_status !== 'none')
+                            <span style="color: #e67e22; font-weight: bold;">{{ $item->return_status }}</span>
+                        @else
+                            <span style="color: #999;">No Return</span>
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
 
+        <div style="text-align: right; margin-top: 20px;">
+            <h2>Total: £{{ number_format($order->total_price, 2) }}</h2>
         </div>
-      </section>
-
     </div>
-  </section>
+</section>
 </main>
 
 <!--FOOTER (REUSABLE)-->

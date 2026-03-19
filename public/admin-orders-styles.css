@@ -1,0 +1,678 @@
+/* Basic reset and default Styles */
+
+/* Using '*' selects every element */
+
+*, *::before, *::after {
+  box-sizing: border-box; /* This makes the width easier to work with */
+  margin: 0; /* This removes browser default spacing so you have full control */
+  padding: 0;
+}
+
+/* BASE STYLES */
+
+body {
+  font-family: 'Signika';
+  background-color: #f5f7fb;
+  /* color: #ffffff; */
+  line-height: 1.6;
+}
+
+img { /* This targets every image on the Wesbite */
+  max-width: 100%; /* This prevents the image overflowing from out of the container */
+  display: block; /* This allows for margin/padding around the image */
+}
+
+a { /* This controls the appearance of hyperlinks */
+  text-decoration: none; /* This removes the default blue underline on the links */
+  color: inherit; /* This makes the Link use same colour as parent the element */
+}
+
+ul {
+  list-style: none; /* This removes the default bullets */
+}
+
+.container {
+  width: min(1200px, 100% - 32px); /* This sets the maximum width of the content, has consistent padding */
+  margin-inline: auto; /* This centres .container horizontally */
+}
+
+/* HEADER & NAVBAR SECTION */
+
+.main-header {
+  background-color: #03315b;
+  color: #ffffff; /* This sets the default text colour inside the Header to white */
+  border-bottom: 15px solid #085296;
+  position: sticky; /* This makes the header stick when scrolling */
+  top: 0; /* This tells the sticky element where to stick, which in this case is at the top of the screen */
+  z-index: 1000; /* This controls the stacking order, to prevent content from overlapping the header */
+}
+
+.nav-container {
+  display: flex; /* This turns the container into a flexbox row, allowing the logo, nav, and icons to sit horizontally */
+  align-items: center; 
+  justify-content: space-between; /* This pushes the Logo to the far left, Icons to the far right. Nav Menu in the middle: Creating a 3-Part Layout */
+  padding: 12px 0; /* This adds vertical spacing */
+  gap: 20px; /* This adds space between the 3 Sections inside the Nav */
+}
+
+.header-left-group { /* This grous the Logo and Menu Button together */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-header-spacer { /* This fills the middle header space after removing the Search Bar */
+  flex: 1;
+}
+
+.logo {
+  display: flex; /* This places the Logo and Text side by side */
+  align-items: center; 
+  gap: 9.6px; /* This adds space between Logo and Tecci Text */
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.logo img {
+  height: 44px;
+}
+
+/* ADMIN HEADER CONTROLS (MENU) */
+
+.menu-btn {
+  background: transparent; /* This removes the defauly grey button background */
+  border: none; /* This removes the default button border */
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer; /* This changes cursor to hand when hovering */
+  padding: 6px 8px; /* This adds clickable space around Icon */
+  border-radius: 8px; /* This creates rounded corners for hover background */
+  transition: background 0.15s ease, transform 0.15s ease; /* This creates a smooth animation when hoveing */
+}
+
+.menu-btn:hover {
+  background: rgba(230, 243, 255, 0.12); /* This makes a light transparent background when hovering */
+  transform: translateY(-1px); /* This moves Button slightly upwards, for a lift effect */
+}
+
+.search-wrap {
+  display: flex; /* This places Icons and input inline */
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  color: #111827;
+  border-radius: 4px;
+  padding: 8px 10px; /* This is for internal spacing */
+  width: 100%;
+  max-width: 420px; /* This prevents the Search from becoming too wide */
+}
+
+.search-wrap i {
+  color: #03315b;
+  font-size: 14px;
+}
+
+.search-wrap input { /* This targets the Search Text Box */
+  border: none; /* This removes the browser border */
+  outline: none; /* This removes the highlight border on click */
+  width: 100%; 
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.admin-top-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 19px;
+}
+
+.admin-top-icons a { /* This targets each clickable Icon link */
+  padding: 2.4px;
+  transition: transform 0.15s ease, color 0.15s ease; /* This creates a smooth hover animation */
+}
+
+.admin-top-icons a:hover {
+  transform: translateY(-1px); /* This creates a lift effect */
+  color: #e6f3ff;
+}
+
+/* DASHBOARD LAYOUT (SIDEBAR + CONTENT) */
+
+.admin-shell { /* This controls how the Sidebar and Content sit next to each other */
+  display: flex; /* This makes the Sidebar and Content sit side-by-side horizontally instead of stacking vertically */
+  min-height: calc(100vh - 90px); /* This makes this area fill the screen height, minus 90px (header height), vh is viewport height */
+}
+
+/* SIDEBAR */
+.admin-sidebar { /* This is for the left blue vertical Menu */
+  position: fixed; /* This means the Sidebar stays in place when scrolling, so it does not move with the page */
+  left: 0; /* This keeps the Sidebar to the left side of the screen */
+  top: 90px; /* This pushes the Sidebar down so it starts under the sticky Header */
+  margin-top: 0; /* This makes sure there is no accidental spacing */
+  height: calc(100vh - 90px); /* This ensures the Sidear fills full screen height minus the Header height */
+  width: 270px;
+  background: #03315b;
+  color: #ffffff;
+  padding: 18px 18px 20px; /* This is for the spacing inside the Sidebar, 18px top, 18px left/right, 20px bottom */
+  overflow: auto; /* This makes sure that if the Sidebar content becomes taller than the screen, it scrolls insides itself without breaking layout */
+  transition: width 0.2s ease, transform 0.2s ease; /* This creates a smooth animation when collapsing Sidebar */
+  z-index: 900; /* This ensures it stays above content but below header */
+}
+
+.admin-profile {
+  display: flex; /* This places Avatar and Text side by side */
+  align-items: center;
+  gap: 12px; /* This is the space between Avatar and Text */
+  padding: 8px 4px 14px; /* This adds spacing arounf profile block */
+}
+
+.profile-avatar { /* This is for the circular white Icon container */
+  width: 44px;
+  height: 44px;
+  border-radius: 999px; /* This radius makes it a perfect circle */
+  background: #ffffff;
+  color: #03315b;
+  display: flex; /* This and the 3 lines below centres the Icon inside the circle */
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.profile-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.profile-role {
+  font-size: 12px;
+  opacity: 0.85; /* This reduces visual importance */
+}
+
+.sidebar-logout { /* This targets the Logout link */
+  display: block; /* This makes it full width like a Button */
+  background: #7fc0ff;
+  color: #03315b;
+  font-weight: 800;
+  text-align: center;
+  padding: 12px 10px;
+  border-radius: 999px; /* This makes the Logout Button into a pill shape */
+  margin: 10px 0 18px; /* This is for the spacing above and below */
+  letter-spacing: 0.5px;
+}
+
+.admin-nav { /* This is for the Sidebar links */
+  display: flex; /* This makes the links stack vertically */
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px; /* This is for the spacing above navigation */
+}
+
+.admin-nav a { /* This is for each specific link */
+  display: flex; /* This makes Text and Icon sit on the same row */
+  align-items: center;      
+  justify-content: space-between; /* This pushes the Text to the left, and Icons to the right */
+  padding: 8px 10px;             
+  border-radius: 10px;
+  font-size: 18px;
+  transition: background 0.15s ease; /* This creates a smooth hover effect */
+}
+
+.admin-nav a:hover {
+  background: rgba(230, 243, 255, 0.12); /* This creates a slight highlight when hovering */
+}
+
+.admin-nav a.active {
+  text-decoration: underline; /* This underlines the current page link */
+  text-underline-offset: 6px; /* This moves the underline slightly down for a cleaner look */
+}
+
+.nav-text {
+  display: inline-block; /* This wraps text so it can be hidden separately during collapse */
+}
+
+.nav-ico {
+  display: inline-flex; /* This ensures the Icon stays centred */
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  font-size: 18px;
+  color: #e6f3ff;
+  opacity: 0.95;
+}
+
+/* COLLAPSED SIDE BAR STATE */
+body.sidebar-collapsed .admin-sidebar {
+  width: 90px; /* This shrinks the side bar from 270px to 90px*/
+}
+
+body.sidebar-collapsed .nav-text {
+  display: none; /* This hides the text when the Sidebar collapses, but the Icons remain */
+}
+
+body.sidebar-collapsed .admin-nav a {
+  justify-content: center; /* This centres the Icon when Sidebar is collapsed */
+  padding: 12px 0; 
+}
+
+body.sidebar-collapsed .profile-meta,
+body.sidebar-collapsed .sidebar-logout { /* This hides the Name and Logout Button Text when Sidebar collapses */
+  font-size: 0;
+  padding: 0;
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+body.sidebar-collapsed .admin-profile { /* This targets .admin-profile only when the <body has the class sidebar-collpased */
+  justify-content: center;
+}
+
+body.sidebar-collapsed .admin-nav {
+  margin-top: 18px; /* This increases to balance the vertical layout */
+  gap: 14px;
+}
+
+/* CONTENT AREA OFFSET */
+.admin-content { /* This manually pushes content to the right since the Sidebar is fixed */
+  margin-left: 270px; /* This moves the content to the right of the Sidebar, otherwise content would sit underneath the Sidebar */
+  width: 100%;
+  padding: 24px 0 48px; /* This is for the top and bottom spacing */
+  transition: margin-left 0.2s ease; /* This gives a smooth slide animation when Sidebar collapses */
+}
+
+body.sidebar-collapsed .admin-content {
+  margin-left: 90px; /* This adjusts when Sidebar collapses */
+}
+
+.admin-content-inner {
+  width: min(980px, 100% - 32px); /* This shifts the full width content area to the right because of the Sidebar */
+  margin-inline: auto;
+}
+
+.site-footer {
+  margin-left: 270px; /* This prevents the footer from going under the Sidebar */
+  transition: margin-left 0.2s ease;
+}
+
+body.sidebar-collapsed .site-footer {
+  margin-left: 90px; /* This matches the collapsed width */
+}
+
+
+/* TITLES */
+.dash-title {
+  margin: 8px 0 18px;
+}
+
+.dash-kicker {
+  font-weight: 700;
+  color: #03315b;
+  font-size: 18px;
+}
+
+.dash-title h1 {
+  font-size: 44px;
+  line-height: 1.05;
+  color: #03315b;
+}
+
+.orders-title {
+  margin-bottom: 18px;
+}
+
+.orders-search-row { /* This is for the Search Row below the title */
+  margin-bottom: 18px;
+}
+
+.page-search-wrap { /* This is for the new search page search styling */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  color: #111827;
+  border: 2px solid #d8e6f4;
+  border-radius: 4px;
+  padding: 10px 12px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.page-search-wrap i {
+  color: #03315b;
+  font-size: 14px;
+}
+
+.page-search-wrap input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+  font-size: 16px;
+  background: transparent;
+}
+
+/* ORDERS FILTER BAR */
+.orders-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.orders-filter-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.orders-filter-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filter-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.filter-select-wrap select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #3aa0ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 42px 11px 16px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 146px;
+}
+
+.filter-select-wrap i {
+  position: absolute;
+  right: 14px;
+  pointer-events: none;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.sort-select select {
+  min-width: 150px;
+}
+
+/* ORDERS PANEL */
+.orders-panel {
+  background: #0b5aa2;
+  border-radius: 10px;
+  padding: 18px 20px 22px;
+}
+
+.orders-table-wrap {
+  overflow-x: auto;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #e6f3ff;
+  font-size: 14px;
+  min-width: 720px;
+}
+
+.orders-table thead th {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 6px 10px 14px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.orders-table tbody td {
+  padding: 14px 10px;
+  font-weight: 600;
+  color: #d9e8f5;
+}
+
+.orders-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.orders-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.checkbox-col {
+  width: 34px;
+}
+
+.orders-table input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #dcecff;
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.orders-table input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: -3px;
+  left: 3px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.status-pill {
+  display: inline-block;
+  min-width: 92px;
+  text-align: center;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.status-paid {
+  background: #f1c40f;
+  color: #ffffff;
+}
+
+.status-delivered {
+  background: #cc5a37;
+  color: #ffffff;
+}
+
+.status-completed {
+  background: #1cc95b;
+  color: #ffffff;
+}
+
+/* FOOTER SECTION */
+
+.site-footer {
+  background-color: #03315b;
+  color: #ffffff; /* This sets the default colour inside the Footer to white */
+  padding-top: 40px; /* This adds space to the top so the content is not stuck to the edge */
+  margin-top: 0;
+}
+
+.footer-inner {
+  display: grid; /* This enables the CSS Grid Layout */
+  grid-template-columns: 2fr 1.5fr 1.8fr; /* This creates 3 columns with different relative widths: First Column is 2 fractions, Second Column is 1.5 fractions. Third Column is 1.8 fractions */
+  gap: 40px; /* Space between the columns */
+  padding-bottom: 32px; /* This adds space below the columns, before the copyright bar */
+}
+
+.footer-col h3,
+.footer-col h4 {
+  margin-bottom: 14px; /* This adds space from under the Headings to seperate them from the content */
+}
+
+.footer-col p {
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.footer-col ul {
+  display: flex; /* This turns the UL into a flex container */
+  flex-direction: column; /* This aligns the list items vertically */
+  gap: 6px; /* This adds vertical spacing between list items */
+}
+
+.footer-col a {
+  font-size: 14px; 
+  color: #ffffff;
+  transition: color 0.15s ease; /* This adds a colour transition when hovering */
+}
+
+.footer-col a:hover {
+  color: #dae6f2; /* When hovering, it becomes this colour */
+}
+
+.contact-list li {
+  display: flex; /* This places the Icons and text in a row */
+  align-items: center; /* This vertically aligns the Icon and text */
+  gap: 8px; /* Space between Icon and text */
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.contact-list i {
+  font-size: 16px; /* This makes sure that each Icon is a consistent size */
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 14px 0 19px; /* This gives the text some space */
+  text-align: center;
+  font-size: 13px;
+  color: #ffffff;
+}
+
+/* RESPONSIVENESS */
+@media (max-width: 980px) {
+  .dash-title h1 {
+    font-size: 38px;
+  }
+
+  .admin-content-inner {
+    width: min(980px, 100% - 24px);
+  }
+
+  .orders-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .orders-filter-right {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 860px) {
+  .admin-shell {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    top: auto;
+    left: auto;
+    border-bottom: 15px solid #085296;
+  }
+
+  .admin-content {
+    margin-left: 0;
+    padding-top: 16px;
+  }
+
+  .site-footer {
+    margin-left: 0;
+  }
+
+  body.sidebar-collapsed .site-footer {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .logo {
+    font-size: 30px;
+  }
+
+  .search-wrap {
+    max-width: 260px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .footer-col {
+    text-align: center;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+  }
+
+  .filter-select-wrap select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .orders-filter-left {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .orders-filter-right {
+    width: 100%;
+  }
+
+  .sort-select {
+    width: 100%;
+  }
+}
+
+.pagination-wrap svg {
+    width: 20px; 
+    height: 20px;
+}
+
+.pagination-wrap nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination-wrap nav div:first-child {
+    display: none; 
+}
+
+.pagination-wrap span, .pagination-wrap a {
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #03315b;
+    text-decoration: none;
+}
