@@ -165,7 +165,7 @@ Route::get('admin-inventory', function () {
 
 Route::get('/admin-inventory', [AdminInventoryController::class, 'index'])->name('admin.inventory');
 Route::post('/admin-inventory/products', [AdminInventoryController::class, 'store'])->name('admin.inventory.store');
-Route::put('/admin-inventory/products/{product}', [AdminInventoryController::class, 'update'])->name('admin.inventory.update');
+Route::put('/admin-inventory/products/{product}', [AdminInventoryController::class, 'update']);
 Route::delete('/admin-inventory/products/{product}', [AdminInventoryController::class, 'destroy']);
 
 

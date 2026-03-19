@@ -98,8 +98,8 @@ class AdminInventoryController extends Controller
             'message' => 'Product added successfully.',
         ]);
     }
-
-    // updates exisitng products
+    
+    // UPDATE PRODUCT (SAVES EDIT CHANGES TO DATABASE)
     public function update(Request $request, Product $product)
     {
         $request->validate([
@@ -109,12 +109,14 @@ class AdminInventoryController extends Controller
             'description' => 'nullable|string',
         ]);
 
+        // Update product table
         $product->update([
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,
         ]);
 
+        // Update inventory table
         if ($product->inventory) {
             $product->inventory->update([
                 'quantity_available' => $request->stock_quantity,
@@ -127,7 +129,7 @@ class AdminInventoryController extends Controller
         }
 
         return response()->json([
-            'message' => 'Product updated successfully.',
+            'message' => 'Product updated successfully.'
         ]);
     }
 

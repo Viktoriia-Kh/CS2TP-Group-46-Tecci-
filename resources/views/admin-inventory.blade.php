@@ -188,7 +188,7 @@
 
             <div class="form-group">
                 <label for="edit-price">Price (£)</label>
-                <input type="number" id="edit-price" name="price" step="1" required>
+                <input type="number" id="edit-price" name="price" step="0.01" required> <!-- Now we can add decimals -->
             </div>
 
             <div class="form-group">
@@ -559,6 +559,49 @@
                     fileText.textContent = 'No file chosen';
                 }
             });
+        }
+    });
+
+
+        // EDIT PRODUCT (REAL DATABASE UPDATE)
+    document.getElementById('editProductForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Stop page refresh
+
+        const productId = document.getElementById('edit-product-id').value;
+
+        // Getting edited values
+        const updatedData = {
+            name: document.getElementById('edit-name').value,
+            price: document.getElementById('edit-price').value,
+            stock_quantity: document.getElementById('edit-stock').value,
+            description: document.getElementById('edit-desc').value
+        };
+
+        try {
+            // Sending updated data to Laravel backend
+            const response = await fetch(`/admin-inventory/products/${productId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // CSRF token for Laravel security
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            });
+
+            if (response.ok) {
+                closeEditModal();
+                location.reload(); // Refresh page to show updated product
+            } else {
+                const errorText = await response.text();
+                console.error(errorText);
+                alert("Failed to update product.");
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert("Error updating product.");
         }
     });
 
