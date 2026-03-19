@@ -167,3 +167,5 @@ Route::get('admin-orders', [AdminOrderController::class, 'index'])->name('admin.
 Route::put('admin-orders/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
 
 Route::get('/admin/orders/{id}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
+
+
