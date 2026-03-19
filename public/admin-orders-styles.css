@@ -652,3 +652,27 @@ body.sidebar-collapsed .site-footer {
   }
 }
 
+.pagination-wrap svg {
+    width: 20px; 
+    height: 20px;
+}
+
+.pagination-wrap nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination-wrap nav div:first-child {
+    display: none; 
+}
+
+.pagination-wrap span, .pagination-wrap a {
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #03315b;
+    text-decoration: none;
+}
