@@ -21,8 +21,8 @@ body {
 
 .account-header {
     text-align: center;
-    margin-top: 50px;
-    margin-bottom: 30px;
+    margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 .account-header h2 {
@@ -43,7 +43,7 @@ body {
     width: 380px;
     border-radius: 20px;
     text-align: left;
-    margin: 20px auto 80px;
+    margin: 0px auto 80px;
 }
 
 /* styling the labels for each input */
