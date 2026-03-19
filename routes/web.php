@@ -20,11 +20,9 @@ use App\Http\Controllers\ReviewController;
 
 
 // Homepage
-Route::get('/', [HomeController::class, 'HomeController'])->name('home');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::post('/submit-review', [ReviewController::class, 'store'])->name('reviews.store');
-
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('login');
 
 

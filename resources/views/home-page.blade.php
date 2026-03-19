@@ -291,15 +291,45 @@
       </div> <!--Closes each card-->
     </div> <!--Closes .container-->
   </section>
+<!-- LEAVE US A REVIEW -->
+<section class="review-section">
+    <div class="container review-inner">
+        <h2>Leave Us A Review</h2>
 
-  <!--LEAVE US A REVIEW-->
-    <section class="review-section">
-        <div class="container review-inner">
-            <h2>Leave Us A Review</h2>
+        <p class="review-intro">
+            Based on my visit today, the service provided by Tecci has been...
+        </p>
 
-            <p class="review-intro">
-                Based on my visit today, the service provided by Tecci has been...
+        @if(session('success'))
+            <p style="color: green; font-weight: 700; margin-bottom: 15px;">
+                {{ session('success') }}
             </p>
+        @endif
+
+        @if($errors->any())
+            <div style="color: red; margin-bottom: 15px;">
+                @foreach($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+
+        <form class="review-form" action="{{ route('reviews.store') }}" method="POST">
+            @csrf
+
+            <input type="hidden" name="rating" id="ratingInput" value="0">
+
+            <div style="margin-bottom: 20px;">
+                <label for="reviewName" class="review-text-label">Your Name</label>
+                <input
+                    type="text"
+                    id="reviewName"
+                    name="name"
+                    class="review-textarea"
+                    placeholder="Optional"
+                    style="min-height: 50px;"
+                >
+            </div>
 
             <div class="review-rating-wrap">
                 <span class="review-label-left">Poor</span>
@@ -315,45 +345,50 @@
                 <span class="review-label-right">Excellent</span>
             </div>
 
-            <form class="review-form">
-                <label for="reviewMessage" class="review-text-label">Tell us more about your experience</label>
+            <label for="reviewMessage" class="review-text-label">Tell us more about your experience</label>
 
-                <textarea
-                    id="reviewMessage"
-                    class="review-textarea"
-                    placeholder="Write your review here..."
-                    rows="7"
-                ></textarea>
+            <textarea
+                id="reviewMessage"
+                name="message"
+                class="review-textarea"
+                placeholder="Write your review here..."
+                rows="7"
+                required
+            ></textarea>
 
-                <button type="submit" class="btn btn-primary review-submit-btn">Submit Review</button>
-            </form>
-        </div>
-    </section>
-<section class="reviews-carousel-section">
-    <h2>What Our Customers Say</h2>
-
-    @if($reviews->isEmpty())
-        <p>No reviews yet.</p>
-    @else
-        <div class="reviews-carousel-wrapper">
-            <button class="carousel-btn prev" onclick="moveReviewSlide(-1)">&#10094;</button>
-
-            <div class="reviews-carousel" id="reviewsCarousel">
-                @foreach($reviews as $review)
-                    <div class="review-card">
-                        <div class="review-stars-display">
-                            {{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}
-                        </div>
-                        <p class="review-message">"{{ $review->message }}"</p>
-                        <p class="review-name">— {{ $review->name ?? 'Anonymous' }}</p>
-                    </div>
-                @endforeach
-            </div>
-
-            <button class="carousel-btn next" onclick="moveReviewSlide(1)">&#10095;</button>
-        </div>
-    @endif
+            <button type="submit" class="btn btn-primary review-submit-btn">Submit Review</button>
+        </form>
+    </div>
 </section>
+
+<section class="reviews-carousel-section">
+    <div class="container">
+        <h2>What Our Customers Say</h2>
+
+        @if($reviews->isEmpty())
+            <p>No reviews yet.</p>
+        @else
+            <div class="reviews-carousel-wrapper">
+                <button type="button" class="carousel-btn prev" onclick="moveReviewSlide(-1)">&#10094;</button>
+
+                <div class="reviews-carousel" id="reviewsCarousel">
+                    @foreach($reviews as $review)
+                        <div class="review-card">
+                            <div class="review-stars-display">
+                                {{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}
+                            </div>
+                            <p class="review-message">"{{ $review->message }}"</p>
+                            <p class="review-name">— {{ $review->name ?: 'Anonymous' }}</p>
+                        </div>
+                    @endforeach
+                </div>
+
+                <button type="button" class="carousel-btn next" onclick="moveReviewSlide(1)">&#10095;</button>
+            </div>
+        @endif
+    </div>
+</section>
+
   <!--FOOTER-->
   <footer class="site-footer">
     <div class="container footer-inner"> <!--footer-inner used to create multi-column layout-->
@@ -405,23 +440,33 @@
   <!--Link to external JavaScript File-->
   <script src="home-page.js"></script>
 
-</body>
-
-</html>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const stars = document.querySelectorAll('#starRating span');
+    const stars = document.querySelectorAll('#starRating .star');
     const ratingInput = document.getElementById('ratingInput');
 
-    if (stars.length) {
+    function paintStars(value) {
+        stars.forEach(star => {
+            const starValue = parseInt(star.getAttribute('data-value'));
+
+            if (starValue <= value) {
+                star.classList.remove('fa-regular');
+                star.classList.add('fa-solid');
+                star.style.color = '#f4b400';
+            } else {
+                star.classList.remove('fa-solid');
+                star.classList.add('fa-regular');
+                star.style.color = '';
+            }
+        });
+    }
+
+    if (stars.length && ratingInput) {
         stars.forEach(star => {
             star.addEventListener('click', function () {
-                const value = this.getAttribute('data-value');
+                const value = parseInt(this.getAttribute('data-value'));
                 ratingInput.value = value;
-
-                stars.forEach(s => {
-                    s.textContent = s.getAttribute('data-value') <= value ? '★' : '☆';
-                });
+                paintStars(value);
             });
         });
     }
@@ -431,7 +476,11 @@ function moveReviewSlide(direction) {
     const carousel = document.getElementById('reviewsCarousel');
     if (!carousel) return;
 
-    const scrollAmount = 320;
-    carousel.scrollLeft += direction * scrollAmount;
+    carousel.scrollLeft += direction * 320;
 }
 </script>
+</script>
+
+</body>
+
+</html>
