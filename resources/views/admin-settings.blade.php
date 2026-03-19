@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Shared Admin CSS -->
 
+
   <!--Google Font-->
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
   <!--Font Awesome for Icons-->
@@ -60,12 +61,16 @@
           <i class="fa-solid fa-user-tie"></i>  <!--fa-user-tie is a User/Avatar Icon linked from Font Awesome-->
         </div>
         <div class="profile-meta"> <!--Using this will allow the Avatar/Profile to stay visible while hiding the text, which is all done in CSS-->
-          <p class="profile-name">Full Name</p>
+          <p class="profile-name">{{Auth::user()->name}}</p> {{-- the user will see their full name on the side--}}
           <p class="profile-role">Admin</p>
         </div>
       </div>
 
-      <a class="sidebar-logout" href="TP2_Home.html">LOGOUT</a>
+      {{-- logout button--}}
+            <form action="{{ route('logout')}}" method="POST">
+                @csrf
+                <button type="submit" class="sidebar-logout">Logout</button>
+            </form>
 
       <!--NAV TEXT (SIDEBAR) + ICONS ON THE RIGHT-->
       <nav class="admin-nav">
@@ -158,12 +163,6 @@
 
             <hr class="divide-form"> {{-- organises the form--}}
 
-            {{-- logout button--}}
-            <form action="{{ route('logout')}}" method="POST">
-                @csrf
-                <button type="submit" class="logout-button">Logout</button>
-            </form>
-
             {{--the user will be able to delete their account here--}}
             <form id="delete-form" action="{{ route('admin.settings.delete')}}" method="POST">
                 @csrf
@@ -231,8 +230,17 @@
     </div>
 </footer>
 
+{{-- javascript to handle the account deletion--}}
+<script>
+    function confirmAccountDeletion() {
+        if(confirm('Are you sure you want to delete your Tecci Admin account?')) {
+            document.getElementById('delete-form').submit();
+        }
+    }
+</script>
+
 <!--Link to external JavaScript File-->
 
-<script src="admin-dashboard.js"></script>
+<script src="{{asset('admin-dashboard.js')}}"></script>
 </body>
 </html>

@@ -158,6 +158,7 @@ Route::get('checkout', [CheckoutController::class, 'checkout']);
 // admin routes
 Route::middleware(['auth', 'admin'])->group(function (){
     Route::get('/admin-settings', [AdminSettingsController::class, 'showAdminSettings'])->name('admin.settings');
-    Route::post('/admin-settings', [AdminSettingsController::class, 'update'])->name('admin.settings.update');
+    Route::patch('/admin-settings', [AdminSettingsController::class, 'update'])->name('admin.settings.update');
+    Route::delete('/admin-settings/delete', [AdminSettingsController::class, 'destroy'])->name('admin.settings.delete');
 });
 
