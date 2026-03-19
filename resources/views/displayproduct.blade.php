@@ -197,7 +197,7 @@
 
   let currentCategory = "all";
   let currentSortOption = "featured";
-  let priceRange = 1000;
+  let priceRange = 5000;
   let selectedConditions = [];
   let selectedRatings = [];
 
