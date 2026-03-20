@@ -210,7 +210,7 @@ $status = strtolower(trim($request->return_status));
 <div class="dash-mid-grid"> <!--This is a container for the middle section of the Dashboard-->
 <section class="panel table-panel">
   <div class="panel-header">
-      <h2>Recent Sales | Today</h2>
+      <h2>Recent Sales</h2>
   </div>
 
   <div class="table-wrap">
@@ -221,7 +221,7 @@ $status = strtolower(trim($request->return_status));
                   <th>Customer</th>
                   <th>Total Price</th>
                   <th>Status</th>
-                  <th>Date</th>
+                  <th>Time</th>
               </tr>
           </thead>
           <tbody>
