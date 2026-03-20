@@ -16,21 +16,21 @@ class AdminDashboardController extends Controller
         ->whereYear('created_at', \Carbon\Carbon::now()->year)
         ->sum('total_price');
 
+        $recentSales = \App\Models\Order::latest()->take(5)->get();
+
         $refundRequests = OrderItem::whereNotNull('return_status')
             ->where('return_status', '!=', 'none')
             ->orderBy('updated_at', 'desc')
             ->take(5)
             ->get();
 
-        // orders that need to be processed
         $pendingOrders = \App\Models\Order::where('status', 'Pending')->latest()->get();
 
-        // show items that are out of stock
         $itemsOutOfStock = \App\Models\Inventory::where('quantity_available', '<=', 0)
-            ->with('product') // gets the product name from the database
+            ->with('product')
             ->get();
 
-        return view('admin-dashboard', compact('refundRequests', 'salesToday', 'revenueMonth', 'pendingOrders', 'itemsOutOfStock'));
+        return view('admin-dashboard', compact('refundRequests', 'salesToday', 'revenueMonth', 'pendingOrders', 'itemsOutOfStock','recentSales'));
     }
 
     public function approveReturn($id){
