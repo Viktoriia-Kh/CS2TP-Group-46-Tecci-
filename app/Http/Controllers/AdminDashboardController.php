@@ -26,7 +26,7 @@ class AdminDashboardController extends Controller
         $pendingOrders = \App\Models\Order::where('status', 'Pending')->latest()->get();
 
         // show items that are out of stock
-        $itemsOutOfStock = \App\Models\Inventory::where('quantity', '<=', 0)
+        $itemsOutOfStock = \App\Models\Inventory::where('quantity_available', '<=', 0)
             ->with('product') // gets the product name from the database
             ->get();
 

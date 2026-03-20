@@ -102,7 +102,7 @@
 <h1>Hello Admin</h1>
 </div>
 
-<!--The Search Bar has been moved under the page heading-->  
+<!--The Search Bar has been moved under the page heading-->
 <div class="dashboard-search-row"> <!--This is a wrapper for styling purpose of the Search Bar-->
 <div class="page-search-wrap">
 <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
@@ -146,25 +146,25 @@
 <ul class="activity-timeline" style="list-style: none; padding: 0;">
   @forelse($refundRequests as $request)
       <li class="activity-item" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative;">
-          
+
           <div style="flex: 1; padding-left: 15px;">
               <span class="activity-time" style="font-size: 11px; color: #a5c7e9;">
                   {{ $request->updated_at->diffForHumans(null, true) }}
               </span>
-              
+
               <p class="activity-text" style="margin: 4px 0; color: #fff;">
-                  <strong>Order #{{ $request->order_id }}</strong> 
+                  <strong>Order #{{ $request->order_id }}</strong>
                   <span style="color: #7fc0ff;">({{ $request->product_name }})</span>
               </p>
-              
+
               <span class="pill {{ strtolower($request->return_status) == 'pending' ? 'pill-pending' : 'pill-approved' }}" style="font-size: 10px;">
                   {{ strtoupper($request->return_status) }}
               </span>
           </div>
 
           <div class="dash-action-btns" style="display: flex; gap: 8px; margin-left: 10px;">
-@php 
-    $status = strtolower(trim($request->return_status)); 
+@php
+    $status = strtolower(trim($request->return_status));
 @endphp
 
 @if($status != 'approved' && $status != 'declined' && $status != 'none')
@@ -325,7 +325,26 @@
 </div>
 </section>
 
-<div class="right-spacer"></div> <!--This intentionally added to leave white space on the right side of Top-Selling section-->
+<aside class="panel stock-alerts-panel"> <!-- adding an out of stock panel to the right of the top selling panel-->
+    <div class="panel-header">
+        <h2>Items Out Of Stock</h2>
+    </div>
+
+    <div class="table-wrap">
+        <ul class="stock-alert-list">
+            @forelse($itemsOutOfStock as $item) {{-- this loop will check if the items are out of stock--}}
+                <li class="stock-item">
+                    <span class="stock-name">{{$item->product->name}}</span>
+                    <span class="stock-status">OUT OF STOCK</span>
+                </li>
+            @empty
+                {{-- this will show if there are no products out of stock--}}
+                <li class="stock-message">No products currently out of stock.</li>
+            @endforelse
+        </ul>
+    </div>
+
+</aside>
 </div>
 
 </div>
