@@ -187,6 +187,17 @@
             </div>
 
             <div class="form-group">
+                <label for="edit-category">Category</label>
+                <select id="edit-category" name="category" class="filter-input" style="width: 100%;" required>
+                    <option value="desktops">PCs</option>
+                    <option value="laptops">Laptops</option>
+                    <option value="phones">Phones</option>
+                    <option value="tablets">Tablets</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="edit-price">Price (£)</label>
                 <input type="number" id="edit-price" name="price" step="0.01" required> <!-- Now we can add decimals -->
             </div>
@@ -199,6 +210,26 @@
             <div class="form-group">
                 <label for="edit-desc">Description</label>
                 <textarea id="edit-desc" name="description" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Technical Specifications</label>
+                <div id="edit-specs-container" class="specs-container">
+                    </div>
+                <button type="button" class="btn-add-spec" onclick="addEditSpecRow()">
+                    <i class="fa-solid fa-plus"></i> Add Specification
+                </button>
+            </div>
+
+            <div class="media-upload-group">
+                <input type="file" id="edit-product-image" name="image" accept="image/*" class="hidden-file-input">
+                <label for="edit-product-image" class="add-media-btn">
+                    <svg class="camera-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23 19V5H19L17.17 3H6.83L5 5H1V19H23ZM12 8C14.21 8 16 9.79 16 12C16 14.21 14.21 16 12 16C9.79 16 8 14.21 8 12C8 9.79 9.79 8 12 8Z" fill="#3B82F6"/>
+                    </svg>
+                    <span class="btn-text">Change picture</span>
+                </label>
+                <div id="edit-file-chosen" class="file-chosen-text">No new file chosen</div>
             </div>
 
             <div class="modal-actions">
@@ -242,6 +273,19 @@
             <div class="form-group">
                 <label for="add-desc">Description</label>
                 <textarea id="add-desc" name="description" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Technical Specifications</label>
+                <div id="specs-container" class="specs-container">
+                    <div class="spec-row">
+                        <input type="text" name="spec_names[]" placeholder="Spec (e.g. RAM)">
+                        <input type="text" name="spec_values[]" placeholder="Value (e.g. 16GB)">
+                        <button type="button" class="btn-remove-spec" onclick="this.parentElement.remove()">&times;</button>
+                    </div>
+                </div>
+                <button type="button" class="btn-add-spec" onclick="addSpecRow()">
+                    <i class="fa-solid fa-plus"></i> Add Specification
+                </button>
             </div>
             <div class="media-upload-group">
                 <input type="file" id="product-image" name="image" accept="image/*" class="hidden-file-input">
@@ -435,10 +479,22 @@
         
         document.getElementById('edit-product-id').value = product.id;
         document.getElementById('edit-name').value = product.name;
+        document.getElementById('edit-category').value = product.category;
         document.getElementById('edit-price').value = product.price;
         document.getElementById('edit-stock').value = product.stock_quantity;
-
         document.getElementById('edit-desc').value = product.description || '';
+
+        const specsContainer = document.getElementById('edit-specs-container');
+        specsContainer.innerHTML = '';
+        
+        if (product.specifications) {
+        let specs = product.specifications;
+        if (typeof specs === 'string') specs = JSON.parse(specs);
+        
+        Object.entries(specs).forEach(([name, value]) => {
+            addEditSpecRow(name, value);
+        });
+    }
 
         document.getElementById('editProductModal').style.display = 'flex';
     }
@@ -468,6 +524,8 @@
         const price = document.getElementById('add-price').value;
         const stock = document.getElementById('add-stock').value;
         const description = document.getElementById('add-desc').value;
+        const specNames = Array.from(document.querySelectorAll('input[name="spec_names[]"]')).map(input => input.value);
+        const specValues = Array.from(document.querySelectorAll('input[name="spec_values[]"]')).map(input => input.value);
 
         // File input 
         const fileInput = document.getElementById('product-image');
@@ -562,6 +620,29 @@
         }
     });
 
+    function addSpecRow() {
+        const container = document.getElementById('specs-container');
+        const row = document.createElement('div');
+        row.className = 'spec-row'; 
+        row.innerHTML = `
+            <input type="text" name="spec_names[]" placeholder="Spec name">
+            <input type="text" name="spec_values[]" placeholder="Value">
+            <button type="button" class="btn-remove-spec" onclick="this.parentElement.remove()">&times;</button>
+        `;
+        container.appendChild(row);
+    }
+
+    function addEditSpecRow(name = '', value = '') {
+        const container = document.getElementById('edit-specs-container');
+        const row = document.createElement('div');
+        row.className = 'spec-row';
+        row.innerHTML = `
+            <input type="text" name="edit_spec_names[]" value="${name}" placeholder="Spec name">
+            <input type="text" name="edit_spec_values[]" value="${value}" placeholder="Value">
+            <button type="button" class="btn-remove-spec" onclick="this.parentElement.remove()">&times;</button>
+        `;
+        container.appendChild(row);
+    }
 
         // EDIT PRODUCT (REAL DATABASE UPDATE)
     document.getElementById('editProductForm').addEventListener('submit', async function(event) {
