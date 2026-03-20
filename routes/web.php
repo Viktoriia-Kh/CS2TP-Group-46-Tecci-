@@ -17,6 +17,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\AdminDashboardController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
@@ -155,10 +156,7 @@ Route::get('checkout', [CheckoutController::class, 'checkout']);
 // ADMIN DASHBOARD & ORDERS
 // ==========================================
 
-// Main Admin Dashboard
-Route::get('admin-dashboard', function () {
-    return view('admin-dashboard');
-})->name('admin.dashboard');
+Route::get('admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 // Admin Orders: Main List (Handles Search & Filters)
 Route::get('admin-orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
@@ -168,4 +166,7 @@ Route::put('admin-orders/{id}/status', [AdminOrderController::class, 'updateStat
 
 Route::get('/admin/orders/{id}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
 
+Route::post('/admin/returns/{id}/approve', [App\Http\Controllers\AdminDashboardController::class, 'approveReturn'])
+    ->name('admin.returns.approve');
 
+Route::post('/admin/returns/{id}/decline', [AdminDashboardController::class, 'declineReturn'])->name('admin.returns.decline');
