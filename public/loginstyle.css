@@ -133,6 +133,43 @@ body {
   transform: translateY(-1px);
   opacity: 0.95;
 }
+html, body {
+  height: 100%;
+}
+
+body.signup-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-main {
+  flex: 1;
+}
+.verify-card {
+  text-align: center;
+}
+
+/* Logged in section */
+.verify-user {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Logout button (clean, not ugly link) */
+.logout-btn {
+  background: none;
+  border: none;
+  color: #5a4bff;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}
 
 /* applying styling to error messages */
 .error-messages {

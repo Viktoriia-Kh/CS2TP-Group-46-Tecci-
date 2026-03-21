@@ -35,42 +35,43 @@
         </div>
     </header>
 
-    <main class="signup-main">
-        <div class="signup-card">
-            <div class="signup-header" style="text-align:center;">
-                <h1>Verify your email</h1>
-                <p>
-                    We’ve sent a verification link to<br>
-                    <strong>{{ auth()->user()->email }}</strong>.
-                </p>
+   <main class="signup-main">
+    <div class="signup-card verify-card">
+
+        <div class="signup-header" style="text-align:center;">
+            <h1>Verify your email</h1>
+            <p>
+                We’ve sent a verification link to<br>
+                <strong>{{ auth()->user()->email }}</strong>.
+            </p>
+        </div>
+
+        @if (session('status') == 'verification-link-sent')
+            <div class="alert-success">
+                A new verification link has been sent to your email address.
             </div>
+        @endif
 
-            @if (session('status') == 'verification-link-sent')
-                <div class="alert-success">
-                    A new verification link has been sent to your email address.
-                </div>
-            @endif
+        <form method="POST" action="{{ route('verification.send') }}" class="signup-form">
+            @csrf
+            <button type="submit" class="signup-submit-btn">
+                Resend Verification Email
+            </button>
+        </form>
 
-            <form method="POST" action="{{ route('verification.send') }}" class="signup-form">
+        <div class="verify-user">
+            Logged in as <strong>{{ auth()->user()->name }}</strong>
+            
+            <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="signup-submit-btn">
-                    Resend Verification Email
+                <button type="submit" class="logout-btn">
+                    Log out
                 </button>
             </form>
-
-            <p class="signup-footer-text">
-                Logged in as {{ auth()->user()->name }} –
-                <a href="{{ route('logout') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Log out
-                </a>
-            </p>
-
-            <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display:none;">
-                @csrf
-            </form>
         </div>
-    </main>
+
+    </div>
+</main>
 
     <footer class="main-footer">
         <div class="container footer-inner">
