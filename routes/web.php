@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ReviewController;
 
@@ -25,7 +26,10 @@ use App\Http\Controllers\AdminInventoryController;
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
 
 
+// Homepage
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('login');
 
 

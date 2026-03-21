@@ -44,29 +44,98 @@
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container hero-inner"> <!--.hero-inner used to turn this into a two column layout-->
+  <!--HERO SECTION-->
+    <section class="hero">
+    <div class="hero-slider"> <!--This wraps the fuller slider system-->
+        <div class="hero-track" id="heroTrack"> /<!--This is the moving strip that contains all slides-->
+            
+            <!--SLIDE 1-->
+            <div class="hero-slide"> <!--This creates one single slide inside the slider-->
+                <div class="container hero-inner">
 
-      <!--Left Side: Text Content-->
-      <div class="hero-text">
-        <h1>
-          <p class="special-word">Affordable<p>
-          <p>Tech.</p>
-          <p class="special-word">Unbeatable</p>
-          <p>Style.</p>
-        </h1>
-        <p class="hero-subtitle">Smart gadgets and sleek devices, priced for University Students.</p>
-        <a href="displayproduct" class="btn btn-primary">Shop Now</a>
-      </div>
+                    <div class="hero-text"> <!--This is for the left column of the slide-->
+                        <h1>
+                            <span class="special-word">Affordable</span>
+                            <span>Tech.</span>
+                            <span class="special-word">Unbeatable</span>
+                            <span>Style.</span>
+                        </h1>
 
-      <!--Right Side: Hero Image-->
-      <div class="hero-banner">
-        <img src="https://i.ibb.co/XfxPXyL5/Hero-Section-Image.webp" alt="Student using a laptop from Tecci"
-          class="hero-image">
-      </div>
+                        <p class="hero-subtitle">
+                            Smart gadgets and sleek devices, priced for University Students.
+                        </p>
+
+                        <a href="products.html" class="btn btn-primary">Shop Now</a>
+                    </div>
+
+                    <div class="hero-banner">
+                        <img src="https://i.ibb.co/XfxPXyL5/Hero-Section-Image.webp"
+                             alt="Student using a laptop from Tecci"
+                             class="hero-image">
+                    </div>
+                </div>
+            </div>
+
+            <!--SLIDE 2-->
+            <div class="hero-slide"> <!--This creates one single slide inside the slider-->
+                <div class="container hero-inner">
+
+                    <div class="hero-text"> <!--This is for the left column of the slide-->
+                        <h1>
+                            <span class="special-word">Why</span>
+                            <span>Choose Us?</span>
+                        </h1>
+
+                        <p class="hero-subtitle">
+                            We curate tech that balances performance, price and style, so you can focus on your studies, not your budget.
+                        </p>
+
+                        <a href="TP2_About.html" class="btn btn-primary">Learn More</a>
+                    </div>
+
+                    <div class="hero-banner">
+                        <img src="Images\Top-Right-Team-Image.png"
+                             alt="Students collaborating around a table"
+                             class="hero-image">
+                    </div>
+                </div>
+            </div>
+
+            <!--SLIDE 3-->
+            <div class="hero-slide"> <!--This creates one single slide inside the slider-->
+                <div class="container hero-inner">
+
+                    <div class="hero-text"> <!--This is for the left column of the slide-->
+                        <h1>
+                            <span class="special-word">Lock In Your Summer Setup</span>
+                            <span>With 25% Off</span>
+                        </h1>
+
+                        <p class="hero-subtitle">
+                            Get ahead before summer starts. Enjoy <strong>25% off laptops</strong> built for Uni life.
+                        </p>
+
+                        <p class="hero-offer-code">
+                            Use code <strong>SUMMER25</strong> at checkout
+                        </p>
+
+                        <a href="products.html" class="btn btn-primary">View Laptops</a>
+                    </div>
+
+                    <div class="hero-banner">
+                        <img src="Images\Rotating Banner Laptop Sale.png"
+                             alt="Tecci big savings laptop promotion"
+                             class="hero-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="hero-arrow" id="heroNextBtn" aria-label="Next slide"> <!--This creates the circular right arrow Button-->
+            <i class="fa-solid fa-chevron-right"></i> <!--fa-chevron-right is a Right Arrow Icon linked from Font Awesome-->
+        </button>
     </div>
-    </div>
-  </section>
+</section>
 
   <!--FEATURED PRODUCTS-->
   <section class="featured-products" id="featured">
@@ -222,6 +291,103 @@
       </div> <!--Closes each card-->
     </div> <!--Closes .container-->
   </section>
+<!-- LEAVE US A REVIEW -->
+<section class="review-section">
+    <div class="container review-inner">
+        <h2>Leave Us A Review</h2>
+
+        <p class="review-intro">
+            Based on my visit today, the service provided by Tecci has been...
+        </p>
+
+        @if(session('success'))
+            <p style="color: green; font-weight: 700; margin-bottom: 15px;">
+                {{ session('success') }}
+            </p>
+        @endif
+
+        @if($errors->any())
+            <div style="color: red; margin-bottom: 15px;">
+                @foreach($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+
+        <form class="review-form" action="{{ route('reviews.store') }}" method="POST">
+            @csrf
+
+            <input type="hidden" name="rating" id="ratingInput" value="0">
+
+            <div style="margin-bottom: 20px;">
+                <label for="reviewName" class="review-text-label">Your Name</label>
+                <input
+                    type="text"
+                    id="reviewName"
+                    name="name"
+                    class="review-textarea"
+                    placeholder="Optional"
+                    style="min-height: 50px;"
+                >
+            </div>
+
+            <div class="review-rating-wrap">
+                <span class="review-label-left">Poor</span>
+
+                <div class="star-rating" id="starRating">
+                    <i class="fa-regular fa-star star" data-value="1" aria-label="1 star"></i>
+                    <i class="fa-regular fa-star star" data-value="2" aria-label="2 stars"></i>
+                    <i class="fa-regular fa-star star" data-value="3" aria-label="3 stars"></i>
+                    <i class="fa-regular fa-star star" data-value="4" aria-label="4 stars"></i>
+                    <i class="fa-regular fa-star star" data-value="5" aria-label="5 stars"></i>
+                </div>
+
+                <span class="review-label-right">Excellent</span>
+            </div>
+
+            <label for="reviewMessage" class="review-text-label">Tell us more about your experience</label>
+
+            <textarea
+                id="reviewMessage"
+                name="message"
+                class="review-textarea"
+                placeholder="Write your review here..."
+                rows="7"
+                required
+            ></textarea>
+
+            <button type="submit" class="btn btn-primary review-submit-btn">Submit Review</button>
+        </form>
+    </div>
+</section>
+
+<section class="reviews-carousel-section">
+    <div class="container">
+        <h2>What Our Customers Say</h2>
+
+        @if($reviews->isEmpty())
+            <p>No reviews yet.</p>
+        @else
+            <div class="reviews-carousel-wrapper">
+                <button type="button" class="carousel-btn prev" onclick="moveReviewSlide(-1)">&#10094;</button>
+
+                <div class="reviews-carousel" id="reviewsCarousel">
+                    @foreach($reviews as $review)
+                        <div class="review-card">
+                            <div class="review-stars-display">
+                                {{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}
+                            </div>
+                            <p class="review-message">"{{ $review->message }}"</p>
+                            <p class="review-name">— {{ $review->name ?: 'Anonymous' }}</p>
+                        </div>
+                    @endforeach
+                </div>
+
+                <button type="button" class="carousel-btn next" onclick="moveReviewSlide(1)">&#10095;</button>
+            </div>
+        @endif
+    </div>
+</section>
 
   <!--FOOTER-->
   <footer class="site-footer">
@@ -270,6 +436,50 @@
       <p>&copy; 2025 Tecci. All rights reserved.</p>
     </div>
   </footer>
+
+  <!--Link to external JavaScript File-->
+  <script src="home-page.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const stars = document.querySelectorAll('#starRating .star');
+    const ratingInput = document.getElementById('ratingInput');
+
+    function paintStars(value) {
+        stars.forEach(star => {
+            const starValue = parseInt(star.getAttribute('data-value'));
+
+            if (starValue <= value) {
+                star.classList.remove('fa-regular');
+                star.classList.add('fa-solid');
+                star.style.color = '#f4b400';
+            } else {
+                star.classList.remove('fa-solid');
+                star.classList.add('fa-regular');
+                star.style.color = '';
+            }
+        });
+    }
+
+    if (stars.length && ratingInput) {
+        stars.forEach(star => {
+            star.addEventListener('click', function () {
+                const value = parseInt(this.getAttribute('data-value'));
+                ratingInput.value = value;
+                paintStars(value);
+            });
+        });
+    }
+});
+
+function moveReviewSlide(direction) {
+    const carousel = document.getElementById('reviewsCarousel');
+    if (!carousel) return;
+
+    carousel.scrollLeft += direction * 320;
+}
+</script>
+</script>
 
 </body>
 
