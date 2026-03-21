@@ -61,22 +61,42 @@
           <!-- Filter Categories  -->
           <div class="filter-group">
             <h4>Price Range</h4>
-            <input type="range" min="0" max="2000" value="2000" class="price-slider">
+            <input type="range" min="0" max="1000" value="1000" class="price-slider">
             <div class="price-range-display">
-              <span>£0</span> - <span>£2000</span>
+              <span>£0</span> - <span>£1000</span>
             </div>
           </div>
 
           <div class="filter-group">
             <h4>Condition</h4>
             <label class="checkbox-label">
-              <input type="checkbox" value="new"> New
+              <input type="checkbox" class="condition-filter" value="new"> New
             </label>
             <label class="checkbox-label">
-              <input type="checkbox" value="used"> Used
+              <input type="checkbox" class="condition-filter" value="used">
+ Used
             </label>
             <label class="checkbox-label">
-              <input type="checkbox" value="refurbished"> Refurbished
+              <input type="checkbox" class="condition-filter" value="refurbished"> Refurbished
+            </label>
+          </div>
+          <div class="filter-group">
+            <h4>Rating</h4>
+            <label class="checkbox-label">
+              <input type="checkbox" class="rating-filter" value="5">
+ 5 Stars ★★★★★
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" class="rating-filter" value="4"> 4 Stars ★★★★☆
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" class="rating-filter" value="3"> 3 Stars ★★★☆☆
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" class="rating-filter" value="2"> 2 Stars ★★☆☆☆
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" class="rating-filter" value="1"> 1 Star ★☆☆☆☆
             </label>
           </div>
 
@@ -177,8 +197,9 @@
 
   let currentCategory = "all";
   let currentSortOption = "featured";
-  let priceRange = 2000;
+  let priceRange = 5000;
   let selectedConditions = [];
+  let selectedRatings = [];
 
   // Category tab functionality
   document.querySelectorAll(".tab-button").forEach(button => {
@@ -209,11 +230,21 @@
   });
 
   // Apply filters button
-  document.querySelector(".confirm-filter-btn").addEventListener("click", () => {
-    selectedConditions = Array.from(document.querySelectorAll(".checkbox-label input[type='checkbox']:checked"))
-      .map(cb => cb.value);
-    displayProducts();
-  });
+document.querySelector(".confirm-filter-btn").addEventListener("click", () => {
+  selectedConditions = Array.from(document.querySelectorAll(".condition-filter:checked"))
+    .map(cb => cb.value);
+
+  selectedRatings = Array.from(document.querySelectorAll(".rating-filter:checked"))
+    .map(cb => Number(cb.value));
+
+  displayProducts();
+});
+
+// Applies star review functionalltiy 
+  function renderStars(rating) {
+    const rounded = Math.round(rating || 0);
+    return '★'.repeat(rounded) + '☆'.repeat(5 - rounded);
+}
 
   // Filter products based on criteria
   function filterProducts(searchTerm = "") {
@@ -237,6 +268,19 @@
       filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm));
     }
 
+    // Filter by condition
+    if (selectedConditions.length > 0) {
+      filtered = filtered.filter(p => selectedConditions.includes(p.condition));
+    }
+
+    // Filter by rating
+    if (selectedRatings.length > 0) {
+      filtered = filtered.filter(p => {
+        const roundedRating = Math.round(Number(p.avg_rating) || 0);
+        return selectedRatings.includes(roundedRating);
+      });
+    }
+
     return filtered;
   }
 
@@ -255,7 +299,7 @@
         sorted.sort((a, b) => b.id - a.id);
         break;
       case "rating":
-        sorted.sort((a, b) => b.id - a.id); // Placeholder for rating
+        sorted.sort((a, b) => b.avg_rating - a.avg_rating);
         break;
       case "featured":
       default:
@@ -294,24 +338,47 @@
       const productCard = document.createElement("div");
       productCard.className = "product-card-item";
 
+      const isInStock = product.stock_status === 'in_stock' || product.stock_quantity > 0;
+      const isLowStock = product.stock_quantity > 0 && product.stock_quantity < 5;
 
+      let badgeText;
+      let badgeClass;
 
-    productCard.innerHTML = `
-      <a href="/product/${product.id}" class="product-link">
-        <div class="product-image-placeholder">
-          <img src="${product.image_url}" alt="${product.name}">
+      // Check the stock states in order
+      if (!isInStock) {
+          badgeText = 'Out of Stock';
+          badgeClass = 'badge-out-of-stock';
+      } else if (isLowStock) {
+          badgeText = 'Low Stock';
+          badgeClass = 'badge-low-stock';
+      } else {
+          badgeText = 'In Stock';
+          badgeClass = 'badge-in-stock';
+      } 
+
+      productCard.innerHTML = `
+        <a <div onclick="window.location.href='/product/${product.id}'" class="product-link" style="text-decoration: none;">
+          <div class="stock-badge ${badgeClass}">${badgeText}</div>
+          <div class="product-image-placeholder">
+            <img src="${product.image_url}" alt="${product.name}">
+          </div>
+          <div class="product-item-info">
+            <p class="product-item-name">${product.name}</p>
+              <!-- Placeholder stars -->
+            ${renderStars(product.avg_rating)} (${product.review_count})
+            <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
+            <p class="product-item-price">£${product.price.toFixed(2)}</p>
+            <form action="/add-to-basket/${product.id}" method="GET" class="cart-action-group" onclick="event.stopPropagation();">
+              <input type="number" name="quantity" class="qty-input" value="1" min="1" max="99" title="Quantity">
+              <button type="submit" class="add-to-cart-quick">Add to Basket</button>
+            </form>
+          </div>
         </div>
-        <div class="product-item-info">
-          <h4>${product.name}</h4>
-          <p class="product-item-price">£${product.price.toFixed(2)}</p>
-          <a href="/add-to-basket/${product.id}" class="add-to-cart-quick">Add to Cart</a>
-        </div>
-      </a>
-    `;
+      `;
 
-      grid.appendChild(productCard);
-    });
-  }
+        grid.appendChild(productCard);
+      });
+    }
 
   // Initialize display
   displayProducts();

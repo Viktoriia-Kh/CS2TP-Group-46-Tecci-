@@ -17,6 +17,9 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ReviewController;
+
+use App\Http\Controllers\AdminInventoryController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
@@ -157,3 +160,26 @@ Route::middleware('auth')->group(function (){ // requires user to be logged in
     Route::patch('/account/update', [AccountController::class, 'update'])->name('account.update'); // update the account details
     Route::delete('/account/delete', [AccountController::class, 'destroy'])->name('account.destroy'); // deletes the account
 });
+// forgot password route
+Route::get('/forgot-password', [LoginController::class, 'showForgotPassword'])->name('password.request');
+Route::post('/forgot-password', [LoginController::class, 'sendResetPasswordLink']);
+
+// reset password routes
+Route::get('/reset-password/{token}', [LoginController:: class, 'showPasswordResetForm'])->name('password.reset');
+Route::post('/reset-password', [LoginController::class, 'updatePassword'])->name('password.update'); // saves the new password to database
+
+// Reviews routee
+Route::post('/product/{product}/review', [ReviewController::class, 'store'])
+    ->name('reviews.store');
+
+//Admin Inventory route
+Route::get('admin-inventory', function () {
+    return view('admin-inventory');
+});
+
+Route::get('/admin-inventory', [AdminInventoryController::class, 'index'])->name('admin.inventory');
+Route::post('/admin-inventory/products', [AdminInventoryController::class, 'store'])->name('admin.inventory.store');
+Route::put('/admin-inventory/products/{product}', [AdminInventoryController::class, 'update']);
+Route::delete('/admin-inventory/products/{product}', [AdminInventoryController::class, 'destroy']);
+
+
