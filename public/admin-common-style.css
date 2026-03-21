@@ -45,6 +45,20 @@ ul {
   position: sticky; /* This makes the header stick when scrolling */
   top: 0; /* This tells the sticky element where to stick, which in this case is at the top of the screen */
   z-index: 1000; /* This controls the stacking order, to prevent content from overlapping the header */
+}.header-left-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-header-spacer {
+  flex: 1;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .nav-container {
@@ -76,18 +90,20 @@ ul {
   flex: 1; /* This allows this section to expand, so it helps balance spacing in the Header */
   max-width: 560px; /* This prevents the Search from becoming too wide */
 }
-
 .menu-btn {
-  background: transparent; /* This removes the defauly grey button background */
-  border: none; /* This removes the default button border */
+  background: transparent;
+  border: none;
   color: #ffffff;
-  font-size: 20px;
-  cursor: pointer; /* This changes cursor to hand when hovering */
-  padding: 6px 8px; /* This adds clickable space around Icon */
-  border-radius: 8px; /* This creates rounded corners for hover background */
-  transition: background 0.15s ease, transform 0.15s ease; /* This creates a smooth animation when hoveing */
+  font-size: 28px;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.15s ease, transform 0.15s ease;
+  margin-left: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .menu-btn:hover {
   background: rgba(230, 243, 255, 0.12); /* This makes a light transparent background when hovering */
   transform: translateY(-1px); /* This moves Button slightly upwards, for a lift effect */
@@ -153,7 +169,8 @@ ul {
   background: #03315b;
   color: #ffffff;
   padding: 18px 18px 20px; /* This is for the spacing inside the Sidebar, 18px top, 18px left/right, 20px bottom */
-  overflow: auto; /* This makes sure that if the Sidebar content becomes taller than the screen, it scrolls insides itself without breaking layout */
+  overflow-y: auto; /* This makes sure that if the Sidebar content becomes taller than the screen, it scrolls insides itself without breaking layout */
+  overflow-x: hidden;
   transition: width 0.2s ease, transform 0.2s ease; /* This creates a smooth animation when collapsing Sidebar */
   z-index: 900; /* This ensures it stays above content but below header */
 }
