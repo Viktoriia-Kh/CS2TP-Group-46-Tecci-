@@ -526,16 +526,10 @@
         const specNames = Array.from(document.querySelectorAll('input[name="spec_names[]"]')).map(input => input.value);
         const specValues = Array.from(document.querySelectorAll('input[name="spec_values[]"]')).map(input => input.value);
 
-        // Add specs to form data
-        specNames.forEach((name, index) => {
-            formData.append('spec_names[]', name);
-            formData.append('spec_values[]', specValues[index] || '');
-        });
-
         // File input 
         const fileInput = document.getElementById('product-image');
 
-        // sEnd image + data together
+        // Send image + data together
         const formData = new FormData();
         formData.append('name', name);
         formData.append('category', category);
@@ -543,7 +537,13 @@
         formData.append('stock_quantity', stock);
         formData.append('description', description);
 
-        
+        // Add specs to form data
+        specNames.forEach((name, index) => {
+            formData.append('spec_names[]', name);
+            formData.append('spec_values[]', specValues[index] || '');
+        });
+
+        // If image selected → add it
         if (fileInput.files.length > 0) {
             formData.append('image', fileInput.files[0]);
         }
@@ -573,7 +573,7 @@
             console.error("Add product failed:", error);
             alert("Something went wrong.");
         }
-    }  
+    }
 
     //  DELETE PRODUCT LOGIC
     // DELETE PRODUCT (REAL DATABASE DELETE)
