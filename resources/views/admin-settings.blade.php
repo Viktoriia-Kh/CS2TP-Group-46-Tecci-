@@ -76,7 +76,7 @@
 
       <!--NAV TEXT (SIDEBAR) + ICONS ON THE RIGHT-->
       <nav class="admin-nav">
-        <a class="active" href="TP2_Admin_Dashboard.html">
+        <a href="TP2_Admin_Dashboard.html">
           <span class="nav-text">Dashboard</span> <!--span will allow the text in the Sidebar to be hidden when it collapses, which is done in CSS-->
           <span class="nav-ico"><i class="fa-solid fa-chart-line"></i></span> <!--fa-chart-line is a Chart Icon linked from Font Awesome-->
         </a>
@@ -101,7 +101,7 @@
           <span class="nav-ico"><i class="fa-solid fa-user-group"></i></span> <!--fa-user-group is a User (Group) Icon linked from Font Awesome-->
         </a>
 
-        <a href="TP2_Admin_Settings.html">
+        <a class="active" href="admin-settings">
           <span class="nav-text">Admin Settings</span>
           <span class="nav-ico"><i class="fa-solid fa-gear"></i></span> <!--fa-gear is a Gear/Settings Icon linked from Font Awesome-->
         </a>
