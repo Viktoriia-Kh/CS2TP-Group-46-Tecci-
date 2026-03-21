@@ -12,8 +12,7 @@ class AdminOrderController extends Controller
     /* Search, filter, and view the status of selected orders. */
     public function index(Request $request)
     {
-        // Start query, fetching related items and the user who placed it
-        $query = Order::with(['items', 'user'])->orderBy('created_at', 'desc');
+        $query = Order::with(['items', 'user']);
 
         // 1. SEARCH LOGIC (By Order ID or Customer Name)
         if ($request->filled('search')) {
@@ -38,6 +37,19 @@ class AdminOrderController extends Controller
                 $query->where('total_price', '>=', 1000);
             }
         }
+
+        // SORTING LOGIC (date & price)
+        if ($request->has('sort')) {
+            if ($request->sort == 'price_asc') {
+                $query->orderBy('total_price', 'asc');
+            } elseif ($request->sort == 'date_desc') {
+                $query->orderBy('created_at', 'desc');
+            }
+        } else {
+            // Default sorting (newest first)
+            $query->orderBy('created_at', 'desc');
+}
+
 
         $orders = $query->paginate(15);
 
