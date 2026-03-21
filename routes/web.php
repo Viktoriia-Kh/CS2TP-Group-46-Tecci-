@@ -16,6 +16,9 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ReviewController;
+
+use App\Http\Controllers\AdminInventoryController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
@@ -157,3 +160,15 @@ Route::post('/forgot-password', [LoginController::class, 'sendResetPasswordLink'
 // reset password routes
 Route::get('/reset-password/{token}', [LoginController:: class, 'showPasswordResetForm'])->name('password.reset');
 Route::post('/reset-password', [LoginController::class, 'updatePassword'])->name('password.update'); // saves the new password to database
+
+// Reviews routee
+Route::post('/product/{product}/review', [ReviewController::class, 'store'])
+    ->name('reviews.store');
+
+//Admin Inventory route
+Route::get('admin-inventory', function () {
+    return view('admin-inventory');
+});
+
+Route::get('admin-inventory', [AdminInventoryController::class, 'AdminInventoryController'])->name('products.index');
+

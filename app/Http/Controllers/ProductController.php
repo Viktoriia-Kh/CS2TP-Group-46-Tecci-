@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-
-
-    public function ProductController(Request $request)
+    public function index(Request $request)
     {
         // Get all active categories for filters
         $categories = Category::where('is_active', true)
@@ -18,7 +16,13 @@ class ProductController extends Controller
                               ->get();
 
         // Base query
-        $query = Product::with(['category', 'inventory']);
+        $query = Product::with([
+            'category',
+            'inventory',
+            'images',
+            'specs',
+            'reviews'
+        ]);
 
         // Optional category filter: ?category=ID
         if ($request->filled('category')) {
@@ -48,7 +52,14 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         // Load all related info
-        $product->load(['category', 'inventory']);
+        $product->load([
+            'category',
+            'inventory',
+            'images',
+            'specs',
+            'reviews.user',
+            'reviews.images'
+        ]);
 
         // Render details
         return view('product', [

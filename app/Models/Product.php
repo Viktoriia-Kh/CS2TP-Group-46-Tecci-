@@ -32,6 +32,24 @@ class Product extends Model
         return $this->hasOne(Inventory::class);
     }
 
+    // Multiple images for each product
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    // Reviews for the product
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    // Specs for the product
+    public function specs()
+    {
+        return $this->hasMany(ProductSpec::class);
+    }
+
     // Allows us to keep track of our stock logic
     public function getStockStatusAttribute()
     {
@@ -51,5 +69,11 @@ class Product extends Model
         }
 
         return 'in_stock';
+    }
+
+    // Average rating
+    public function getAverageRatingAttribute()
+    {
+        return $this->reviews()->avg('rating');
     }
 }
