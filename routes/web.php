@@ -34,6 +34,7 @@ Route::get('/decrease-quantity/{id}', [BasketController::class, 'decrease'])->na
 Route::post('/apply-discount', [BasketController::class, 'applyDiscount'])->name('basket.discount');
 // AJAX Basket Update
 Route::post('/basket/update-ajax', [BasketController::class, 'updateAjax'])->name('basket.update.ajax');
+Route::post('/basket/save-delivery', [BasketController::class, 'saveDelivery'])->name('basket.saveDelivery');
 
 Route::get('/login', function () {
     return view('login');
@@ -156,23 +157,25 @@ Route::get('displayproduct', [DisplayProductController::class, 'DisplayProductCo
 Route::get('/product/{product}', [ProductController::class, 'show'])
     ->name('product.detail');
 
-// Checkout route - REQUIRES LOGIN
-Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout')
-      ->middleware('auth'); // Users must be logged in to checkout
+// REMOVED: Redundant checkout page - now goes straight to payment
+// Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+
+// Payment/Checkout page (combined) - REQUIRES LOGIN
+Route::get('/checkout', [CheckoutController::class, 'showPaymentForm'])->name('checkout')
+      ->middleware('auth');
       
-Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+// Legacy route for compatibility
+Route::get('/checkout/payment', [CheckoutController::class, 'showPaymentForm'])->name('checkout.payment')
+      ->middleware('auth');
+
+// Process payment and save order
+Route::post('/checkout/payment/validate', [CheckoutController::class, 'processPayment'])->name('payment.validate');
 
 // Show list of all orders
 Route::get('/my-orders', [OrderController::class, 'index'])->name('orders.index');
 
 // Show details of one specific order
 Route::get('/my-orders/{id}', [OrderController::class, 'show'])->name('orders.show');
-
-// Show the payment form
-Route::get('/checkout/payment', [CheckoutController::class, 'showPaymentForm'])->name('checkout.payment');
-
-// Validate payment and THEN process the order
-Route::post('/checkout/payment/validate', [CheckoutController::class, 'processPayment'])->name('payment.validate');
 
 // Route to submit a return request for a specific item
 Route::post('/order-item/{id}/return', [OrderController::class, 'requestReturn'])->name('item.return');

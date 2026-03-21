@@ -198,9 +198,7 @@ class BasketController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Apply Discount
-     */
+    /* Apply Discount */
     public function applyDiscount(Request $request)
     {
         $code = strtolower(trim($request->input('code')));
@@ -228,9 +226,7 @@ class BasketController extends Controller
         ], 400);
     }
 
-    /**
-     * AJAX Update Method
-     */
+    /* AJAX Update Method */
     public function updateAjax(Request $request)
     {
         $id = $request->input('id');
@@ -350,5 +346,17 @@ class BasketController extends Controller
                 }
             }
         });
+    }
+
+    /**
+     * Save Delivery Cost to Session
+     * Called via AJAX from basket page when user selects delivery option
+     */
+    public function saveDelivery(Request $request)
+    {
+        $deliveryCost = $request->input('delivery_cost', 3.99);
+        session()->put('delivery_cost', $deliveryCost);
+        
+        return response()->json(['success' => true]);
     }
 }

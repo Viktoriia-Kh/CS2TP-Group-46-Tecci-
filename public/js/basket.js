@@ -119,14 +119,33 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     checkboxes.forEach(box => {
-        box.addEventListener('change', function() {
-            if(this.checked) {
-                checkboxes.forEach(other => { if(other !== this) other.checked = false; });
-                if(deliveryErrorMsg) deliveryErrorMsg.style.display = 'none';
+    box.addEventListener('change', function() {
+        if(this.checked) {
+            checkboxes.forEach(other => { if(other !== this) other.checked = false; });
+            if(deliveryErrorMsg) deliveryErrorMsg.style.display = 'none';
+            
+            // Save delivery cost to session via AJAX
+            let deliveryCost = 0;
+            if (this.id === 'delivery-standard') {
+                const subtotalRaw = parseFloat(subtotalEl.innerText.replace(/[£,]/g, '')) || 0;
+                deliveryCost = subtotalRaw >= 60 ? 0 : 3.99;
+            } else if (this.id === 'delivery-premium') {
+                deliveryCost = 4.99;
             }
-            updateTotals();
-        });
+            
+            // Save to session
+            fetch('/basket/save-delivery', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({ delivery_cost: deliveryCost })
+            });
+        }
+        updateTotals();
     });
+});
 
     if (applyButton) {
         applyButton.addEventListener('click', function() {
