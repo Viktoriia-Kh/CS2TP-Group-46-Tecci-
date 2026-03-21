@@ -18,4 +18,16 @@ class HomeController extends Controller
             'featuredProducts' => $featuredProducts,
         ]);
     }
+    public function index()
+
+    {
+
+        $featuredProducts = Product::latest()->take(4)->get();
+
+
+        return view('home-page', [
+            'featuredProducts' => $featuredProducts,
+        ]); 
+
+    }
 }
