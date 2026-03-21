@@ -119,23 +119,78 @@
 <article class="metric-card">
 <p class="metric-label">Sales | Today</p>
 <div class="metric-body">
-  <div class="metric-icon">
-      <i class="fa-solid fa-cart-shopping"></i>
-  </div>
-  <p class="metric-value">{{ number_format($salesToday) }}</p>
+<div class="metric-icon">
+<i class="fa-solid fa-cart-shopping"></i>
+</div>
+<p class="metric-value">{{ number_format($salesToday) }}</p>
 </div>
 </article>
 
 <article class="metric-card">
 <p class="metric-label">Revenue | This Month</p>
 <div class="metric-body">
-  <div class="metric-icon">
-      <i class="fa-solid fa-circle-dollar-to-slot"></i>
-  </div>
-  <p class="metric-value">£{{ number_format($revenueMonth, 2) }}</p>
+<div class="metric-icon">
+<i class="fa-solid fa-circle-dollar-to-slot"></i>
+</div>
+<p class="metric-value">£{{ number_format($revenueMonth, 2) }}</p>
 </div>
 </article>
+<section class="panel table-panel" style="margin: 0;">
+    <div class="panel-header">
+        <h2>Recent Sales | Today</h2>
+    </div>
+    <div class="table-wrap">
+        <table class="dash-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Customer</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($recentSales as $sale)
+                <tr>
+                    <td>#{{ $sale->id }}</td>
+                    <td>{{ $sale->user->name ?? 'Guest' }}</td>
+                    <td>£{{ number_format($sale->total_price, 2) }}</td>
+                    <td><span class="pill pill-approved">{{ strtoupper($sale->status) }}</span></td>
+                </tr>
+                @empty
+                <tr><td colspan="4" style="text-align:center;">No recent sales.</td></tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+<aside class="panel stock-alerts-panel"> <!-- adding an out of stock panel to the right of the top selling panel-->
+<div class="panel-header">
+<h2>Items Out Of Stock</h2>
 </div>
+
+<div class="table-wrap">
+<ul class="stock-alert-list">
+    @forelse($itemsOutOfStock as $item) {{-- this loop will check if the items are out of stock--}}
+        <li class="stock-item">
+            <span class="stock-name">{{$item->product->name}}</span>
+            <span class="stock-status">OUT OF STOCK</span>
+        </li>
+    @empty
+        {{-- this will show if there are no products out of stock--}}
+        <li class="stock-message">No products currently out of stock.</li>
+    @endforelse
+</ul>
+</div>
+
+</aside>
+
+
+
+</div>
+
 
 <!--panel is a shared styling class, used so any element with class panel gets a blue background, rounded corners, and padding-->
 <aside class="panel activity-panel">
@@ -146,204 +201,73 @@
 <ul class="activity-timeline" style="list-style: none; padding: 0;">
 
 @forelse($refundRequests as $request)
-  <li class="activity-item" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative;">
+<li class="activity-item" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative;">
 
-      <div style="flex: 1; padding-left: 15px;">
-          <span class="activity-time" style="font-size: 11px; color: #a5c7e9;">
-              {{ $request->updated_at->diffForHumans(null, true) }}
-          </span>
+<div style="flex: 1; padding-left: 15px;">
+    <span class="activity-time" style="font-size: 11px; color: #a5c7e9;">
+        {{ $request->updated_at->diffForHumans(null, true) }}
+    </span>
 
-          <p class="activity-text" style="margin: 4px 0; color: #fff;">
-              <strong>Order #{{ $request->order_id }}</strong>
-              <span style="color: #7fc0ff;">({{ $request->product_name }})</span>
-          </p>
-
-          @if($request->return_reason)
-    <p style="font-size: 12px; color: #d1e7ff; background: rgba(255,255,255,0.05); padding: 5px 8px; border-left: 2px solid #7fc0ff; margin: 5px 0 10px 0; font-style: italic;">
-        "{{ $request->return_reason }}"
+    <p class="activity-text" style="margin: 4px 0; color: #fff;">
+        <strong>Order #{{ $request->order_id }}</strong>
+        <span style="color: #7fc0ff;">({{ $request->product_name }})</span>
     </p>
+
+    @if($request->return_reason)
+<p style="font-size: 12px; color: #d1e7ff; background: rgba(255,255,255,0.05); padding: 5px 8px; border-left: 2px solid #7fc0ff; margin: 5px 0 10px 0; font-style: italic;">
+"{{ $request->return_reason }}"
+</p>
 @else
-    <p style="font-size: 11px; color: #a5c7e9; margin-bottom: 10px;">No reason provided.</p>
+<p style="font-size: 11px; color: #a5c7e9; margin-bottom: 10px;">No reason provided.</p>
 @endif
 
-          <span class="pill {{ strtolower($request->return_status) == 'pending' ? 'pill-pending' : 'pill-approved' }}" style="font-size: 10px;">
-              {{ strtoupper($request->return_status) }}
-          </span>
-      </div>
+    <span class="pill {{ strtolower($request->return_status) == 'pending' ? 'pill-pending' : 'pill-approved' }}" style="font-size: 10px;">
+        {{ strtoupper($request->return_status) }}
+    </span>
+</div>
 
-      <div class="dash-action-btns" style="display: flex; gap: 8px; margin-left: 10px;">
+<div class="dash-action-btns" style="display: flex; gap: 8px; margin-left: 10px;">
 @php
 $status = strtolower(trim($request->return_status));
 @endphp
 
 @if($status != 'approved' && $status != 'declined' && $status != 'none')
 <form action="{{ route('admin.returns.approve', $request->id) }}" method="POST" style="margin: 0;">
-    @csrf
-    <button type="submit" class="pill pill-approved" title="Approve" style="cursor: pointer; border: none; padding: 8px 12px; background: #1cc95b; color: white;">
-        <i class="fa-solid fa-check"></i>
-    </button>
+@csrf
+<button type="submit" class="pill pill-approved" title="Approve" style="cursor: pointer; border: none; padding: 8px 12px; background: #1cc95b; color: white;">
+<i class="fa-solid fa-check"></i>
+</button>
 </form>
 
 <form action="{{ route('admin.returns.decline', $request->id) }}" method="POST" style="margin: 0;">
-    @csrf
-    <button type="submit" class="pill" title="Decline" style="cursor: pointer; border: none; background: #e74c3c; color: white; padding: 8px 12px;">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
+@csrf
+<button type="submit" class="pill" title="Decline" style="cursor: pointer; border: none; background: #e74c3c; color: white; padding: 8px 12px;">
+<i class="fa-solid fa-xmark"></i>
+</button>
 </form>
 @else
 {{-- This shows once you have clicked a button --}}
 <div style="text-align: center; min-width: 40px;">
-    <i class="fa-solid fa-circle-check" style="color: #1cc95b; font-size: 1.2rem;" title="Processed"></i>
+<i class="fa-solid fa-circle-check" style="color: #1cc95b; font-size: 1.2rem;" title="Processed"></i>
 </div>
 @endif
 </div>
-  </li>
+</li>
 @empty
-  <li class="activity-item">
-      <p class="activity-text" style="color: #a5c7e9; text-align: center; padding: 20px;">No active refund requests.</p>
-  </li>
+<li class="activity-item">
+<p class="activity-text" style="color: #a5c7e9; text-align: center; padding: 20px;">No active refund requests.</p>
+</li>
 @endforelse
 </ul>
 </aside>
 </div>
 
-<!--MIDDLE GRID: RECENT SALES + TRAFFIC-->
-<div class="dash-mid-grid"> <!--This is a container for the middle section of the Dashboard-->
-<section class="panel table-panel">
-  <div class="panel-header">
-      <h2>Recent Sales</h2>
-  </div>
 
-  <div class="table-wrap">
-      <table class="dash-table">
-          <thead>
-              <tr>
-                  <th>#</th>
-                  <th>Customer</th>
-                  <th>Total Price</th>
-                  <th>Status</th>
-                  <th>Time</th>
-              </tr>
-          </thead>
-          <tbody>
-              @forelse($recentSales as $sale)
-                  <tr>
-                      <td>#{{ $sale->id }}</td>
-                      <td>{{ $sale->user->name ?? 'Guest' }}</td>
-                      <td>£{{ number_format($sale->total_price, 2) }}</td>
-                      <td>
-                          @php
-                              $statusClass = match(strtolower($sale->status)) {
-                                  'completed', 'approved' => 'pill-approved',
-                                  'pending' => 'pill-pending',
-                                  'declined', 'cancelled' => 'pill-declined', // You may need to add this CSS class
-                                  default => 'pill-pending',
-                              };
-                          @endphp
-                          <span class="pill {{ $statusClass }}">{{ strtoupper($sale->status) }}</span>
-                      </td>
-                      <td style="font-size: 0.8em; color: #a5c7e9;">{{ $sale->created_at->format('H:i') }}</td>
-                  </tr>
-              @empty
-                  <tr>
-                      <td colspan="5" style="text-align: center; color: #a5c7e9; padding: 20px;">No sales recorded today.</td>
-                  </tr>
-              @endforelse
-          </tbody>
-      </table>
-  </div>
-</section>
 
-<aside class="panel traffic-panel"> <!--aside represents the secondary content-->
-<div class="panel-header">
-<h2>Website Traffic | Today</h2>
-</div>
-<div class="traffic-empty"></div> <!--This is empty for now to reserve space for future chart-->
-</aside>
-</div>
 
-<!--BOTTOM GRID: TOP SELLING + SPACING COLUMN-->
-<div class="dash-bot-grid"> <!--This is the layout wrapper for the bottom row of the dashboard-->
-<section class="panel top-selling-panel">
-<div class="panel-header">
-<h2>Top-Selling Products | Today</h2>
-</div>
 
-<div class="table-wrap">
-<table class="dash-table dash-table-products">
-<thead> <!--thead defines the header section-->
-  <tr> <!--tr is for the table row-->
-    <th>Preview</th>
-    <th>Product</th>
-    <th>Price</th>
-    <th>Sold</th>
-    <th>Revenue</th>
-  </tr>
-</thead>
-<tbody> <!--tbody represents the actual data-->
-  <tr>
-    <td><div class="product-thumbnail">Product<br>Image 1</div></td> <!--td represents the table data cells-->
-    <td>Lorem Ipsum</td>
-    <td>£499.99</td>
-    <td>124</td>
-    <td>X</td>
-  </tr>
-  <tr>
-    <td><div class="product-thumbnail">Product<br>Image 2</div></td>
-    <td>Lorem Ipsum 2</td>
-    <td>£399.99</td>
-    <td>98</td>
-    <td>X</td>
-  </tr>
-  <tr>
-    <td><div class="product-thumbnail">Product<br>Image 3</div></td>
-    <td>Lorem Ipsum 3</td>
-    <td>£450.99</td>
-    <td>74</td>
-    <td>X</td>
-  </tr>
-  <tr>
-    <td><div class="product-thumbnail">Product<br>Image 4</div></td>
-    <td>Lorem Ipsum 4</td>
-    <td>£299.99</td>
-    <td>63</td>
-    <td>X</td>
-  </tr>
-  <tr>
-    <td><div class="product-thumbnail">Product<br>Image 5</div></td>
-    <td>Lorem Ipsum 5</td>
-    <td>£199.99</td>
-    <td>41</td>
-    <td>X</td>
-  </tr>
-</tbody>
-</table>
-</div>
-</section>
 
-<aside class="panel stock-alerts-panel"> <!-- adding an out of stock panel to the right of the top selling panel-->
-    <div class="panel-header">
-        <h2>Items Out Of Stock</h2>
-    </div>
 
-    <div class="table-wrap">
-        <ul class="stock-alert-list">
-            @forelse($itemsOutOfStock as $item) {{-- this loop will check if the items are out of stock--}}
-                <li class="stock-item">
-                    <span class="stock-name">{{$item->product->name}}</span>
-                    <span class="stock-status">OUT OF STOCK</span>
-                </li>
-            @empty
-                {{-- this will show if there are no products out of stock--}}
-                <li class="stock-message">No products currently out of stock.</li>
-            @endforelse
-        </ul>
-    </div>
-
-</aside>
-</div>
-
-</div>
 </section>
 </main>
 
@@ -353,41 +277,41 @@ $status = strtolower(trim($request->return_status));
 <div class="footer-col">
 <h3>TECCI</h3>
 <p>
-    Smart Tech at Smart Prices.<br>
-    Tecci makes premium devices accessible to<br>
-    students and customers across the UK.
+Smart Tech at Smart Prices.<br>
+Tecci makes premium devices accessible to<br>
+students and customers across the UK.
 </p>
 </div>
 
 <div class="footer-col">
 <h4>Quick Links</h4>
 <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about-us">About</a></li>
-    <li><a href="/contact-us">Contact</a></li>
-    <li><a href="/displayproduct">Products</a></li>
-    <li><a href="/basket">Basket</a></li>
-    <li><a href="/account">My Account</a></li>
+<li><a href="/">Home</a></li>
+<li><a href="/about-us">About</a></li>
+<li><a href="/contact-us">Contact</a></li>
+<li><a href="/displayproduct">Products</a></li>
+<li><a href="/basket">Basket</a></li>
+<li><a href="/account">My Account</a></li>
 </ul>
 </div>
 
 <div class="footer-col">
 <h4>Contact Info</h4>
 <ul class="contact-list">
-    <li>
-        <i class="fa-solid fa-location-dot"></i>
-        <!--fa-loocation-dot is a Location Icon linked from Font Awesome-->
-        <span>0121 555 0198</span><br><br>
-    </li>
-    <li>
-        <i class="fa-solid fa-phone"></i> <!--fa-phone is a Phone Icon linked from Font Awesome-->
-        <span>Tecci_Queries@net.com</span><br><br>
-    </li>
-    <li>
-        <i class="fa-regular fa-envelope"></i>
-        <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
-        <span>Birmingham, B4 7ET</span><br><br>
-    </li>
+<li>
+<i class="fa-solid fa-location-dot"></i>
+<!--fa-loocation-dot is a Location Icon linked from Font Awesome-->
+<span>0121 555 0198</span><br><br>
+</li>
+<li>
+<i class="fa-solid fa-phone"></i> <!--fa-phone is a Phone Icon linked from Font Awesome-->
+<span>Tecci_Queries@net.com</span><br><br>
+</li>
+<li>
+<i class="fa-regular fa-envelope"></i>
+<!--fa-envelope is an Envelope Icon linked from Font Awesome-->
+<span>Birmingham, B4 7ET</span><br><br>
+</li>
 </ul>
 </div>
 </div> <!--Closes <div class="container footer-inner"-->
