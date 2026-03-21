@@ -14,6 +14,23 @@
   <!--Font Awesome for Icons-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
+  {{-- CSRF Token for AJAX requests --}}
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  {{-- Toast Notification Styles --}}
+  <style>
+    #toast-container { position: fixed; top: 140px; right: 30px; z-index: 99999; display: flex; flex-direction: column; gap: 15px; pointer-events: none; }
+    .toast-notification { background: white; min-width: 380px; padding: 20px 25px; border-radius: 12px; box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18); display: flex; align-items: center; gap: 20px; position: relative; overflow: hidden; pointer-events: auto; transform: translateX(120%); opacity: 0; transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s ease; }
+    .toast-notification.show { transform: translateX(0); opacity: 1; }
+    .toast-icon { font-size: 32px; flex-shrink: 0; }
+    .toast-content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .toast-title { font-weight: 700; font-size: 16px; color: #111827; }
+    .toast-message { font-size: 14px; color: #4b5563; font-weight: 500; }
+    .toast-product-image { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; flex-shrink: 0; border: 1px solid #e5e7eb; }
+    .toast-progress { position: absolute; bottom: 0; left: 0; height: 5px; width: 100%; animation: shrink 3s linear forwards; }
+    @keyframes shrink { to { width: 0%; } }
+  </style>  
+
 </head>
 <body>
     <header class="main-header">
@@ -101,7 +118,10 @@
                       </p>
                   </div>
                   
-                 <a href="{{ route('basket.add', $product->id) }}" class="add-to-cart-btn"> Add to Cart</a>
+                 <a href="#" class="add-to-cart-btn" 
+                  onclick="event.preventDefault(); addToBasketAjax({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ $product->image_url ? asset($product->image_url) : asset('images/laptop.jpg') }}', 1);">
+                  Add to Cart
+                </a>
 
               </div>
           </div>
@@ -156,4 +176,89 @@
     </div>
   </footer>
 </body>
+
+  <script>
+const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+// AJAX Add to Basket (NO PAGE REFRESH!)
+function addToBasketAjax(productId, productName, productImage, quantity = 1) {
+  fetch(`/add-to-basket/${productId}?quantity=${quantity}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': csrfToken,
+      'X-Requested-With': 'XMLHttpRequest', 
+      'Accept': 'application/json'          
+    },
+    body: JSON.stringify({ quantity: quantity })
+  })
+  .then(res => {
+      if (!res.ok) throw new Error('Network response was not ok');
+      return res.json();
+  })
+  .then(data => {
+    if (data.success) {
+      const message = quantity > 1 
+        ? `${quantity} × ${productName} added to your basket!`
+        : `${productName} added to your basket!`;
+      
+      showToast("Added to Basket", message, "success", productImage);
+      
+      // Update header badge
+      const cartBadge = document.querySelector('.cart-badge');
+      if (cartBadge) {
+        cartBadge.innerText = data.totalQty;
+        cartBadge.style.display = 'inline-block';
+      } else {
+        const cartIcon = document.querySelector('.cart-icon-wrapper');
+        if (cartIcon) {
+          const badge = document.createElement('span');
+          badge.className = 'cart-badge';
+          badge.innerText = data.totalQty;
+          cartIcon.appendChild(badge);
+        }
+      }
+    }
+  })
+  .catch(err => console.error("Add to basket error:", err));
+}
+
+// Toast Notification Function 
+function showToast(title, message, type = 'success', imageUrl = null) {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = 'toast-notification'; 
+  
+  const color = type === 'success' ? '#2ecc71' : '#e74c3c';
+  const icon = type === 'success' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-exclamation-circle"></i>';
+  
+  const imageHtml = imageUrl ? `<img src="${imageUrl}" class="toast-product-image" alt="Product">` : `<div class="toast-icon" style="color: ${color}">${icon}</div>`;
+  
+  toast.style.borderLeft = `5px solid ${color}`;
+  toast.innerHTML = `
+    ${imageHtml}
+    <div class="toast-content">
+      <span class="toast-title" style="color: #333">${title}</span>
+      <span class="toast-message">${message}</span>
+    </div>
+    <div class="toast-progress" style="background-color: ${color}"></div>
+  `;
+  
+  container.appendChild(toast);
+  
+  setTimeout(() => toast.classList.add('show'), 10);
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 400); 
+  }, 3000);
+}
+</script>
+
 </html>

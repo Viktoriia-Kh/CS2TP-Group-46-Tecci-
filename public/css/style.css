@@ -138,6 +138,14 @@ body:not(.signup-page) {
     justify-content: center;
     border: 2px solid white; /* Thicker border makes it pop more */
     box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Added shadow for depth */
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    box-sizing: border-box !important;
+    text-align: center;
+    white-space: nowrap !important; /* Forces everything onto a single line */
+    overflow: hidden !important;    /* Hides any extra invisible space that tries to expand the badge */
+    align-content: center !important; /* Forces strict vertical centering even if text wraps invisibly */
 }
 
 /* ================================
