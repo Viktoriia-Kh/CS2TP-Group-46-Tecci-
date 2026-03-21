@@ -130,14 +130,10 @@ For each page with a hardcoded header:
 - Check database `basket_items` table has correct data
 - Verify session ID matches for guests
 
-**Toast notifications are missing on product/display-product pages after merge:**
-- **Check Script Links:** Ensure the toast notification JavaScript library (and its corresponding CSS file) are still linked in the `<head>` or right before the closing `</body>` tag. Merges often accidentally overwrite these imports.
-- **Check the AJAX Script:** Verify that the JavaScript handling the "Add to Cart" button click hasn't been overwritten. The `success` block of your AJAX/fetch request must still contain the function that triggers the toast popup.
-- **Check Console:** Open the browser's developer tools (F12) and check the Console tab for any JavaScript errors like "Toast is not defined," which indicates the library was lost during the merge.
-
 ---
 
 ## 📞 Questions?
+
 Contact: KP - Basket Branch Owner
 
 Last Updated: March 21, 2026
