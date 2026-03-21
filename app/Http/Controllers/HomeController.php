@@ -19,4 +19,17 @@ class HomeController extends Controller
 
         return view('home-page', compact('featuredProducts', 'reviews'));
     }
+    public function index()
+
+    {
+
+        $featuredProducts = Product::latest()->take(4)->get();
+
+
+        return view('home-page', [
+            'featuredProducts' => $featuredProducts,
+        ]); 
+
+    }
+}
 }
