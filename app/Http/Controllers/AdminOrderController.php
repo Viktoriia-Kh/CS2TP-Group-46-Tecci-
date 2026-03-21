@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\OrderItem;
+use App\Models\Inventory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -55,7 +58,10 @@ class AdminOrderController extends Controller
         return view('admin-orders', compact('orders'));
     }
 
-    /* Process an order... Following this entry, the stock level will be automatically updated. */
+    /* 
+     * Process an order status change
+     * Stock is deducted when order moves from Pending → Approved/Shipped/Completed
+     */
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
@@ -64,20 +70,31 @@ class AdminOrderController extends Controller
 
         $order = Order::with('items.product.inventory')->findOrFail($id);
         $newStatus = $request->input('status');
+        $oldStatus = $order->status;
 
-        DB::transaction(function () use ($order, $newStatus) {
+        DB::transaction(function () use ($order, $newStatus, $oldStatus) {
             
             // AUTOMATIC STOCK DEDUCTION LOGIC
-            if ($order->status === 'Pending' && in_array($newStatus, ['Approved', 'Shipped', 'Completed'])) {
+            // When admin approves order, deduct stock
+            if ($oldStatus === 'Pending' && in_array($newStatus, ['Approved', 'Shipped', 'Completed'])) {
                 foreach ($order->items as $item) {
                     if ($item->product && $item->product->inventory) {
-                        $item->product->inventory->decrement('quantity_available', $item->quantity);
+                        $inventory = $item->product->inventory;
+                        
+                        // Check if enough stock
+                        if ($inventory->quantity_available < $item->quantity) {
+                            throw new \Exception("Insufficient stock for {$item->product->name}. Available: {$inventory->quantity_available}, Required: {$item->quantity}");
+                        }
+                        
+                        // Deduct stock
+                        $inventory->decrement('quantity_available', $item->quantity);
                     }
                 }
             }
 
-            // RESTORE STOCK LOGIC (Optional but good practice)
-            if (in_array($order->status, ['Approved', 'Shipped', 'Completed']) && $newStatus === 'Cancelled') {
+            // RESTORE STOCK LOGIC
+            // If order is cancelled after being approved, restore stock
+            if (in_array($oldStatus, ['Approved', 'Shipped', 'Completed']) && $newStatus === 'Cancelled') {
                 foreach ($order->items as $item) {
                     if ($item->product && $item->product->inventory) {
                         $item->product->inventory->increment('quantity_available', $item->quantity);
@@ -88,26 +105,27 @@ class AdminOrderController extends Controller
             $order->update(['status' => $newStatus]);
         });
 
-        return redirect()->back()->with('success', 'Order #' . $order->id . ' has been updated to ' . $newStatus . '.');
+        return redirect()->back()->with('success', 'Order #' . $order->id . ' has been updated to ' . $newStatus . '. Stock levels have been updated automatically.');
     }
 
+    /* View single order details */
     public function show($id)
     {
         $order = Order::with(['items.product', 'user'])->findOrFail($id);
         return view('admin-order-details', compact('order'));
-    } // <--- THIS WAS THE MISSING BRACE!
+    }
 
-    // --- NEW: Show the Create Order Form ---
+    /* Show the Create Order Form */
     public function create()
     {
-        // Get all users and products so we can show them in dropdown menus
-        $users = \App\Models\User::orderBy('name')->get();
-        $products = \App\Models\Product::orderBy('name')->get();
+        // Get all users and products for dropdown menus
+        $users = User::orderBy('name')->get();
+        $products = Product::with('inventory')->orderBy('name')->get();
         
         return view('admin-create-order', compact('users', 'products'));
     }
 
-    // --- NEW: Save the Initiated Order ---
+    /* Save the Initiated Order */
     public function store(Request $request)
     {
         $request->validate([
@@ -124,32 +142,53 @@ class AdminOrderController extends Controller
             return back()->withErrors('You must select at least one product with a quantity.');
         }
 
-        // Create the base order
-        $order = Order::create([
-            'user_id' => $request->user_id,
-            'status' => 'Pending', // Starts as pending, stock isn't deducted until Approved/Shipped!
-            'total_price' => 0,
-        ]);
+        // Wrap in transaction for data integrity
+        try {
+            DB::beginTransaction();
 
-        $totalPrice = 0;
-
-        // Add the items to the order
-        foreach ($selectedProducts as $item) {
-            $product = Product::find($item['id']);
-            $linePrice = $product->price * $item['quantity'];
-            $totalPrice += $linePrice;
-
-            \App\Models\OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $product->id,
-                'quantity' => $item['quantity'],
-                'price' => $product->price,
+            // Create the base order (starts as Pending - no stock deducted yet)
+            $order = Order::create([
+                'user_id' => $request->user_id,
+                'status' => 'Pending',
+                'total_price' => 0,
             ]);
+
+            $totalPrice = 0;
+
+            // Add the items to the order
+            foreach ($selectedProducts as $item) {
+                $product = Product::findOrFail($item['id']);
+                $quantity = (int) $item['quantity'];
+                
+                // Validate quantity
+                if ($quantity < 1) {
+                    throw new \Exception("Quantity must be at least 1 for {$product->name}");
+                }
+                
+                $linePrice = $product->price * $quantity;
+                $totalPrice += $linePrice;
+
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $product->id,
+                    'product_name' => $product->name, 
+                    'quantity' => $quantity,
+                    'price' => $product->price,
+                    'image_url' => $product->image_url ?? null,
+                ]);
+            }
+
+            // Update the final total
+            $order->update(['total_price' => $totalPrice]);
+
+            DB::commit();
+
+            return redirect()->route('admin.orders.index')
+                ->with('success', 'Order #' . $order->id . ' has been successfully created! Status: Pending. Stock will be deducted when order is Approved.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors('Error creating order: ' . $e->getMessage());
         }
-
-        // Update the final total
-        $order->update(['total_price' => $totalPrice]);
-
-        return redirect()->route('admin.orders.index')->with('success', 'New order #' . $order->id . ' has been successfully initiated!');
     }
 }

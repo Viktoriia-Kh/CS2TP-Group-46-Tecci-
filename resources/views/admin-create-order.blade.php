@@ -70,7 +70,7 @@
                 <label style="font-weight: bold; display: block; margin-bottom: 10px;">2. Add Products</label>
                 
                 <div id="product-rows-container">
-                    <div class="product-row" style="display: flex; gap: 15px; margin-bottom: 15px;">
+                    <div class="product-row" style="display: flex; gap: 15px; margin-bottom: 15px; align-items: center;">
                         <select name="products[0][id]" style="flex: 3; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
                             <option value="">-- Select Product --</option>
                             @foreach($products as $product)
@@ -78,6 +78,10 @@
                             @endforeach
                         </select>
                         <input type="number" name="products[0][quantity]" placeholder="Qty" min="1" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                        
+                        <button type="button" class="remove-row-btn" style="background: #dc3545; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;" title="Remove Product">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
                     </div>
                 </div>
                 
@@ -99,26 +103,42 @@
 <script>
     let productRowIndex = 1;
 
+    // Logic for ADDING rows
     document.getElementById('add-row-btn').addEventListener('click', function() {
-        // 1. Find the container and the first row
         const container = document.getElementById('product-rows-container');
         const firstRow = container.querySelector('.product-row');
         
-        // 2. Clone the entire row perfectly (including all dropdown options)
         const newRow = firstRow.cloneNode(true);
 
-        // 3. Update the 'name' attributes so Laravel knows they are new array items
         const select = newRow.querySelector('select');
         select.name = `products[${productRowIndex}][id]`;
-        select.value = ''; // Reset to blank
+        select.value = ''; 
 
         const input = newRow.querySelector('input');
         input.name = `products[${productRowIndex}][quantity]`;
-        input.value = ''; // Reset to blank
+        input.value = ''; 
 
-        // 4. Append it to the page and increase our counter
         container.appendChild(newRow);
         productRowIndex++;
+    });
+
+    // Logic for REMOVING rows
+    document.getElementById('product-rows-container').addEventListener('click', function(e) {
+        // Use .closest() just in case click FontAwesome icon inside the button
+        const removeBtn = e.target.closest('.remove-row-btn');
+        
+        if (removeBtn) {
+            const row = removeBtn.closest('.product-row');
+            
+            // If there is more than 1 row, delete the whole HTML row
+            if (document.querySelectorAll('.product-row').length > 1) {
+                row.remove();
+            } else {
+                // If it is the last row left, just clear the inputs instead of deleting it entirely
+                row.querySelector('select').value = '';
+                row.querySelector('input').value = '';
+            }
+        }
     });
 </script>
 
