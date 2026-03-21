@@ -1,22 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
-use App\Http\Controllers\Controller;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    //Show the home page with products
-    public function HomeController()
+    public function index()
     {
-        // Get 4 products
         $featuredProducts = Product::latest()->take(4)->get();
 
+        $reviews = Review::where('is_approved', true)
+            ->latest()
+            ->take(10)
+            ->get();
 
-        return view('home-page', [
-            'featuredProducts' => $featuredProducts,
-        ]);
+        return view('home-page', compact('featuredProducts', 'reviews'));
     }
     public function index()
 
@@ -30,4 +31,5 @@ class HomeController extends Controller
         ]); 
 
     }
+}
 }
