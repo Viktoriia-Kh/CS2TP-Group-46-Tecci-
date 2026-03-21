@@ -22,6 +22,7 @@ The basket badge (red circle with item count) displays the total quantity of ite
 - `resources/views/product.blade.php`
 - `resources/views/about-us.blade.php`
 - `resources/views/contact-us.blade.php`
+- `resources/views/login.blade.php`
 
 ---
 
