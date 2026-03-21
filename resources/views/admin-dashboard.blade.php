@@ -256,9 +256,31 @@ $status = strtolower(trim($request->return_status));
 
 <aside class="panel traffic-panel"> <!--aside represents the secondary content-->
 <div class="panel-header">
-<h2>Website Traffic | Today</h2>
+<h2>Orders To Be Processed</h2>
 </div>
-<div class="traffic-empty"></div> <!--This is empty for now to reserve space for future chart-->
+
+<div class="table-wrap">
+    <ul class="orders-to-process">
+        @forelse ($pendingOrders as $order)
+            <li class="order-action">
+                <div class="order-info">
+                    <p class="order-id">Order #{{$order->id}}</p>
+                    <small class="customer-order">
+                        <i class="fa-solid fa-user"></i> {{$order->user->name}} {{-- shows the username net to the order--}}
+                    </small>
+                    <small class="time-of-order">
+                        {{$order->created_at->diffForHumans()}}
+                    </small>
+                </div>
+            </li>
+        @empty
+        <div class="empty-action-state">
+            <i class="fa-solid fa-circle-check"></i>
+            <p class="main-message">You're All Caught Up!</p>
+            <p class="sub-message">You currently do not have any orders to process.</p>
+        </div>
+        @endforelse
+    </ul>
 </aside>
 </div>
 

@@ -646,8 +646,69 @@ body.sidebar-collapsed .site-footer {
     color: #a5c7e9;
     text-align: center;
     padding: 20px 0;
-    font-style: italic;
     font-size: 0.9rem;
+}
+
+/* orders to be processed styling*/
+.orders-to-process{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* show the orders if there are any*/
+.order-action{
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.order-id{
+    margin: 0;
+    font-weight: bold;
+    color: #0d2137;
+    font-size: 1rem;
+}
+
+.customer-order{
+    display: block;
+    color: #334155;
+    margin: 4px 0;
+}
+
+.time-of-order{
+    display: block;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* styling for the empty state messages*/
+.empty-section-state{
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-action-state i{
+    font-size: 3rem;
+    color: #1cc95b;
+    margin-bottom: 15px;
+    display: block; /* centres the icon*/
+}
+
+.main-message{
+    display: block;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #0d2137;
+    margin-bottom: 10px;
+}
+
+.sub-message{
+    display: block;
+    font-size: 0.8rem;
+    color: #475569;
+    line-height: 1.2;
 }
 
 /* FOOTER SECTION */
