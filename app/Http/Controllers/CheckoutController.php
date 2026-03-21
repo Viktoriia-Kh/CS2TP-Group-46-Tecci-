@@ -7,7 +7,9 @@ use App\Models\BasketItem;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Inventory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
@@ -92,61 +94,106 @@ class CheckoutController extends Controller
         return $this->saveOrder($request);
     }
 
-    /* Save Order with Shipping Address */
+    /* 
+     * Save Order with Shipping Address
+     * UPDATED: Now includes automatic stock deduction for customer orders
+     */
     protected function saveOrder(Request $request)
     {
-        // Get basket from DATABASE
-        $cart = $this->getBasketItems();
-        
-        // Calculate total
-        $subtotal = 0;
-        foreach($cart as $details) {
-            $subtotal += $details['price'] * $details['quantity'];
-        }
+        try {
+            DB::beginTransaction();
 
-        $delivery = session()->get('delivery_cost', 3.99);
-        $discountMultiplier = session()->get('discount_multiplier', 1);
-        $total = ($subtotal * $discountMultiplier) + $delivery;
-
-        // Create order with shipping address
-        $order = Order::create([
-            'user_id' => Auth::id(), // NULL for guests
-            'total_price' => $total,
-            'status' => 'Placed',
+            // Get basket from DATABASE
+            $cart = $this->getBasketItems();
             
-            // Shipping address fields
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'address_line1' => $request->address_line1,
-            'address_line2' => $request->address_line2,
-            'city' => $request->city,
-            'postcode' => $request->postcode,
-            'country' => $request->country,
-            'phone' => $request->phone,
-        ]);
+            if (empty($cart)) {
+                throw new \Exception('Your basket is empty.');
+            }
 
-        // Create order items
-        foreach($cart as $id => $details) {
-            OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $id,
-                'product_name' => $details['name'],
-                'quantity' => $details['quantity'],
-                'price' => $details['price'],
-                'image_url' => $details['image'] ?? null,
+            // STEP 1: Validate stock availability BEFORE creating order
+            foreach ($cart as $productId => $details) {
+                $product = Product::with('inventory')->find($productId);
+                
+                if (!$product) {
+                    throw new \Exception("Product '{$details['name']}' no longer exists.");
+                }
+                
+                // Check if product has inventory tracking
+                if ($product->inventory) {
+                    $availableStock = $product->inventory->quantity_available;
+                    $requestedQty = $details['quantity'];
+                    
+                    if ($availableStock < $requestedQty) {
+                        throw new \Exception("Insufficient stock for '{$product->name}'. Available: {$availableStock}, Requested: {$requestedQty}. Please update your basket.");
+                    }
+                }
+            }
+
+            // STEP 2: Calculate total
+            $subtotal = 0;
+            foreach($cart as $details) {
+                $subtotal += $details['price'] * $details['quantity'];
+            }
+
+            $delivery = session()->get('delivery_cost', 3.99);
+            $discountMultiplier = session()->get('discount_multiplier', 1);
+            $total = ($subtotal * $discountMultiplier) + $delivery;
+
+            // STEP 3: Create order with shipping address
+            $order = Order::create([
+                'user_id' => Auth::id(), // NULL for guests
+                'total_price' => $total,
+                'status' => 'Placed', // Customer orders are immediately "Placed"
+                
+                // Shipping address fields
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'address_line1' => $request->address_line1,
+                'address_line2' => $request->address_line2,
+                'city' => $request->city,
+                'postcode' => $request->postcode,
+                'country' => $request->country,
+                'phone' => $request->phone,
             ]);
+
+            // STEP 4: Create order items AND deduct stock immediately
+            foreach($cart as $id => $details) {
+                // Create order item
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $id,
+                    'product_name' => $details['name'],
+                    'quantity' => $details['quantity'],
+                    'price' => $details['price'],
+                    'image_url' => $details['image'] ?? null,
+                ]);
+
+                // DEDUCT STOCK IMMEDIATELY (customer orders are paid, so stock goes down right away)
+                $product = Product::with('inventory')->find($id);
+                if ($product && $product->inventory) {
+                    $product->inventory->decrement('quantity_available', $details['quantity']);
+                }
+            }
+
+            // STEP 5: Clear basket from DATABASE
+            if (Auth::check()) {
+                BasketItem::where('user_id', Auth::id())->delete();
+            } else {
+                BasketItem::where('session_id', session()->getId())->delete();
+            }
+
+            // STEP 6: Clear session data
+            session()->forget(['discount_code', 'discount_multiplier', 'delivery_cost']);
+
+            DB::commit();
+
+            return redirect()->route('orders.index')->with('success', 'Payment Authorized! Order placed successfully. Stock levels have been updated.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            
+            // Return to basket with error message
+            return redirect()->route('basket.index')->withErrors($e->getMessage());
         }
-
-        // Clear basket from DATABASE
-        if (Auth::check()) {
-            BasketItem::where('user_id', Auth::id())->delete();
-        } else {
-            BasketItem::where('session_id', session()->getId())->delete();
-        }
-
-        // Clear session data
-        session()->forget(['discount_code', 'discount_multiplier', 'delivery_cost']);
-
-        return redirect()->route('orders.index')->with('success', 'Payment Authorized! Order placed successfully.');
     }
 }
