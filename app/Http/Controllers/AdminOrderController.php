@@ -48,8 +48,7 @@ class AdminOrderController extends Controller
         } else {
             // Default sorting (newest first)
             $query->orderBy('created_at', 'desc');
-}
-
+        }
 
         $orders = $query->paginate(15);
 
@@ -69,21 +68,15 @@ class AdminOrderController extends Controller
         DB::transaction(function () use ($order, $newStatus) {
             
             // AUTOMATIC STOCK DEDUCTION LOGIC
-            // If the order is moving from 'Pending' to an active processed state, deduct stock.
-            // We check this so we don't accidentally deduct stock twice if changing from Approved to Shipped.
             if ($order->status === 'Pending' && in_array($newStatus, ['Approved', 'Shipped', 'Completed'])) {
-                
                 foreach ($order->items as $item) {
-                    // Make sure the product and its inventory record still exist
                     if ($item->product && $item->product->inventory) {
-                        // Deduct the purchased quantity from the available stock
                         $item->product->inventory->decrement('quantity_available', $item->quantity);
                     }
                 }
             }
 
             // RESTORE STOCK LOGIC (Optional but good practice)
-            // If an order is cancelled, give the stock back to the inventory
             if (in_array($order->status, ['Approved', 'Shipped', 'Completed']) && $newStatus === 'Cancelled') {
                 foreach ($order->items as $item) {
                     if ($item->product && $item->product->inventory) {
@@ -92,17 +85,71 @@ class AdminOrderController extends Controller
                 }
             }
 
-            // Finally, update the order status
             $order->update(['status' => $newStatus]);
         });
 
         return redirect()->back()->with('success', 'Order #' . $order->id . ' has been updated to ' . $newStatus . '.');
     }
 
+    public function show($id)
+    {
+        $order = Order::with(['items.product', 'user'])->findOrFail($id);
+        return view('admin-order-details', compact('order'));
+    } // <--- THIS WAS THE MISSING BRACE!
 
-    public function show($id){
-    $order = Order::with(['items.product', 'user'])->findOrFail($id);
-    
-    return view('admin-order-details', compact('order'));
+    // --- NEW: Show the Create Order Form ---
+    public function create()
+    {
+        // Get all users and products so we can show them in dropdown menus
+        $users = \App\Models\User::orderBy('name')->get();
+        $products = \App\Models\Product::orderBy('name')->get();
+        
+        return view('admin-create-order', compact('users', 'products'));
+    }
+
+    // --- NEW: Save the Initiated Order ---
+    public function store(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'products' => 'required|array',
+        ]);
+
+        // Filter out any empty product rows
+        $selectedProducts = array_filter($request->products, function($p) {
+            return !empty($p['id']) && !empty($p['quantity']);
+        });
+
+        if (empty($selectedProducts)) {
+            return back()->withErrors('You must select at least one product with a quantity.');
+        }
+
+        // Create the base order
+        $order = Order::create([
+            'user_id' => $request->user_id,
+            'status' => 'Pending', // Starts as pending, stock isn't deducted until Approved/Shipped!
+            'total_price' => 0,
+        ]);
+
+        $totalPrice = 0;
+
+        // Add the items to the order
+        foreach ($selectedProducts as $item) {
+            $product = Product::find($item['id']);
+            $linePrice = $product->price * $item['quantity'];
+            $totalPrice += $linePrice;
+
+            \App\Models\OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'quantity' => $item['quantity'],
+                'price' => $product->price,
+            ]);
+        }
+
+        // Update the final total
+        $order->update(['total_price' => $totalPrice]);
+
+        return redirect()->route('admin.orders.index')->with('success', 'New order #' . $order->id . ' has been successfully initiated!');
     }
 }

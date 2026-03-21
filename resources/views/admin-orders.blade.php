@@ -100,10 +100,15 @@
     <div class="admin-content-inner">
 
       <!-- PAGE TITLE -->
-      <div class="dash-title orders-title">
-        <p class="dash-kicker">Hello Admin</p>
-        <h1>Orders</h1>
-      </div>
+      <<div class="dash-title orders-title" style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <p class="dash-kicker">Hello Admin</p>
+            <h1>Orders</h1>
+          </div>
+          <a href="{{ route('admin.orders.create') }}" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">
+            <i class="fa-solid fa-plus"></i> Initiate New Order
+          </a>
+        </div>
 
       <!-- SEARCH BAR (CONNECTED) -->
 <div class="orders-search-row">

@@ -160,6 +160,10 @@ Route::get('admin-dashboard', function () {
     return view('admin-dashboard');
 })->name('admin.dashboard');
 
+// Admin Orders: Create and Save a New Order
+Route::get('admin-orders-create', [AdminOrderController::class, 'create'])->name('admin.orders.create');
+Route::post('admin-orders', [AdminOrderController::class, 'store'])->name('admin.orders.store');
+
 // Admin Orders: Main List (Handles Search & Filters)
 Route::get('admin-orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
 
