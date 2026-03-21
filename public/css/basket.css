@@ -43,21 +43,39 @@
     letter-spacing: 0.5px;
 }
 
-/* Active State */
+/* Active State (Current Step) */
 .progress-step.active .step-icon {
     background-color: #03315b;
     color: white;
     box-shadow: 0 4px 10px rgba(3, 49, 91, 0.3);
     transform: scale(1.1);
 }
-.progress-step.active .step-label { color: #03315b; }
+.progress-step.active .step-label { 
+    color: #03315b; 
+}
 
+/* Completed State (Previous Steps) - Just stays gray */
+.progress-step.completed .step-icon {
+    background-color: #e2e8f0;
+    color: #94a3b8;
+}
+.progress-step.completed .step-label { 
+    color: #94a3b8; 
+}
+
+/* Progress Lines */
 .progress-line {
     flex: 1;
     height: 2px;
     background-color: #e2e8f0;
     margin: 0 15px;
     margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Completed Line - Also stays gray */
+.progress-line.completed {
+    background-color: #e2e8f0;
 }
 
 /* --- Main Layout --- */

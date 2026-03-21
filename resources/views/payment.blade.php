@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{{ asset('paymentstyle.css') }}" />
   <link rel="stylesheet" href="{{ asset('common-styles.css') }}" />
   <link rel="stylesheet" href="{{ asset('contactstyle.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/basket.css') }}" />
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
@@ -156,6 +157,22 @@
   </header>
 
   <section class="hero">
+
+    <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+      {{-- Progress Tracker --}}
+      <div class="checkout-progress-container" style="margin-top: 60px; margin-bottom: 30px;">
+          <div class="progress-step completed">
+              <div class="step-icon">1</div>
+              <div class="step-label">Basket</div>
+          </div>
+          <div class="progress-line completed"></div>
+          <div class="progress-step active">
+              <div class="step-icon">2</div>
+              <div class="step-label">Checkout</div>
+          </div>
+      </div>
+    </div>
+
     <div class="payment-grid">
       
       {{-- LEFT SIDE: Shipping + Payment Forms --}}

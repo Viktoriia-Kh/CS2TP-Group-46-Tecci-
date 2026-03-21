@@ -18,12 +18,8 @@
             <div class="progress-line"></div>
             <div class="progress-step">
                 <div class="step-icon">2</div>
-                <div class="step-label">Delivery</div>
-            </div>
-            <div class="progress-line"></div>
-            <div class="progress-step">
-                <div class="step-icon">3</div>
-                <div class="step-label">Payment</div>
+                <div class="step-label">Checkout</div>
+                           
             </div>
         </div>
 
