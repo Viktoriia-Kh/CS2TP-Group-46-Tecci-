@@ -18,17 +18,18 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AccountController;
-
 use App\Http\Controllers\AdminInventoryController;
+use App\Http\Controllers\WebsiteReviewController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'HomeController'])->name('home');
 
-
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 // Homepage
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::post('/reviews', [WebsiteReviewController::class, 'store'])->name('reviews.store');
 Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('login');
 
 
