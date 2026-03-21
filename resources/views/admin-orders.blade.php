@@ -180,7 +180,7 @@
         <td>{{ $order->user->name ?? 'Guest' }}</td>
         <td>
           <!-- This form lets you change status and deduct stock automatically -->
-          <form action="{{ route('admin.orders.updateStatus', $order->id) }}" method="POST">
+          <form action="{{ route('admin.orders.updateStatus', $order->id) }}" method="POST" style="display:inline-block; margin-right: 10px;">
             @csrf
             @method('PUT')
             <select name="status" onchange="this.form.submit()" 
@@ -193,6 +193,7 @@
               <option value="Cancelled" {{ $order->status == 'Cancelled' ? 'selected' : '' }}>CANCELLED</option>
             </select>
           </form>
+          <a href="{{ route('admin.orders.show', $order->id) }}" style="font-size: 0.85rem; text-decoration: underline; color: #007bff;">View Details</a>
         </td>
         <td>£{{ number_format($order->total_price, 2) }}</td>
         <td>{{ $order->created_at->format('M d') }}</td>

@@ -128,15 +128,15 @@
                 @foreach($order->items as $item)
                 <tr style="border-bottom: 1px solid #eee;">
                     <td style="padding: 15px; display: flex; align-items: center;">
-                        <img src="{{ asset($item->image_url) }}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
-                        {{ $item->product_name }}
+                        <img src="{{ asset($item->product->image ?? 'images/placeholder.png') }}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover; margin-right: 15px; border-radius: 4px; background: #eaeaea;">
+                        <span style="font-weight: 500;">{{ $item->product->name ?? 'Product Unavailable' }}</span>
                     </td>
                     <td>£{{ number_format($item->price, 2) }}</td>
                     <td>{{ $item->quantity }}</td>
                     <td>£{{ number_format($item->price * $item->quantity, 2) }}</td>
                     <td>
-                        @if($item->return_status && $item->return_status !== 'none')
-                            <span style="color: #e67e22; font-weight: bold;">{{ $item->return_status }}</span>
+                        @if(!empty($item->return_status) && $item->return_status !== 'none')
+                            <span style="color: #e67e22; font-weight: bold;">{{ strtoupper($item->return_status) }}</span>
                         @else
                             <span style="color: #999;">No Return</span>
                         @endif

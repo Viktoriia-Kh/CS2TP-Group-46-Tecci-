@@ -166,6 +166,7 @@ Route::get('admin-orders', [AdminOrderController::class, 'index'])->name('admin.
 // Admin Orders: Processing (Handles Status Updates & Stock Deduction)
 Route::put('admin-orders/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
 
+// Admin Orders: View Single Order Details
 Route::get('/admin/orders/{id}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
 
 
