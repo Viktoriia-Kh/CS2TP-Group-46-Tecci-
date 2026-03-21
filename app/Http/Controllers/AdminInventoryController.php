@@ -11,7 +11,7 @@ class AdminInventoryController extends Controller
     public function index()
     {
         // Load all products with category and inventory
-        $products = Product::with('category', 'inventory')->get();
+        $products = Product::with(['category', 'inventory', 'specs'])->get();
 
         // Convert DB products
         $productsForJs = $products->map(function ($p) {
@@ -29,6 +29,12 @@ class AdminInventoryController extends Controller
                     : asset('images/Laptop.jpg'),
                 'stock_quantity' => $p->inventory ? $p->inventory->quantity_available : 0,
                 'stock_status' => $p->stock_status,
+                'specs' => $p->specs->map(function ($spec) {
+                    return [
+                        'spec_name' => $spec->spec_name,
+                        'spec_value' => $spec->spec_value,
+                    ];
+                })->values(),
             ];
         });
 
@@ -94,6 +100,21 @@ class AdminInventoryController extends Controller
             'sort_order' => 1,
         ]);
 
+        // Save product specs
+        $specNames = $request->input('spec_names', []);
+        $specValues = $request->input('spec_values', []);
+
+        foreach ($specNames as $index => $specName) {
+            $specValue = $specValues[$index] ?? null;
+
+            if (!empty($specName) && !empty($specValue)) {
+                $product->specs()->create([
+                    'spec_name' => $specName,
+                    'spec_value' => $specValue,
+                ]);
+            }
+        }
+
         return response()->json([
             'message' => 'Product added successfully.',
         ]);
@@ -104,16 +125,41 @@ class AdminInventoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:150',
+            'category' => 'required|string',
             'price' => 'required|numeric|min:0',
             'stock_quantity' => 'required|integer|min:0',
             'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+        $categoryMap = [
+            'desktops' => 'PCs',
+            'laptops' => 'Laptops',
+            'phones' => 'Phones',
+            'tablets' => 'Tablets',
+            'accessories' => 'Accessories',
+        ];
+
+        $categoryName = $categoryMap[$request->category] ?? null;
+        $category = \App\Models\Category::where('name', $categoryName)->first();
+
+        $imagePath = $product->image_url;
+
+        // If admin uploaded a new image
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . preg_replace('/\s+/', '-', strtolower($file->getClientOriginalName()));
+            $file->move(public_path('images/products'), $filename);
+            $imagePath = 'images/products/' . $filename;
+        }
 
         // Update product table
         $product->update([
+            'category_id' => $category ? $category->id : $product->category_id,
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,
+            'image_url' => $imagePath,
         ]);
 
         // Update inventory table
@@ -127,6 +173,31 @@ class AdminInventoryController extends Controller
                 'reorder_threshold' => 5,
             ]);
         }
+
+        // Replace existing specs with new specs
+        $product->specs()->delete();
+
+        $specNames = $request->input('spec_names', []);
+        $specValues = $request->input('spec_values', []);
+
+        foreach ($specNames as $index => $specName) {
+            $specValue = $specValues[$index] ?? null;
+
+            if (!empty($specName) && !empty($specValue)) {
+                $product->specs()->create([
+                    'spec_name' => $specName,
+                    'spec_value' => $specValue,
+                ]);
+            }
+        }
+
+        // Update image table too
+        $product->images()->delete();
+        $product->images()->create([
+            'image_path' => $imagePath,
+            'is_primary' => true,
+            'sort_order' => 1,
+        ]);
 
         return response()->json([
             'message' => 'Product updated successfully.'

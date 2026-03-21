@@ -253,7 +253,7 @@
             </div>
             <div class="form-group">
                 <label for="add-category">Category</label>
-                <select id="add-category" class="filter-input" style="width: 100%;" required>
+                <select id="add-category" name="category" class="filter-input" style="width: 100%;" required>
                     <option value="desktops">PCs</option>
                     <option value="laptops">Laptops</option>
                     <option value="phones">Phones</option>
@@ -476,7 +476,6 @@
         const product = allProducts.find(p => p.id === productId);
         if (!product) return;
 
-        
         document.getElementById('edit-product-id').value = product.id;
         document.getElementById('edit-name').value = product.name;
         document.getElementById('edit-category').value = product.category;
@@ -484,17 +483,17 @@
         document.getElementById('edit-stock').value = product.stock_quantity;
         document.getElementById('edit-desc').value = product.description || '';
 
+        // Load current technical specs into the edit modal
         const specsContainer = document.getElementById('edit-specs-container');
         specsContainer.innerHTML = '';
-        
-        if (product.specifications) {
-        let specs = product.specifications;
-        if (typeof specs === 'string') specs = JSON.parse(specs);
-        
-        Object.entries(specs).forEach(([name, value]) => {
-            addEditSpecRow(name, value);
-        });
-    }
+
+        if (product.specs && product.specs.length > 0) {
+            product.specs.forEach(spec => {
+                addEditSpecRow(spec.spec_name, spec.spec_value);
+            });
+        } else {
+            addEditSpecRow();
+        }
 
         document.getElementById('editProductModal').style.display = 'flex';
     }
@@ -526,6 +525,12 @@
         const description = document.getElementById('add-desc').value;
         const specNames = Array.from(document.querySelectorAll('input[name="spec_names[]"]')).map(input => input.value);
         const specValues = Array.from(document.querySelectorAll('input[name="spec_values[]"]')).map(input => input.value);
+
+        // Add specs to form data
+        specNames.forEach((name, index) => {
+            formData.append('spec_names[]', name);
+            formData.append('spec_values[]', specValues[index] || '');
+        });
 
         // File input 
         const fileInput = document.getElementById('product-image');
@@ -604,7 +609,7 @@
 
     // Adding images in add product
     document.addEventListener('DOMContentLoaded', function() {
-        const fileInput = document.getElementById('review-media');
+        const fileInput = document.getElementById('product-image');
         const fileText = document.getElementById('file-chosen-text');
 
         if(fileInput) {
@@ -644,31 +649,48 @@
         container.appendChild(row);
     }
 
-        // EDIT PRODUCT (REAL DATABASE UPDATE)
+    // EDIT PRODUCT (REAL DATABASE UPDATE)
     document.getElementById('editProductForm').addEventListener('submit', async function(event) {
         event.preventDefault(); // Stop page refresh
 
         const productId = document.getElementById('edit-product-id').value;
 
         // Getting edited values
-        const updatedData = {
-            name: document.getElementById('edit-name').value,
-            price: document.getElementById('edit-price').value,
-            stock_quantity: document.getElementById('edit-stock').value,
-            description: document.getElementById('edit-desc').value
-        };
+        const formData = new FormData();
+        formData.append('name', document.getElementById('edit-name').value);
+        formData.append('category', document.getElementById('edit-category').value);
+        formData.append('price', document.getElementById('edit-price').value);
+        formData.append('stock_quantity', document.getElementById('edit-stock').value);
+        formData.append('description', document.getElementById('edit-desc').value);
+
+        // Getting edited specs
+        const editSpecNames = Array.from(document.querySelectorAll('input[name="edit_spec_names[]"]')).map(input => input.value);
+        const editSpecValues = Array.from(document.querySelectorAll('input[name="edit_spec_values[]"]')).map(input => input.value);
+
+        editSpecNames.forEach((name, index) => {
+            formData.append('spec_names[]', name);
+            formData.append('spec_values[]', editSpecValues[index] || '');
+        });
+
+        // Getting edited image if one was chosen
+        const editImageInput = document.getElementById('edit-product-image');
+        if (editImageInput.files.length > 0) {
+            formData.append('image', editImageInput.files[0]);
+        }
+
+        // Laravel PUT support through POST + _method
+        formData.append('_method', 'PUT');
 
         try {
             // Sending updated data to Laravel backend
             const response = await fetch(`/admin-inventory/products/${productId}`, {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     // CSRF token for Laravel security
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(updatedData)
+                body: formData
             });
 
             if (response.ok) {
