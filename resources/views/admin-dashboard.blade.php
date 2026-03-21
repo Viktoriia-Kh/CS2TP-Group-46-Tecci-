@@ -187,6 +187,34 @@
 
 </aside>
 
+<aside class="panel traffic-panel"> <!--aside represents the secondary content-->
+<div class="panel-header">
+<h2>Orders To Be Processed</h2>
+</div>
+
+<div class="table-wrap">
+    <ul class="orders-to-process">
+        @forelse ($pendingOrders as $order)
+            <li class="order-action">
+                <div class="order-info">
+                    <p class="order-id">Order #{{$order->id}}</p>
+                    <small class="customer-order">
+                        <i class="fa-solid fa-user"></i> {{$order->user->name}} {{-- shows the username net to the order--}}
+                    </small>
+                    <small class="time-of-order">
+                        {{$order->created_at->diffForHumans()}}
+                    </small>
+                </div>
+            </li>
+        @empty
+        <div class="empty-action-state">
+            <i class="fa-solid fa-circle-check"></i>
+            <p class="main-message">You're All Caught Up!</p>
+            <p class="sub-message">You currently do not have any orders to process.</p>
+        </div>
+        @endforelse
+    </ul>
+</aside>
 
 
 </div>
@@ -262,166 +290,7 @@ $status = strtolower(trim($request->return_status));
 </aside>
 </div>
 
-<!--MIDDLE GRID: RECENT SALES + TRAFFIC-->
-<div class="dash-mid-grid"> <!--This is a container for the middle section of the Dashboard-->
-<section class="panel table-panel">
-  <div class="panel-header">
-      <h2>Recent Sales</h2>
-  </div>
 
-  <div class="table-wrap">
-      <table class="dash-table">
-          <thead>
-              <tr>
-                  <th>#</th>
-                  <th>Customer</th>
-                  <th>Total Price</th>
-                  <th>Status</th>
-                  <th>Time</th>
-              </tr>
-          </thead>
-          <tbody>
-              @forelse($recentSales as $sale)
-                  <tr>
-                      <td>#{{ $sale->id }}</td>
-                      <td>{{ $sale->user->name ?? 'Guest' }}</td>
-                      <td>£{{ number_format($sale->total_price, 2) }}</td>
-                      <td>
-                          @php
-                              $statusClass = match(strtolower($sale->status)) {
-                                  'completed', 'approved' => 'pill-approved',
-                                  'pending' => 'pill-pending',
-                                  'declined', 'cancelled' => 'pill-declined', // You may need to add this CSS class
-                                  default => 'pill-pending',
-                              };
-                          @endphp
-                          <span class="pill {{ $statusClass }}">{{ strtoupper($sale->status) }}</span>
-                      </td>
-                      <td style="font-size: 0.8em; color: #a5c7e9;">{{ $sale->created_at->format('H:i') }}</td>
-                  </tr>
-              @empty
-                  <tr>
-                      <td colspan="5" style="text-align: center; color: #a5c7e9; padding: 20px;">No sales recorded today.</td>
-                  </tr>
-              @endforelse
-          </tbody>
-      </table>
-  </div>
-</section>
-
-<aside class="panel traffic-panel"> <!--aside represents the secondary content-->
-<div class="panel-header">
-<h2>Orders To Be Processed</h2>
-</div>
-
-<div class="table-wrap">
-    <ul class="orders-to-process">
-        @forelse ($pendingOrders as $order)
-            <li class="order-action">
-                <div class="order-info">
-                    <p class="order-id">Order #{{$order->id}}</p>
-                    <small class="customer-order">
-                        <i class="fa-solid fa-user"></i> {{$order->user->name}} {{-- shows the username net to the order--}}
-                    </small>
-                    <small class="time-of-order">
-                        {{$order->created_at->diffForHumans()}}
-                    </small>
-                </div>
-            </li>
-        @empty
-        <div class="empty-action-state">
-            <i class="fa-solid fa-circle-check"></i>
-            <p class="main-message">You're All Caught Up!</p>
-            <p class="sub-message">You currently do not have any orders to process.</p>
-        </div>
-        @endforelse
-    </ul>
-</aside>
-</div>
-
-<!--BOTTOM GRID: TOP SELLING + SPACING COLUMN-->
-<div class="dash-bot-grid"> <!--This is the layout wrapper for the bottom row of the dashboard-->
-<section class="panel top-selling-panel">
-<div class="panel-header">
-<h2>Top-Selling Products | Today</h2>
-</div>
-
-<div class="table-wrap">
-<table class="dash-table dash-table-products">
-<thead> <!--thead defines the header section-->
-  <tr> <!--tr is for the table row-->
-    <th>Preview</th>
-    <th>Product</th>
-    <th>Price</th>
-    <th>Sold</th>
-    <th>Revenue</th>
-  </tr>
-</thead>
-<tbody> <!--tbody represents the actual data-->
-  <tr>
-    <td><div class="product-thumbnail">Product<br>Image 1</div></td> <!--td represents the table data cells-->
-    <td>Lorem Ipsum</td>
-    <td>£499.99</td>
-    <td>124</td>
-    <td>X</td>
-  </tr>
-  <tr>
-    <td><div class="product-thumbnail">Product<br>Image 2</div></td>
-    <td>Lorem Ipsum 2</td>
-    <td>£399.99</td>
-    <td>98</td>
-    <td>X</td>
-  </tr>
-  <tr>
-    <td><div class="product-thumbnail">Product<br>Image 3</div></td>
-    <td>Lorem Ipsum 3</td>
-    <td>£450.99</td>
-    <td>74</td>
-    <td>X</td>
-  </tr>
-  <tr>
-    <td><div class="product-thumbnail">Product<br>Image 4</div></td>
-    <td>Lorem Ipsum 4</td>
-    <td>£299.99</td>
-    <td>63</td>
-    <td>X</td>
-  </tr>
-  <tr>
-    <td><div class="product-thumbnail">Product<br>Image 5</div></td>
-    <td>Lorem Ipsum 5</td>
-    <td>£199.99</td>
-    <td>41</td>
-    <td>X</td>
-  </tr>
-</tbody>
-</table>
-</div>
-</section>
-
-<aside class="panel stock-alerts-panel"> <!-- adding an out of stock panel to the right of the top selling panel-->
-    <div class="panel-header">
-        <h2>Items Out Of Stock</h2>
-    </div>
-
-    <div class="table-wrap">
-        <ul class="stock-alert-list">
-            @forelse($itemsOutOfStock as $item) {{-- this loop will check if the items are out of stock--}}
-                <li class="stock-item">
-                    <span class="stock-name">{{$item->product->name}}</span>
-                    <span class="stock-status">OUT OF STOCK</span>
-                </li>
-            @empty
-                {{-- this will show if there are no products out of stock--}}
-                <li class="stock-message">No products currently out of stock.</li>
-            @endforelse
-        </ul>
-    </div>
-
-</aside>
-</div>
-
-</div>
-</section>
 </main>
 
 <!--FOOTER-->
