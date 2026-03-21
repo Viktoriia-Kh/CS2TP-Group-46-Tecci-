@@ -170,5 +170,9 @@ Route::get('admin-inventory', function () {
     return view('admin-inventory');
 });
 
-Route::get('admin-inventory', [AdminInventoryController::class, 'AdminInventoryController'])->name('products.index');
+Route::get('/admin-inventory', [AdminInventoryController::class, 'index'])->name('admin.inventory');
+Route::post('/admin-inventory/products', [AdminInventoryController::class, 'store'])->name('admin.inventory.store');
+Route::put('/admin-inventory/products/{product}', [AdminInventoryController::class, 'update']);
+Route::delete('/admin-inventory/products/{product}', [AdminInventoryController::class, 'destroy']);
+
 
