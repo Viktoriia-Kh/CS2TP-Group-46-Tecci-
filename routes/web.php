@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ReviewController;
 
 use App\Http\Controllers\AdminInventoryController;
@@ -35,10 +36,10 @@ Route::get('/remove-from-basket/{id}', [BasketController::class, 'remove'])->nam
 Route::get('/decrease-quantity/{id}', [BasketController::class, 'decrease'])->name('basket.decrease');
 
 
-Route::get('/login', function () {
+/*Route::get('/login', function () {
     return view('login');
 })->name('login');
-
+*/
 Route::get('/signup', [SignUpController::class, 'showForm'])
     ->name('signup.form');
 
@@ -153,6 +154,12 @@ Route::get('/product/{product}', [ProductController::class, 'show'])
 // Checkout route
 Route::get('checkout', [CheckoutController::class, 'checkout']);
 
+// account page routes
+Route::middleware('auth')->group(function (){ // requires user to be logged in
+    Route::get('/account', [AccountController::class, 'show'])->name('account.show'); // view account page
+    Route::patch('/account/update', [AccountController::class, 'update'])->name('account.update'); // update the account details
+    Route::delete('/account/delete', [AccountController::class, 'destroy'])->name('account.destroy'); // deletes the account
+});
 // forgot password route
 Route::get('/forgot-password', [LoginController::class, 'showForgotPassword'])->name('password.request');
 Route::post('/forgot-password', [LoginController::class, 'sendResetPasswordLink']);

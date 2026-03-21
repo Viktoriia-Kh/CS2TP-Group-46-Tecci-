@@ -12,6 +12,10 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
+        // adding a check to see if the user is logged in already
+        if(Auth::check()) {
+            return redirect()->intended('/account');
+        }
 
         // assigning variables
         $email_address = ''; // holds the email address which the user enters when logging in
