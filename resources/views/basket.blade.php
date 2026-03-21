@@ -192,13 +192,11 @@
                                 @auth
                                     {{-- Logged in users can checkout --}}
                                     <a href="/checkout" class="btn-checkout-bottom checkout-validate">CHECKOUT NOW</a>
+                                    <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE SHOPPING</a>
                                 @else
-                                    {{-- Guest users see disabled button that redirects to login --}}
-                                    <a href="{{ route('login') }}" class="btn-checkout-bottom" style="background: #95a5a6; cursor: not-allowed;">
-                                        LOGIN TO CHECKOUT
-                                    </a>
+                                    {{-- Guest users only see continue shopping (login warning already shown above) --}}
+                                    <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE SHOPPING</a>
                                 @endauth
-                                <a href="{{ route('products.index') }}" class="btn-continue-bottom">CONTINUE SHOPPING</a>
                             </div>
                         </div>
                     </div> {{-- End Right Column --}}
