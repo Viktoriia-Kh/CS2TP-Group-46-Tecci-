@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Login</title>
+        <title>Forgot Password</title>
         <link rel="stylesheet" href="loginstyle.css"> <!-- created a link to the stylesheet-->
         <link rel="stylesheet" href="common-style.css">
         <!-- Google font -->
@@ -41,8 +41,20 @@
         </header>
 
         <section class="section-form">
-            <h2>Welcome Back</h2>
-            <p class="welcome-sub-message">Login to your Tecci account.</p>
+            <h2>Reset Your Password</h2>
+            <p class="welcome-sub-message">Enter your email address to reset your password.</p>
+
+            {{-- This will display a success message to the user--}}
+            @if (session('status'))
+                <div class="success-messages">
+                    {{session('status')}}
+                </div>
+
+            @endif
+
+
+
+
             {{-- This will display error messages to the user--}}
             @if (!empty($error_messages))
                 <ul class="error-messages">
@@ -52,8 +64,8 @@
                 </ul>
             @endif
 
-            <!-- adding the login form here for the user to fill in-->
-            <form method="POST" action="{{route('login')}}"> <!-- once the form is submitted by the user it is sent to the login route-->
+            <!-- adding the form here for the user to fill in-->
+            <form method="POST" action="{{url('/forgot-password')}}"> {{-- sends the email address to the forgot password route--}}
                 @csrf {{-- this token is added for security of the form--}}
 
                 <div>
@@ -62,24 +74,10 @@
                     <input type="email" name="email_address" id="email_address" required>
                 </div>
 
-                <div>
-                    <!-- this is where the user will enter their password-->
-                    <label for="password">Password:</label>
-                    <div class="password-wrapper">
-                        <input type="password" name="password" id="password" required>
-                        <i class="fa-regular fa-eye toggle-icon" id="togglePassword"></i>  <!-- font awesome eye icon is added-->
-                    </div>
-                </div>
-
-                {{-- forgot password link on form--}}
-                <div class="forgot-password-option">
-                    <a href="{{route('password.request')}}" class="forgot-password-link">Forgot Password?</a>
-                </div>
-
-                <button type="submit">Login</button> <!-- allows the user to login-->
+                <button type="submit">Send Reset Link</button> <!-- sends the reset link once clicked-->
 
                 <p class="signup-message">
-                    Don't have an account? <a href="signup">Sign up</a> <!-- redirects the user to signup to make an account-->
+                    <a href="{{ url('login')}}">Return to Login</a> <!-- this will redirect the user back to the login page-->
                 </p>
 
 
@@ -125,22 +123,5 @@
         &copy; 2025 Tecci. All rights reserved.
     </div>
 </footer>
-
-<!-- javascript for the eye icon -->
-<script>
-    const toggleButton = document.querySelector('#togglePassword');
-    const passwordInput = document.querySelector('#password');
-
-    toggleButton.addEventListener('click', function() {
-        const isPassword = passwordInput.getAttribute('type') === 'password';
-        passwordInput.setAttribute('type', isPassword ? 'text': 'password');
-
-        // swap between the eye icons
-        this.classList.toggle('fa-eye');
-        this.classList.toggle('fa-eye-slash');
-    })
-</script>
-
-
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BasketController; 
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DisplayProductController;
@@ -73,7 +73,7 @@ Route::get('/auth/microsoft', function () {
 Route::get('/auth/microsoft/callback', function () {
     return redirect('/')->with('success', 'Logged in with Microsoft!');
 })->name('auth.microsoft.callback');
- 
+
 // Show "verify your email" page
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -143,7 +143,7 @@ Route::get('product', function () {
     return view('product');
 });
 
-// Products listing page 
+// Products listing page
 Route::get('displayproduct', [DisplayProductController::class, 'DisplayProductController'])->name('products.index');
 
 // Single product details page
@@ -153,6 +153,13 @@ Route::get('/product/{product}', [ProductController::class, 'show'])
 // Checkout route
 Route::get('checkout', [CheckoutController::class, 'checkout']);
 
+// forgot password route
+Route::get('/forgot-password', [LoginController::class, 'showForgotPassword'])->name('password.request');
+Route::post('/forgot-password', [LoginController::class, 'sendResetPasswordLink']);
+
+// reset password routes
+Route::get('/reset-password/{token}', [LoginController:: class, 'showPasswordResetForm'])->name('password.reset');
+Route::post('/reset-password', [LoginController::class, 'updatePassword'])->name('password.update'); // saves the new password to database
 
 // Reviews routee
 Route::post('/product/{product}/review', [ReviewController::class, 'store'])

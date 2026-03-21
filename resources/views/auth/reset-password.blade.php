@@ -2,10 +2,10 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Login</title>
-        <link rel="stylesheet" href="loginstyle.css"> <!-- created a link to the stylesheet-->
-        <link rel="stylesheet" href="common-style.css">
-        <!-- Google font -->
+        <title>Reset Your Password</title>
+        <link rel="stylesheet" href="{{asset('loginstyle.css')}}"> <!-- added a link to the stylesheet-->
+        <link rel="stylesheet" href="{{asset('common-style.css')}}">
+        <!-- Google font-->
         <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
         <!-- Font awesome for icons-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -19,7 +19,7 @@
                     <span class="logo-text">TECCI</span>
                 </a>
 
-                <!-- main nav bar-->
+                <!--main nav bar-->
                 <nav class="main-nav">
                     <ul>
                         <li><a href="{{ url('/') }}">Home</a></li>
@@ -29,7 +29,7 @@
                     </ul>
                 </nav>
 
-                <!-- icons on the nav bar-->
+                 <!-- icons on the nav bar-->
                 <div class="nav-icons">
                     <a href="#"><i class="fa-regular fa-heart"></i></a>
                     <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a>
@@ -41,8 +41,9 @@
         </header>
 
         <section class="section-form">
-            <h2>Welcome Back</h2>
-            <p class="welcome-sub-message">Login to your Tecci account.</p>
+            <h2>Create Your New Password</h2>
+            <p class="welcome-sub-message">Please enter your new password below.</p>
+
             {{-- This will display error messages to the user--}}
             @if (!empty($error_messages))
                 <ul class="error-messages">
@@ -52,42 +53,34 @@
                 </ul>
             @endif
 
-            <!-- adding the login form here for the user to fill in-->
-            <form method="POST" action="{{route('login')}}"> <!-- once the form is submitted by the user it is sent to the login route-->
-                @csrf {{-- this token is added for security of the form--}}
+            {{-- this is where the password will get updated--}}
+            <form method="POST" action="{{route('password.update')}}">
+                @csrf
+                <input type="hidden" name="token" value="{{$token}}"> {{-- added a hidden token to ensure it is a valid reset request--}}
 
                 <div>
-                    <!-- this is where the user will enter the email address-->
-                    <label for="email_address">Email address:</label>
-                    <input type="email" name="email_address" id="email_address" required>
+                     {{-- showing the user email as readonly to keep integrity--}}
+                    <label for="email">Email Address:</label>
+                    <input type="email" name="email" id="email" value="{{$email}}" required readonly>
                 </div>
 
                 <div>
-                    <!-- this is where the user will enter their password-->
-                    <label for="password">Password:</label>
-                    <div class="password-wrapper">
-                        <input type="password" name="password" id="password" required>
-                        <i class="fa-regular fa-eye toggle-icon" id="togglePassword"></i>  <!-- font awesome eye icon is added-->
-                    </div>
+                    {{-- the user will enter their new password here--}}
+                    <label for="password">New Password:</label>
+                    <input type="password" name="password" id="password" required>
                 </div>
 
-                {{-- forgot password link on form--}}
-                <div class="forgot-password-option">
-                    <a href="{{route('password.request')}}" class="forgot-password-link">Forgot Password?</a>
+                <div>
+                    {{-- the user will confirm their password here--}}
+                    <label for="password_confirmation">Confirm New Password:</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" required>
                 </div>
 
-                <button type="submit">Login</button> <!-- allows the user to login-->
-
-                <p class="signup-message">
-                    Don't have an account? <a href="signup">Sign up</a> <!-- redirects the user to signup to make an account-->
-                </p>
-
-
+                <button type="submit">Update Password</button>
             </form>
-
         </section>
 
-   <!-- creating the footer-->
+ <!-- creating the footer-->
     <footer class="site-footer">
     <div class="container footer-inner">
         <div class="footer-col">
@@ -126,21 +119,3 @@
     </div>
 </footer>
 
-<!-- javascript for the eye icon -->
-<script>
-    const toggleButton = document.querySelector('#togglePassword');
-    const passwordInput = document.querySelector('#password');
-
-    toggleButton.addEventListener('click', function() {
-        const isPassword = passwordInput.getAttribute('type') === 'password';
-        passwordInput.setAttribute('type', isPassword ? 'text': 'password');
-
-        // swap between the eye icons
-        this.classList.toggle('fa-eye');
-        this.classList.toggle('fa-eye-slash');
-    })
-</script>
-
-
-</body>
-</html>
