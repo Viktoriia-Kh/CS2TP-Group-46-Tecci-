@@ -4,6 +4,9 @@
         <meta charset="UTF-8">
         <title>Login</title>
         <link rel="stylesheet" href="loginstyle.css"> <!-- created a link to the stylesheet-->
+        <link rel="stylesheet" href="common-style.css">
+        {{-- Basket Badge CSS --}}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <!-- Google font -->
         <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
         <!-- Font awesome for icons-->
@@ -37,10 +40,27 @@
                 <!-- icons on the nav bar-->
                 <div class="nav-icons">
                     <a href="#"><i class="fa-regular fa-heart"></i></a>
-                    <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a>
-                    <a href="login"><i class="fa-regular fa-user"></i></a>
-                </div>
 
+                        {{-- Basket Icon with Badge --}}
+                        <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            
+                            @php
+                            use App\Models\BasketItem;
+                            use Illuminate\Support\Facades\Auth; /* Added this just in case your login page doesn't auto-load the Auth facade */
+                            
+                            $basketCount = Auth::check() 
+                                ? BasketItem::where('user_id', Auth::id())->sum('quantity')
+                                : BasketItem::where('session_id', session()->getId())->sum('quantity');
+                            @endphp
+                            
+                            @if($basketCount > 0)
+                            <span class="cart-badge">{{ $basketCount }}</span>
+                            @endif
+                        </a>
+
+                        <a href="login"><i class="fa-regular fa-user"></i></a>
+                    </div>
 
             </div>
         </header>
@@ -70,7 +90,15 @@
                 <div>
                     <!-- this is where the user will enter their password-->
                     <label for="password">Password:</label>
-                    <input type="password" name="password" id="password" required>
+                    <div class="password-wrapper">
+                        <input type="password" name="password" id="password" required>
+                        <i class="fa-regular fa-eye toggle-icon" id="togglePassword"></i>  <!-- font awesome eye icon is added-->
+                    </div>
+                </div>
+
+                {{-- forgot password link on form--}}
+                <div class="forgot-password-option">
+                    <a href="{{route('password.request')}}" class="forgot-password-link">Forgot Password?</a>
                 </div>
 
                 <button type="submit">Login</button> <!-- allows the user to login-->
@@ -84,10 +112,8 @@
 
         </section>
 
-    </body>
-
    <!-- creating the footer-->
-    <footer class="main-footer">
+    <footer class="site-footer">
     <div class="container footer-inner">
         <div class="footer-col">
             <h3>TECCI</h3>
@@ -124,4 +150,22 @@
         &copy; 2025 Tecci. All rights reserved.
     </div>
 </footer>
+
+<!-- javascript for the eye icon -->
+<script>
+    const toggleButton = document.querySelector('#togglePassword');
+    const passwordInput = document.querySelector('#password');
+
+    toggleButton.addEventListener('click', function() {
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPassword ? 'text': 'password');
+
+        // swap between the eye icons
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    })
+</script>
+
+
+</body>
 </html>

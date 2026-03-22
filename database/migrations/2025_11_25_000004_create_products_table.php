@@ -16,7 +16,7 @@ return new class extends Migration
 
             // Foreign key linking product → category
             $table->foreignId('category_id')
-                ->constrained(`categories`) // references categories.id
+                ->constrained('categories') // references categories.id
                 ->cascadeOnDelete(); // delete products if category deleted
     
             $table->string('name', 150); // Product name
