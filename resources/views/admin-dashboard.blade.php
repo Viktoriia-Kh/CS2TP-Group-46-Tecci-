@@ -39,8 +39,8 @@
 
 <!--Icons-->
 <div class="nav-icons admin-top-icons">
-<a href="TP2_Notifications.html" aria-label="Notifications"><i class="fa-regular fa-bell"></i></a>  <!--fa-bell is a Bell Icon linked from Font Awesome-->
-<a href="TP2_Messages.html" aria-label="Messages"><i class="fa-regular fa-envelope"></i></a>  <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
+<a href="admin-dashboard" aria-label="Notifications"><i class="fa-regular fa-bell"></i></a>  <!--fa-bell is a Bell Icon linked from Font Awesome-->
+<a href="admin/contacts" aria-label="Messages"><i class="fa-regular fa-envelope"></i></a>  <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
 <a href="/" aria-label="Home"><i class="fa-solid fa-house"></i></a>  <!--fa-house is a House Icon linked from Font Awesome-->
 </div>
 
@@ -56,7 +56,7 @@
 <i class="fa-solid fa-user-tie"></i>  <!--fa-user-tie is a User/Avatar Icon linked from Font Awesome-->
 </div>
 <div class="profile-meta"> <!--Using this will allow the Avatar/Profile to stay visible while hiding the text, which is all done in CSS-->
-<p class="profile-name">Full Name</p>
+<p class="profile-name">{{Auth::user()->name}}</p>
 <p class="profile-role">Admin</p>
 </div>
 </div>
@@ -80,9 +80,14 @@
 <span class="nav-ico"><i class="fa-solid fa-warehouse"></i></span> <!--fa-warehouse is a Warehouse Icon linked from Font Awesome-->
 </a>
 
-<a href="/admin-customers">
+<a href="/admin/customers">
 <span class="nav-text">Customers</span>
 <span class="nav-ico"><i class="fa-solid fa-user-group"></i></span> <!--fa-user-group is a User (Group) Icon linked from Font Awesome-->
+</a>
+
+<a href="{{ route('admin.contacts') }}">
+    <span class="nav-text">Contact Messages</span>
+    <span class="nav-ico"><i class="fa-solid fa-envelope"></i></span>
 </a>
 
 <a href="/admin-settings">

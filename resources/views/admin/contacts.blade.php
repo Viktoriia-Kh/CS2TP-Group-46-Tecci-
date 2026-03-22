@@ -28,8 +28,8 @@
       <div class="admin-header-spacer"></div>
 
       <div class="nav-icons admin-top-icons">
-        <a href="#" aria-label="Notifications"><i class="fa-regular fa-bell"></i></a>
-        <a href="#" aria-label="Messages"><i class="fa-regular fa-envelope"></i></a>
+        <a href="/admin-dashboard" aria-label="Notifications"><i class="fa-regular fa-bell"></i></a>
+        <a href="/admin/contacts" aria-label="Messages"><i class="fa-regular fa-envelope"></i></a>
         <a href="/" aria-label="Home"><i class="fa-solid fa-house"></i></a>
       </div>
     </div>
@@ -65,7 +65,7 @@
           <span class="nav-ico"><i class="fa-solid fa-warehouse"></i></span>
         </a>
 
-        <a href="/admin-customers">
+        <a href="/admin/customers">
           <span class="nav-text">Customers</span>
           <span class="nav-ico"><i class="fa-solid fa-user-group"></i></span>
         </a>
