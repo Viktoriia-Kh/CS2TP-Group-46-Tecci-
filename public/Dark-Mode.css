@@ -64,6 +64,42 @@ body.dark-mode .btn-primary:hover {
   background-color: #165a9b;
 }
 
+/* ROTATING BANNER DARK MODE */
+body.dark-mode .hero {
+  background-color: #0f172a;
+}
+
+body.dark-mode .hero-slide {
+  background-color: #0f172a; /* This makes each Slide in the Rotating Banner darker */
+}
+
+body.dark-mode .hero-text {
+  background-color: #1e293b;
+}
+
+body.dark-mode .hero-text h1 {
+  color: #f8fafc;
+}
+
+body.dark-mode .special-word {
+  color: #93c5fd;
+}
+
+body.dark-mode .hero-subtitle,
+body.dark-mode .hero-offer-code {
+  color: #cbd5e1;
+}
+
+body.dark-mode .hero-arrow {
+  background-color: #2563eb;
+  color: #f8fafc;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .hero-arrow:hover {
+  background-color: #3b82f6;
+}
+
 /* FEATURED PRODUCTS SECTION DARK MODE */
 body.dark-mode .featured-products {
   background-color: #0f3a66;
