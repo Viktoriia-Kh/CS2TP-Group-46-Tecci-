@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="common-style.css">
         {{-- Basket Badge CSS --}}
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <link rel="stylesheet" href="Dark-Mode.css">
+        <link rel="stylesheet" href="{{ asset('Dark-Mode.css')}}">
         <!-- Google font -->
         <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
         <!-- Font awesome for icons-->
@@ -174,8 +174,9 @@
         this.classList.toggle('fa-eye-slash');
     })
 
-    src="Dark-Mode-Theme.js"
+    
 </script>
+<script src="Dark-Mode-Theme.js"></script>
 
 
 </body>
