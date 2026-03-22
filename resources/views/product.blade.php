@@ -426,6 +426,79 @@ function showToast(title, message, type = 'success', imageUrl = null) {
     setTimeout(() => toast.remove(), 400); 
   }, 3000);
 }
+// --- ДОДАНО З ДРУГОГО ФАЙЛУ ---
+
+// Перемикання вкладок (Tech Specs / Reviews)
+function openTab(evt, tabName) {
+  let tabPanes = document.querySelectorAll('.tab-pane');
+  tabPanes.forEach(function(pane) {
+      pane.classList.remove('active');
+  });
+
+  let tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns.forEach(function(btn) {
+      btn.classList.remove('active');
+  });
+
+  document.getElementById(tabName).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+
+// Зміна головного фото при кліку на мініатюру
+document.querySelectorAll('.thumb img').forEach(img => {
+  img.addEventListener('click', function() {
+      document.querySelector('.product-image').src = this.src;
+  });
+});
+
+// Відображення назви завантаженого файлу у відгуках
+document.addEventListener('DOMContentLoaded', function() {
+  const fileInput = document.getElementById('review-media');
+  const fileText = document.getElementById('file-chosen-text');
+
+  if(fileInput) {
+      fileInput.addEventListener('change', function() {
+          if (this.files && this.files.length > 1) {
+              fileText.textContent = `Files chosen: ${this.files.length}`;
+          } else if (this.files && this.files.length === 1) {
+              fileText.textContent = this.files[0].name;
+          } else {
+              fileText.textContent = 'No file chosen';
+          }
+      });
+  }
+});
+
+// Динамічний статус наявності (Stock Status)
+document.addEventListener('DOMContentLoaded', function() {
+  const product = {
+      stock_status: "{{ $product->stock_status ?? 'out_of_stock' }}",
+      stock_quantity: parseInt("{{ $product->stock_quantity ?? 0 }}", 10) || 0
+  };
+
+  const isInStock = product.stock_status === 'in_stock' || product.stock_quantity > 0;
+  const isLowStock = product.stock_quantity > 0 && product.stock_quantity < 5;
+
+  let badgeText;
+  let badgeClass;
+
+  if (!isInStock) {
+      badgeText = 'Out of Stock';
+      badgeClass = 'badge-out-of-stock';
+  } else if (isLowStock) {
+      badgeText = 'Low Stock';
+      badgeClass = 'badge-low-stock';
+  } else {
+      badgeText = 'In Stock';
+      badgeClass = 'badge-in-stock';
+  } 
+
+  const stockBox = document.getElementById('dynamic-stock-box');
+  if (stockBox) {
+      stockBox.innerHTML = `<span class="stock-badge ${badgeClass}">${badgeText}</span>`;
+  }
+});
+
 </script>
 
 </html>
