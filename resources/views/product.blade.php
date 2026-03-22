@@ -7,6 +7,7 @@
   <!--Links to HTML/CSS Files-->
   <link rel="stylesheet" href="{{ asset('common-style.css') }}" />
   <link rel="stylesheet" href="{{ asset('product-style.css') }}">
+  <link rel="stylesheet" href="{{ asset('Dark-Mode.css')}}">
   {{-- Basket Badge CSS --}}
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <!--Google Font-->
@@ -513,7 +514,8 @@ document.addEventListener('DOMContentLoaded', function() {
       stockBox.innerHTML = `<span class="stock-badge ${badgeClass}">${badgeText}</span>`;
   }
 });
-
 </script>
+
+<script>src="TP2_Tecci-Theme.js"</script>
 
 </html>
