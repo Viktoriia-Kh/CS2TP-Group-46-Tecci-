@@ -58,7 +58,7 @@
         <i class="fa-solid fa-user-tie"></i>  <!--fa-user-tie is a User/Avatar Icon linked from Font Awesome-->
       </div>
       <div class="profile-meta"> <!--Using this will allow the Avatar/Profile to stay visible while hiding the text, which is all done in CSS-->
-        <p class="profile-name">Full Name</p>
+        <p class="profile-name">{{Auth::user()->name}}</p>
         <p class="profile-role">Admin</p>
       </div>
     </div>

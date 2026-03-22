@@ -40,7 +40,7 @@
           <i class="fa-solid fa-user-tie"></i>
         </div>
         <div class="profile-meta">
-          <p class="profile-name">Full Name</p>
+          <p class="profile-name">{{Auth::user()->name}}</p>
           <p class="profile-role">Admin</p>
         </div>
       </div>
