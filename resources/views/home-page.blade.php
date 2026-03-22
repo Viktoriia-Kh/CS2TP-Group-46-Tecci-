@@ -89,7 +89,7 @@
                             Smart gadgets and sleek devices, priced for University Students.
                         </p>
 
-                        <a href="products.html" class="btn btn-primary">Shop Now</a>
+                        <a href="/displayproduct" class="btn btn-primary">Shop Now</a>
                     </div>
 
                     <div class="hero-banner">
@@ -114,7 +114,7 @@
                             We curate tech that balances performance, price and style, so you can focus on your studies, not your budget.
                         </p>
 
-                        <a href="TP2_About.html" class="btn btn-primary">Learn More</a>
+                        <a href="/about-us" class="btn btn-primary">Learn More</a>
                     </div>
 
                     <div class="hero-banner">
@@ -143,7 +143,7 @@
                             Use code <strong>SUMMER25</strong> at checkout
                         </p>
 
-                        <a href="products.html" class="btn btn-primary">View Laptops</a>
+                        <a href="/displayproduct" class="btn btn-primary">View Laptops</a>
                     </div>
 
                     <div class="hero-banner">
