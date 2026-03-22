@@ -318,12 +318,12 @@
     </div>
   </footer>
 
-  <script>src="Dark-Mode.Theme.js"</script>
+  
 
 </body>
 
 </html>
-
+<script src="Dark-Mode-Theme.js"></script>
 <script>
 
 // Product data with categories and details
