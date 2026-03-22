@@ -17,9 +17,9 @@
           <span class="logo-text">TECCI</span>
         </a>
 
-        <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
+        <a href="/admin-dashboard" class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
           <i class="fa-solid fa-bars"></i>
-        </button>
+        </a>
       </div>
 
       <div class="admin-header-spacer"></div>

@@ -64,6 +64,42 @@ body.dark-mode .btn-primary:hover {
   background-color: #165a9b;
 }
 
+/* ROTATING BANNER DARK MODE */
+body.dark-mode .hero {
+  background-color: #0f172a;
+}
+
+body.dark-mode .hero-slide {
+  background-color: #0f172a; /* This makes each Slide in the Rotating Banner darker */
+}
+
+body.dark-mode .hero-text {
+  background-color: #1e293b;
+}
+
+body.dark-mode .hero-text h1 {
+  color: #f8fafc;
+}
+
+body.dark-mode .special-word {
+  color: #93c5fd;
+}
+
+body.dark-mode .hero-subtitle,
+body.dark-mode .hero-offer-code {
+  color: #cbd5e1;
+}
+
+body.dark-mode .hero-arrow {
+  background-color: #2563eb;
+  color: #f8fafc;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .hero-arrow:hover {
+  background-color: #3b82f6;
+}
+
 /* FEATURED PRODUCTS SECTION DARK MODE */
 body.dark-mode .featured-products {
   background-color: #0f3a66;
@@ -118,6 +154,56 @@ body.dark-mode .testimonial-text {
 
 body.dark-mode .testimonial-quote-icon {
   color: #7cc0ff;
+}
+
+/* LEAVE A REVIEW SECTION DARK MODE */
+body.dark-mode .review-section {
+  background-color: #1e293b;
+}
+
+body.dark-mode .review-section h2 {
+  color: #f8fafc;
+}
+
+body.dark-mode .review-intro {
+  color: #cbd5e1;
+}
+
+body.dark-mode .review-label-left,
+body.dark-mode .review-label-right {
+  color: #93c5fd;
+}
+
+body.dark-mode .star {
+  color: #facc15;
+}
+
+body.dark-mode .review-text-label {
+  color: #e5e7eb;
+}
+
+body.dark-mode .review-textarea {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .review-textarea::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-mode .review-textarea:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.18);
+}
+
+body.dark-mode .review-submit-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .review-submit-btn:hover {
+  background-color: #1d4ed8;
 }
 
 /* FOOTER SECTION DARK MODE */
@@ -262,4 +348,130 @@ body.dark-mode .contact-info-item { /* This is for the Contact information rows 
 
 body.dark-mode .contact-info-item i {
   color: #cfe9ff;
+}
+
+/* LOGIN PAGE DARK MODE */
+
+body.dark-mode { /* This is for the Login Page background colour */
+  background: linear-gradient(to bottom, #0b1220, #0f1f35);
+}
+
+body.dark-mode .section-form { /* This is for the Login Card */
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .section-form h2 { /* This is for the Welcome Back heading */
+  color: #7cc0ff; 
+}
+
+body.dark-mode .welcome-sub-message { /* This is for the message on the Login Card */  
+  color: #cbd5e1;
+}
+
+body.dark-mode .section-form label { /* This is for the Login Card Labels */
+  color: #e5e7eb;
+}
+
+body.dark-mode .section-form input { /* This is for the Login Inputs */
+  background-color: #0f1f35;
+  border-color: rgba(203, 213, 225, 0.25);
+  color: #e5e7eb;
+}
+
+body.dark-mode .section-form input::placeholder { /* This is for the Placeholder text, which will help improve readability */
+  color: rgba(229, 231, 235, 0.65);
+}
+
+body.dark-mode .section-form button { /* This is for the Login Button */
+  background-color: #005baf;
+  color: #ffffff;
+}
+
+body.dark-mode .section-form button:hover {
+  background-color: #00488c;
+}
+
+body.dark-mode .signup-message { /* This and the lines below are for the Signup text and link */
+  color: #cbd5e1;
+}
+
+body.dark-mode .signup-message a {
+  color: #cfe9ff;
+}
+
+body.dark-mode .signup-message a:hover {
+  text-decoration: underline;
+}
+
+/* SIGN UP PAGE DARK MODE */
+
+body.dark-mode.signup-page {
+  background: #0b1220; /* This is for the Signup Page background colour */
+  color: #e5e7eb;
+}
+
+body.dark-mode .signup-card { /* This is for Signup Card */
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .signup-header h1 { /* This is for the Header text */
+  color: #7cc0ff; 
+}
+
+body.dark-mode .signup-header p {
+  color: #cbd5e1;
+}
+
+body.dark-mode .social-btn { /* This is for the Social Buttons */
+  background-color: #0f1f35;
+  border-color: rgba(203, 213, 225, 0.25);
+  color: #e5e7eb;
+}
+
+body.dark-mode .social-btn:hover {
+  background-color: #132a4a;
+}
+
+body.dark-mode .signup-divider { /* This is for the Divider Text ('Or Continue With') */
+  color: #94a3b8;
+}
+
+body.dark-mode .form-group label {  /* This is for the Sign Up Card Labels */
+  color: #e5e7eb;
+}
+
+/* Inputs */
+body.dark-mode .form-group input { /* This is for the Sign Up Inputs */
+  background-color: #0f1f35;
+  border-color: rgba(203, 213, 225, 0.25);
+  color: #e5e7eb;
+}
+
+body.dark-mode .form-group input::placeholder { /* This is for the Placeholder text, which will help improve readability */
+  color: rgba(229, 231, 235, 0.6);
+}
+
+body.dark-mode .signup-submit-btn { /* This is for the Submit Button */
+  background: linear-gradient(135deg, #2563eb, #1e3a8a);
+  color: #ffffff;
+}
+
+body.dark-mode .signup-submit-btn:hover {
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.45);
+}
+
+body.dark-mode .signup-footer-text { /* This is for the Sign Up Footer text under the card */
+  color: #cbd5e1;
+}
+
+body.dark-mode .signup-footer-text a {
+  color: #93c5fd;
+}
+
+body.dark-mode .signup-footer-text a:hover {
+  text-decoration: underline;
 }
