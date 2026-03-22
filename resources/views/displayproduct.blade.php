@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
   <link rel="stylesheet" href="common-style.css" />
   <link rel="stylesheet" href="displaystyle.css" />
+    <link rel="stylesheet" href="{{ asset('Dark-Mode.css')}}">
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
@@ -316,6 +317,8 @@
       <p>&copy; 2025 Tecci. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>src="TP2_Tecci-Theme.js"</script>
 
 </body>
 
