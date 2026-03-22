@@ -10,7 +10,7 @@
  
   {{-- Basket Badge CSS --}}
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-   <link rel="stylesheet" href="{{ asset('Dark-Mode.css')}}">
+  <link rel="stylesheet" href="{{ asset('Dark-Mode.css') }}"/>
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
