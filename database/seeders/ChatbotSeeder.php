@@ -10,15 +10,16 @@ class ChatbotSeeder extends Seeder
 {
     public function run(): void
     {
+        // Clear old chatbot data first
         ChatFaq::query()->delete();
         ChatCategory::query()->delete();
 
-        $refunds = ChatCategory::create(['title' => 'Refunds', 'sort_order' => 1]);
-        $delivery = ChatCategory::create(['title' => 'Delivery', 'sort_order' => 2]);
-        $Account = ChatCategory::create(['title' => 'Account', 'sort_order' => 3]);
-        $Payment = ChatCategory::create(['title' => 'Payment', 'sort_order' => 4]);
-        $Support = ChatCategory::create(['title' => 'Support', 'sort_order' => 5]);
-        $Prodcuts = ChatCategory::create(['title' => 'Products', 'sort_order' => 6]);
+        // Create categories
+        $refunds = ChatCategory::create([
+            'title' => 'Refunds',
+            'sort_order' => 1,
+            'is_active' => true,
+        ]);
 
         $delivery = ChatCategory::create([
             'title' => 'Delivery',
@@ -44,6 +45,13 @@ class ChatbotSeeder extends Seeder
             'is_active' => true,
         ]);
 
+        $products = ChatCategory::create([
+            'title' => 'Products',
+            'sort_order' => 6,
+            'is_active' => true,
+        ]);
+
+        // Refund FAQs
         ChatFaq::create([
             'category_id' => $refunds->id,
             'question' => 'How long do refunds take?',
@@ -60,6 +68,7 @@ class ChatbotSeeder extends Seeder
             'is_active' => true,
         ]);
 
+        // Delivery FAQs
         ChatFaq::create([
             'category_id' => $delivery->id,
             'question' => 'How long is delivery?',
@@ -76,6 +85,7 @@ class ChatbotSeeder extends Seeder
             'is_active' => true,
         ]);
 
+        // Account FAQs
         ChatFaq::create([
             'category_id' => $account->id,
             'question' => 'How do I reset my password?',
@@ -92,6 +102,7 @@ class ChatbotSeeder extends Seeder
             'is_active' => true,
         ]);
 
+        // Payment FAQs
         ChatFaq::create([
             'category_id' => $payment->id,
             'question' => 'How do I update my payment information?',
@@ -116,10 +127,11 @@ class ChatbotSeeder extends Seeder
             'is_active' => true,
         ]);
 
+        // Support FAQs
         ChatFaq::create([
             'category_id' => $support->id,
             'question' => 'How do I contact support?',
-            'answer' => 'You can contact support via the "Contact Us" page or by emailing Tecci_Queries@net.com.',
+            'answer' => 'You can contact support via the Contact Us page or by emailing Tecci_Queries@net.com.',
             'sort_order' => 1,
             'is_active' => true,
         ]);
@@ -137,6 +149,23 @@ class ChatbotSeeder extends Seeder
             'question' => 'Do you offer live chat support?',
             'answer' => 'Yes, we offer live chat support during our support hours.',
             'sort_order' => 3,
+            'is_active' => true,
+        ]);
+
+        // Products FAQs
+        ChatFaq::create([
+            'category_id' => $products->id,
+            'question' => 'What products do you sell?',
+            'answer' => 'We sell a range of laptops, phones, accessories, and other tech products.',
+            'sort_order' => 1,
+            'is_active' => true,
+        ]);
+
+        ChatFaq::create([
+            'category_id' => $products->id,
+            'question' => 'Are your products new?',
+            'answer' => 'Yes, all products sold on Tecci are brand new unless stated otherwise.',
+            'sort_order' => 2,
             'is_active' => true,
         ]);
     }

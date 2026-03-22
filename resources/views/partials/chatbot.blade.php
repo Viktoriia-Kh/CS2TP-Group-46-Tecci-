@@ -1,4 +1,5 @@
 <div id="tecci-chatbot" class="tecci-chatbot">
+  <script src="{{ asset('chatbot.js') }}?v={{ time() }}"></script>
 
   <!-- Floating launcher -->
   <button id="tecci-chatbot-launcher" class="tecci-chatbot__launcher" type="button" aria-label="Open Tecci chatbot">

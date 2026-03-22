@@ -10,7 +10,6 @@
 
   if (!launcher || !win || !messages) return;
 
-  // ---- Backend endpoints (these MUST match your Laravel routes) ----
   const API = {
     categories: "/chatbot/categories",
     faqsByCategory: (id) => `/chatbot/categories/${id}/faqs`,
@@ -24,11 +23,12 @@
     win.classList.remove("tecci-chatbot__window--hidden");
     input?.focus();
 
-    // Only boot once (avoid duplicating messages)
-    if (messages.children.length === 0) {
-      addMsg("Hi 👋 Choose a topic:", "bot");
-      loadCategories().catch(() => addMsg("Sorry — I couldn’t load topics right now.", "bot"));
-    }
+    messages.innerHTML = "";
+    addMsg("Hi 👋 Choose a topic:", "bot");
+    loadCategories().catch((err) => {
+      console.error("Failed to load categories:", err);
+      addMsg("Sorry — I couldn’t load topics right now.", "bot");
+    });
   }
 
   function closeChat() {
@@ -53,7 +53,12 @@
     messages.scrollTop = messages.scrollHeight;
   }
 
-  // Creates a "bot row" that contains chips (buttons)
+  function clearChips() {
+    messages.querySelectorAll(".tecci-chatbot__chips").forEach((chips) => {
+      chips.parentElement?.remove();
+    });
+  }
+
   function addChips(chips = []) {
     const row = document.createElement("div");
     row.className = "tecci-chatbot__msg tecci-chatbot__msg--bot";
@@ -91,6 +96,8 @@
     currentCategoryId = null;
     currentCategoryTitle = null;
 
+    clearChips();
+
     const cats = await fetchJson(API.categories);
 
     if (!Array.isArray(cats) || cats.length === 0) {
@@ -111,6 +118,8 @@
   async function loadFaqs(categoryId, categoryTitle) {
     currentCategoryId = categoryId;
     currentCategoryTitle = categoryTitle;
+
+    clearChips();
 
     const data = await fetchJson(API.faqsByCategory(categoryId));
     const faqs = data?.faqs || [];
@@ -134,11 +143,12 @@
   }
 
   async function loadAnswer(faqId) {
+    clearChips();
+
     const data = await fetchJson(API.faqAnswer(faqId));
 
     addMsg(data.answer || "Sorry — I couldn’t find that answer.", "bot");
 
-    // navigation chips
     addChips([
       {
         label: "Back to questions",
@@ -150,7 +160,6 @@
     ]);
   }
 
-  // ----- UI Events -----
   launcher.addEventListener("click", () => {
     if (win.classList.contains("tecci-chatbot__window--hidden")) openChat();
     else closeChat();
@@ -160,7 +169,6 @@
   minimiseBtn?.addEventListener("click", closeChat);
   expandBtn?.addEventListener("click", toggleExpand);
 
-  // Chip click handler (same idea as his original)
   messages.addEventListener("click", (e) => {
     const btn = e.target.closest(".tecci-chatbot__chip");
     if (!btn) return;
@@ -214,7 +222,6 @@
     addMsg("How can I help?", "bot");
   });
 
-  // If they type instead of clicking
   form?.addEventListener("submit", (e) => {
     e.preventDefault();
     const text = (input?.value || "").trim();
