@@ -15,6 +15,7 @@
 
 <!-- Page specific styles SECOND -->
 <link rel="stylesheet" href="{{ asset('css/sign-up2style.css') }}">
+<link rel="stylesheet" href="Dark-Mode.css">
 
 <!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -178,6 +179,8 @@
     </div>
 </footer>
     @include('partials.chatbot')
-    <script src="{{ asset('chatbot.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('chatbot.js') }}?v={{ time() }}">
+            src="Dark-Mode-Theme.js"
+    </script>
 </body>
 </html>
