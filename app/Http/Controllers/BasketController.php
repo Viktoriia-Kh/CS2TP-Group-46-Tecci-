@@ -3,81 +3,360 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\BasketItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BasketController extends Controller
 {
-    // Show the Basket Page
+    /* HELPER - Get the identifier for the current basket
+     Returns ['type' => 'user'|'session', 'id' => userId|sessionId]
+     */
+    private function getBasketIdentifier()
+    {
+        if (Auth::check()) {
+            return ['type' => 'user', 'id' => Auth::id()];
+        }
+        
+        return ['type' => 'session', 'id' => session()->getId()];
+    }
+
+    /* HELPER - Get basket items from database (replaces session()->get('basket')) */
+    private function getBasketItems()
+    {
+        $identifier = $this->getBasketIdentifier();
+        
+        if ($identifier['type'] === 'user') {
+            $items = BasketItem::forUser($identifier['id'])->with('product')->get();
+        } else {
+            $items = BasketItem::forSession($identifier['id'])->with('product')->get();
+        }
+        
+        // Transform to match blade template's expected format
+        $basket = [];
+        foreach ($items as $item) {
+            $basket[$item->product_id] = [
+                'name' => $item->product->name,
+                'quantity' => $item->quantity,
+                'price' => $item->product->price,
+                'image' => $item->product->image_url,
+            ];
+        }
+        
+        return $basket;
+    }
+
+    /**
+     * Show Basket Page
+     */
     public function index() 
     {
-        // Get the basket data from the session
-        // If it doesn't exist yet, we use an empty list []
-        $basket = session()->get('basket', []);
+        // Get basket from DB instead of session
+        $basket = $this->getBasketItems();
+
+        // Retrieve discount data from session (stays the same)
+        $discountCode = session()->get('discount_code', null);
+        $discountMultiplier = session()->get('discount_multiplier', 1);
         
-        return view('basket', compact('basket'));
+        return view('basket', compact('basket', 'discountCode', 'discountMultiplier'));
     }
 
-    // Add Item To Basket Logic
-    public function add($id)
+    /* Add Item To Basket */
+    public function add($id, Request $request)
     {
-    // Find the product in the DB using the ID passed from the route
-    $product = Product::findOrFail($id);
-
-    // Get the current basket from session (or start a new empty one)
-    $basket = session()->get('basket', []);
-
-    // Check if this specific product ID is already in the basket
-    if(isset($basket[$id])) {
-        // If yes, just add 1 to the quantity
-        $basket[$id]['quantity']++;
-    } else {
-        // If no, add the real product details to the array
-        $basket[$id] = [
-            "name" => $product->name,
-            "quantity" => 1,
-            "price" => $product->price,
-            // We map the DB column 'image_url' to the session key 'image'
-            "image" => $product->image_url 
+        // Find product in the DB
+        $product = Product::findOrFail($id);
+        
+        // Get quantity from request, default to 1 if not provided
+        $quantity = (int) $request->input('quantity', 1);
+        
+        // Validate quantity is at least 1
+        if ($quantity < 1) {
+            $quantity = 1;
+        }
+        
+        $identifier = $this->getBasketIdentifier();
+        
+        // Build data array
+        $data = [
+            'product_id' => $product->id,
+            'quantity' => $quantity,
         ];
+        
+        if ($identifier['type'] === 'user') {
+            $data['user_id'] = $identifier['id'];
+            $data['session_id'] = null;
+        } else {
+            $data['session_id'] = $identifier['id'];
+            $data['user_id'] = null;
+        }
+        
+        // Check if item already exists
+        if ($identifier['type'] === 'user') {
+            $existingItem = BasketItem::where('user_id', $identifier['id'])
+                                      ->where('product_id', $product->id)
+                                      ->first();
+        } else {
+            $existingItem = BasketItem::where('session_id', $identifier['id'])
+                                      ->where('product_id', $product->id)
+                                      ->first();
+        }
+        
+        if ($existingItem) {
+            // Add the requested quantity to existing quantity
+            $existingItem->increment('quantity', $quantity);
+        } else {
+            // Create new basket item with requested quantity
+            BasketItem::create($data);
+        }
+        
+        // Calculate total quantity for badge
+        $basket = $this->getBasketItems();
+        $totalQty = 0;
+        foreach ($basket as $item) {
+            $totalQty += $item['quantity'];
+        }
+        
+        // Dynamic success message based on quantity
+        $message = $quantity > 1 
+            ? "{$quantity} × {$product->name} added to your basket!" 
+            : "{$product->name} added to your basket!";
+        
+        // If AJAX request, return JSON
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => $message,
+                'totalQty' => $totalQty,
+                'itemCount' => count($basket)
+            ]);
+        }
+        
+        // Regular request, redirect back
+        return redirect()->back()->with('success', $message);
     }
 
-    // Save the updated basket back to the session
-    session()->put('basket', $basket);
-
-    // Go back to the page with a success message
-    return redirect()->back()->with('success', 'Product added to basket successfully!');
-    }
-
-    // Remove Items
+    /**
+     * Remove Item from Basket
+     */
     public function remove($id)
     {
-        $basket = session()->get('basket');
-
-        if(isset($basket[$id])) {
-            unset($basket[$id]);
-            session()->put('basket', $basket);
+        $identifier = $this->getBasketIdentifier();
+        
+        if ($identifier['type'] === 'user') {
+            BasketItem::where('user_id', $identifier['id'])
+                      ->where('product_id', $id)
+                      ->delete();
+        } else {
+            BasketItem::where('session_id', $identifier['id'])
+                      ->where('product_id', $id)
+                      ->delete();
         }
-
+        
+        // Check if basket is empty and clear discount
+        $remainingItems = $this->getBasketItems();
+        if (empty($remainingItems)) {
+            session()->forget(['discount_code', 'discount_multiplier']);
+        }
+        
         return redirect()->back();
- 
     }
 
-    // Decrease Quantity
+    /**
+     * Decrease Quantity
+     */
     public function decrease($id)
     {
-        $basket = session()->get('basket', []);
-
-        if(isset($basket[$id])) {
-            // If quantity is more than 1, subtract 1
-            if($basket[$id]['quantity'] > 1) {
-                $basket[$id]['quantity']--;
+        $identifier = $this->getBasketIdentifier();
+        
+        if ($identifier['type'] === 'user') {
+            $item = BasketItem::where('user_id', $identifier['id'])
+                              ->where('product_id', $id)
+                              ->first();
+        } else {
+            $item = BasketItem::where('session_id', $identifier['id'])
+                              ->where('product_id', $id)
+                              ->first();
+        }
+        
+        if ($item) {
+            if ($item->quantity > 1) {
+                $item->decrement('quantity');
             } else {
-                // If quantity is 1, remove the single item entirely
-                unset($basket[$id]);
+                // Remove if quantity would go to 0
+                $item->delete();
             }
         }
-
-        session()->put('basket', $basket);
+        
+        // Check if basket is empty and clear discount
+        $remainingItems = $this->getBasketItems();
+        if (empty($remainingItems)) {
+            session()->forget(['discount_code', 'discount_multiplier']);
+        }
+        
         return redirect()->back();
+    }
+
+    /* Apply Discount */
+    public function applyDiscount(Request $request)
+    {
+        $code = strtolower(trim($request->input('code')));
+
+        // Hardcoded valid discount codes
+        $validCodes = [
+            'xmas10' => 0.90,    // 10% off
+            'welcome20' => 0.80  // 20% off
+        ];
+
+        if (array_key_exists($code, $validCodes)) {
+            // Save to Session
+            session()->put('discount_code', $code);
+            session()->put('discount_multiplier', $validCodes[$code]);
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Discount applied!',
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid discount code.'
+        ], 400);
+    }
+
+    /* AJAX Update Method */
+    public function updateAjax(Request $request)
+    {
+        $id = $request->input('id');
+        $action = $request->input('action');
+        
+        $identifier = $this->getBasketIdentifier();
+        
+        // Find the basket item
+        if ($identifier['type'] === 'user') {
+            $item = BasketItem::where('user_id', $identifier['id'])
+                              ->where('product_id', $id)
+                              ->first();
+        } else {
+            $item = BasketItem::where('session_id', $identifier['id'])
+                              ->where('product_id', $id)
+                              ->first();
+        }
+        
+        $newQuantity = 0;
+        $wasDeleted = false;
+        
+        // Process the action
+        if ($item) {
+            if ($action === 'increase') {
+                $item->increment('quantity');
+                // Refresh to get the new quantity
+                $item->refresh();
+                $newQuantity = $item->quantity;
+            } elseif ($action === 'decrease') {
+                if ($item->quantity > 1) {
+                    $item->decrement('quantity');
+                    // Refresh to get the new quantity
+                    $item->refresh();
+                    $newQuantity = $item->quantity;
+                } else {
+                    $item->delete();
+                    $action = 'remove';
+                    $wasDeleted = true;
+                }
+            } elseif ($action === 'remove') {
+                $item->delete();
+                $wasDeleted = true;
+            }
+        }
+        
+        // Recalculate totals from database
+        $basket = $this->getBasketItems();
+        $total = 0;
+        $totalQty = 0;
+        
+        foreach ($basket as $basketItem) {
+            $total += $basketItem['price'] * $basketItem['quantity'];
+            $totalQty += $basketItem['quantity'];
+        }
+        
+        // Clear discount if empty
+        if (empty($basket)) {
+            session()->forget(['discount_code', 'discount_multiplier']);
+        }
+        
+        return response()->json([
+            'success' => true,
+            'action' => $action,
+            'newQuantity' => $newQuantity,
+            'subtotal' => number_format($total, 2),
+            'subtotalRaw' => $total,
+            'totalQty' => $totalQty,
+            'itemCount' => count($basket)
+        ]);
+    }
+
+    /**
+     * Merge guest basket into user basket on login
+     * Call this method after a user successfully logs in
+     * 
+     * Usage in LoginController:
+     * Auth::login($user);
+     * app(BasketController::class)->mergeGuestBasketOnLogin();
+     */
+    public function mergeGuestBasketOnLogin()
+    {
+        if (!Auth::check()) {
+            return; // Must be logged in
+        }
+        
+        $userId = Auth::id();
+        $sessionId = session()->getId();
+        
+        // Find all guest basket items for this session
+        $guestItems = BasketItem::where('session_id', $sessionId)
+                                ->whereNull('user_id')
+                                ->get();
+        
+        if ($guestItems->isEmpty()) {
+            return; // No guest items to merge
+        }
+        
+        DB::transaction(function () use ($userId, $guestItems) {
+            foreach ($guestItems as $guestItem) {
+                // Check if user already has this product in their basket
+                $userItem = BasketItem::where('user_id', $userId)
+                                      ->where('product_id', $guestItem->product_id)
+                                      ->first();
+                
+                if ($userItem) {
+                    // User already has this item - add quantities together
+                    $userItem->quantity += $guestItem->quantity;
+                    $userItem->save();
+                    
+                    // Delete the guest item
+                    $guestItem->delete();
+                } else {
+                    // User doesn't have this item - transfer ownership
+                    $guestItem->user_id = $userId;
+                    $guestItem->session_id = null;
+                    $guestItem->save();
+                }
+            }
+        });
+    }
+
+    /**
+     * Save Delivery Cost to Session
+     * Called via AJAX from basket page when user selects delivery option
+     */
+    public function saveDelivery(Request $request)
+    {
+        $deliveryCost = $request->input('delivery_cost', 3.99);
+        session()->put('delivery_cost', $deliveryCost);
+        
+        return response()->json(['success' => true]);
     }
 }
