@@ -143,7 +143,7 @@
                             Use code <strong>SUMMER25</strong> at checkout
                         </p>
 
-                        <a href="/displayproduct" class="btn btn-primary">View Laptops</a>
+                        <a href="/displayproduct?category=laptops" class="btn btn-primary">View Laptops</a>
                     </div>
 
                     <div class="hero-banner">
