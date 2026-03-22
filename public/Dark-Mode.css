@@ -1,0 +1,265 @@
+/* DARK/LIGHT MODE BUTTON ICON */
+.theme-toggle {
+  background: transparent; /* This removes any default button background so it looks like an Icon */
+  border: none; /* This removes a default button button border */
+  color: inherit; /* This makes the Icon use the same colour as the header's text, which is white */
+  cursor: pointer; /* This shows the hand cursor when hovering on Dark/Light Mode Icon */
+  padding: 2.4px; /* This give a slightly bigger area to click without changing the layout */
+  font-size: 19px; 
+  transition: transform 0.15s ease, color 0.15s ease; /* This creates a smooth animation when hovering over the Icon */
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px); /* This creates a slight lift effect, matches other existing Icons */
+  color: #e6f3ff;
+}
+
+/* DARK MODE OVERRIDE FEATURES */
+/* These activate when the body has .dark-mode, so we only apply dark colours when body has a 
+class called dark-mode */
+
+body.dark-mode {
+  background-color: #0b1220; /* This is for the overall background colour in Dark Mode */
+  color: #e5e7eb; /* This is for the default text colour in Dark Mode */
+}
+
+/* HEADER AND NAV SECTION DARK MODE */
+body.dark-mode .main-header { /* This is for the Header and Nav Dark Mode colours */
+  background-color: #071426;
+  border-bottom-color: #0f3a66;
+}
+
+body.dark-mode .main-nav a::after {
+  background-color: #cfe9ff; /* This makes the underline animation a brighter light-blue so it stands out against the dark header */
+}
+
+body.dark-mode .nav-icons a:hover,
+body.dark-mode .theme-toggle:hover {
+  color: #cfe9ff; /* This applies the same hover colour to all the Icons in Nav */
+}
+
+/* HERO SECTION DARK MODE */
+body.dark-mode .hero {
+  background: linear-gradient(to right, #0f1f35 40%, #0b1220 40%);
+}
+
+body.dark-mode .hero-text h1 {
+  color: #f3f4f6; /* This makes the Hero Heading light for better contrast */
+}
+
+body.dark-mode .special-word {
+  color: #7cc0ff;
+}
+
+body.dark-mode .hero-subtitle {
+  color: #cbd5e1;
+}
+
+/* BUTTONS DARK MODE */
+body.dark-mode .btn-primary {
+  background-color: #1d6dbd; /* This makes the button brighter in Dark Mode for better contrast against dark backgrounds */
+}
+
+body.dark-mode .btn-primary:hover {
+  background-color: #165a9b;
+}
+
+/* FEATURED PRODUCTS SECTION DARK MODE */
+body.dark-mode .featured-products {
+  background-color: #0f3a66;
+}
+
+body.dark-mode .product-card {
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); /* This creates a stronger shadow due to darker background */
+}
+
+body.dark-mode .product-image-placeholder {
+  background-color: #0b1220;
+}
+
+body.dark-mode .product-price {
+  color: #e5e7eb; /* Ensures prices don't stay black on darker background for better readability */
+}
+
+/* CATEGORIES SECTION DARK MODE */
+body.dark-mode .product-categories {
+  background-color: #0f1f35;
+}
+
+body.dark-mode .category-card {
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .category-card:hover {
+  background-color: #0b1220;
+}
+
+body.dark-mode .category-icon {
+  background-color: #0b1220;
+}
+
+/* TESTIMONIALS SECTION DARK MODE */
+body.dark-mode .testimonials {
+  background: linear-gradient(to bottom, #0b1220, #0f1f35);
+}
+
+body.dark-mode .testimonial-card {
+  background-color: #101827;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .testimonial-text {
+  color: #cbd5e1;
+}
+
+body.dark-mode .testimonial-quote-icon {
+  color: #7cc0ff;
+}
+
+/* FOOTER SECTION DARK MODE */
+body.dark-mode .site-footer {
+  background-color: #071426;
+}
+
+body.dark-mode .footer-col a:hover {
+  color: #cfe9ff;
+}
+
+body.dark-mode .footer-bottom {
+  border-top: 1px solid rgba(207, 233, 255, 0.18); /* Keeps the top border in Dark Mode but makes it subtle and visible */
+}
+
+/* ABOUT US PAGE DARK MODE */
+
+body.dark-mode .about-row,
+body.dark-mode .mission-vision { /* This is for the general background for About Us Page sections that are light-blue in light mode */
+  background-color: #0b1220;
+}
+
+body.dark-mode .about-text-block h1,
+body.dark-mode .about-text-block h2 { /* This is for the About Us headings and paragraphs */
+  color: #7cc0ff;
+}
+
+body.dark-mode .about-text-block p {
+  color: #cbd5e1;
+}
+
+/* WHY TECCI SECTION */ 
+body.dark-mode .why-tecci {
+  background-color: #0f3a66; /* This creates slightly darker blue tones */
+  color: #e5e7eb;
+}
+
+body.dark-mode .why-heading-wrap::before { /* This is for the Curved Shape behind Why Tecci heading */
+  background-color: #071426;
+}
+
+body.dark-mode .why-heading-wrap h2 { /* This is for the Why Tecci heading */
+  color: #e5e7eb;
+}
+
+body.dark-mode .why-icon { /* This is for the Why Tecci icon circles and icons */
+  border-color: #cfe9ff;
+}
+
+body.dark-mode .why-icon i {
+  color: #cfe9ff;
+}
+
+body.dark-mode .why-content h3 { /* This is for the Why Tecci content text */
+  color: #f3f4f6;
+}
+
+body.dark-mode .why-content p {
+  color: #cbd5e1;
+}
+
+/* MISSION AND VISION CARD SECTIONS */ 
+
+body.dark-mode .mission-vision { /* This creates a colour with gradient darker for dark mode */
+  background: linear-gradient(to bottom, #0b1220, #0f1f35);
+}
+
+body.dark-mode .mission-card,
+body.dark-mode .vision-card {
+  background-color: #0f3a66;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .mission-card h2,
+body.dark-mode .vision-card h2 {
+  color: #cfe9ff;
+}
+
+body.dark-mode .mission-card p,
+body.dark-mode .vision-card p {
+  color: #e5e7eb;
+}
+
+/* CONTACT US PAGE DARK MODE */
+body.dark-mode .contact-section { /* This is for the Contact Page overall Background */
+  background: linear-gradient(to bottom, #0b1220, #0b1625);
+}
+
+/* LEFT FORM CARD SECTION */
+body.dark-mode .contact-form-card { /* This is for the Left Form Card which becomes dark */
+  background-color: #101827;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .form-row label { /* This is for the Form labels and text */
+  color: #e5e7eb;
+}
+
+body.dark-mode .form-row input,
+body.dark-mode .form-row textarea { /* This is for the Text Inputs and Text Area */
+  background-color: #0b1220; /* This creates a dark input surface */
+  color: #e5e7eb; /* This creates a lighter text to make it more readable */
+  border-color: #243043; /* This creates a subtle border */
+}
+
+body.dark-mode .form-row input::placeholder,
+body.dark-mode .form-row textarea::placeholder { /* This is for the Placeholder colour, which creates dim text inside empty fields */
+  color: #94a3b8;
+}
+
+body.dark-mode .form-row input:focus,
+body.dark-mode .form-row textarea:focus { /* This creates a blue glow when an Input Label is clicked on */
+  border-color: #7cc0ff;
+  box-shadow: 0 0 0 2px rgba(124, 192, 255, 0.16);
+}
+
+body.dark-mode .btn-primary { /* This is for the Submit button which stays blue but slightly brighter when in Dark Mode */
+  background-color: #1d6dbd;
+}
+
+body.dark-mode .btn-primary:hover {
+  background-color: #165a9b;
+}
+
+/* RIGHT INFO CARD SECTION */
+body.dark-mode .contact-info-panel { /* This is for the Right Info Card which becomes dark */
+  background-color: #0f1f35;
+}
+
+body.dark-mode .contact-info-inner h2 { /* This is for the Right Card heading and text, making it lighter */
+  color: #7cc0ff;
+}
+
+body.dark-mode .contact-info-text {
+  color: #cbd5e1;
+}
+
+body.dark-mode .contact-info-item { /* This is for the Contact information rows */
+  color: #e5e7eb;
+}
+
+body.dark-mode .contact-info-item i {
+  color: #cfe9ff;
+}

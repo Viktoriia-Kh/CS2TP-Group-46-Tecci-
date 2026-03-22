@@ -8,6 +8,7 @@
   <!--Links to HTML/CSS Files-->
   <link rel="stylesheet" href="homestyle.css" />
   <link rel="stylesheet" href="contactstyle.css" />
+  <link rel="stylesheet" href="Dark-Mode.css" />
   {{-- Basket Badge CSS --}}
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <!--Google Font-->
@@ -461,6 +462,7 @@
   </footer>
 
   <!--Link to external JavaScript File-->
+    <script src="Dark-Mode-Theme.js"></script>
   <script src="home-page.js"></script>
 
 <script>

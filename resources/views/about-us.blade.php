@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="homestyle.css" />
     <link rel="stylesheet" href="contactstyle.css" />
     <link rel="stylesheet" href="Aboutstyle.css" />
+    <link rel="stylesheet" href="Dark-Mode.css" />
     {{-- Basket Badge CSS --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!--Google Font-->
@@ -28,7 +29,7 @@
     <header class="main-header">
         <div class="container nav-container">
 
-            <!-- Logo -->
+        <!-- Logo -->
             <a href="/" class="logo">
                 <!--Using this will make the Logo clickable and takes the user to the Home Page-->
                 <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
@@ -265,6 +266,10 @@
             <p>&copy; 2025 Tecci. All rights reserved.</p>
         </div>
     </footer>
+
+    <!--Link to external JavaScript File-->
+    <script src="Dark-Mode-Theme.js"></script>
+
 </body>
 
 </html>
