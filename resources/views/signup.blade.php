@@ -15,6 +15,7 @@
 
 <!-- Page specific styles SECOND -->
 <link rel="stylesheet" href="{{ asset('css/sign-up2style.css') }}">
+<link rel="stylesheet" href="Dark-Mode.css">
 
 <!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -45,6 +46,14 @@
                 <a href="#"><i class="fa-regular fa-heart"></i></a>
                 <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a>
                 <a href="login" class="active"><i class="fa-regular fa-user"></i></a>
+
+                <!--Added A Dark/Light Mode Toggle Button-->
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                    <!--fa-moon is a Moon Icon linked from Font Awesome-->
+                    <!--class="theme-toggle" lets us style the button using CSS-->
+                    <!--id="themeToggle" allows us to use this id in JavaScript-->
+                </button>
             </div>
 
         </div>
@@ -170,6 +179,8 @@
     </div>
 </footer>
     @include('partials.chatbot')
-    <script src="{{ asset('chatbot.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('chatbot.js') }}?v={{ time() }}">
+            src="Dark-Mode-Theme.js"
+    </script>
 </body>
 </html>
