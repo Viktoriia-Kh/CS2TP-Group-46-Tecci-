@@ -48,4 +48,20 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Relationship - A user has many basket items
+     */
+    public function basketItems()
+    {
+        return $this->hasMany(BasketItem::class);
+    }
+
+    /**
+     * Helper method - Get user's current basket with product details
+     */
+    public function getBasketWithProducts()
+    {
+        return $this->basketItems()->with('product')->get();
+    }
 }

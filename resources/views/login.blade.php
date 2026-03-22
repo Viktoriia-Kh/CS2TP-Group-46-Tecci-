@@ -5,6 +5,8 @@
         <title>Login</title>
         <link rel="stylesheet" href="loginstyle.css"> <!-- created a link to the stylesheet-->
         <link rel="stylesheet" href="common-style.css">
+        {{-- Basket Badge CSS --}}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <!-- Google font -->
         <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
         <!-- Font awesome for icons-->
@@ -32,10 +34,27 @@
                 <!-- icons on the nav bar-->
                 <div class="nav-icons">
                     <a href="#"><i class="fa-regular fa-heart"></i></a>
-                    <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a>
-                    <a href="login"><i class="fa-regular fa-user"></i></a>
-                </div>
 
+                        {{-- Basket Icon with Badge --}}
+                        <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            
+                            @php
+                            use App\Models\BasketItem;
+                            use Illuminate\Support\Facades\Auth; /* Added this just in case your login page doesn't auto-load the Auth facade */
+                            
+                            $basketCount = Auth::check() 
+                                ? BasketItem::where('user_id', Auth::id())->sum('quantity')
+                                : BasketItem::where('session_id', session()->getId())->sum('quantity');
+                            @endphp
+                            
+                            @if($basketCount > 0)
+                            <span class="cart-badge">{{ $basketCount }}</span>
+                            @endif
+                        </a>
+
+                        <a href="login"><i class="fa-regular fa-user"></i></a>
+                    </div>
 
             </div>
         </header>

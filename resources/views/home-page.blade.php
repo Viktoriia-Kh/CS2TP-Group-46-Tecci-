@@ -8,6 +8,8 @@
   <!--Links to HTML/CSS Files-->
   <link rel="stylesheet" href="homestyle.css" />
   <link rel="stylesheet" href="contactstyle.css" />
+  {{-- Basket Badge CSS --}}
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
@@ -37,9 +39,25 @@
 
       <!--Icons-->
       <div class="nav-icons">
-        <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a> <!--fa-heart is a Heart Icon linked from Font Awesome-->
-        <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
-        <a href="login"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
+        <a href="my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
+        
+        {{-- Basket Icon with Badge --}}
+        <a href="basket" class="cart-icon-wrapper">
+          <i class="fa-solid fa-cart-shopping"></i>
+          
+          @php
+            use App\Models\BasketItem;
+            $basketCount = Auth::check() 
+              ? BasketItem::where('user_id', Auth::id())->sum('quantity')
+              : BasketItem::where('session_id', session()->getId())->sum('quantity');
+          @endphp
+          
+          @if($basketCount > 0)
+            <span class="cart-badge">{{ $basketCount }}</span>
+          @endif
+        </a>
+        
+        <a href="login"><i class="fa-regular fa-user"></i></a>
       </div>
     </div>
   </header>

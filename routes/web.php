@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminInventoryController;
@@ -34,10 +35,13 @@ Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name
 
 // Basket Logic (Viewing, Adding, Removing)
 Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
-Route::get('/add-to-basket/{id}', [BasketController::class, 'add'])->name('basket.add');
+Route::match(['get', 'post'], '/add-to-basket/{id}', [BasketController::class, 'add'])->name('basket.add');
 Route::get('/remove-from-basket/{id}', [BasketController::class, 'remove'])->name('basket.remove');
 Route::get('/decrease-quantity/{id}', [BasketController::class, 'decrease'])->name('basket.decrease');
-
+Route::post('/apply-discount', [BasketController::class, 'applyDiscount'])->name('basket.discount');
+// AJAX Basket Update
+Route::post('/basket/update-ajax', [BasketController::class, 'updateAjax'])->name('basket.update.ajax');
+Route::post('/basket/save-delivery', [BasketController::class, 'saveDelivery'])->name('basket.saveDelivery');
 
 /*Route::get('/login', function () {
     return view('login');
@@ -60,11 +64,14 @@ Route::get('/auth/google/callback', function () {
         ['email' => $googleUser->getEmail()],
         [
             'name'     => $googleUser->getName() ?? $googleUser->getNickname() ?? 'Google User',
-            'password' => bcrypt(Str::random(32)), // random, they’ll log in via Google
+            'password' => bcrypt(Str::random(32)), // random, they'll log in via Google
         ]
     );
 
     Auth::login($user);
+    
+    // Merge guest basket into user basket after OAuth login
+    app(BasketController::class)->mergeGuestBasketOnLogin();
 
     // After login, send them home (change if you want)
     return redirect('/');   // or route('signup.form')
@@ -98,6 +105,9 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) 
     }
     // log them in so they're authenticated after clicking
     Auth::login($user);
+    
+    // Merge guest basket after email verification login
+    app(BasketController::class)->mergeGuestBasketOnLogin();
 
     return redirect('/signup')->with('success', 'Email verified successfully!');
 })->middleware(['signed', 'throttle:6,1'])
@@ -156,32 +166,11 @@ Route::get('/product/{product}', [ProductController::class, 'show'])
 // Checkout route
 Route::get('checkout', [CheckoutController::class, 'checkout']);
 
-// account page routes
-Route::middleware('auth')->group(function (){ // requires user to be logged in
-    Route::get('/account', [AccountController::class, 'show'])->name('account.show'); // view account page
-    Route::patch('/account/update', [AccountController::class, 'update'])->name('account.update'); // update the account details
-    Route::delete('/account/delete', [AccountController::class, 'destroy'])->name('account.destroy'); // deletes the account
-});
-// forgot password route
-Route::get('/forgot-password', [LoginController::class, 'showForgotPassword'])->name('password.request');
-Route::post('/forgot-password', [LoginController::class, 'sendResetPasswordLink']);
+// Show list of all orders
+Route::get('/my-orders', [OrderController::class, 'index'])->name('orders.index');
 
-// reset password routes
-Route::get('/reset-password/{token}', [LoginController:: class, 'showPasswordResetForm'])->name('password.reset');
-Route::post('/reset-password', [LoginController::class, 'updatePassword'])->name('password.update'); // saves the new password to database
+// Show details of one specific order
+Route::get('/my-orders/{id}', [OrderController::class, 'show'])->name('orders.show');
 
-// Reviews routee
-Route::post('/product/{product}/review', [ReviewController::class, 'store'])
-    ->name('reviews.store');
-
-//Admin Inventory route
-Route::get('admin-inventory', function () {
-    return view('admin-inventory');
-});
-
-Route::get('/admin-inventory', [AdminInventoryController::class, 'index'])->name('admin.inventory');
-Route::post('/admin-inventory/products', [AdminInventoryController::class, 'store'])->name('admin.inventory.store');
-Route::put('/admin-inventory/products/{product}', [AdminInventoryController::class, 'update']);
-Route::delete('/admin-inventory/products/{product}', [AdminInventoryController::class, 'destroy']);
-
-
+// Route to submit a return request for a specific item
+Route::post('/order-item/{id}/return', [OrderController::class, 'requestReturn'])->name('item.return');
