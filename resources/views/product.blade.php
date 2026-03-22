@@ -425,10 +425,9 @@ function showToast(title, message, type = 'success', imageUrl = null) {
     toast.classList.remove('show');
     setTimeout(() => toast.remove(), 400); 
   }, 3000);
-}
-// --- ДОДАНО З ДРУГОГО ФАЙЛУ ---
+}і
 
-// Перемикання вкладок (Tech Specs / Reviews)
+// Tech Specs / Reviews
 function openTab(evt, tabName) {
   let tabPanes = document.querySelectorAll('.tab-pane');
   tabPanes.forEach(function(pane) {
@@ -444,14 +443,13 @@ function openTab(evt, tabName) {
   evt.currentTarget.classList.add('active');
 }
 
-// Зміна головного фото при кліку на мініатюру
+
 document.querySelectorAll('.thumb img').forEach(img => {
   img.addEventListener('click', function() {
       document.querySelector('.product-image').src = this.src;
   });
 });
 
-// Відображення назви завантаженого файлу у відгуках
 document.addEventListener('DOMContentLoaded', function() {
   const fileInput = document.getElementById('review-media');
   const fileText = document.getElementById('file-chosen-text');
@@ -469,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Динамічний статус наявності (Stock Status)
+//Stock Status
 document.addEventListener('DOMContentLoaded', function() {
   const product = {
       stock_status: "{{ $product->stock_status ?? 'out_of_stock' }}",
