@@ -263,3 +263,58 @@ body.dark-mode .contact-info-item { /* This is for the Contact information rows 
 body.dark-mode .contact-info-item i {
   color: #cfe9ff;
 }
+
+/* LOGIN PAGE DARK MODE */
+
+body.dark-mode { /* This is for the Login Page background colour */
+  background: linear-gradient(to bottom, #0b1220, #0f1f35);
+}
+
+body.dark-mode .section-form { /* This is for the Login Card */
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .section-form h2 { /* This is for the Welcome Back heading */
+  color: #7cc0ff; 
+}
+
+body.dark-mode .welcome-sub-message { /* This is for the message on the Login Card */  
+  color: #cbd5e1;
+}
+
+body.dark-mode .section-form label { /* This is for the Login Card Labels */
+  color: #e5e7eb;
+}
+
+body.dark-mode .section-form input { /* This is for the Login Inputs */
+  background-color: #0f1f35;
+  border-color: rgba(203, 213, 225, 0.25);
+  color: #e5e7eb;
+}
+
+body.dark-mode .section-form input::placeholder { /* This is for the Placeholder text, which will help improve readability */
+  color: rgba(229, 231, 235, 0.65);
+}
+
+body.dark-mode .section-form button { /* This is for the Login Button */
+  background-color: #005baf;
+  color: #ffffff;
+}
+
+body.dark-mode .section-form button:hover {
+  background-color: #00488c;
+}
+
+body.dark-mode .signup-message { /* This and the lines below are for the Signup text and link */
+  color: #cbd5e1;
+}
+
+body.dark-mode .signup-message a {
+  color: #cfe9ff;
+}
+
+body.dark-mode .signup-message a:hover {
+  text-decoration: underline;
+}
