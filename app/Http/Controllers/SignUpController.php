@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class SignUpController extends Controller
 {
@@ -38,6 +39,8 @@ class SignUpController extends Controller
             'password' => Hash::make($validated['password']),
             'is_admin' => $isAdminStatus, // admin setting added (if user is not admin value remains 0)
         ]);
+
+        event(new Registered($user)); // this will trigger the sending of the verification email
 
         // 3) log them in
         Auth::login($user);
