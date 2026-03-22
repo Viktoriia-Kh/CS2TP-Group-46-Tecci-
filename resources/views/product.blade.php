@@ -360,6 +360,7 @@
       <p>&copy; 2025 Tecci. All rights reserved.</p>
     </div>
   </footer>
+  <script>src="Dark-Mode-Theme.js"</script>
 </body>
 
   <script>
@@ -515,7 +516,5 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
-
-<script>src="Dark-Mode-Theme.js"</script>
 
 </html>
