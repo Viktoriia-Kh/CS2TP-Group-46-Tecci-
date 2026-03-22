@@ -49,7 +49,7 @@ ul {
 
 .nav-container {
   display: flex; /* This turns the container into a flexbox row, allowing the logo, nav, and icons to sit horizontally */
-  align-items: center; 
+  align-items: center;
   justify-content: space-between; /* This pushes the Logo to the far left, Icons to the far right. Nav Menu in the middle: Creating a 3-Part Layout */
   padding: 12px 0; /* This adds vertical spacing */
   gap: 20px; /* This adds space between the 3 Sections inside the Nav */
@@ -57,7 +57,7 @@ ul {
 
 .logo {
   display: flex; /* This places the Logo and Text side by side */
-  align-items: center; 
+  align-items: center;
   gap: 9.6px; /* This adds space between Logo and Tecci Text */
   text-transform: uppercase;
   font-weight: 700;
@@ -190,6 +190,7 @@ ul {
 .sidebar-logout { /* This targets the Logout link */
   display: block; /* This makes it full width like a Button */
   background: #7fc0ff;
+  width: 100%;
   color: #03315b;
   font-weight: 800;
   text-align: center;
@@ -197,6 +198,11 @@ ul {
   border-radius: 999px; /* This makes the Logout Button into a pill shape */
   margin: 10px 0 18px; /* This is for the spacing above and below */
   letter-spacing: 0.5px;
+  border: none; 
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
 }
 
 .admin-nav { /* This is for the Sidebar links */
