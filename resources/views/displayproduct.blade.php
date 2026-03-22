@@ -318,7 +318,7 @@
     </div>
   </footer>
 
-  <script>src="TP2_Tecci-Theme.js"</script>
+  <script>src="Dark-Mode.js"</script>
 
 </body>
 
