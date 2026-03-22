@@ -15,8 +15,10 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;use
- App\Http\Controllers\AdminCustomerController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
@@ -235,6 +237,40 @@ Route::middleware(['auth', 'admin'])->group(function (){
     Route::delete('/admin-settings/delete', [AdminSettingsController::class, 'destroy'])->name('admin.settings.delete');
 });
 
+// ==========================================
+// ADMIN DASHBOARD & ORDERS
+// ==========================================
+
+Route::get('admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
+// Admin Orders: Create and Save a New Order
+Route::get('admin-orders-create', [AdminOrderController::class, 'create'])->name('admin.orders.create');
+Route::post('admin-orders', [AdminOrderController::class, 'store'])->name('admin.orders.store');
+
+// Admin Orders: Main List (Handles Search & Filters)
+Route::get('admin-orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+
+// Admin Orders: Processing (Handles Status Updates & Stock Deduction)
+Route::put('admin-orders/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+
+// Admin Orders: View Single Order Details
+Route::get('/admin/orders/{id}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
+
+Route::post('/admin/returns/{id}/approve', [App\Http\Controllers\AdminDashboardController::class, 'approveReturn'])
+    ->name('admin.returns.approve');
+
+// Reviews routee
+Route::post('/product/{product}/review', [ReviewController::class, 'store'])
+    ->name('reviews.store');
+
+//Admin Inventory route
+Route::get('admin-inventory', function () {
+    return view('admin-inventory');
+});
+
+Route::get('admin-inventory', [AdminInventoryController::class, 'AdminInventoryController'])->name('products.index');
+
+Route::post('/admin/returns/{id}/decline', [AdminDashboardController::class, 'declineReturn'])->name('admin.returns.decline');
 Route::get('/admin-inventory', [AdminInventoryController::class, 'index'])->name('admin.inventory');
 Route::post('/admin-inventory/products', [AdminInventoryController::class, 'store'])->name('admin.inventory.store');
 Route::put('/admin-inventory/products/{product}', [AdminInventoryController::class, 'update']);
