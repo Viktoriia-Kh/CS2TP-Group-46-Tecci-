@@ -34,7 +34,12 @@ Route::get('/admin/contacts', [ContactController::class, 'adminIndex'])->name('a
 Route::post('/admin/contacts/{id}/reply', [ContactController::class, 'reply'])->name('admin.contacts.reply');
 Route::post('/admin/contacts/{id}/resolve', [ContactController::class, 'markResolved'])->name('admin.contacts.resolve');
 // Homepage
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'HomeController'])->name('home');
+
+
+Route::get('/admin/contacts', [ContactController::class, 'adminIndex'])->name('admin.contacts');
+Route::post('/admin/contacts/{id}/reply', [ContactController::class, 'reply'])->name('admin.contacts.reply');
+Route::post('/admin/contacts/{id}/resolve', [ContactController::class, 'markResolved'])->name('admin.contacts.resolve');
 
 // Homepage
 Route::get('/', [HomeController::class, 'index'])->name('home');
