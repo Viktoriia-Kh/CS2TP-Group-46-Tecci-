@@ -96,6 +96,11 @@
           <span class="nav-ico"><i class="fa-solid fa-user-group"></i></span> <!--fa-user-group is a User (Group) Icon linked from Font Awesome-->
         </a>
 
+        <a href="{{ route('admin.contacts') }}">
+          <span class="nav-text">Contact Messages</span>
+          <span class="nav-ico"><i class="fa-solid fa-envelope"></i></span>
+        </a>
+
         <a class="active" href="admin-settings">
           <span class="nav-text">Admin Settings</span>
           <span class="nav-ico"><i class="fa-solid fa-gear"></i></span> <!--fa-gear is a Gear/Settings Icon linked from Font Awesome-->
