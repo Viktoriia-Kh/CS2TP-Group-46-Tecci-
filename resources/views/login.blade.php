@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="common-style.css">
         {{-- Basket Badge CSS --}}
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="Dark-Mode.css">
         <!-- Google font -->
         <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
         <!-- Font awesome for icons-->
@@ -60,6 +61,14 @@
                         </a>
 
                         <a href="login"><i class="fa-regular fa-user"></i></a>
+
+                        <!--Added A Dark/Light Mode Toggle Button-->
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                    <!--fa-moon is a Moon Icon linked from Font Awesome-->
+                    <!--class="theme-toggle" lets us style the button using CSS-->
+                    <!--id="themeToggle" allows us to use this id in JavaScript-->
+                    </button>
                     </div>
 
             </div>
@@ -164,6 +173,8 @@
         this.classList.toggle('fa-eye');
         this.classList.toggle('fa-eye-slash');
     })
+
+    src="Dark-Mode-Theme.js"
 </script>
 
 
