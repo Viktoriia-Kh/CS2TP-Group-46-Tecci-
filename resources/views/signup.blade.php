@@ -19,9 +19,10 @@
 <!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
+<!-- Chatbot CSS -->
+<link rel="stylesheet" href="{{ asset('chatbot.css') }}">
 </head>
 <body class="signup-page">
-
     {{-- HEADER --}}
     <header class="main-header">
         <div class="container nav-container">
@@ -168,3 +169,7 @@
         <p>&copy; 2025 Tecci. All rights reserved.</p>
     </div>
 </footer>
+    @include('partials.chatbot')
+    <script src="{{ asset('chatbot.js') }}?v={{ time() }}"></script>
+</body>
+</html>
