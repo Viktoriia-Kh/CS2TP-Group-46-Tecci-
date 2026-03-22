@@ -207,6 +207,7 @@ ul {
 .sidebar-logout { /* This targets the Logout link */
   display: block; /* This makes it full width like a Button */
   background: #7fc0ff;
+  width: 100%;
   color: #03315b;
   font-weight: 800;
   text-align: center;
@@ -214,6 +215,11 @@ ul {
   border-radius: 999px; /* This makes the Logout Button into a pill shape */
   margin: 10px 0 18px; /* This is for the spacing above and below */
   letter-spacing: 0.5px;
+  border: none; 
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
 }
 
 .admin-nav { /* This is for the Sidebar links */
