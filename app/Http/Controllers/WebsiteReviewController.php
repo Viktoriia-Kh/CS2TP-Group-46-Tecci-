@@ -15,12 +15,12 @@ class WebsiteReviewController extends Controller
             'message' => 'required|string|max:2000',
         ]);
 
-        Review::create([
-            'name' => $validated['name'] ?? 'Anonymous',
-            'rating' => $validated['rating'],
-            'message' => $validated['message'],
-            'is_approved' => true,
-        ]);
+        $review = new Review();
+        $review->name = $validated['name'] ?? 'Anonymous';
+        $review->rating = $validated['rating'];
+        $review->message = $validated['message'];
+        $review->is_approved = true;
+        $review->save();
 
         return redirect()->back()->with('success', 'Review submitted successfully.');
     }
