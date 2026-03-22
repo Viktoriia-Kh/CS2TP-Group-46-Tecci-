@@ -15,6 +15,10 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\AdminDashboardController;
+
 use App\Http\Controllers\LoginController;use
  App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\AdminSettingsController;
@@ -235,6 +239,24 @@ Route::middleware(['auth', 'admin'])->group(function (){
     Route::delete('/admin-settings/delete', [AdminSettingsController::class, 'destroy'])->name('admin.settings.delete');
 });
 
+// ==========================================
+// ADMIN DASHBOARD & ORDERS
+// ==========================================
+
+Route::get('admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
+// Admin Orders: Main List (Handles Search & Filters)
+Route::get('admin-orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+
+// Admin Orders: Processing (Handles Status Updates & Stock Deduction)
+Route::put('admin-orders/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+
+Route::get('/admin/orders/{id}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
+
+Route::post('/admin/returns/{id}/approve', [App\Http\Controllers\AdminDashboardController::class, 'approveReturn'])
+    ->name('admin.returns.approve');
+
+Route::post('/admin/returns/{id}/decline', [AdminDashboardController::class, 'declineReturn'])->name('admin.returns.decline');
 Route::get('/admin-inventory', [AdminInventoryController::class, 'index'])->name('admin.inventory');
 Route::post('/admin-inventory/products', [AdminInventoryController::class, 'store'])->name('admin.inventory.store');
 Route::put('/admin-inventory/products/{product}', [AdminInventoryController::class, 'update']);
