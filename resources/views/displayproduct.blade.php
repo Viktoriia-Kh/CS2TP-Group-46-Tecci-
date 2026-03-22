@@ -318,7 +318,7 @@
     </div>
   </footer>
 
-  <script>src="Dark-Mode.js"</script>
+  <script>src="Dark-Mode.Theme.js"</script>
 
 </body>
 
