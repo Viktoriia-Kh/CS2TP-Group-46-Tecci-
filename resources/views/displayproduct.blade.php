@@ -235,7 +235,7 @@
           <button class="tab-button active" data-category="all">All Products</button>
           <button class="tab-button" data-category="desktops">PCs</button>
           <button class="tab-button" data-category="laptops">Laptops</button>
-          <button class="tab-button" data-category="phones">Phones</button>
+          <button class="tab-button" data-category="phones">Smartphones</button>
           <button class="tab-button" data-category="tablets">Tablets</button>
           <button class="tab-button" data-category="accessories">Accessories</button>
           
@@ -319,7 +319,21 @@
 const allProducts = @json($productsForJs);
 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryFromUrl = urlParams.get('category');
   let currentCategory = "all";
+
+  if (categoryFromUrl && ["all", "desktops", "laptops", "phones", "tablets", "accessories"].includes(categoryFromUrl)) {
+      currentCategory = categoryFromUrl;
+      
+      // Update the active state of the buttons on page load
+      document.addEventListener("DOMContentLoaded", () => {
+          document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+          const activeButton = document.querySelector(`.tab-button[data-category="${currentCategory}"]`);
+          if (activeButton) activeButton.classList.add("active");
+      });
+  }
+
   let currentSortOption = "featured";
   let priceRange = 5000;
   let selectedConditions = [];

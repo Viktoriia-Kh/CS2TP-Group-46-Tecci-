@@ -198,35 +198,36 @@
     <div class="container">
       <h2>Shop All Products Now</h2>
       <div class="card-grid category-grid">
-        <a href="displayproduct" class="category-card">
-          <div class="category-icon">
-            <i class="fa-solid fa-laptop"></i> <!--fa-laptop is a Laptop Icon linked from Font Awesome-->
-          </div>
-          <p>Laptops</p>
-        </a>
-
-        <a href="displayproduct" class="category-card">
+        
+        <a href="/displayproduct?category=desktops" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-desktop"></i> <!--fa-desktop is a Desktop Icon linked from Font Awesome-->
           </div>
           <p>PCs</p>
         </a>
 
-        <a href="displayproduct" class="category-card">
+        <a href="/displayproduct?category=laptops" class="category-card">
+          <div class="category-icon">
+            <i class="fa-solid fa-laptop"></i> <!--fa-laptop is a Laptop Icon linked from Font Awesome-->
+          </div>
+          <p>Laptops</p>
+        </a>
+
+        <a href="/displayproduct?category=phones" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-mobile-screen-button"></i> <!--fa-mobile-screen-button is a Mobile Icon linked from Font Awesome-->
           </div>
           <p>Smartphones</p>
         </a>
 
-        <a href="displayproduct" class="category-card">
+        <a href="/displayproduct?category=tablets" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-tablet-screen-button"></i> <!--fa-tablet-screen-button is a Tablet Icon linked from Font Awesome-->
           </div>
           <p>Tablets</p>
         </a>
 
-        <a href="displayproduct" class="category-card">
+        <a href="/displayproduct?category=accessories" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-headphones"></i> <!--fa-headphones is a Headphone Icon linked from Font Awesome-->
           </div>
