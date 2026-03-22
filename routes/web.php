@@ -18,10 +18,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AdminInventoryController;
 use App\Http\Controllers\WebsiteReviewController;
 
 // Homepage
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Homepage
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -80,8 +82,7 @@ Route::get('/auth/microsoft/callback', function () {
 // Show "verify your email" page
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
-})->middleware('auth')
-  ->name('verification.notice');
+})->middleware('auth')->name('verification.notice');
 
 // Verification link (user clicks from email)
 Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
