@@ -263,3 +263,129 @@ body.dark-mode .contact-info-item { /* This is for the Contact information rows 
 body.dark-mode .contact-info-item i {
   color: #cfe9ff;
 }
+
+/* LOGIN PAGE DARK MODE */
+
+body.dark-mode { /* This is for the Login Page background colour */
+  background: linear-gradient(to bottom, #0b1220, #0f1f35);
+}
+
+body.dark-mode .section-form { /* This is for the Login Card */
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .section-form h2 { /* This is for the Welcome Back heading */
+  color: #7cc0ff; 
+}
+
+body.dark-mode .welcome-sub-message { /* This is for the message on the Login Card */  
+  color: #cbd5e1;
+}
+
+body.dark-mode .section-form label { /* This is for the Login Card Labels */
+  color: #e5e7eb;
+}
+
+body.dark-mode .section-form input { /* This is for the Login Inputs */
+  background-color: #0f1f35;
+  border-color: rgba(203, 213, 225, 0.25);
+  color: #e5e7eb;
+}
+
+body.dark-mode .section-form input::placeholder { /* This is for the Placeholder text, which will help improve readability */
+  color: rgba(229, 231, 235, 0.65);
+}
+
+body.dark-mode .section-form button { /* This is for the Login Button */
+  background-color: #005baf;
+  color: #ffffff;
+}
+
+body.dark-mode .section-form button:hover {
+  background-color: #00488c;
+}
+
+body.dark-mode .signup-message { /* This and the lines below are for the Signup text and link */
+  color: #cbd5e1;
+}
+
+body.dark-mode .signup-message a {
+  color: #cfe9ff;
+}
+
+body.dark-mode .signup-message a:hover {
+  text-decoration: underline;
+}
+
+/* SIGN UP PAGE DARK MODE */
+
+body.dark-mode.signup-page {
+  background: #0b1220; /* This is for the Signup Page background colour */
+  color: #e5e7eb;
+}
+
+body.dark-mode .signup-card { /* This is for Signup Card */
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .signup-header h1 { /* This is for the Header text */
+  color: #7cc0ff; 
+}
+
+body.dark-mode .signup-header p {
+  color: #cbd5e1;
+}
+
+body.dark-mode .social-btn { /* This is for the Social Buttons */
+  background-color: #0f1f35;
+  border-color: rgba(203, 213, 225, 0.25);
+  color: #e5e7eb;
+}
+
+body.dark-mode .social-btn:hover {
+  background-color: #132a4a;
+}
+
+body.dark-mode .signup-divider { /* This is for the Divider Text ('Or Continue With') */
+  color: #94a3b8;
+}
+
+body.dark-mode .form-group label {  /* This is for the Sign Up Card Labels */
+  color: #e5e7eb;
+}
+
+/* Inputs */
+body.dark-mode .form-group input { /* This is for the Sign Up Inputs */
+  background-color: #0f1f35;
+  border-color: rgba(203, 213, 225, 0.25);
+  color: #e5e7eb;
+}
+
+body.dark-mode .form-group input::placeholder { /* This is for the Placeholder text, which will help improve readability */
+  color: rgba(229, 231, 235, 0.6);
+}
+
+body.dark-mode .signup-submit-btn { /* This is for the Submit Button */
+  background: linear-gradient(135deg, #2563eb, #1e3a8a);
+  color: #ffffff;
+}
+
+body.dark-mode .signup-submit-btn:hover {
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.45);
+}
+
+body.dark-mode .signup-footer-text { /* This is for the Sign Up Footer text under the card */
+  color: #cbd5e1;
+}
+
+body.dark-mode .signup-footer-text a {
+  color: #93c5fd;
+}
+
+body.dark-mode .signup-footer-text a:hover {
+  text-decoration: underline;
+}
