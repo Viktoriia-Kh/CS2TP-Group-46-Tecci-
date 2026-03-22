@@ -542,9 +542,9 @@ const isInStock = product.stock_status === 'in_stock' || product.stock_quantity 
       </div>
     `;
 
-      grid.appendChild(productCard);
-    });
-  }
+        grid.appendChild(productCard);
+      });
+    }
 
 // Toast Notification Function (Synced with Basket style)
 function showToast(title, message, type = 'success', imageUrl = null) {
