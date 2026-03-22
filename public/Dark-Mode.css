@@ -318,3 +318,42 @@ body.dark-mode .signup-message a {
 body.dark-mode .signup-message a:hover {
   text-decoration: underline;
 }
+
+/* SIGN UP PAGE DARK MODE */
+
+body.dark-mode.signup-page {
+  background: #0b1220; /* This is for the Signup Page background colour */
+  color: #e5e7eb;
+}
+
+body.dark-mode .signup-card { /* This is for Signup Card */
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .signup-header h1 { /* This is for the Header text */
+  color: #7cc0ff; 
+}
+
+body.dark-mode .signup-header p {
+  color: #cbd5e1;
+}
+
+body.dark-mode .social-btn { /* This is for the Social Buttons */
+  background-color: #0f1f35;
+  border-color: rgba(203, 213, 225, 0.25);
+  color: #e5e7eb;
+}
+
+body.dark-mode .social-btn:hover {
+  background-color: #132a4a;
+}
+
+body.dark-mode .signup-divider { /* This is for the Divider Text ('Or Continue With') */
+  color: #94a3b8;
+}
+
+body.dark-mode .form-group label {  /* This is for the Sign Up Card Labels */
+  color: #e5e7eb;
+}
