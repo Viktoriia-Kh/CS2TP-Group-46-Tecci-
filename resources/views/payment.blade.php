@@ -140,7 +140,7 @@
       <!--Navigation Menu-->
       <nav class="main-nav">
         <ul>
-          <li><a href="/" class="active">Home</a></li>
+          <li><a href="/" >Home</a></li>
           <li><a href="about-us">About</a></li>
           <li><a href="contact-us">Contact</a></li>
           <li><a href="{{ route('products.index') }}">Products</a></li>
@@ -149,9 +149,25 @@
 
       <!--Icons-->
       <div class="nav-icons">
-        <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a>
-        <a href="{{ route('basket.index') }}"><i class="fa-solid fa-cart-shopping"></i></a>
-        <a href="login"><i class="fa-regular fa-user"></i></a>
+        <a href="/my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
+        
+        {{-- Basket Icon with Badge --}}
+        <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
+          <i class="fa-solid fa-cart-shopping"></i>
+          
+          @php
+            use App\Models\BasketItem;
+            $basketCount = Auth::check() 
+              ? BasketItem::where('user_id', Auth::id())->sum('quantity')
+              : BasketItem::where('session_id', session()->getId())->sum('quantity');
+          @endphp
+          
+          @if($basketCount > 0)
+            <span class="cart-badge">{{ $basketCount }}</span>
+          @endif
+        </a>
+        
+        <a href="/account"><i class="fa-regular fa-user"></i></a>
       </div>
     </div>
   </header>

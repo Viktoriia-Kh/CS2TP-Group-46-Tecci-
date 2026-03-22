@@ -78,7 +78,7 @@
           @endif
         </a>
         
-        <a href="/account.html"><i class="fa-regular fa-user"></i></a>
+        <a href="/account"><i class="fa-regular fa-user"></i></a>
       </div>
     </div>
   </header>
@@ -325,7 +325,7 @@
           <li><a href="/contact-us">Contact</a></li>
           <li><a href="/displayproduct">Products</a></li>
           <li><a href="{{ route('basket.index') }}">Basket</a></li>
-          <li><a href="account.html">My Account</a></li>
+          <li><a href="/account">My Account</a></li>
         </ul>
       </div>
 
