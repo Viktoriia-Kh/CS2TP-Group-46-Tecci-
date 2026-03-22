@@ -30,10 +30,10 @@
         <span class="logo-text">TECCI</span> <!--span is an inline element used for short text-->
       </a>
       
-      <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
+      <a href="/admin-dashboard" class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
         <!--id="menuBtn" connects to the JS, for it to work-->
         <i class="fa-solid fa-bars"></i> <!--fa-bars is a Menu Icon linked from Font Awesome-->
-      </button>
+      </a>
     </div>
     
     <div class="admin-header-spacer"></div>

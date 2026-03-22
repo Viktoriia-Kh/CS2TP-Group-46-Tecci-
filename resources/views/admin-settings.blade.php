@@ -32,10 +32,10 @@
 
       <!--ADMIN HEADER CONTROLS (MENU + SEARCH)-->
       <div class="admin-header-controls">
-        <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
+        <a href="/admin-dashboard" class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
           <!--id="menuBtn" connects to the JS, for it to work-->
           <i class="fa-solid fa-bars"></i> <!--fa-bars is a Menu Icon linked from Font Awesome-->
-        </button>
+        </a>
 
         <div class="search-wrap"> <!--This is a wrapper for styling purpose of the Search Bar-->
           <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
