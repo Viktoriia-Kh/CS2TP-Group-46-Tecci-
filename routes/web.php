@@ -15,6 +15,8 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;use
+ App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\OrderController;
@@ -23,6 +25,15 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminInventoryController;
 use App\Http\Controllers\WebsiteReviewController;
 
+
+Route::get('/admin/customers', [AdminCustomerController::class, 'index'])->name('admin.customers');
+Route::get('/admin/customers/{id}/edit', [AdminCustomerController::class, 'edit'])->name('admin.customers.edit');
+Route::put('/admin/customers/{id}', [AdminCustomerController::class, 'update'])->name('admin.customers.update');
+Route::delete('/admin/customers/{id}', [AdminCustomerController::class, 'destroy'])->name('admin.customers.destroy');
+
+Route::get('/admin/contacts', [ContactController::class, 'adminIndex'])->name('admin.contacts');
+Route::post('/admin/contacts/{id}/reply', [ContactController::class, 'reply'])->name('admin.contacts.reply');
+Route::post('/admin/contacts/{id}/resolve', [ContactController::class, 'markResolved'])->name('admin.contacts.resolve');
 // Homepage
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
