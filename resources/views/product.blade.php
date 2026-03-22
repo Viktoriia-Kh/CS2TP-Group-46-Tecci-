@@ -516,6 +516,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<script>src="TP2_Tecci-Theme.js"</script>
+<script>src="Dark-Mode-Theme.js"</script>
 
 </html>
