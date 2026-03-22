@@ -314,7 +314,7 @@
             </div>
         @endif
 
-        <form class="review-form" action="{{ route('reviews.store') }}" method="POST">
+        <form class="review-form" action="{{ route('website.reviews.store') }}" method="POST">
             @csrf
 
             <input type="hidden" name="rating" id="ratingInput" value="0">
