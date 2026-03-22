@@ -64,6 +64,42 @@ body.dark-mode .btn-primary:hover {
   background-color: #165a9b;
 }
 
+/* ROTATING BANNER DARK MODE */
+body.dark-mode .hero {
+  background-color: #0f172a;
+}
+
+body.dark-mode .hero-slide {
+  background-color: #0f172a; /* This makes each Slide in the Rotating Banner darker */
+}
+
+body.dark-mode .hero-text {
+  background-color: #1e293b;
+}
+
+body.dark-mode .hero-text h1 {
+  color: #f8fafc;
+}
+
+body.dark-mode .special-word {
+  color: #93c5fd;
+}
+
+body.dark-mode .hero-subtitle,
+body.dark-mode .hero-offer-code {
+  color: #cbd5e1;
+}
+
+body.dark-mode .hero-arrow {
+  background-color: #2563eb;
+  color: #f8fafc;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .hero-arrow:hover {
+  background-color: #3b82f6;
+}
+
 /* FEATURED PRODUCTS SECTION DARK MODE */
 body.dark-mode .featured-products {
   background-color: #0f3a66;
@@ -118,6 +154,56 @@ body.dark-mode .testimonial-text {
 
 body.dark-mode .testimonial-quote-icon {
   color: #7cc0ff;
+}
+
+/* LEAVE A REVIEW SECTION DARK MODE */
+body.dark-mode .review-section {
+  background-color: #1e293b;
+}
+
+body.dark-mode .review-section h2 {
+  color: #f8fafc;
+}
+
+body.dark-mode .review-intro {
+  color: #cbd5e1;
+}
+
+body.dark-mode .review-label-left,
+body.dark-mode .review-label-right {
+  color: #93c5fd;
+}
+
+body.dark-mode .star {
+  color: #facc15;
+}
+
+body.dark-mode .review-text-label {
+  color: #e5e7eb;
+}
+
+body.dark-mode .review-textarea {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .review-textarea::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-mode .review-textarea:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.18);
+}
+
+body.dark-mode .review-submit-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .review-submit-btn:hover {
+  background-color: #1d4ed8;
 }
 
 /* FOOTER SECTION DARK MODE */
