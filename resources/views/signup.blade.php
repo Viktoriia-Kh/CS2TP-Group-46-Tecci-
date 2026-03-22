@@ -180,7 +180,8 @@
 </footer>
     @include('partials.chatbot')
     <script src="{{ asset('chatbot.js') }}?v={{ time() }}">
-            src="Dark-Mode-Theme.js"
     </script>
 </body>
 </html>
+
+<script src="Dark-Mode-Theme.js"></script>
