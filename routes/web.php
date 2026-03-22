@@ -17,7 +17,6 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;use
  App\Http\Controllers\AdminCustomerController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
