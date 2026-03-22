@@ -109,7 +109,7 @@
                     </span>
                 </div>
                 
-                <a href="{{ route('basket.add', $product->id) }}" class="add-to-basket-btn"> Add to Basket</a>
+                <button onclick="addToBasketAjax({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ asset($product->image_url ?? 'images/laptop.jpg') }}', 1)" class="add-to-basket-btn">Add to Basket</button>
             </div>
         </div>
 
