@@ -9,12 +9,21 @@
   <!--Link to CSS File for Contact Page-->
   <link rel="stylesheet" href="contactstyle.css" />
   <link rel="stylesheet" href="Dark-Mode.css" />
+  {{-- Basket Badge CSS --}}
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <!--Google Font-->
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
   <!--Font Awesome for Icons-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+   <!-- Linking the chatbot-->
+    <link rel="stylesheet" href="{{ asset('chatbot.css') }}">
 
 </head>
+<!-- Linking the chatbot-->
+ @include('partials.chatbot')
+<script src="{{ asset('chatbot.js') }}"></script>
+
+
 <body>
   <!--HEADER SECTION (SAME STRUCTURE AS HOME PAGE)-->
   <header class="main-header">
@@ -39,8 +48,24 @@
 
       <!--Icons-->
       <div class="nav-icons">
-        <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a>
-        <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
+        
+        {{-- Basket Icon with Badge --}}
+        <a href="basket" class="cart-icon-wrapper">
+          <i class="fa-solid fa-cart-shopping"></i>
+          
+          @php
+            use App\Models\BasketItem;
+            $basketCount = Auth::check() 
+              ? BasketItem::where('user_id', Auth::id())->sum('quantity')
+              : BasketItem::where('session_id', session()->getId())->sum('quantity');
+          @endphp
+          
+          @if($basketCount > 0)
+            <span class="cart-badge">{{ $basketCount }}</span>
+          @endif
+        </a>
+        
         <a href="login"><i class="fa-regular fa-user"></i></a>
 
         <!--Added A Dark/Light Mode Toggle Button-->
