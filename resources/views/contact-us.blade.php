@@ -222,7 +222,7 @@
           <li><a href="contact-us">Contact</a></li>
           <li><a href="displayproduct">Products</a></li>
           <li><a href="basket">Basket</a></li>
-          <li><a href="login">My Account</a></li>
+          <li><a href="account">My Account</a></li>
         </ul>
       </div>
 

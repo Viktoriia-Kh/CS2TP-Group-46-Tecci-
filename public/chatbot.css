@@ -229,3 +229,9 @@
 .tecci-chatbot__iconbtn:hover{
   background: rgba(255,255,255,0.12);
 }
+#tecci-chatbot {
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 24px !important;
+  z-index: 99999 !important;
+}

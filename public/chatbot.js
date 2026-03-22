@@ -176,7 +176,7 @@
     const action = btn.getAttribute("data-action");
     const label = btn.textContent?.trim() || "Option";
 
-    addMsg(label, "user");
+    addMsg(`Selected: ${label}`, "user");
 
     if (action === "open_category") {
       const categoryId = Number(btn.dataset.categoryId);
@@ -231,8 +231,10 @@
     input.value = "";
 
     setTimeout(() => {
-      addMsg("This bot works with options — choose a topic:", "bot");
-      loadCategories().catch(() => addMsg("Sorry — I couldn’t load topics right now.", "bot"));
+addMsg(
+  `${data?.category?.title ?? currentCategoryTitle}: ${data.answer || "Sorry — I couldn’t find that answer."}`,
+  "bot"
+);      loadCategories().catch(() => addMsg("Sorry — I couldn’t load topics right now.", "bot"));
     }, 250);
   });
 })();
