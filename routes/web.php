@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AccountController;
@@ -43,15 +44,20 @@ Route::post('/apply-discount', [BasketController::class, 'applyDiscount'])->name
 Route::post('/basket/update-ajax', [BasketController::class, 'updateAjax'])->name('basket.update.ajax');
 Route::post('/basket/save-delivery', [BasketController::class, 'saveDelivery'])->name('basket.saveDelivery');
 
+
 /*Route::get('/login', function () {
     return view('login');
 })->name('login');
 */
+
 Route::get('/signup', [SignUpController::class, 'showForm'])
     ->name('signup.form');
 
 Route::post('/signup', [SignUpController::class, 'submit'])
     ->name('signup.submit');
+
+Route::get('/admin-signup', [SignUpController::class, 'showForm'])
+    ->name('admin.signup');
 
 Route::get('/auth/google', function () {
     return Socialite::driver('google')->redirect();
@@ -205,6 +211,13 @@ Route::post('/product/{product}/review', [ReviewController::class, 'store'])
 //Admin Inventory route
 Route::get('admin-inventory', function () {
     return view('admin-inventory');
+});
+
+// admin routes
+Route::middleware(['auth', 'admin'])->group(function (){
+    Route::get('/admin-settings', [AdminSettingsController::class, 'showAdminSettings'])->name('admin.settings');
+    Route::patch('/admin-settings', [AdminSettingsController::class, 'update'])->name('admin.settings.update');
+    Route::delete('/admin-settings/delete', [AdminSettingsController::class, 'destroy'])->name('admin.settings.delete');
 });
 
 Route::get('/admin-inventory', [AdminInventoryController::class, 'index'])->name('admin.inventory');

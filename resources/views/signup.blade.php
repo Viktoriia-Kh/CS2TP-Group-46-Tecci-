@@ -87,6 +87,11 @@
             <form action="{{ route('signup.submit') }}" method="POST" class="signup-form">
                 @csrf
 
+                {{-- check if it is an admin signup--}}
+                @if (Request::is('admin-signup'))
+                    <input type="hidden" name="is_admin" value="1">
+                @endif
+
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input name="name" id="name" type="text" value="{{ old('name') }}" required>
