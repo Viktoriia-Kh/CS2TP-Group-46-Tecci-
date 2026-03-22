@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Review;
+use App\Models\ProductReview;
+use App\Models\WebsiteReview;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +13,7 @@ class HomeController extends Controller
     {
         $featuredProducts = Product::latest()->take(4)->get();
 
-        $reviews = Review::where('is_approved', true)
+        $reviews = WebsiteReview::where('is_approved', true)
             ->latest()
             ->take(10)
             ->get();

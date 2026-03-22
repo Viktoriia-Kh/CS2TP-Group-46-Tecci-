@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WebsiteReview;
 use Illuminate\Http\Request;
-use App\Models\Review;
 
 class WebsiteReviewController extends Controller
 {
@@ -15,7 +15,7 @@ class WebsiteReviewController extends Controller
             'message' => 'required|string|max:2000',
         ]);
 
-        $review = new Review();
+        $review = new WebsiteReview();
         $review->name = $validated['name'] ?? 'Anonymous';
         $review->rating = $validated['rating'];
         $review->message = $validated['message'];
