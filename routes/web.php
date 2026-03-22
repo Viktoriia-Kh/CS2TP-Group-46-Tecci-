@@ -16,6 +16,9 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ChatbotController;
+
+
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminCustomerController;
@@ -270,6 +273,15 @@ Route::get('admin-inventory', function () {
 
 Route::get('admin-inventory', [AdminInventoryController::class, 'AdminInventoryController'])->name('products.index');
 
+
+
+
+
+Route::prefix('chatbot')->group(function () {
+    Route::get('/categories', [ChatbotController::class, 'categories'])->name('chatbot.categories');
+    Route::get('/categories/{category}/faqs', [ChatbotController::class, 'faqsByCategory'])->name('chatbot.faqsByCategory');
+    Route::get('/faqs/{faq}', [ChatbotController::class, 'faqAnswer'])->name('chatbot.faqAnswer');
+});
 Route::post('/admin/returns/{id}/decline', [AdminDashboardController::class, 'declineReturn'])->name('admin.returns.decline');
 Route::get('/admin-inventory', [AdminInventoryController::class, 'index'])->name('admin.inventory');
 Route::post('/admin-inventory/products', [AdminInventoryController::class, 'store'])->name('admin.inventory.store');
