@@ -20,14 +20,16 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AdminInventoryController;
+use App\Http\Controllers\WebsiteReviewController;
 
 // Homepage
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Homepage
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::post('/reviews', [WebsiteReviewController::class, 'store'])->name('website.reviews.store');
+Route::post('/products/{productId}/reviews', [ReviewController::class, 'store'])
+    ->name('product.reviews.store');
 Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('login');
 
 

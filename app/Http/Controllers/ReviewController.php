@@ -3,26 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Review;
+use App\Models\ProductReview;
 
 class ReviewController extends Controller
 {
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'nullable|string|max:255',
-            'rating' => 'required|integer|min:1|max:5',
-            'message' => 'required|string|max:2000',
-        ]);
-
-        Review::create([
-            'name' => $validated['name'] ?? 'Anonymous',
-            'rating' => $validated['rating'],
-            'message' => $validated['message'],
-            'is_approved' => true,
-        ]);
-
-        return redirect()->back()->with('success', 'Review submitted successfully.');
     public function store(Request $request, $productId)
     {
         $request->validate([
@@ -30,7 +14,7 @@ class ReviewController extends Controller
             'comment' => 'required|string|max:1000',
         ]);
 
-        Review::updateOrCreate(
+        ProductReview::updateOrCreate(
             [
                 'product_id' => $productId,
                 'user_id' => auth()->id() ?? 1,
