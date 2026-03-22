@@ -114,43 +114,79 @@ ul {
 
 /* HERO SECTION */
 
-.hero {
-  background: linear-gradient(to right, #e6f3ff 40%, #e6f3ff 40%); /* This draws a left-to-right gradient behind the Hero Section */
-  margin: 0; /* Top Padding, Left and Right, Bottom Padding */
-  padding: 0; /* This ensures that there is no internal spacing inside .hero itself */
+.hero { /* This targets the whole Hero Section */
+  background-color: #e6f3ff;
+  margin: 0; /* This removes any outside spacing around the Hero Section */
+  padding: 0; /* This removes any internal spacing inside the hero wrapper itself */
+  overflow: hidden; /* This hides anything that sticks outside the hero box */
 }
 
-.hero-inner {
-  display: flex; /* This turns the container into a horizontal row */
-  gap: 48px; /* Space between two columns */
-  align-items: stretch; /* This makes both columns the same height */
-  min-height: 340px; /* This makes sure that the hero section is at least 340px tall */
-
-  width: 100%; /* This overrides the .container width so the hero section can stretch full width across the screen */
-  margin-inline: 0; /* This overrides the .container, it removes the hero section from being centred so it can take up width completely */
-  padding-left: 16px; /* This makes sure the text doesn't sit right on the very edge of the screen */
+.hero-slider { /* This targets the overall slider container */
+  position: relative;
+  width: 100%; /* This makes the slider take the full avaliable width */
+  overflow: hidden; 
 }
 
-.hero-text {
-  max-width: 320px; /* This restricts the width of the text column */
+.hero-track { /* This targets the strip containing all the slides */
+  display: flex; /* This places all the hero slides in a row horizontally */
+  width: 100%;
+  transition: transform 1s ease-in-out; /* This makes the slide movement smooth when JS changes the transform, which is the property being animated */
+  align-items: stretch; /* This makes all slides stretch to equal height */
+}
+
+.hero-slide { /* This targets each individual slide */
+  min-width: 100%; /* This ensures each slide is at least full width of the slider */
+  flex: 0 0 100%; /* This means the flex-grow is 0, flex-shrink is 0, and flex-basis is 100% */
+  background-color: #e6f3ff;
+  display: flex; /* This allows the slide content to stretch fully */
+}
+
+.hero-slide .hero-inner { 
+  flex: 1; /* This makes each slide fill the full slide height */
+}
+
+.hero-inner { /* This targets the inner content wrapper of each slide */
   display: flex;
+  align-items: stretch; /* This makes both columns strech to equal height */
+  min-height: 340px;
+  width: 100%;
+  margin-inline: auto; /* This centres the block horizontally */
+  padding-left: 0; /* This removes left padding */
+  gap: 0; /* This removes the spacing between the text side and image size */
+}
+
+.hero-text { /* This targets the left panel */
+  flex: 0 0 37%; /* This makes the text section 37% width, so it won't grow or shrink */
+  max-width: 37%;
+  display: flex; /* This makes the inside content use flex layout */
   flex-direction: column;
   justify-content: center;
+  padding: 36px 40px;
+  background-color: #dbeaf8;
 }
 
-.hero-text h1 {
+.hero-text h1 { 
+  display: flex;
+  flex-direction: column;
   font-size: clamp(35px, 3vw, 45px); /* This creates responsive font size: Minimum Size, Preferred (3% Of Viewport Width), Maximum Size */
   font-weight: 700;
   line-height: 1.1;
-  color: #000000
+  color: #000000;
 }
 
 .special-word {
-    color: #03315b;
+  color: #03315b;
 }
 
 .hero-subtitle {
-  margin: 16px 0 29px; /* Space: Above, Left/Right, Below */
+  margin: 16px 0 24px; /* Space: Above, Left/Right, Below */
+  font-size: 15px;
+  color: #2e2f33;
+  max-width: 290px;
+}
+
+.hero-offer-code {
+  margin: -6px 0 22px;
   font-size: 15px;
   color: #2e2f33;
 }
@@ -164,6 +200,7 @@ ul {
   border: none;
   cursor: pointer; /* This makes the Mouse Pointer change to Hand when hovering */
   text-align: center;
+  width: fit-content;
 }
 
 .btn-primary {
@@ -180,11 +217,10 @@ ul {
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
 }
 
-/* HERO IMAGE ON THE RIGHT SIDE */
 .hero-banner {
   flex: 1; /* This lets the image side take up the remaining width */
-  height: 100%; /* This makes .hero-banner match the height of .hero-inner */
- 
+  min-height: 340px;
+  position: relative;
 }
 
 .hero-image {
@@ -192,6 +228,32 @@ ul {
   height: 100%; /* This keeps the image from getting too tall */
   display: block; /* This removes the default inline spacing that images have */
   object-fit: cover; /* This makes the image fill the box completely, even if it has to be slightly cropped */
+}
+
+.hero-arrow { /* This styles the right arrow button */
+  position: absolute; /* This lets the arrow button be placed exatly on top of slide */
+  top: 50%; /* This moves its top edge halfway down the slider */
+  right: 16px; /* This places it 16px from the right side */
+  transform: translateY(-50%); /* This pulls it upward by half its own height so it becomes perfectly vertically centred */
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 999px;
+  background-color: #7fc0ff;
+  color: #03315b;
+  font-size: 26px;
+  display: flex; /* This lets the Icon be centred */
+  align-items: center;
+  justify-content: center; 
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: background-color 0.15s ease, transform 0.15s ease; /* This creates a smooth hover transition */
+  z-index: 2; /* This keeps the arrow above the image and slide content */
+}
+
+.hero-arrow:hover { /* This is for the hover state of the arrow */
+  background-color: #9bd0ff;
+  transform: translateY(-50%) scale(1.04); /* This keeps is vertically centred and slightly enlarges the button */
 }
 
 /* FEATURED PRODUCTS SECTION */
@@ -370,6 +432,167 @@ ul {
   font-size: 15px;
 }
 
+/* LEAVE US A REVIEW SECTION */
+
+.review-section {
+  background-color: #bcd9f5;
+  padding: 48px 0 56px;
+  margin: 0;
+}
+
+.review-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-section h2 {
+  font-size: 34px;
+  color: #000000;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.review-intro {
+  font-size: 16px;
+  color: #2e2f33;
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.review-rating-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 42px;
+  flex-wrap: wrap;
+}
+
+.review-label-left,
+.review-label-right {
+  font-size: 14px;
+  font-weight: 600;
+  color: #03315b;
+}
+
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.star {
+  font-size: 24px;
+  color: #d6a800;
+  cursor: pointer;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.star:hover {
+  transform: translateY(-1px);
+}
+
+.review-form {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-text-label {
+  font-size: 16px;
+  color: #2e2f33;
+  margin-bottom: 14px;
+}
+
+.review-textarea {
+  width: 100%;
+  min-height: 165px;
+  border: 1px solid #b8b8b8;
+  border-radius: 10px;
+  padding: 16px 14px;
+  font-family: 'Signika';
+  font-size: 16px;
+  resize: vertical;
+  background-color: #ffffff;
+  color: #2e2f33;
+  outline: none;
+  margin-bottom: 20px;
+}
+
+.review-textarea::placeholder {
+  color: #b7b7b7;
+}
+
+.review-textarea:focus {
+  border-color: #085296;
+  box-shadow: 0 0 0 3px rgba(8, 82, 150, 0.12);
+}
+
+.review-submit-btn {
+  align-self: flex-start;
+}
+.reviews-carousel-section {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.reviews-carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.reviews-carousel {
+  display: flex;
+  overflow: hidden;
+  width: 900px;
+  scroll-behavior: smooth;
+  gap: 20px;
+}
+
+.review-card {
+  min-width: 280px;
+  max-width: 280px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.review-stars-display {
+  font-size: 22px;
+  color: #f4b400;
+  margin-bottom: 10px;
+}
+
+.review-message {
+  font-size: 16px;
+  color: #1f2937;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.review-name {
+  font-weight: 700;
+  color: #03315b;
+}
+
+.carousel-btn {
+  background: #03315b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  font-size: 20px;
+}
 
 /* FOOTER SECTION */
 

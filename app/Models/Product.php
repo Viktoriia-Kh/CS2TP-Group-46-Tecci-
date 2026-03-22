@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ProductReview;
 
 class Product extends Model
 {
@@ -32,6 +33,24 @@ class Product extends Model
         return $this->hasOne(Inventory::class);
     }
 
+    // Multiple images for each product
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    // Reviews for the product
+    public function reviews()
+    {
+        return $this->hasMany(ProductReview::class, 'product_id');
+    }
+
+    // Specs for the product
+    public function specs()
+    {
+        return $this->hasMany(ProductSpec::class);
+    }
+
     // Allows us to keep track of our stock logic
     public function getStockStatusAttribute()
     {
@@ -51,5 +70,11 @@ class Product extends Model
         }
 
         return 'in_stock';
+    }
+
+    // Average rating
+    public function getAverageRatingAttribute()
+    {
+        return $this->reviews()->avg('rating');
     }
 }
