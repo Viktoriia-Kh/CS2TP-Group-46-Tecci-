@@ -46,7 +46,7 @@ class SignUpController extends Controller
         Auth::login($user);
 
         // 4) send the verification email
-        $user->sendEmailVerificationNotification();
+        //$user->sendEmailVerificationNotification();
 
         // 5) redirect to the verification notice page
         return redirect()
