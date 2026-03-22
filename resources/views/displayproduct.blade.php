@@ -501,19 +501,46 @@ function renderProducts(products) {
     const productCard = document.createElement("div");
     productCard.className = "product-card-item";
 
+const isInStock = product.stock_status === 'in_stock' || product.stock_quantity > 0;
+    const isLowStock = product.stock_quantity > 0 && product.stock_quantity < 5;
 
+    let badgeText;
+    let badgeClass;
+
+    // Check the stock states in order
+    if (!isInStock) {
+        badgeText = 'Out of Stock';
+        badgeClass = 'badge-out-of-stock';
+    } else if (isLowStock) {
+        badgeText = 'Low Stock';
+        badgeClass = 'badge-low-stock';
+    } else {
+        badgeText = 'In Stock';
+        badgeClass = 'badge-in-stock';
+    } 
+
+    // Escaping quotes for JS function call
+    const safeProductName = product.name.replace(/'/g, "\\'");
 
     productCard.innerHTML = `
-      <a href="/product/${product.id}" class="product-link">
+      <div onclick="window.location.href='/product/${product.id}'" class="product-link" style="text-decoration: none; cursor: pointer;">
+        <div class="stock-badge ${badgeClass}">${badgeText}</div>
         <div class="product-image-placeholder">
           <img src="${product.image_url}" alt="${product.name}">
         </div>
         <div class="product-item-info">
-          <h4>${product.name}</h4>
+          <p class="product-item-name">${product.name}</p>
+          ${renderStars(product.avg_rating)} (${product.review_count || 0})
+          <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
           <p class="product-item-price">£${product.price.toFixed(2)}</p>
-          <a href="/add-to-basket/${product.id}" class="add-to-cart-quick">Add to Cart</a>
+          
+          <div class="cart-action-group" onclick="event.stopPropagation();">
+            <input type="number" id="qty-${product.id}" class="qty-input" value="1" min="1" max="99" title="Quantity">
+            <button type="button" class="add-to-cart-quick" onclick="addToBasketAjax(${product.id}, '${safeProductName}', '${product.image_url}', document.getElementById('qty-${product.id}').value)">Add to Basket</button>
+          </div>
         </div>
-      `;
+      </div>
+    `;
 
       grid.appendChild(productCard);
     });

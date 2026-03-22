@@ -163,8 +163,16 @@ Route::get('displayproduct', [DisplayProductController::class, 'DisplayProductCo
 Route::get('/product/{product}', [ProductController::class, 'show'])
     ->name('product.detail');
 
-// Checkout route
-Route::get('checkout', [CheckoutController::class, 'checkout']);
+// Payment/Checkout page (combined) - REQUIRES LOGIN
+Route::get('/checkout', [CheckoutController::class, 'showPaymentForm'])->name('checkout')
+      ->middleware('auth');
+
+// Legacy route for compatibility
+Route::get('/checkout/payment', [CheckoutController::class, 'showPaymentForm'])->name('checkout.payment')
+      ->middleware('auth');
+
+// Process payment and save order
+Route::post('/checkout/payment/validate', [CheckoutController::class, 'processPayment'])->name('payment.validate');
 
 // Show list of all orders
 Route::get('/my-orders', [OrderController::class, 'index'])->name('orders.index');
@@ -174,3 +182,32 @@ Route::get('/my-orders/{id}', [OrderController::class, 'show'])->name('orders.sh
 
 // Route to submit a return request for a specific item
 Route::post('/order-item/{id}/return', [OrderController::class, 'requestReturn'])->name('item.return');
+
+// account page routes
+Route::middleware('auth')->group(function (){ // requires user to be logged in
+    Route::get('/account', [AccountController::class, 'show'])->name('account.show'); // view account page
+    Route::patch('/account/update', [AccountController::class, 'update'])->name('account.update'); // update the account details
+    Route::delete('/account/delete', [AccountController::class, 'destroy'])->name('account.destroy'); // deletes the account
+});
+
+// forgot password route
+Route::get('/forgot-password', [LoginController::class, 'showForgotPassword'])->name('password.request');
+Route::post('/forgot-password', [LoginController::class, 'sendResetPasswordLink']);
+
+// reset password routes
+Route::get('/reset-password/{token}', [LoginController:: class, 'showPasswordResetForm'])->name('password.reset');
+Route::post('/reset-password', [LoginController::class, 'updatePassword'])->name('password.update'); // saves the new password to database
+
+// Reviews routee
+Route::post('/product/{product}/review', [ReviewController::class, 'store'])
+    ->name('reviews.store');
+
+//Admin Inventory route
+Route::get('admin-inventory', function () {
+    return view('admin-inventory');
+});
+
+Route::get('/admin-inventory', [AdminInventoryController::class, 'index'])->name('admin.inventory');
+Route::post('/admin-inventory/products', [AdminInventoryController::class, 'store'])->name('admin.inventory.store');
+Route::put('/admin-inventory/products/{product}', [AdminInventoryController::class, 'update']);
+Route::delete('/admin-inventory/products/{product}', [AdminInventoryController::class, 'destroy']);
