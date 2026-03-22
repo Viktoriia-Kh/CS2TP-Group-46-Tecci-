@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Product;
-use App\Models\Review;
+use App\Models\ProductReview;
 use App\Models\User;
 
-class ReviewSeeder extends Seeder
+class ProductReviewSeeder extends Seeder
 {
     public function run(): void
     {
@@ -24,7 +24,7 @@ class ReviewSeeder extends Seeder
         $products = Product::all();
 
         foreach ($products as $product) {
-            Review::updateOrCreate(
+            ProductReview::updateOrCreate(
                 [
                     'product_id' => $product->id,
                     'user_id' => $user->id,
