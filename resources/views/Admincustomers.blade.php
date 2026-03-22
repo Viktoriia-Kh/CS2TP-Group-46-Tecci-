@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tecci | Customers</title>
 
-  <link rel="stylesheet" href="{{ asset('admin-common-style.css') }}">
-  <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('adminstyles.css') }}">  <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -40,7 +39,7 @@
           <i class="fa-solid fa-user-tie"></i>
         </div>
         <div class="profile-meta">
-          <p class="profile-name">Full Name</p>
+          <p class="profile-name">{{Auth::user()->name}}</p>
           <p class="profile-role">Admin</p>
         </div>
       </div>
@@ -81,77 +80,75 @@
     </aside>
 
     <section class="admin-content">
-      <div class="admin-content-inner">
-        <div class="dash-title">
-          <p class="dash-kicker">Admin Panel</p>
-          <h1>Customers</h1>
-        </div>
+  <div class="admin-content-inner">
+    <div class="dash-title">
+      <p class="dash-kicker">Hello Admin</p>
+      <h1>Customers</h1>
+    </div>
 
-        <div class="panel table-panel">
-          <div class="panel-header">
-            <h2>Registered Customers</h2>
-          </div>
-
-          <div class="table-wrap">
-            @if(session('success'))
-              <p style="margin-bottom: 16px; color: #0a7f3f; font-weight: 700;">
-                {{ session('success') }}
-              </p>
-            @endif
-
-            @if($customers->isEmpty())
-              <p>No customers found.</p>
-            @else
-              <table class="dash-table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Email Verified</th>
-                    <th>Created At</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach($customers as $customer)
-                    <tr>
-                      <td>{{ $customer->id }}</td>
-                      <td>{{ $customer->name }}</td>
-                      <td>{{ $customer->email }}</td>
-                      <td>
-                        @if($customer->email_verified_at)
-                          <span style="background:#22c55e;color:white;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">
-                            Verified
-                          </span>
-                        @else
-                          <span style="background:#facc15;color:#111827;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">
-                            Not Verified
-                          </span>
-                        @endif
-                      </td>
-                      <td>{{ $customer->created_at->format('d M Y, H:i') }}</td>
-                      <td>
-                        <a href="{{ route('admin.customers.edit', $customer->id) }}"
-                           style="padding:8px 14px;background:#03315b;color:white;border-radius:6px;text-decoration:none;">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                  @endforeach
-                </tbody>
-              </table>
-              <td>
-    
-
-              <div style="margin-top: 20px;">
-                {{ $customers->links() }}
-              </div>
-            @endif
-          </div>
-        </div>
+    <div class="panel table-panel">
+      <div class="panel-header">
+        <h2>Registered Customers</h2>
       </div>
-    </section>
+
+      <div class="table-wrap">
+        @if(session('success'))
+          <p style="margin-bottom: 16px; color: #0a7f3f; font-weight: 700;">
+            {{ session('success') }}
+          </p>
+        @endif
+
+        @if($customers->isEmpty())
+          <p>No customers found.</p>
+        @else
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Email Verified</th>
+                <th>Created At</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($customers as $customer)
+                <tr>
+                  <td>{{ $customer->id }}</td>
+                  <td>{{ $customer->name }}</td>
+                  <td>{{ $customer->email }}</td>
+                  <td>
+                    @if($customer->email_verified_at)
+                      <span style="background:#22c55e;color:white;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">
+                        Verified
+                      </span>
+                    @else
+                      <span style="background:#facc15;color:#111827;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">
+                        Not Verified
+                      </span>
+                    @endif
+                  </td>
+                  <td>{{ $customer->created_at->format('d M Y, H:i') }}</td>
+                  <td>
+                    <a href="{{ route('admin.customers.edit', $customer->id) }}"
+                       style="padding:8px 14px;background:#03315b;color:white;border-radius:6px;text-decoration:none;">
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+
+          <div style="margin-top: 20px;">
+            {{ $customers->links() }}
+          </div>
+        @endif
+      </div>
+    </div>
+  </div>
+</section>
   </main>
 
   <footer class="site-footer">

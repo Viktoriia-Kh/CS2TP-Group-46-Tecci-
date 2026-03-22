@@ -6,7 +6,7 @@
   <title>Tecci | Contact Messages</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="{{ asset('admin-common-style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adminstyles.css') }}" />
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
@@ -42,7 +42,7 @@
           <i class="fa-solid fa-user-tie"></i>
         </div>
         <div class="profile-meta">
-          <p class="profile-name">Full Name</p>
+          <p class="profile-name">{{Auth::user()->name}}</p>
           <p class="profile-role">Admin</p>
         </div>
       </div>
