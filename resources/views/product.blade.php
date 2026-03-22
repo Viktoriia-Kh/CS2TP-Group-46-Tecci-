@@ -361,9 +361,9 @@
       <p>&copy; 2025 Tecci. All rights reserved.</p>
     </div>
   </footer>
-  <script src="Dark-Mode-Theme.js"></script>
+  
 </body>
-
+<script src="{{ asset('Dark-Mode-Theme.js') }}"></script>
   <script>
 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
