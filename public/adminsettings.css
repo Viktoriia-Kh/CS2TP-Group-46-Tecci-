@@ -161,10 +161,18 @@ body {
     margin: 25px 0;
 }
 
-/* adding specific styling for the logout button and the delete account */
-.logout-button{
-    background-color: dimgrey !important; /* overrides previous button styling */
+.sidebar-logout {
+  display: block;
+  background: #3aa0ff;
+  color: #03315b;
+  font-weight: 800;
+  text-align: center;
+  padding: 12px 10px;
+  border-radius: 999px;
+  margin: 10px 0 18px;
+  letter-spacing: 0.5px;
 }
+
 
 /* overriding default button style to make delete button stand out*/
 .delete-button{
