@@ -56,8 +56,8 @@
 
             {{-- Icons --}}
             <div class="nav-icons">
-                {{-- Wishlist: Placeholder (No route in web.php yet) --}}
-                <a href="#"><i class="fa-regular fa-heart"></i></a>
+                {{-- Order History: Placeholder --}}
+                <a href="my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
                 
                 {{-- Basket Icon with Notification Badge --}}
                 <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
