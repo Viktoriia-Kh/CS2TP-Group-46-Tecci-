@@ -967,6 +967,130 @@ body.sidebar-collapsed .site-footer {
 }
 
 /* ===================================================================
+   ORDER DETAILS PAGE STYLES
+   =================================================================== */
+
+.order-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+}
+
+/* Info Cards (Customer & Timeline) */
+.info-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.info-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f3f7;
+}
+
+.info-card h3 {
+  color: #03315b;
+  font-size: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e0e7f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-list li {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-list li:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.info-value {
+  font-size: 17px;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* Product Table Additions */
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.product-cell img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #e0e7f0;
+}
+
+.product-cell-name {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 17px;
+}
+
+.return-badge {
+  background: #ffedd5;
+  color: #ea580c;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.details-table th {
+  font-size: 15px !important; 
+}
+
+.details-table td {
+  font-size: 17px !important;
+}
+
+/* Grand Total Footer */
+.order-total-box {
+  background: #f8fafb;
+  border-top: 2px solid #e0e7f0;
+  padding: 24px 28px;
+  text-align: right;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  margin: 0 -28px -28px -28px; /* Stretches the box flush against the panel edges */
+}
+
+.order-total-box h2 {
+  color: #03315b;
+  font-size: 28px;
+  margin: 0;
+}
+
+/* ===================================================================
    RESPONSIVE DESIGN
    =================================================================== */
 

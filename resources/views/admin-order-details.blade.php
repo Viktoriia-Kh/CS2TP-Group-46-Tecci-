@@ -99,62 +99,104 @@
 
 
 <section class="admin-content">
-    <div class="admin-content-inner">
-        <a href="{{ route('admin.orders.index') }}" style="text-decoration: none; color: #666;">
-            <i class="fa-solid fa-arrow-left"></i> Back to All Orders
-        </a>
+  <div class="admin-content-inner">
+      
+      <a href="{{ route('admin.orders.index') }}" class="back-link">
+          <i class="fa-solid fa-arrow-left"></i> Back to Orders
+      </a>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
-            <h1>Order #{{ $order->id }} Details</h1>
-            <span class="status-pill status-{{ strtolower($order->status) }}" style="padding: 10px 20px; border-radius: 50px; font-weight: bold;">
-                {{ strtoupper($order->status) }}
-            </span>
-        </div>
+      <div class="order-details-header">
+          <div class="dash-title" style="margin: 0;">
+              <p class="dash-kicker">Order Details</p>
+              <h1>Order #{{ $order->id }}</h1>
+          </div>
+          <div>
+              <span class="status-pill status-{{ strtolower($order->status) }}" style="font-size: 14px; padding: 8px 20px;">
+                  {{ strtoupper($order->status) }}
+              </span>
+          </div>
+      </div>
 
-        <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px; border: 1px solid #eee;">
-            <h3>Customer Information</h3>
-            <p><strong>Name:</strong> {{ $order->user->name ?? 'Guest' }}</p>
-            <p><strong>Email:</strong> {{ $order->user->email ?? 'N/A' }}</p>
-            <p><strong>Date Placed:</strong> {{ $order->created_at->format('d M Y, H:i') }}</p>
-        </div>
+      <div class="info-card-grid">
+          <div class="info-card">
+              <h3><i class="fa-solid fa-user" style="color: #26639f;"></i> Customer Information</h3>
+              <ul class="info-list">
+                  <li>
+                      <span class="info-label">Name</span>
+                      <span class="info-value">{{ $order->user->name ?? 'Guest' }}</span>
+                  </li>
+                  <li>
+                      <span class="info-label">Email</span>
+                      <span class="info-value">{{ $order->user->email ?? 'N/A' }}</span>
+                  </li>
+              </ul>
+          </div>
 
-        <h3 style="margin-top: 30px;">Items in this Order</h3>
-        <table class="orders-table" style="width: 100%; border-collapse: collapse; background: white;">
-            <thead>
-                <tr style="background: #f8f9fa; text-align: left;">
-                    <th style="padding: 15px;">Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                    <th>Return Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($order->items as $item)
-                <tr style="border-bottom: 1px solid #eee;">
-                    <td style="padding: 15px; display: flex; align-items: center;">
-                        <img src="{{ !empty($item->product->image_url) ? asset($item->product->image_url) : 'https://placehold.co/50x50/eeeeee/999999?text=No+Img' }}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover; margin-right: 15px; border-radius: 4px; border: 1px solid #ddd;">
-                        <span style="font-weight: 500;">{{ $item->product->name ?? 'Product Unavailable' }}</span>
-                    </td>
-                    <td>£{{ number_format($item->price, 2) }}</td>
-                    <td>{{ $item->quantity }}</td>
-                    <td>£{{ number_format($item->price * $item->quantity, 2) }}</td>
-                    <td>
-                        @if(!empty($item->return_status) && $item->return_status !== 'none')
-                            <span style="color: #e67e22; font-weight: bold;">{{ strtoupper($item->return_status) }}</span>
-                        @else
-                            <span style="color: #999;">No Return</span>
-                        @endif
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+          <div class="info-card">
+              <h3><i class="fa-solid fa-clock" style="color: #26639f;"></i> Order Timeline</h3>
+              <ul class="info-list">
+                  <li>
+                      <span class="info-label">Date Placed</span>
+                      <span class="info-value">{{ $order->created_at->format('d M Y, H:i') }}</span>
+                  </li>
+                  <li>
+                      <span class="info-label">Last Updated</span>
+                      <span class="info-value">{{ $order->updated_at->format('d M Y, H:i') }}</span>
+                  </li>
+              </ul>
+          </div>
+      </div>
 
-        <div style="text-align: right; margin-top: 20px;">
-            <h2>Total: £{{ number_format($order->total_price, 2) }}</h2>
-        </div>
-    </div>
+      <div class="orders-panel" style="overflow: hidden;">
+          <h3 style="color: #03315b; font-size: 18px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-box-open" style="color: #26639f;"></i> Items in this Order
+          </h3>
+          
+          <div class="orders-table-wrap" style="margin-bottom: 30px;">
+              <table class="orders-table details-table">
+                  <thead>
+                      <tr>
+                          <th>Product</th>
+                          <th>Price</th>
+                          <th>Quantity</th>
+                          <th>Subtotal</th>
+                          <th>Return Status</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      @foreach($order->items as $item)
+                      <tr>
+                          <td>
+                              <div class="product-cell">
+                                  <img src="{{ !empty($item->product->image_url) ? asset($item->product->image_url) : 'https://placehold.co/50x50/eeeeee/999999?text=No+Img' }}" alt="Product Image">
+                                  <span class="product-cell-name">{{ $item->product->name ?? 'Product Unavailable' }}</span>
+                              </div>
+                          </td>
+                          <td>£{{ number_format($item->price, 2) }}</td>
+                          <td>{{ $item->quantity }}</td>
+                          <td style="font-weight: 700;">£{{ number_format($item->price * $item->quantity, 2) }}</td>
+                          <td>
+                              @if(!empty($item->return_status) && $item->return_status !== 'none')
+                                  <span class="return-badge">
+                                      {{ strtoupper($item->return_status) }}
+                                  </span>
+                              @else
+                                  <span style="color: #94a3b8; font-size: 15px; font-weight: 600;">No Return</span>
+                              @endif
+                          </td>
+                      </tr>
+                      @endforeach
+                  </tbody>
+              </table>
+          </div>
+          
+          <div class="order-total-box">
+              <span class="info-label">Grand Total</span>
+              <h2>£{{ number_format($order->total_price, 2) }}</h2>
+          </div>
+      </div>
+
+  </div>
 </section>
 </main>
 
