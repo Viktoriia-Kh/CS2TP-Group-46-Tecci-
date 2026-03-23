@@ -1055,3 +1055,99 @@ body.dark-mode .submit-btn:hover {
 body.dark-mode .order-summary-box a {
   color: #93c5fd !important;
 }
+/* MY ACCOUNT PAGE DARK MODE */
+
+body.dark-mode {
+  background-color: #0f172a;
+}
+
+/* MAIN ACCOUNT PAGE AREA */
+body.dark-mode .account-container {
+  background-color: transparent;
+}
+
+body.dark-mode .account-header h2 {
+  color: #f8fafc;
+}
+
+body.dark-mode .account-header p {
+  color: #cbd5e1;
+}
+
+/* ACCOUNT FORM CARD */
+body.dark-mode .section-form {
+  background-color: #111827;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .section-form label {
+  color: #e2e8f0;
+}
+
+body.dark-mode .section-form input {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .section-form input::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-mode .section-form input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.18);
+}
+
+/* MAIN ACTION BUTTON */
+body.dark-mode .section-form button {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .section-form button:hover {
+  background-color: #1d4ed8;
+}
+
+/* DIVIDER LINE */
+body.dark-mode .divide-form {
+  border-top: 1px solid #334155;
+}
+
+/* LOGOUT BUTTON */
+body.dark-mode .logout-button {
+  background-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .logout-button:hover {
+  background-color: #475569 !important;
+}
+
+/* DELETE BUTTON */
+body.dark-mode .delete-button {
+  background-color: transparent !important;
+  color: #f87171 !important;
+  border: 1px solid #f87171 !important;
+}
+
+body.dark-mode .delete-button:hover {
+  background-color: #b91c1c !important;
+  color: #ffffff !important;
+  border-color: #b91c1c !important;
+}
+
+/* ERROR MESSAGES */
+body.dark-mode .error-messages {
+  background-color: rgba(127, 29, 29, 0.2);
+  color: #fecaca;
+  border: 1px solid #b91c1c;
+}
+
+/* SUCCESS MESSAGES */
+body.dark-mode .success-messages {
+  background-color: rgba(20, 83, 45, 0.25);
+  color: #bbf7d0;
+  border: 1px solid #15803d;
+}

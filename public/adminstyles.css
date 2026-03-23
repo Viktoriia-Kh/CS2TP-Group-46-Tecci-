@@ -192,7 +192,7 @@ ul {
 
 .sidebar-logout { /* This targets the Logout link */
   display: block; /* This makes it full width like a Button */
-  background: #7fc0ff;
+  background: #3aa0ff;
   color: #03315b;
   font-weight: 800;
   text-align: center;
@@ -352,7 +352,7 @@ body.sidebar-collapsed .site-footer {
 /* PANELS/CARDS */
 
 .panel { /* This is used by Activity Panel, Traffic Panel, Table Panels (which are then overriden), and Top Selling Panel */
-  background: #7fc0ff;
+  background: #3aa0ff;
   border-radius: 10px;
   padding: 16px;
 }

@@ -5,6 +5,7 @@
         <title>My Tecci Account</title>
         <link rel="stylesheet" href="accountstyle.css"> <!-- created a link to the stylesheet-->
         <link rel="stylesheet" href="common-style.css">
+        <link rel="stylesheet" href="{{ asset('Dark-Mode.css')}}">
         <!-- Google font-->
         <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
         <!-- Font awesome for icons-->
@@ -40,6 +41,15 @@
                     @else
                         <a href="{{ url('login')}}"><i class="fa-regular fa-user"></i></a>
                     @endif
+
+                    <!--Added A Dark/Light Mode Toggle Button-->
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                    <!--fa-moon is a Moon Icon linked from Font Awesome-->
+                    <!--class="theme-toggle" lets us style the button using CSS-->
+                    <!--id="themeToggle" allows us to use this id in JavaScript-->
+                </button>
+
                 </div>
 
 
@@ -156,3 +166,5 @@
         </script>
     </body>
 </html>
+
+<script src="Dark-Mode-Theme.js"></script>
