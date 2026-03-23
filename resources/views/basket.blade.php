@@ -64,52 +64,59 @@
                         <div class="basket-items-list">
                             @php $total = 0; @endphp
                             @foreach($basket as $id => $details)
-                                @php $total += $details['price'] * $details['quantity']; @endphp
+                            @php 
+                                $total += $details['price'] * $details['quantity']; 
                                 
-                                <div class="basket-item-row">
-                                    <div class="item-col-image">
-                                        <img src="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}" alt="{{ $details['name'] }}" class="basket-product-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/150';">
-                                    </div>
+                                // Fetch the real-time stock limit for this specific item
+                                $productModel = \App\Models\Product::with('inventory')->find($id);
+                                $maxStock = $productModel ? ($productModel->inventory->quantity_available ?? 0) : 0;
+                            @endphp
+                            
+                            <div class="basket-item-row">
+                                <div class="item-col-image">
+                                    <img src="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}" alt="{{ $details['name'] }}" class="basket-product-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/150';">
+                                </div>
 
-                                    <div class="item-col-desc">
-                                        <h3 class="item-name">{{ strtolower($details['name']) }}</h3>
-                                        <div class="item-controls">
-                                            <label>quantity:</label>
+                                <div class="item-col-desc">
+                                    <h3 class="item-name">{{ strtolower($details['name']) }}</h3>
+                                    <div class="item-controls">
+                                        <label>quantity:</label>
 
-                                            <div class="qty-box">
-                                                {{-- Added ID for JS targeting --}}
-                                                <input type="text" id="qty-input-{{ $id }}" value="{{ $details['quantity'] }}" readonly>
-                                                <div class="qty-arrows">
+                                        <div class="qty-box">
+                                            <input type="text" id="qty-input-{{ $id }}" value="{{ $details['quantity'] }}" readonly>
+                                            <div class="qty-arrows">
 
-                                                    {{-- Buttons with Data Attributes --}}
-                                                    <button type="button" class="ajax-qty-btn"
-                                                     data-id="{{ $id }}"
-                                                     data-name="{{ $details['name'] }}"
-                                                     data-image="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}"
-                                                     data-action="increase">▲</button>
+                                                {{-- Increase Button (Now includes data-max-stock) --}}
+                                                <button type="button" class="ajax-qty-btn"
+                                                    data-id="{{ $id }}"
+                                                    data-name="{{ $details['name'] }}"
+                                                    data-image="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}"
+                                                    data-max-stock="{{ $maxStock }}"
+                                                    data-action="increase">▲</button>
 
-                                                    <button type="button" class="ajax-qty-btn"
-                                                     data-id="{{ $id }}"
-                                                     data-name="{{ $details['name'] }}"
-                                                     data-image="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}"
-                                                     data-action="decrease">▼</button>
+                                                {{-- Decrease Button --}}
+                                                <button type="button" class="ajax-qty-btn"
+                                                    data-id="{{ $id }}"
+                                                    data-name="{{ $details['name'] }}"
+                                                    data-image="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}"
+                                                    data-action="decrease">▼</button>
                                             </div>
                                         </div>
                                     </div>
 
-                                        {{-- Remove Button --}}
-                                        <button type="button" class="remove-item-link ajax-remove-btn"
-                                         data-id="{{ $id }}"
-                                         data-name="{{ $details['name'] }}"
-                                         data-image="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}">
-                                         remove item <span class="x-icon">×</span>
-                                        </button>
-                                        </div>
-
-                                    <div class="item-col-price">
-                                        £{{ number_format($details['price'], 2) }}
-                                    </div>
+                                    {{-- Remove Button --}}
+                                    <button type="button" class="remove-item-link ajax-remove-btn"
+                                        data-id="{{ $id }}"
+                                        data-name="{{ $details['name'] }}"
+                                        data-image="{{ filter_var($details['image'], FILTER_VALIDATE_URL) ? $details['image'] : asset($details['image']) }}">
+                                        remove item <span class="x-icon">×</span>
+                                    </button>
                                 </div>
+
+                                <div class="item-col-price">
+                                    £{{ number_format($details['price'], 2) }}
+                                </div>
+                            </div>
                             @endforeach
                         </div>
 
@@ -207,7 +214,7 @@
             @endif
         </div>
         
-        <script src="{{ asset('js/basket.js') }}"></script>
+        <script src="{{ asset('js/basket.js') }}?v={{ time() }}"></script>
 
     </div>
 
