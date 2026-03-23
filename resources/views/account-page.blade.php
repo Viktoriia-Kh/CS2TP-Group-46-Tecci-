@@ -31,7 +31,7 @@
 
                 <!-- icons on the nav bar-->
                 <div class="nav-icons">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
+                    <a href="/my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
                     <a href="{{ url('basket')}}"><i class="fa-solid fa-cart-shopping"></i></a>
 
                     {{-- if the user is logged in, the profile icon should direct them to account page--}}

@@ -43,7 +43,7 @@
             </nav>
 
             <div class="nav-icons">
-                <a href="#"><i class="fa-regular fa-heart"></i></a>
+                <a href="/my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
                 <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a>
                 <a href="login" class="active"><i class="fa-regular fa-user"></i></a>
 

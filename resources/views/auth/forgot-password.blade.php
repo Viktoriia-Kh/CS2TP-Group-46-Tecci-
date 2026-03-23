@@ -31,7 +31,7 @@
 
                 <!-- icons on the nav bar-->
                 <div class="nav-icons">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
+                    <a href="/my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
                     <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a>
                     <a href="login"><i class="fa-regular fa-user"></i></a>
                 </div>
@@ -105,7 +105,7 @@
                 <li><a href="/contact-us">Contact</a></li>
                 <li><a href="/displayproduct">Products</a></li>
                 <li><a href="/basket">Basket</a></li>
-                <li><a href="/login">My Account</a></li>
+                <li><a href="/account">My Account</a></li>
             </ul>
         </div>
 

@@ -28,7 +28,7 @@
             </nav>
 
             <div class="nav-icons">
-                <a href="#"><i class="fa-regular fa-heart"></i></a>
+                <a href="#"><i class="fa fa-history" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
                 <a href="#"><i class="fa-regular fa-user"></i></a>
             </div>

@@ -40,7 +40,7 @@
 
                 <!-- icons on the nav bar-->
                 <div class="nav-icons">
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
+                    <a href="/my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
 
                         {{-- Basket Icon with Badge --}}
                         <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
