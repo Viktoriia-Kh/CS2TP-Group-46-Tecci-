@@ -7,12 +7,39 @@
   <!--Links to HTML/CSS Files-->
   <link rel="stylesheet" href="{{ asset('common-style.css') }}" />
   <link rel="stylesheet" href="{{ asset('product-style.css') }}">
+ 
+  {{-- Basket Badge CSS --}}
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('Dark-Mode.css') }}"/>
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+      <link rel="stylesheet" href="{{ asset('chatbot.css') }}">
+
+  {{-- CSRF Token for AJAX requests --}}
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  {{-- Toast Notification Styles --}}
+  <style>
+    #toast-container { position: fixed; top: 140px; right: 30px; z-index: 99999; display: flex; flex-direction: column; gap: 15px; pointer-events: none; }
+    .toast-notification { background: white; min-width: 380px; padding: 20px 25px; border-radius: 12px; box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18); display: flex; align-items: center; gap: 20px; position: relative; overflow: hidden; pointer-events: auto; transform: translateX(120%); opacity: 0; transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s ease; }
+    .toast-notification.show { transform: translateX(0); opacity: 1; }
+    .toast-icon { font-size: 32px; flex-shrink: 0; }
+    .toast-content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .toast-title { font-weight: 700; font-size: 16px; color: #111827; }
+    .toast-message { font-size: 14px; color: #4b5563; font-weight: 500; }
+    .toast-product-image { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; flex-shrink: 0; border: 1px solid #e5e7eb; }
+    .toast-progress { position: absolute; bottom: 0; left: 0; height: 5px; width: 100%; animation: shrink 3s linear forwards; }
+    @keyframes shrink { to { width: 0%; } }
+  </style>  
 
 </head>
+<!-- Linking the chatbot-->
+ @include('partials.chatbot')
+<script src="{{ asset('chatbot.js') }}"></script>
+
+
 <body>
     <header class="main-header">
     <div class="container nav-container">
@@ -35,9 +62,33 @@
 
       <!--Icons-->
       <div class="nav-icons">
-        <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a> <!--fa-heart is a Heart Icon linked from Font Awesome-->
-        <a href="{{ route('basket.index') }}"><i class="fa-solid fa-cart-shopping"></i></a> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
-        <a href="account.html"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
+        <a href="/my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
+        
+        {{-- Basket Icon with Badge --}}
+        <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
+          <i class="fa-solid fa-cart-shopping"></i>
+          
+          @php
+            use App\Models\BasketItem;
+            $basketCount = Auth::check() 
+              ? BasketItem::where('user_id', Auth::id())->sum('quantity')
+              : BasketItem::where('session_id', session()->getId())->sum('quantity');
+          @endphp
+          
+          @if($basketCount > 0)
+            <span class="cart-badge">{{ $basketCount }}</span>
+          @endif
+        </a>
+        
+        <a href="/account"><i class="fa-regular fa-user"></i></a>
+
+        <!--Added A Dark/Light Mode Toggle Button-->
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                    <!--fa-moon is a Moon Icon linked from Font Awesome-->
+                    <!--class="theme-toggle" lets us style the button using CSS-->
+                    <!--id="themeToggle" allows us to use this id in JavaScript-->
+                </button>
       </div>
     </div>
   </header>
@@ -45,7 +96,7 @@
   <main>
     <section class="product-detail">
 
-        <!-- TOP ROW: Name (Left) | Price & Basket (Right) -->
+           <!-- TOP ROW: Name (Left) | Price & Basket (Right) -->
         <div class="product-header-row">
             
             <!-- Name -->
@@ -59,7 +110,16 @@
                     </span>
                 </div>
                 
-                <a href="{{ route('basket.add', $product->id) }}" class="add-to-basket-btn"> Add to Basket</a>
+                @php
+                // Check the correct database fields matching your displayproduct page
+                $isInStock = ($product->stock_status === 'in_stock' || $product->stock_quantity > 0);
+               @endphp
+        
+               @if(!$isInStock)
+                <button disabled class="add-to-basket-btn" style="background-color: #999; cursor: not-allowed;" title="Out of Stock">Out of Stock</button>
+               @else
+                <button onclick="addToBasketAjax({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ asset($product->image_url ?? 'images/laptop.jpg') }}', 1)" class="add-to-basket-btn">Add to Basket</button>
+               @endif
             </div>
         </div>
 
@@ -152,96 +212,114 @@
               <div id="reviews" class="tab-pane">
                 <h3 class="tab-title">Customer Reviews</h3>
                     
-                  <div class="reviews-list">
-
+                <div class="reviews-list">
                     @forelse($product->reviews as $review)
-
                     <div class="review-item">
+                        <div class="review-header">
+                            <span class="reviewer-name">{{ $review->user->name ?? 'User' }}</span>
+                            <span class="review-date">{{ $review->created_at->format('d/m/Y') }}</span>
+                        </div>
 
-                    <div class="review-header">
-                    <span class="reviewer-name">{{ $review->user->name ?? 'User' }}</span>
-                    <span class="review-date">{{ $review->created_at->format('d/m/Y') }}</span>
+                        <div class="review-stars">
+                            {{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}
+                        </div>
+
+                        <p class="review-text">{{ $review->review_text }}</p>
                     </div>
-
-                    <div class="review-stars">
-                    {{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}
-                    </div>
-
-                    <p class="review-text">{{ $review->review_text }}</p>
-
-                    </div>
-
                     @empty
                     <p>No reviews yet.</p>
                     @endforelse
-
-                    </div>
-                
+                </div>
 
                 <hr class="review-divider">
 
                 <div class="add-review-section">
+                    <form action="{{ route('product.reviews.store', $product->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
 
-                  <form action="{{ route('reviews.store', $product->id) }}" method="POST">
-                  @csrf
-                  
-                  <h4 class="form-title">Leave a Review</h4>
-                  
-                      <div class="form-group">
-                          <label>Rating</label>
-                          <div class="star-rating">
-                              <input type="radio" id="star5" name="rating" value="5" required />
-                              <label for="star5" title="5 stars">
-                                  <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                              </label>
+                        <h4 class="form-title">Leave a Review</h4>
 
-                              <input type="radio" id="star4" name="rating" value="4" />
-                              <label for="star4" title="4 stars">
-                                  <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                              </label>
-                              
-                              <input type="radio" id="star3" name="rating" value="3" />
-                              <label for="star3" title="3 stars">
-                                  <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                              </label>
-                              
-                              <input type="radio" id="star2" name="rating" value="2" />
-                              <label for="star2" title="2 stars">
-                                  <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                              </label>
-                              
-                              <input type="radio" id="star1" name="rating" value="1" />
-                              <label for="star1" title="1 star">
-                                  <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                              </label>
-                          </div>
-                      </div>
+                        <div class="form-group">
+                            <label>Rating</label>
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5" required>
+                                <label for="star5" title="5 stars">
+                                    <svg class="star-icon" viewBox="0 0 24 24">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                </label>
 
-                      <div class="form-group">
-                          <label for="comment">Your Review</label>
-                          <textarea name="comment" id="comment" rows="6" required class="form-control" placeholder="Share your thoughts about the product"></textarea>
-                      </div>
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4" title="4 stars">
+                                    <svg class="star-icon" viewBox="0 0 24 24">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                </label>
 
-                      <div class="media-upload-group">
-                        <input type="file" id="review-media" name="media[]" accept="image/*,video/*" multiple class="hidden-file-input">
-                        
-                        <label for="review-media" class="add-media-btn">
-                            <svg class="camera-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23 19V5H19L17.17 3H6.83L5 5H1V19H23ZM12 8C14.21 8 16 9.79 16 12C16 14.21 14.21 16 12 16C9.79 16 8 14.21 8 12C8 9.79 9.79 8 12 8Z" fill="#3B82F6"/>
-                            </svg>
-                            <span class="btn-text">Add picture</span>
-                        </label>
-                        
-                        <div id="file-chosen-text" class="file-chosen-text">No file chosen</div>
-                    </div>
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3" title="3 stars">
+                                    <svg class="star-icon" viewBox="0 0 24 24">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                </label>
 
-                      <button type="submit" class="submit-review-btn">Submit Review</button>
-                  </form>
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2" title="2 stars">
+                                    <svg class="star-icon" viewBox="0 0 24 24">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                </label>
+
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1" title="1 star">
+                                    <svg class="star-icon" viewBox="0 0 24 24">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comment">Your Review</label>
+                            <textarea
+                                name="comment"
+                                id="comment"
+                                rows="6"
+                                required
+                                class="form-control"
+                                placeholder="Share your thoughts about the product"
+                            ></textarea>
+                        </div>
+
+                        <div class="media-upload-group">
+                            <input
+                                type="file"
+                                id="review-media"
+                                name="media[]"
+                                accept="image/*,video/*"
+                                multiple
+                                class="hidden-file-input"
+                            >
+
+                            <label for="review-media" class="add-media-btn">
+                                <svg class="camera-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M23 19V5H19L17.17 3H6.83L5 5H1V19H23ZM12 8C14.21 8 16 9.79 16 12C16 14.21 14.21 16 12 16C9.79 16 8 14.21 8 12C8 9.79 9.79 8 12 8Z" fill="#3B82F6"/>
+                                </svg>
+                                <span class="btn-text">Add picture</span>
+                            </label>
+
+                            <div id="file-chosen-text" class="file-chosen-text">No file chosen</div>
+                        </div>
+
+                        <button type="submit" class="submit-review-btn">Submit Review</button>
+                    </form>
+                </div>
               </div>
             </div>
 
             </div>
           </div>
+        </div>   
     </section>
 </main>
 
@@ -266,7 +344,7 @@
           <li><a href="/contact-us">Contact</a></li>
           <li><a href="/displayproduct">Products</a></li>
           <li><a href="{{ route('basket.index') }}">Basket</a></li>
-          <li><a href="account.html">My Account</a></li>
+          <li><a href="/account">My Account</a></li>
         </ul>
       </div>
 
@@ -279,7 +357,7 @@
           </li>
           <li>
             <i class="fa-solid fa-phone"></i> <!--fa-phone is a Phone Icon linked from Font Awesome-->
-            <span>Tecci_Queries@net.com</span><br><br>
+            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82d6e7e1e1ebddd3f7e7f0ebe7f1c2ece7f6ace1edef">[email&#160;protected]</a></span><br><br>
           </li>
           <li>
             <i class="fa-regular fa-envelope"></i> <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
@@ -292,77 +370,171 @@
       <p>&copy; 2025 Tecci. All rights reserved.</p>
     </div>
   </footer>
+  
 </body>
-</html>
+<script src="{{ asset('Dark-Mode-Theme.js') }}"></script>
+  <script>
+const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
-<script>
-  //Show the clicked tab
-  function openTab(evt, tabName) {
-    let tabPanes = document.querySelectorAll('.tab-pane');
-    tabPanes.forEach(function(pane) {
-        pane.classList.remove('active');
-    });
-
-    let tabBtns = document.querySelectorAll('.tab-btn');
-    tabBtns.forEach(function(btn) {
-        btn.classList.remove('active');
-    });
-
-    document.getElementById(tabName).classList.add('active');
-    
-    evt.currentTarget.classList.add('active');
+// AJAX Add to Basket (NO PAGE REFRESH!)
+function addToBasketAjax(productId, productName, productImage, quantity = 1) {
+  fetch(`/add-to-basket/${productId}?quantity=${quantity}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': csrfToken,
+      'X-Requested-With': 'XMLHttpRequest', 
+      'Accept': 'application/json'          
+    },
+    body: JSON.stringify({ quantity: quantity })
+  })
+  .then(res => {
+      if (!res.ok) {
+          // Handle stock validation errors
+          return res.json().then(errData => {
+              throw new Error(errData.message || 'Failed to add to basket');
+          });
+      }
+      return res.json();
+  })
+  .then(data => {
+    if (data.success) {
+      const message = quantity > 1 
+        ? `${quantity} × ${productName} added to your basket!`
+        : `${productName} added to your basket!`;
+      
+      showToast("Added to Basket", message, "success", productImage);
+      
+      // Update header badge
+      const cartBadge = document.querySelector('.cart-badge');
+      if (cartBadge) {
+        cartBadge.innerText = data.totalQty;
+        cartBadge.style.display = 'inline-block';
+      } else {
+        const cartIcon = document.querySelector('.cart-icon-wrapper');
+        if (cartIcon) {
+          const badge = document.createElement('span');
+          badge.className = 'cart-badge';
+          badge.innerText = data.totalQty;
+          cartIcon.appendChild(badge);
+        }
+      }
+    }
+  })
+  .catch(err => {
+      console.error("Add to basket error:", err);
+      // Show error toast for stock issues
+      showToast("Cannot Add to Basket", err.message, "error");
+  });
 }
 
-// Allows to click to switch between various images
+// Toast Notification Function 
+function showToast(title, message, type = 'success', imageUrl = null) {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = 'toast-notification'; 
+  
+  const color = type === 'success' ? '#2ecc71' : '#e74c3c';
+  const icon = type === 'success' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-exclamation-circle"></i>';
+  
+  const imageHtml = imageUrl ? `<img src="${imageUrl}" class="toast-product-image" alt="Product">` : `<div class="toast-icon" style="color: ${color}">${icon}</div>`;
+  
+  toast.style.borderLeft = `5px solid ${color}`;
+  toast.innerHTML = `
+    ${imageHtml}
+    <div class="toast-content">
+      <span class="toast-title" style="color: #333">${title}</span>
+      <span class="toast-message">${message}</span>
+    </div>
+    <div class="toast-progress" style="background-color: ${color}"></div>
+  `;
+  
+  container.appendChild(toast);
+  
+  setTimeout(() => toast.classList.add('show'), 10);
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 400); 
+  }, 3000);
+}
+
+// Tech Specs / Reviews
+function openTab(evt, tabName) {
+  let tabPanes = document.querySelectorAll('.tab-pane');
+  tabPanes.forEach(function(pane) {
+      pane.classList.remove('active');
+  });
+
+  let tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns.forEach(function(btn) {
+      btn.classList.remove('active');
+  });
+
+  document.getElementById(tabName).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+
+
 document.querySelectorAll('.thumb img').forEach(img => {
-    img.addEventListener('click', function() {
-        document.querySelector('.product-image').src = this.src;
-    });
+  img.addEventListener('click', function() {
+      document.querySelector('.product-image').src = this.src;
+  });
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    const fileInput = document.getElementById('review-media');
-    const fileText = document.getElementById('file-chosen-text');
+  const fileInput = document.getElementById('review-media');
+  const fileText = document.getElementById('file-chosen-text');
 
-    if(fileInput) {
-        fileInput.addEventListener('change', function() {
-            if (this.files && this.files.length > 1) {
-                fileText.textContent = `Files chosen: ${this.files.length}`;
-            } else if (this.files && this.files.length === 1) {
-                fileText.textContent = this.files[0].name;
-            } else {
-                fileText.textContent = 'No file chosen';
-            }
-        });
-    }
+  if(fileInput) {
+      fileInput.addEventListener('change', function() {
+          if (this.files && this.files.length > 1) {
+              fileText.textContent = `Files chosen: ${this.files.length}`;
+          } else if (this.files && this.files.length === 1) {
+              fileText.textContent = this.files[0].name;
+          } else {
+              fileText.textContent = 'No file chosen';
+          }
+      });
+  }
 });
 
+//Stock Status
 document.addEventListener('DOMContentLoaded', function() {
-    const product = {
-        stock_status: "{{ $product->stock_status ?? 'out_of_stock' }}",
-        stock_quantity: parseInt("{{ $product->stock_quantity ?? 0 }}", 10) || 0
-    };
+  const product = {
+      stock_status: "{{ $product->stock_status ?? 'out_of_stock' }}",
+      stock_quantity: parseInt("{{ $product->inventory->quantity_available ?? 0 }}", 10) || 0
+  };
 
-    const isInStock = product.stock_status === 'in_stock' || product.stock_quantity > 0;
-    const isLowStock = product.stock_quantity > 0 && product.stock_quantity < 5;
+  let badgeText;
+  let badgeClass;
 
-    let badgeText;
-    let badgeClass;
+  // Use stock_status first.
+  if (product.stock_status === 'out_of_stock') {
+      badgeText = 'Out of Stock';
+      badgeClass = 'badge-out-of-stock';
+  } else if (product.stock_status === 'low_stock') {
+      badgeText = 'Low Stock';
+      badgeClass = 'badge-low-stock';
+  } else if (product.stock_status === 'in_stock') {
+      badgeText = 'In Stock';
+      badgeClass = 'badge-in-stock';
+  } else {
+      badgeText = 'Stock Unknown';
+      badgeClass = 'badge-out-of-stock';
+  }
 
-    if (!isInStock) {
-        badgeText = 'Out of Stock';
-        badgeClass = 'badge-out-of-stock';
-    } else if (isLowStock) {
-        badgeText = 'Low Stock';
-        badgeClass = 'badge-low-stock';
-    } else {
-        badgeText = 'In Stock';
-        badgeClass = 'badge-in-stock';
-    } 
-
-    const stockBox = document.getElementById('dynamic-stock-box');
-    if (stockBox) {
-        stockBox.innerHTML = `<span class="stock-badge ${badgeClass}">${badgeText}</span>`;
-    }
+  const stockBox = document.getElementById('dynamic-stock-box');
+  if (stockBox) {
+      stockBox.innerHTML = `<span class="stock-badge ${badgeClass}">${badgeText}</span>`;
+  }
 });
 </script>
+
+</html>

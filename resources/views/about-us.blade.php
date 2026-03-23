@@ -9,18 +9,27 @@
     <link rel="stylesheet" href="homestyle.css" />
     <link rel="stylesheet" href="contactstyle.css" />
     <link rel="stylesheet" href="Aboutstyle.css" />
+    <link rel="stylesheet" href="Dark-Mode.css" />
+    {{-- Basket Badge CSS --}}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!--Google Font-->
     <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
     <!--Font Awesome for Icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="{{ asset('chatbot.css') }}">
 
 </head>
+<!-- Linking the chatbot-->
+ @include('partials.chatbot')
+<script src="{{ asset('chatbot.js') }}"></script>
+
+
 
 <body>
     <header class="main-header">
         <div class="container nav-container">
 
-            <!-- Logo -->
+        <!-- Logo -->
             <a href="/" class="logo">
                 <!--Using this will make the Logo clickable and takes the user to the Home Page-->
                 <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
@@ -39,9 +48,42 @@
 
             <!--Icons-->
             <div class="nav-icons">
-                <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a> <!--fa-heart is a Heart Icon linked from Font Awesome-->
-                <a href="basket"><i class="fa-solid fa-cart-shopping"></i></a> <!--fa-cart-shopping is a Shopping Cart Icon linked from Font Awesome-->
-                <a href="login"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
+               <a href="my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
+
+               {{-- Basket Icon with Badge --}}
+               <a href="basket" class="cart-icon-wrapper">
+                 <i class="fa-solid fa-cart-shopping"></i>
+
+                 @php
+                   use App\Models\BasketItem;
+                   $basketCount = Auth::check()
+                     ? BasketItem::where('user_id', Auth::id())->sum('quantity')
+                     : BasketItem::where('session_id', session()->getId())->sum('quantity');
+                 @endphp
+
+                 @if($basketCount > 0)
+                   <span class="cart-badge">{{ $basketCount }}</span>
+                 @endif
+               </a>
+
+        @if(Auth::check())
+            {{-- If logged in, check if they are an admin --}}
+            <a href="{{ Auth::user()->is_admin ? route('admin.dashboard') : url('account') }}">
+                <i class="fa-regular fa-user"></i>
+            </a>
+        @else
+            {{-- If not logged in, just go to the login page --}}
+            <a href="{{ url('login') }}">
+                <i class="fa-regular fa-user"></i>
+            </a>
+        @endif
+
+               <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                    <!--fa-moon is a Moon Icon linked from Font Awesome-->
+                    <!--class="theme-toggle" lets us style the button using CSS-->
+                    <!--id="themeToggle" allows us to use this id in JavaScript-->
+                </button>
             </div>
 
         </div>
@@ -59,7 +101,7 @@
                         technology affordable, accessible, and stress-free for students and young professionals.
                     </p>
                     <p>
-                        That’s why Tecci focuses on providing budget-friendly laptops, PCs, tablets, phones, and
+                        That's why Tecci focuses on providing budget-friendly laptops, PCs, tablets, phones, and
                         accessories without compromising reliability or performance.
                     </p>
                 </div>
@@ -80,10 +122,10 @@
                 <div class="about-text-block">
                     <h2>The Story Behind Tecci</h2>
                     <p>
-                        Tecci was created by a Team who understands the struggles of being a student. We’ve
+                        Tecci was created by a Team who understands the struggles of being a student. We've
                         experienced unreliable laptops, expensive repairs, and long hours searching for
                         affordable replacements. We understand that technology is essential for academic
-                        success, creative projects, and everyday life — but it shouldn’t come with a heavy
+                        success, creative projects, and everyday life — but it shouldn't come with a heavy
                         price tag.
                     </p>
                     <p>
@@ -241,6 +283,10 @@
             <p>&copy; 2025 Tecci. All rights reserved.</p>
         </div>
     </footer>
+
+    <!--Link to external JavaScript File-->
+    <script src="Dark-Mode-Theme.js"></script>
+
 </body>
 
 </html>

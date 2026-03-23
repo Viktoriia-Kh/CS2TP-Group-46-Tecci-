@@ -3,34 +3,197 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Basket;
+use App\Models\BasketItem;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Inventory;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
-    public function checkout()
+    /* Get basket items from database (same logic as BasketController) */
+    private function getBasketItems()
     {
-        // Fetch the basket from the session (same way BasketController does)
-        // If 'basket' doesn't exist, use empty array []
-        $cart = session()->get('basket', []);
+        if (Auth::check()) {
+            $items = BasketItem::where('user_id', Auth::id())->with('product')->get();
+        } else {
+            $items = BasketItem::where('session_id', session()->getId())->with('product')->get();
+        }
+        
+        // Transform to match the format expected by views
+        $basket = [];
+        foreach ($items as $item) {
+            $basket[$item->product_id] = [
+                'name' => $item->product->name,
+                'quantity' => $item->quantity,
+                'price' => $item->product->price,
+                'image' => $item->product->image_url,
+            ];
+        }
+        
+        return $basket;
+    }
 
-        // Safety Check - If basket empty, redirect to basket page
+    /* Show Payment Form (combined with shipping address) */
+    public function showPaymentForm()
+    {
+        // Get basket from DATABASE
+        $cart = $this->getBasketItems();
+        
         if(empty($cart)) {
             return redirect()->route('basket.index')->with('error', 'Your basket is empty!');
         }
 
-        // Calculate the Total
-        // Session data is an Array, loop through it
-        $total = 0;
-        foreach($cart as $id => $details) {
-            $total += $details['price'] * $details['quantity'];
+        // Calculate totals
+        $subtotal = 0;
+        foreach($cart as $item) {
+            $subtotal += $item['price'] * $item['quantity'];
         }
 
-         // Fetch 4 products for the featured section
-        $featuredProducts = Product::latest()->take(4)->get();
+        // Get delivery cost from session (set on basket page)
+        $delivery = session()->get('delivery_cost', 3.99); // Default to standard
+        
+        // Get discount from session
+        $discountMultiplier = session()->get('discount_multiplier', 1);
+        $discount = $subtotal * (1 - $discountMultiplier);
+        
+        // Calculate total
+        $total = ($subtotal * $discountMultiplier) + $delivery;
 
-        // Send data to view
-        // Pass 'cart' & 'total' so the checkout page displays items
-        return view('checkout', compact('cart', 'total', 'featuredProducts'));
+        return view('payment', compact('cart', 'subtotal', 'delivery', 'discount', 'total'));
+    }
+
+    /* Process Payment with Shipping Address */
+    public function processPayment(Request $request)
+    {
+        // Validate Shipping Address + Card Details
+        $request->validate([
+            // Shipping fields
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'address_line1' => 'required|string|max:255',
+            'address_line2' => 'nullable|string|max:255',
+            'city' => 'required|string|max:100',
+            'postcode' => 'required|string|max:20',
+            'country' => 'required|string|max:100',
+            'phone' => 'required|string|max:20',
+            
+            // Card fields
+            'card_name' => 'required|string|max:255',
+            'card_number' => 'required|digits:16',
+            'expiry_date' => ['required', 'regex:/^(0[1-9]|1[0-2])\/?([0-9]{2})$/'],
+            'cvv' => 'required|digits:3',
+        ], [
+            'card_number.digits' => 'The card number must be exactly 16 digits.',
+            'cvv.digits' => 'The CVV must be exactly 3 digits.',
+            'expiry_date.regex' => 'Use the format MM/YY (e.g., 12/26).'
+        ]);
+
+        return $this->saveOrder($request);
+    }
+
+    /* 
+     * Save Order with Shipping Address
+     * UPDATED: Now includes automatic stock deduction for customer orders
+     */
+    protected function saveOrder(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            // Get basket from DATABASE
+            $cart = $this->getBasketItems();
+            
+            if (empty($cart)) {
+                throw new \Exception('Your basket is empty.');
+            }
+
+            // STEP 1: Validate stock availability BEFORE creating order
+            foreach ($cart as $productId => $details) {
+                $product = Product::with('inventory')->find($productId);
+                
+                if (!$product) {
+                    throw new \Exception("Product '{$details['name']}' no longer exists.");
+                }
+                
+                // Check if product has inventory tracking
+                if ($product->inventory) {
+                    $availableStock = $product->inventory->quantity_available;
+                    $requestedQty = $details['quantity'];
+                    
+                    if ($availableStock < $requestedQty) {
+                        throw new \Exception("Insufficient stock for '{$product->name}'. Available: {$availableStock}, Requested: {$requestedQty}. Please update your basket.");
+                    }
+                }
+            }
+
+            // STEP 2: Calculate total
+            $subtotal = 0;
+            foreach($cart as $details) {
+                $subtotal += $details['price'] * $details['quantity'];
+            }
+
+            $delivery = session()->get('delivery_cost', 3.99);
+            $discountMultiplier = session()->get('discount_multiplier', 1);
+            $total = ($subtotal * $discountMultiplier) + $delivery;
+
+            // STEP 3: Create order with shipping address
+            $order = Order::create([
+                'user_id' => Auth::id(), // NULL for guests
+                'total_price' => $total,
+                'status' => 'Placed', // Customer orders are immediately "Placed"
+                
+                // Shipping address fields
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'address_line1' => $request->address_line1,
+                'address_line2' => $request->address_line2,
+                'city' => $request->city,
+                'postcode' => $request->postcode,
+                'country' => $request->country,
+                'phone' => $request->phone,
+            ]);
+
+            // STEP 4: Create order items AND deduct stock immediately
+            foreach($cart as $id => $details) {
+                // Create order item
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $id,
+                    'product_name' => $details['name'],
+                    'quantity' => $details['quantity'],
+                    'price' => $details['price'],
+                    'image_url' => $details['image'] ?? null,
+                ]);
+
+                // DEDUCT STOCK IMMEDIATELY (customer orders are paid, so stock goes down right away)
+                $product = Product::with('inventory')->find($id);
+                if ($product && $product->inventory) {
+                    $product->inventory->decrement('quantity_available', $details['quantity']);
+                }
+            }
+
+            // STEP 5: Clear basket from DATABASE
+            if (Auth::check()) {
+                BasketItem::where('user_id', Auth::id())->delete();
+            } else {
+                BasketItem::where('session_id', session()->getId())->delete();
+            }
+
+            // STEP 6: Clear session data
+            session()->forget(['discount_code', 'discount_multiplier', 'delivery_cost']);
+
+            DB::commit();
+
+            return redirect()->route('orders.index')->with('success', 'Payment Authorized! Order placed successfully. Stock levels have been updated.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            
+            // Return to basket with error message
+            return redirect()->route('basket.index')->withErrors($e->getMessage());
+        }
     }
 }

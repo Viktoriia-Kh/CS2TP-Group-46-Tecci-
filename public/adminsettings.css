@@ -1,0 +1,352 @@
+/* BASE STYLES */
+.container {
+    width: min(1200px, 100% - 32px); /* This sets the maximum width of the content, has consistent padding */
+    margin-inline: auto; /* This centres .container horizontally */
+}
+
+/* background for the whole page*/
+body {
+    margin: 0;
+    padding: 0;
+    background-color: royalblue;
+    font-family: 'Signika', sans-serif;
+}
+
+.account-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 60px;
+}
+.main-header {
+    background-color: #03315b;
+    border-bottom: 15px solid #085296;
+    width: 100%;
+}
+
+
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 78px; /* header height */
+}
+
+.admin-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* smaller gap between logo and menu */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    text-decoration: none;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.logo img {
+    height: 34x;   /* make logo image smaller */
+    width: auto;
+    display: block;
+}
+
+.logo-text {
+    font-size: 24px;   /* smaller TECCI text */
+    font-weight: 700;
+    line-height: 1;
+}
+
+.menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 20px; /* smaller burger icon */
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-top-icons {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: auto;
+}
+
+.admin-top-icons a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+.account-header {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.account-header h2 {
+    color: royalblue;
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.account-header p {
+    color: grey;
+    font-size: 16px;
+}
+
+/* styling for the card */
+.section-form {
+    background-color: white;
+    padding: 40px;
+    width: 380px;
+    border-radius: 20px;
+    text-align: left;
+    margin: 0px auto 80px;
+}
+
+/* styling the labels for each input */
+.section-form label {
+    font-size: 15px;
+    font-family: Signika;
+    font-weight: bold;
+    color: black;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* styling the input boxes */
+.section-form input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid lightgrey;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* styling for the buttons */
+.section-form button{
+    background-color: royalblue;
+    color: aliceblue;
+    font-weight: bold;
+    font-family: Signika;
+    font-size: 15px;
+    width: 100%;
+    padding: 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    margin-top: 12px;
+}
+
+.section-form button:hover{
+    background-color: mediumblue;
+}
+
+/* styling for the form divider */
+.divide-form{
+    border: 0;
+    border-top: 1px solid lightgrey;
+    margin: 25px 0;
+}
+
+.sidebar-logout {
+  display: block;
+  background: #3aa0ff;
+  color: #03315b;
+  font-weight: 800;
+  text-align: center;
+  padding: 12px 10px;
+  border-radius: 999px;
+  margin: 10px 0 18px;
+  letter-spacing: 0.5px;
+}
+
+
+/* overriding default button style to make delete button stand out*/
+.delete-button{
+    background-color: transparent !important;
+    color: red !important;
+    border: 1px solid red !important;
+}
+
+.delete-button:hover{
+    background-color: red !important;
+    color: white !important;
+}
+
+/* styling for the error messages */
+.error-messages{
+    color: red;
+    background-color: mistyrose;
+    font-size: 12px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid indianred;
+}
+
+.error-messages li {
+    list-style-type: none;
+}
+
+/* styling the success messages */
+.success-messages{
+    color: darkgreen;
+    background-color: mediumseagreen;
+    margin-bottom: 20px;
+    font-size: 12px;
+    padding: 10px;
+    border: 1px solid lightgreen;
+    text-align: center;
+}
+
+/* footer styling */
+/* ================================
+   FOOTER (SAME COLOUR AS HEADER)
+================================== */
+
+/* works for BOTH class="main-footer" and class="site-footer" */
+.main-footer,
+.site-footer {
+  background-color: #03315b;          /* same as header */
+  color: #ffffff;
+  /* border-top: 15px solid #085296; */     /* same stripe as header */
+  padding: 40px 0 14px;
+  margin-top: 3rem;
+}
+
+
+.main-footer a{
+    color: white;
+    text-decoration: none;
+}
+
+/*.main-footer*/
+.site-footer a{
+    color: white;
+    text-decoration: none;
+}
+
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 48px;
+  font-size: 0.85rem;
+}
+
+.footer-col h3,
+.footer-col h4 {
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+.footer-col p {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  max-width: 260px;
+}
+
+.footer-col ul li + li {
+  margin-top: 0.25rem;
+  list-style: none;
+}
+
+.footer-col a:hover {
+  text-decoration: underline;
+}
+
+.contact-list i {
+  margin-right: 6px;
+}
+
+.footer-bottom {
+  margin-top: 24px;
+  padding-top: 10px;
+  text-align: center;
+  font-size: 0.75rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.footer-col ul,
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* ================================
+   RESPONSIVE
+================================== */
+
+@media (max-width: 768px) {
+  .nav-container {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .logo {
+    font-size: 32px;
+  }
+
+  .main-nav ul {
+    gap: 16px;
+    font-size: 16px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* 1. Ensure the main container spreads its children apart */
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Pushes Logo group left and Icons right */
+    padding: 12px 20px;
+    width: 100%;
+}
+
+/* 2. Group the Logo and Hamburger Menu together on the left */
+.admin-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Adjust this to change space between "TECCI" and the bars */
+}
+
+/* 3. Style the Logo to be inline with the text */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.logo-text {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+/* 4. Ensure the right-side icons stay grouped and move to the far right */
+.admin-top-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between the Bell, Envelope, and House */
+    margin-left: auto; /* This acts as the "spacer" pushing them right */
+}
+

@@ -1,0 +1,1592 @@
+/* DARK/LIGHT MODE BUTTON ICON */
+.theme-toggle {
+  background: transparent; /* This removes any default button background so it looks like an Icon */
+  border: none; /* This removes a default button button border */
+  color: inherit; /* This makes the Icon use the same colour as the header's text, which is white */
+  cursor: pointer; /* This shows the hand cursor when hovering on Dark/Light Mode Icon */
+  padding: 2.4px; /* This give a slightly bigger area to click without changing the layout */
+  font-size: 19px; 
+  transition: transform 0.15s ease, color 0.15s ease; /* This creates a smooth animation when hovering over the Icon */
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px); /* This creates a slight lift effect, matches other existing Icons */
+  color: #e6f3ff;
+}
+
+/* DARK MODE OVERRIDE FEATURES */
+/* These activate when the body has .dark-mode, so we only apply dark colours when body has a 
+class called dark-mode */
+
+body.dark-mode {
+  background-color: #0b1220; /* This is for the overall background colour in Dark Mode */
+  color: #e5e7eb; /* This is for the default text colour in Dark Mode */
+}
+
+/* HEADER AND NAV SECTION DARK MODE */
+body.dark-mode .main-header { /* This is for the Header and Nav Dark Mode colours */
+  background-color: #071426;
+  border-bottom-color: #0f3a66;
+}
+
+body.dark-mode .main-nav a::after {
+  background-color: #cfe9ff; /* This makes the underline animation a brighter light-blue so it stands out against the dark header */
+}
+
+body.dark-mode .nav-icons a:hover,
+body.dark-mode .theme-toggle:hover {
+  color: #cfe9ff; /* This applies the same hover colour to all the Icons in Nav */
+}
+
+/* HERO SECTION DARK MODE */
+body.dark-mode .hero {
+  background: linear-gradient(to right, #0f1f35 40%, #0b1220 40%);
+}
+
+body.dark-mode .hero-text h1 {
+  color: #f3f4f6; /* This makes the Hero Heading light for better contrast */
+}
+
+body.dark-mode .special-word {
+  color: #7cc0ff;
+}
+
+body.dark-mode .hero-subtitle {
+  color: #cbd5e1;
+}
+
+/* BUTTONS DARK MODE */
+body.dark-mode .btn-primary {
+  background-color: #1d6dbd; /* This makes the button brighter in Dark Mode for better contrast against dark backgrounds */
+}
+
+body.dark-mode .btn-primary:hover {
+  background-color: #165a9b;
+}
+
+/* ROTATING BANNER DARK MODE */
+body.dark-mode .hero {
+  background-color: #0f172a;
+}
+
+body.dark-mode .hero-slide {
+  background-color: #0f172a; /* This makes each Slide in the Rotating Banner darker */
+}
+
+body.dark-mode .hero-text {
+  background-color: #1e293b;
+}
+
+body.dark-mode .hero-text h1 {
+  color: #f8fafc;
+}
+
+body.dark-mode .special-word {
+  color: #93c5fd;
+}
+
+body.dark-mode .hero-subtitle,
+body.dark-mode .hero-offer-code {
+  color: #cbd5e1;
+}
+
+body.dark-mode .hero-arrow {
+  background-color: #2563eb;
+  color: #f8fafc;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .hero-arrow:hover {
+  background-color: #3b82f6;
+}
+
+/* FEATURED PRODUCTS SECTION DARK MODE */
+body.dark-mode .featured-products {
+  background-color: #0f3a66;
+}
+
+body.dark-mode .product-card {
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); /* This creates a stronger shadow due to darker background */
+}
+
+body.dark-mode .product-image-placeholder {
+  background-color: #0b1220;
+}
+
+body.dark-mode .product-price {
+  color: #e5e7eb; /* Ensures prices don't stay black on darker background for better readability */
+}
+
+/* CATEGORIES SECTION DARK MODE */
+body.dark-mode .product-categories {
+  background-color: #0f1f35;
+}
+
+body.dark-mode .category-card {
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .category-card:hover {
+  background-color: #0b1220;
+}
+
+body.dark-mode .category-icon {
+  background-color: #0b1220;
+}
+
+/* TESTIMONIALS SECTION DARK MODE */
+body.dark-mode .testimonials {
+  background: linear-gradient(to bottom, #0b1220, #0f1f35);
+}
+
+body.dark-mode .testimonial-card {
+  background-color: #101827;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .testimonial-text {
+  color: #cbd5e1;
+}
+
+body.dark-mode .testimonial-quote-icon {
+  color: #7cc0ff;
+}
+
+/* LEAVE A REVIEW SECTION DARK MODE */
+body.dark-mode .review-section {
+  background-color: #1e293b;
+}
+
+body.dark-mode .review-section h2 {
+  color: #f8fafc;
+}
+
+body.dark-mode .review-intro {
+  color: #cbd5e1;
+}
+
+body.dark-mode .review-label-left,
+body.dark-mode .review-label-right {
+  color: #93c5fd;
+}
+
+body.dark-mode .star {
+  color: #facc15;
+}
+
+body.dark-mode .review-text-label {
+  color: #e5e7eb;
+}
+
+body.dark-mode .review-textarea {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .review-textarea::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-mode .review-textarea:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.18);
+}
+
+body.dark-mode .review-submit-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .review-submit-btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* FOOTER SECTION DARK MODE */
+body.dark-mode .site-footer {
+  background-color: #071426;
+}
+
+body.dark-mode .footer-col a:hover {
+  color: #cfe9ff;
+}
+
+body.dark-mode .footer-bottom {
+  border-top: 1px solid rgba(207, 233, 255, 0.18); /* Keeps the top border in Dark Mode but makes it subtle and visible */
+}
+
+/* ABOUT US PAGE DARK MODE */
+
+body.dark-mode .about-row,
+body.dark-mode .mission-vision { /* This is for the general background for About Us Page sections that are light-blue in light mode */
+  background-color: #0b1220;
+}
+
+body.dark-mode .about-text-block h1,
+body.dark-mode .about-text-block h2 { /* This is for the About Us headings and paragraphs */
+  color: #7cc0ff;
+}
+
+body.dark-mode .about-text-block p {
+  color: #cbd5e1;
+}
+
+/* WHY TECCI SECTION */ 
+body.dark-mode .why-tecci {
+  background-color: #0f3a66; /* This creates slightly darker blue tones */
+  color: #e5e7eb;
+}
+
+body.dark-mode .why-heading-wrap::before { /* This is for the Curved Shape behind Why Tecci heading */
+  background-color: #071426;
+}
+
+body.dark-mode .why-heading-wrap h2 { /* This is for the Why Tecci heading */
+  color: #e5e7eb;
+}
+
+body.dark-mode .why-icon { /* This is for the Why Tecci icon circles and icons */
+  border-color: #cfe9ff;
+}
+
+body.dark-mode .why-icon i {
+  color: #cfe9ff;
+}
+
+body.dark-mode .why-content h3 { /* This is for the Why Tecci content text */
+  color: #f3f4f6;
+}
+
+body.dark-mode .why-content p {
+  color: #cbd5e1;
+}
+
+/* MISSION AND VISION CARD SECTIONS */ 
+
+body.dark-mode .mission-vision { /* This creates a colour with gradient darker for dark mode */
+  background: linear-gradient(to bottom, #0b1220, #0f1f35);
+}
+
+body.dark-mode .mission-card,
+body.dark-mode .vision-card {
+  background-color: #0f3a66;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .mission-card h2,
+body.dark-mode .vision-card h2 {
+  color: #cfe9ff;
+}
+
+body.dark-mode .mission-card p,
+body.dark-mode .vision-card p {
+  color: #e5e7eb;
+}
+
+/* CONTACT US PAGE DARK MODE */
+body.dark-mode .contact-section { /* This is for the Contact Page overall Background */
+  background: linear-gradient(to bottom, #0b1220, #0b1625);
+}
+
+/* LEFT FORM CARD SECTION */
+body.dark-mode .contact-form-card { /* This is for the Left Form Card which becomes dark */
+  background-color: #101827;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .form-row label { /* This is for the Form labels and text */
+  color: #e5e7eb;
+}
+
+body.dark-mode .form-row input,
+body.dark-mode .form-row textarea { /* This is for the Text Inputs and Text Area */
+  background-color: #0b1220; /* This creates a dark input surface */
+  color: #e5e7eb; /* This creates a lighter text to make it more readable */
+  border-color: #243043; /* This creates a subtle border */
+}
+
+body.dark-mode .form-row input::placeholder,
+body.dark-mode .form-row textarea::placeholder { /* This is for the Placeholder colour, which creates dim text inside empty fields */
+  color: #94a3b8;
+}
+
+body.dark-mode .form-row input:focus,
+body.dark-mode .form-row textarea:focus { /* This creates a blue glow when an Input Label is clicked on */
+  border-color: #7cc0ff;
+  box-shadow: 0 0 0 2px rgba(124, 192, 255, 0.16);
+}
+
+body.dark-mode .btn-primary { /* This is for the Submit button which stays blue but slightly brighter when in Dark Mode */
+  background-color: #1d6dbd;
+}
+
+body.dark-mode .btn-primary:hover {
+  background-color: #165a9b;
+}
+
+/* RIGHT INFO CARD SECTION */
+body.dark-mode .contact-info-panel { /* This is for the Right Info Card which becomes dark */
+  background-color: #0f1f35;
+}
+
+body.dark-mode .contact-info-inner h2 { /* This is for the Right Card heading and text, making it lighter */
+  color: #7cc0ff;
+}
+
+body.dark-mode .contact-info-text {
+  color: #cbd5e1;
+}
+
+body.dark-mode .contact-info-item { /* This is for the Contact information rows */
+  color: #e5e7eb;
+}
+
+body.dark-mode .contact-info-item i {
+  color: #cfe9ff;
+}
+
+/* LOGIN PAGE DARK MODE */
+
+body.dark-mode { /* This is for the Login Page background colour */
+  background: linear-gradient(to bottom, #0b1220, #0f1f35);
+}
+
+body.dark-mode .section-form { /* This is for the Login Card */
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .section-form h2 { /* This is for the Welcome Back heading */
+  color: #7cc0ff; 
+}
+
+body.dark-mode .welcome-sub-message { /* This is for the message on the Login Card */  
+  color: #cbd5e1;
+}
+
+body.dark-mode .section-form label { /* This is for the Login Card Labels */
+  color: #e5e7eb;
+}
+
+body.dark-mode .section-form input { /* This is for the Login Inputs */
+  background-color: #0f1f35;
+  border-color: rgba(203, 213, 225, 0.25);
+  color: #e5e7eb;
+}
+
+body.dark-mode .section-form input::placeholder { /* This is for the Placeholder text, which will help improve readability */
+  color: rgba(229, 231, 235, 0.65);
+}
+
+body.dark-mode .section-form button { /* This is for the Login Button */
+  background-color: #005baf;
+  color: #ffffff;
+}
+
+body.dark-mode .section-form button:hover {
+  background-color: #00488c;
+}
+
+body.dark-mode .signup-message { /* This and the lines below are for the Signup text and link */
+  color: #cbd5e1;
+}
+
+body.dark-mode .signup-message a {
+  color: #cfe9ff;
+}
+
+body.dark-mode .signup-message a:hover {
+  text-decoration: underline;
+}
+
+/* SIGN UP PAGE DARK MODE */
+
+body.dark-mode.signup-page {
+  background: #0b1220; /* This is for the Signup Page background colour */
+  color: #e5e7eb;
+}
+
+body.dark-mode .signup-card { /* This is for Signup Card */
+  background-color: #101827;
+  color: #e5e7eb;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .signup-header h1 { /* This is for the Header text */
+  color: #7cc0ff; 
+}
+
+body.dark-mode .signup-header p {
+  color: #cbd5e1;
+}
+
+body.dark-mode .social-btn { /* This is for the Social Buttons */
+  background-color: #0f1f35;
+  border-color: rgba(203, 213, 225, 0.25);
+  color: #e5e7eb;
+}
+
+body.dark-mode .social-btn:hover {
+  background-color: #132a4a;
+}
+
+body.dark-mode .signup-divider { /* This is for the Divider Text ('Or Continue With') */
+  color: #94a3b8;
+}
+
+body.dark-mode .form-group label {  /* This is for the Sign Up Card Labels */
+  color: #e5e7eb;
+}
+
+/* Inputs */
+body.dark-mode .form-group input { /* This is for the Sign Up Inputs */
+  background-color: #0f1f35;
+  border-color: rgba(203, 213, 225, 0.25);
+  color: #e5e7eb;
+}
+
+body.dark-mode .form-group input::placeholder { /* This is for the Placeholder text, which will help improve readability */
+  color: rgba(229, 231, 235, 0.6);
+}
+
+body.dark-mode .signup-submit-btn { /* This is for the Submit Button */
+  background: linear-gradient(135deg, #2563eb, #1e3a8a);
+  color: #ffffff;
+}
+
+body.dark-mode .signup-submit-btn:hover {
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.45);
+}
+
+body.dark-mode .signup-footer-text { /* This is for the Sign Up Footer text under the card */
+  color: #cbd5e1;
+}
+
+body.dark-mode .signup-footer-text a {
+  color: #93c5fd;
+}
+
+body.dark-mode .signup-footer-text a:hover {
+  text-decoration: underline;
+}
+
+/* INDIVIDUAL PRODUCT PAGE DARK MODE */
+
+body.dark-mode .product-detail {
+  background-color: #0f172a; /* This changes the background of the product detail section to a very dark blue/navy colour */
+}
+
+body.dark-mode .product-header-row {
+  border-bottom: 2px solid #3b82f6; /* This gives the row at the top of the product section that contains the product name, price, and add-to-basket button, a brighter blue colour and makes the section divider more visible */
+}
+
+body.dark-mode .product-name {
+  color: #f8fafc; /* This makes the text colour lighter on a darker background */
+}
+
+body.dark-mode .price-value {
+  color: #93c5fd;
+}
+
+body.dark-mode .add-to-basket-btn { /* This keeps the button bright and clearly clickale/visible in Dark Mode */
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .add-to-basket-btn:hover {
+  background-color: #1d4ed8; /* When the users place the mouse over the button, the hover becomes a dark blue */
+}
+
+/* MAIN PRODUCT CONTENT */
+body.dark-mode .product-container {
+  background-color: #111827; /* This changes the inner-content panel to a dark grey-blue */
+}
+
+body.dark-mode .thumb {
+  border: 1px solid #334155;
+  background-color: #0f172a;
+}
+
+body.dark-mode .thumb:hover {
+  border-color: #60a5fa; /* This means that when the user hovers over a thumbnail, the border changes colour */
+}
+
+body.dark-mode .product-image-box {
+  background-color: #0f172a;
+  border: 4px solid #2563eb;
+}
+
+body.dark-mode .product-rating-box {
+  background-color: #1d4ed8;
+  color: #f8fafc;
+}
+
+body.dark-mode .right-column { /* This gives the product detail column on the right, a darker background and a stronger blue border */
+  background-color: #1e293b;
+  border: 4px solid #2563eb;
+}
+
+body.dark-mode .product-description-box h3 {
+  color: #f8fafc;
+}
+
+body.dark-mode .product-description-box p {
+  color: #cbd5e1;
+}
+
+/* Stock badges can stay similar, but polished for dark mode */
+body.dark-mode .badge-in-stock {
+  background-color: #15803d;
+  color: #ffffff;
+}
+
+body.dark-mode .badge-low-stock {
+  background-color: #ca8a04;
+  color: #ffffff;
+}
+
+body.dark-mode .badge-out-of-stock {
+  background-color: #b91c1c;
+  color: #ffffff;
+}
+
+/* TABS SECTION */
+body.dark-mode .tabs-nav {
+  border-bottom: 2px solid #334155; /* This gives a visible divider line between the tabs and the tab content area in dark mode */
+}
+
+body.dark-mode .tab-btn {
+  color: #94a3b8;
+}
+
+body.dark-mode .tab-btn:hover {
+  color: #f8fafc; /* This means that when hovering over a tab, the text becomes brighter */
+}
+
+body.dark-mode .tab-btn.active {
+  color: #f8fafc;
+  border-bottom: 3px solid #60a5fa;
+}
+
+body.dark-mode .tab-title {
+  color: #f8fafc;
+}
+
+/* SPECS TABLE */
+body.dark-mode .specs-table tr {
+  border-bottom: 1px solid #334155; /* This adds a subtle divider line between rows in dark mode */
+}
+
+body.dark-mode .specs-table tr:nth-child(even) {
+  background-color: #111827;
+}
+
+body.dark-mode .specs-table th.spec-name {
+  color: #cbd5e1; /* Thsi gives the label text a softer light colour so it contrasts with the value text */
+}
+
+body.dark-mode .specs-table td.spec-value {
+  color: #f8fafc; /* This makes values slightly brighter so they stand out from the labels */
+}
+
+body.dark-mode .no-data-msg {
+  color: #94a3b8;
+}
+
+/* REVIEWS AREA */
+body.dark-mode .review-item {
+  background-color: #1e293b; /* This gives each review its own slightly lighter dark background so it stands apart from the surrounding page */
+}
+
+body.dark-mode .reviewer-name {
+  color: #f8fafc;
+}
+
+body.dark-mode .review-date {
+  color: #94a3b8;
+}
+
+body.dark-mode .review-stars { /* This is for the displayed star rating in reviews */
+  color: #facc15;
+}
+
+body.dark-mode .review-text {
+  color: #cbd5e1;
+}
+
+body.dark-mode .review-divider {
+  border-top: 1px solid #334155;
+}
+
+/* REVIEW FORM */
+body.dark-mode .form-title {
+  color: #f8fafc; /* This keeps important headings bright and readable */
+}
+
+body.dark-mode .review-form label {
+  color: #e2e8f0;
+}
+
+body.dark-mode .star-icon {
+  stroke: #64748b; /* This gives the star outline a grey-blue colour */
+  fill: none; /* This makes the inside of the star transparent */
+}
+
+body.dark-mode .star-rating label:hover ~ label .star-icon,
+body.dark-mode .star-rating label:hover .star-icon,
+body.dark-mode .star-rating input:checked ~ label .star-icon {
+  fill: #facc15;
+  stroke: #facc15;
+}
+
+body.dark-mode .form-control { /* This gives form fields a dark background, light text, and visible border so they match the dark mode design */
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .form-control::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-mode .form-control:focus {
+  border-color: #60a5fa; /* This makes the active field stand out, helping usability and accessibility */
+}
+
+body.dark-mode .add-media-btn {
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+body.dark-mode .add-media-btn:hover {
+  background-color: #334155;
+}
+
+body.dark-mode .file-chosen-text {
+  color: #94a3b8;
+}
+
+body.dark-mode .submit-review-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .submit-review-btn:hover {
+  background-color: #1d4ed8; /* This provides interaction feedback and matches the hover behaviour of other buttons */
+}
+
+/* MAIN PRODUCTS PAGE DARK MODE */
+
+body.dark-mode .products-page {
+  background-color: #0f172a; /* This gives the full Products Page a dark navy background */
+}
+
+body.dark-mode .filters-sidebar {
+  background-color: #111827; /* This gives the sidebar a darker background */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .filter-section::-webkit-scrollbar-track { /* This tracks the custom scrollbar inside .filter-section */
+  background: rgba(255, 255, 255, 0.08); /* This makes the scrollbar track a very faint transparent white */
+}
+
+body.dark-mode .filter-section::-webkit-scrollbar-thumb {
+  background: #334155; /* This makes the scrollbar thumb a muted grey-blue so it is visible on dark mode without being too bright */
+}
+
+body.dark-mode .filter-section h3,
+body.dark-mode .filter-group h4 {
+  color: #f8fafc;
+}
+
+body.dark-mode .search-input {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155; /* This gives the input a visible border */
+}
+
+body.dark-mode .search-input::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-mode .search-box i {
+  color: #93c5fd;
+}
+
+body.dark-mode .filter-group {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2); /* This adds a divider line below each group, seperating filter sections visually */
+}
+
+body.dark-mode .price-slider {
+  background: linear-gradient(to right, #3b82f6, #3b82f6); /* This keeps the slider track visible and consistent with the Tecci blue theme */
+}
+
+body.dark-mode .price-range-display {
+  color: #cbd5e1;
+}
+
+body.dark-mode .checkbox-label {
+  color: #e2e8f0; /* This  keeps the slider track visible and consistent with the Tecci blue theme */
+}
+
+body.dark-mode .checkbox-label input[type="checkbox"] {
+  accent-color: #3b82f6;
+}
+
+body.dark-mode .confirm-filter-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .confirm-filter-btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* CATEGORY TABS */
+body.dark-mode .category-tabs {
+  background-color: #111827; /* This makes the tabs container match the rest of the dark interface */
+}
+
+body.dark-mode .tab-button {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+
+body.dark-mode .tab-button:hover { /* This makes the tabs container match the rest of the dark interface */
+  background-color: #334155;
+  color: #ffffff;
+}
+
+body.dark-mode .tab-button.active {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .sort-dropdown { /* This gives the dropdown a dark background, light text, visible border so it matches dark mode and remains readable */
+  background-color: #1e293b;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .sort-dropdown:hover {
+  background-color: #334155; /* This makes the dropdown slightly lighter when hovered */
+}
+
+/* FEATURED PRODUCTS AREA */
+body.dark-mode .featured-items-section {
+  background-color: #111827; /* This makes the products display area dark and distinct from the page background */
+}
+
+body.dark-mode .product-card-item {
+  background-color: #1e293b;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .product-card-item:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+body.dark-mode .product-image-placeholder {
+  background: #0f172a; /* This keeps the image area dark so it matches the rest of the card */
+}
+
+body.dark-mode .product-item-info {
+  color: #f8fafc; /* This sets a bright default text colour for product information */
+}
+
+body.dark-mode .product-item-name,
+body.dark-mode .product-item-info h4 {
+  color: #f8fafc;
+}
+
+body.dark-mode .product-short-desc {
+  color: #cbd5e1;
+}
+
+body.dark-mode .product-item-price {
+  color: #93c5fd;
+}
+
+/* QUANTITY + BUTTON */
+body.dark-mode .qty-input {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .qty-input:focus {
+  border-color: #60a5fa;
+}
+
+body.dark-mode .add-to-cart-quick {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .add-to-cart-quick:hover {
+  background-color: #1d4ed8;
+}
+
+/* STOCK BADGES */
+body.dark-mode .badge-in-stock {
+  background-color: #15803d;
+  color: #ffffff;
+}
+
+body.dark-mode .badge-low-stock {
+  background-color: #ca8a04;
+  color: #ffffff;
+}
+
+body.dark-mode .badge-out-of-stock {
+  background-color: #b91c1c;
+  color: #ffffff;
+}
+
+/* =========================================
+   BASKET PAGE DARK MODE
+   ========================================= */
+
+/* Main text and header colors */
+body.dark-mode .basket-wrapper {
+  color: #e5e7eb;
+}
+
+body.dark-mode .basket-title,
+body.dark-mode .summary-title,
+body.dark-mode .delivery-header,
+body.dark-mode .payment-section h4 {
+  color: #7cc0ff; /* Matches the blue headers on the About/Login pages */
+}
+
+/* Darken the main white cards */
+body.dark-mode .basket-main-content,
+body.dark-mode .delivery-section,
+body.dark-mode .payment-section,
+body.dark-mode .order-summary-box,
+body.dark-mode .empty-basket-message {
+  background-color: #101827; /* Matches the Contact/Signup form cards */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(203, 213, 225, 0.1);
+}
+
+/* Table headers and item rows */
+body.dark-mode .basket-table-headers {
+  border-bottom: 2px solid #334155;
+  color: #94a3b8;
+}
+
+body.dark-mode .basket-item-row {
+  background-color: transparent !important; /* Strips away any stubborn white backgrounds */
+  border-bottom: 1px solid #334155;
+}
+
+body.dark-mode .basket-item-row .item-name {
+  color: #f8fafc !important; /* Forces the text to stay bright white */
+}
+
+body.dark-mode .item-col-price,
+body.dark-mode .price-text {
+  color: #93c5fd; /* Matches the product prices */
+}
+
+/* Quantity Box Inputs and Buttons */
+body.dark-mode .qty-box input {
+  background-color: #0f1f35;
+  color: #e5e7eb;
+  border: 1px solid rgba(203, 213, 225, 0.25);
+}
+
+body.dark-mode .ajax-qty-btn {
+  background-color: #1e293b;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .ajax-qty-btn:hover {
+  background-color: #334155;
+}
+
+/* Remove Item Link - Made a brighter red for dark mode contrast */
+body.dark-mode .remove-item-link {
+  color: #f87171; 
+}
+
+body.dark-mode .remove-item-link:hover {
+  color: #fca5a5;
+}
+
+/* Delivery Options */
+body.dark-mode .delivery-label {
+  color: #cbd5e1;
+}
+
+/* Promo Code Input */
+body.dark-mode .discount-container input {
+  background-color: #0f1f35;
+  color: #e5e7eb;
+  border: 1px solid rgba(203, 213, 225, 0.25);
+}
+
+body.dark-mode .discount-container input::placeholder {
+  color: #94a3b8;
+}
+
+/* Primary Action Buttons */
+body.dark-mode #apply-btn,
+body.dark-mode .btn-checkout-bottom,
+body.dark-mode .btn-continue-top {
+  background-color: #1d6dbd;
+  color: #ffffff;
+}
+
+body.dark-mode #apply-btn:hover,
+body.dark-mode .btn-checkout-bottom:hover,
+body.dark-mode .btn-continue-top:hover {
+  background-color: #165a9b;
+}
+
+/* Secondary Action Buttons */
+body.dark-mode .btn-continue-bottom {
+  background-color: #1e293b;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .btn-continue-bottom:hover {
+  background-color: #334155;
+}
+
+/* Progress Tracker at the top */
+body.dark-mode .checkout-progress-container {
+  color: #cbd5e1;
+}
+
+body.dark-mode .progress-step.active .step-icon {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .progress-step:not(.active) .step-icon {
+  background-color: #1e293b;
+  color: #94a3b8;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .progress-line {
+  background-color: #334155;
+}
+
+/* =========================================
+   PAYMENT / CHECKOUT PAGE DARK MODE
+   ========================================= */
+
+/* Force the main white cards to go dark */
+body.dark-mode .form-section,
+body.dark-mode .order-summary-box {
+  background-color: #101827 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid rgba(203, 213, 225, 0.1) !important;
+}
+
+/* Card Headers */
+body.dark-mode .form-section h3,
+body.dark-mode .order-summary-box h3 {
+  color: #7cc0ff !important;
+  border-bottom: 2px solid #334155 !important;
+}
+
+/* Form Labels */
+body.dark-mode .form-group label {
+  color: #cbd5e1 !important;
+}
+
+/* Input Fields */
+body.dark-mode .form-group input,
+body.dark-mode .form-group select {
+  background-color: #0f1f35 !important;
+  color: #e5e7eb !important;
+  border: 1px solid #334155 !important;
+}
+
+/* Order Summary Text (Overriding the hardcoded inline #333 and #666 colors) */
+body.dark-mode .order-summary-box p,
+body.dark-mode .summary-item,
+body.dark-mode .summary-item span {
+  color: #e5e7eb !important;
+}
+
+/* Product list divider lines */
+body.dark-mode .order-summary-box div[style*="border-bottom"] {
+  border-bottom: 1px solid #334155 !important;
+}
+
+/* Grand Total Line */
+body.dark-mode .summary-total {
+  border-top: 2px solid #334155 !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .summary-total span {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .summary-total span:last-child {
+  color: #93c5fd !important; /* Bright blue for the final price */
+}
+
+/* Submit Button */
+body.dark-mode .submit-btn {
+  background-color: #1d6dbd !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .submit-btn:hover {
+  background-color: #165a9b !important;
+}
+
+/* Back to Basket Link */
+body.dark-mode .order-summary-box a {
+  color: #93c5fd !important;
+}
+/* MY ACCOUNT PAGE DARK MODE */
+
+body.dark-mode {
+  background-color: #0f172a;
+}
+
+/* MAIN ACCOUNT PAGE AREA */
+body.dark-mode .account-container {
+  background-color: transparent;
+}
+
+body.dark-mode .account-header h2 {
+  color: #f8fafc;
+}
+
+body.dark-mode .account-header p {
+  color: #cbd5e1;
+}
+
+/* ACCOUNT FORM CARD */
+body.dark-mode .section-form {
+  background-color: #111827;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .section-form label {
+  color: #e2e8f0;
+}
+
+body.dark-mode .section-form input {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .section-form input::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-mode .section-form input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.18);
+}
+
+/* MAIN ACTION BUTTON */
+body.dark-mode .section-form button {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .section-form button:hover {
+  background-color: #1d4ed8;
+}
+
+/* DIVIDER LINE */
+body.dark-mode .divide-form {
+  border-top: 1px solid #334155;
+}
+
+/* LOGOUT BUTTON */
+body.dark-mode .logout-button {
+  background-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .logout-button:hover {
+  background-color: #475569 !important;
+}
+
+/* DELETE BUTTON */
+body.dark-mode .delete-button {
+  background-color: transparent !important;
+  color: #f87171 !important;
+  border: 1px solid #f87171 !important;
+}
+
+body.dark-mode .delete-button:hover {
+  background-color: #b91c1c !important;
+  color: #ffffff !important;
+  border-color: #b91c1c !important;
+}
+
+/* ERROR MESSAGES */
+body.dark-mode .error-messages {
+  background-color: rgba(127, 29, 29, 0.2);
+  color: #fecaca;
+  border: 1px solid #b91c1c;
+}
+
+/* SUCCESS MESSAGES */
+body.dark-mode .success-messages {
+  background-color: rgba(20, 83, 45, 0.25);
+  color: #bbf7d0;
+  border: 1px solid #15803d;
+}
+
+/* MY ORDERS PAGE DARK MODE= */
+
+body.dark-mode .orders-container {
+  background-color: transparent;
+}
+
+body.dark-mode .orders-container h2 {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .order-card {
+  background: #111827;
+  border-left: 6px solid #3b82f6;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .order-info h3 {
+  color: #f8fafc;
+}
+
+body.dark-mode .order-meta {
+  color: #94a3b8;
+}
+
+body.dark-mode .order-total {
+  color: #e2e8f0;
+}
+
+body.dark-mode .order-status {
+  color: #ffffff;
+}
+
+/* STATUS COLOURS IN DARK MODE */
+body.dark-mode .status-placed {
+  background: rgba(37, 99, 235, 0.18);
+  color: #93c5fd;
+}
+
+body.dark-mode .status-delivered {
+  background: rgba(22, 163, 74, 0.18);
+  color: #86efac;
+}
+
+body.dark-mode .btn-view {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .btn-view:hover {
+  background: #1d4ed8;
+}
+
+/* EMPTY STATE */
+body.dark-mode .orders-container i.fa-box-open {
+  color: #475569 !important;
+}
+
+body.dark-mode .orders-container p[style*="color: #666"] {
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .orders-container a[style*="color: #005baf"] {
+  color: #93c5fd !important;
+}
+
+
+/* ORDER DETAILS PAGE DARK MODE */
+
+body.dark-mode .details-container {
+  background: #111827; /* This changes the main white order details box to a dark navy background */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); /* This helps the dark card still stand out from the dark page background */
+  color: #e2e8f0;
+}
+
+body.dark-mode .back-link {
+  color: #93c5fd; /* This makes the link a light blue, giving good contrast on a dark background */
+}
+
+body.dark-mode .back-link:hover {
+  color: #60a5fa; /* This changes the blue slightly on hover */
+}
+
+body.dark-mode .details-container h2 {
+  color: #f8fafc; /* This gives the badge a dark blue background */
+}
+
+body.dark-mode .details-container h3 {
+  border-bottom: 2px solid #3b82f6 !important; /* Since inline styles are very strong, !important helps this dark mode rule override those existing light-theme heading colours */
+  color: #f8fafc;
+}
+
+body.dark-mode .details-container h4 {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .details-container p {
+  color: #cbd5e1 !important;
+}
+
+/* ITEM ROWS */
+body.dark-mode .item-card {
+  border-bottom: 1px solid #334155 !important; /* This replaces the light divider with a dark mode border */
+}
+
+body.dark-mode .item-card img {
+  border: 1px solid #334155; /* This adds a slight border around images */
+}
+
+/* ORDER STATUS BADGE */
+body.dark-mode .status-badge {
+  background: rgba(37, 99, 235, 0.18);
+  color: #93c5fd;
+}
+
+/* RETURN BUTTON */
+body.dark-mode button[onclick*="toggleReturnForm"] { /* This means to select any button that has an onclick attribute containing the text toggleReturnForm */
+  background: #dc2626 !important; /* This sets the background colour of the Button */
+}
+
+body.dark-mode button[onclick*="toggleReturnForm"]:hover { /* This styles is applied when the user moves the mouse over the button */
+  background: #b91c1c !important;
+}
+
+/* RETURN FORM */
+body.dark-mode div[id^="return-form"] { /* This means to select any <div> that has an id starting with "return-form" */
+  background: #0f172a !important;
+  border: 1px dashed #334155 !important;
+}
+
+body.dark-mode div[id^="return-form"] label {
+  color: #f8fafc !important;
+}
+
+body.dark-mode div[id^="return-form"] select { /* This styles the dropdown menu */
+  background-color: #1e293b !important;
+  border: 1px solid #334155 !important;
+  color: #f8fafc !important;
+}
+
+/* RETURNS FORM BUTTONS */
+body.dark-mode div[id^="return-form"] button[type="submit"] {
+  background: #2563eb !important;
+}
+
+body.dark-mode div[id^="return-form"] button[type="submit"]:hover {
+  background: #1d4ed8 !important;
+}
+
+body.dark-mode div[id^="return-form"] button[type="button"] {
+  background: transparent !important;
+  border: 1px solid #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+/* TOTAL PRICE */
+body.dark-mode .details-container span[style*="color: #005baf"] { /* This fixes the Total Paid price colour */
+  color: #93c5fd !important;
+}
+
+/* RESET PASSWORD PAGE DARK MODE */
+
+body.dark-mode {
+  background-color: #0f172a; /* This creates a dark navy blue background for the entire page */
+  color: #e2e8f0;
+}
+
+/* MAIN CARD */
+body.dark-mode .section-form { 
+  background-color: #1e293b; /* This gives the Card a dark background */
+  color: #e2e8f0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* HEADING + SUB TEXT */
+body.dark-mode .section-form h2 {
+  color: #60a5fa;
+}
+
+body.dark-mode .welcome-sub-message {
+  color: #94a3b8;
+}
+
+/* LABELS */
+body.dark-mode .section-form label {
+  color: #f8fafc; /* This makes sure labels remain visible on dark backgrounds */
+}
+
+/* INPUTS */
+body.dark-mode .section-form input {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .section-form input::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-mode .section-form input:focus { /* This activates when the user clicks into the field */
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+}
+
+/* EMAIL FIELD */
+body.dark-mode .section-form input[readonly] { /* This targets the readonly input */
+  background-color: #111827;
+  color: #cbd5e1;
+}
+
+/* MAIN BUTTON */
+body.dark-mode .section-form button {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .section-form button:hover {
+  background-color: #1d4ed8;
+}
+
+/* ERROR MESSAGES */
+body.dark-mode .error-messages {
+  background-color: rgba(127, 29, 29, 0.22);
+  border: 1px solid #b91c1c;
+  color: #fecaca;
+}
+
+/* SUCCESS MESSAGE */
+body.dark-mode .success-message {
+  background-color: rgba(21, 128, 61, 0.2);
+  border: 1px solid #15803d;
+  color: #bbf7d0;
+}
+
+/* OPTIONAL HELPER TEXT/LINKS IF USED */
+body.dark-mode .forgot-password-link,
+body.dark-mode .signup-message a,
+body.dark-mode .logout-btn {
+  color: #93c5fd;
+}
+
+body.dark-mode .forgot-password-link:hover,
+body.dark-mode .signup-message a:hover,
+body.dark-mode .logout-btn:hover { 
+  color: #bfdbfe; /* This changes the link colour on hover */
+}
+
+/* EYE ICON IF USED */
+body.dark-mode .toggle-icon {
+  color: #cbd5e1;
+}
+
+/* FORGOT PASSWORD PAGE DARK MODE */
+
+/* This CSS Styling has a very similar structure to RESET PASSWORD PAGE DARK MODE */
+body.dark-mode {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+/* MAIN RESET CARD */
+body.dark-mode .section-form {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+/* TITLE */
+body.dark-mode .section-form h2 {
+  color: #60a5fa;
+}
+
+/* SUB TEXT */
+body.dark-mode .welcome-sub-message {
+  color: #94a3b8;
+}
+
+/* LABELS */
+body.dark-mode .section-form label {
+  color: #f8fafc;
+}
+
+/* INPUT FIELD */
+body.dark-mode .section-form input {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+/* PLACEHOLDER TEXT */
+body.dark-mode .section-form input::placeholder {
+  color: #94a3b8;
+}
+
+/* INPUT FOCUS STATE */
+body.dark-mode .section-form input:focus {
+  border-color: #60a5fa;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(96,165,250,0.15);
+}
+
+/* SUBMIT BUTTON */
+body.dark-mode .section-form button {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .section-form button:hover {
+  background-color: #1d4ed8;
+}
+
+/* RETURN TO LOGIN LINK */
+body.dark-mode .signup-message a {
+  color: #93c5fd;
+}
+
+body.dark-mode .signup-message a:hover {
+  color: #bfdbfe;
+}
+
+/* ERROR MESSAGES */
+body.dark-mode .error-messages {
+  background-color: rgba(127,29,29,0.25);
+  border: 1px solid #b91c1c;
+  color: #fecaca;
+}
+
+/* SUCCESS MESSAGES */
+body.dark-mode .success-messages,
+body.dark-mode .success-message {
+  background-color: rgba(21,128,61,0.25);
+  border: 1px solid #15803d;
+  color: #bbf7d0;
+}
+
+/* VERIFY EMAIL PAGE DARK MODE */
+
+/* This CSS Styling has a similar structure to RESET + FORGOT PASSWORD PAGE DARK MODE */
+body.dark-mode.signup-page {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+/* MAIN VERIFY CARD */
+body.dark-mode .signup-card,
+body.dark-mode .verify-card {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  border-radius: 20px;
+}
+
+/* HEADING + INTRO TEXT */
+body.dark-mode .signup-header h1 {
+  color: #60a5fa;
+}
+
+body.dark-mode .signup-header p {
+  color: #cbd5e1;
+}
+
+body.dark-mode .signup-header strong {
+  color: #f8fafc;
+}
+
+/* SUCCESS ALERT */
+body.dark-mode .alert-success,
+body.dark-mode .success-message {
+  background-color: rgba(21, 128, 61, 0.2);
+  border: 1px solid #15803d;
+  color: #bbf7d0;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+/* VERIFY USER TEXT */
+body.dark-mode .verify-user {
+  color: #cbd5e1;
+}
+
+body.dark-mode .verify-user strong {
+  color: #f8fafc;
+}
+
+/* RESEND VERIFICATION BUTTON */
+body.dark-mode .signup-submit-btn {
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+}
+
+body.dark-mode .signup-submit-btn:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.28);
+}
+
+/* LOGOUT BUTTON */
+body.dark-mode .logout-btn {
+  color: #93c5fd;
+}
+
+body.dark-mode .logout-btn:hover {
+  color: #bfdbfe;
+  text-decoration: underline;
+}
+
+/* OPTIONAL ERROR STYLING */
+body.dark-mode .error-messages {
+  background-color: rgba(127, 29, 29, 0.25);
+  border: 1px solid #b91c1c;
+  color: #fecaca;
+}
+
+/* FOOTER STYLES STAY DARK */
+body.dark-mode .main-footer,
+body.dark-mode .site-footer {
+  background-color: #020617;
+  color: #f8fafc;
+}
+
+body.dark-mode .footer-col p,
+body.dark-mode .footer-col a,
+body.dark-mode .contact-list li,
+body.dark-mode .footer-bottom {
+  color: #cbd5e1;
+}
+
+body.dark-mode .footer-col a:hover {
+  color: #ffffff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  body.dark-mode .signup-card,
+  body.dark-mode .verify-card {
+    margin-inline: 16px;
+  }
+}

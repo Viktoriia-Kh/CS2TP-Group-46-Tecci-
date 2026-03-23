@@ -6,13 +6,15 @@
   <title>Tecci | Admin Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Shared Admin CSS -->
- 
+
   <link rel="stylesheet" href="admin-inventory-style.css" />
   <!--Google Font-->
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
   <!--Font Awesome for Icons-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  
+
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body>
@@ -31,19 +33,19 @@
       </a>
 
       <!--ADMIN HEADER CONTROLS (MENU + SEARCH)-->
-      
-        <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
+
+        <a href="/admin-dashboard" class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
           <!--id="menuBtn" connects to the JS, for it to work-->
           <i class="fa-solid fa-bars"></i> <!--fa-bars is a Menu Icon linked from Font Awesome-->
-        </button>
+        </a>
       </div>
 
       <div class="admin-header-spacer"></div>
 
       <!--Icons-->
       <div class="nav-icons admin-top-icons">
-        <a href="TP2_Notifications.html" aria-label="Notifications"><i class="fa-regular fa-bell"></i></a>  <!--fa-bell is a Bell Icon linked from Font Awesome-->
-        <a href="TP2_Messages.html" aria-label="Messages"><i class="fa-regular fa-envelope"></i></a>  <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
+        <a href="admin-dashboard" aria-label="Notifications"><i class="fa-regular fa-bell"></i></a>  <!--fa-bell is a Bell Icon linked from Font Awesome-->
+        <a href="admin/contacts" aria-label="Messages"><i class="fa-regular fa-envelope"></i></a>  <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
         <a href="/" aria-label="Home"><i class="fa-solid fa-house"></i></a>  <!--fa-house is a House Icon linked from Font Awesome-->
       </div>
 
@@ -59,12 +61,19 @@
           <i class="fa-solid fa-user-tie"></i>  <!--fa-user-tie is a User/Avatar Icon linked from Font Awesome-->
         </div>
         <div class="profile-meta"> <!--Using this will allow the Avatar/Profile to stay visible while hiding the text, which is all done in CSS-->
-          <p class="profile-name">Full Name</p>
+          <p class="profile-name">{{Auth::user()->name}}</p>
           <p class="profile-role">Admin</p>
         </div>
       </div>
 
-      <a class="sidebar-logout" href="/">LOGOUT</a>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+
+<a class="sidebar-logout" href="#"
+   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+   LOGOUT
+</a>
 
       <!--NAV TEXT (SIDEBAR) + ICONS ON THE RIGHT-->
       <nav class="admin-nav">
@@ -78,16 +87,21 @@
           <span class="nav-ico"><i class="fa-solid fa-receipt"></i></span> <!--fa-receipt is a Receipt Icon linked from Font Awesome-->
         </a>
 
-        
+
 
         <a class="active" href="admin-inventory">
           <span class="nav-text">Inventory</span>
           <span class="nav-ico"><i class="fa-solid fa-warehouse"></i></span> <!--fa-warehouse is a Warehouse Icon linked from Font Awesome-->
         </a>
 
-        <a href="/admin-customers">
+        <a href="/admin/customers">
           <span class="nav-text">Customers</span>
           <span class="nav-ico"><i class="fa-solid fa-user-group"></i></span> <!--fa-user-group is a User (Group) Icon linked from Font Awesome-->
+        </a>
+
+        <a href="{{ route('admin.contacts') }}">
+          <span class="nav-text">Contact Messages</span>
+          <span class="nav-ico"><i class="fa-solid fa-envelope"></i></span>
         </a>
 
         <a href="/admin-settings">
@@ -96,9 +110,9 @@
         </a>
       </nav>
     </aside>
-    
+
     <!--PAGE CONTENT (THIS PART CHANGES)-->
-    
+
     <section class="admin-content">
         <div class="admin-content-inner">
             <!-- PAGE TITLE -->
@@ -107,7 +121,7 @@
                <h1>Inventory</h1>
             </div>
 
-            <!--The Search Bar has been moved under the page heading-->  
+            <!--The Search Bar has been moved under the page heading-->
             <div class="inventory-search-row"> <!--This is a wrapper for styling purpose of the Search Bar-->
               <div class="page-search-wrap">
                 <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
@@ -123,13 +137,13 @@
                 <button class="tab-button active" data-category="all">All Products</button>
                 <button class="tab-button" data-category="desktops">PCs</button>
                 <button class="tab-button" data-category="laptops">Laptops</button>
-                <button class="tab-button" data-category="phones">Phones</button>
+                <button class="tab-button" data-category="phones">Smartphones</button>
                 <button class="tab-button" data-category="tablets">Tablets</button>
                 <button class="tab-button" data-category="accessories">Accessories</button>
             </div>
 
             <div class="inventory-controls">
-            
+
             <div class="filter-group">
                 <label for="filterStatus">Status:</label>
                 <select id="filterStatus" class="filter-input" onchange="applyFilters()">
@@ -159,13 +173,13 @@
 
         </div>
 
-        
+
         <!-- PAGE CONTENT GOES HERE -->
         <div class="featured-items-section">
             <div class="featured-grid">
             </div>
         </div>
-        
+
     </section>
 
 </main>
@@ -185,8 +199,19 @@
             </div>
 
             <div class="form-group">
+                <label for="edit-category">Category</label>
+                <select id="edit-category" name="category" class="filter-input" style="width: 100%;" required>
+                    <option value="desktops">PCs</option>
+                    <option value="laptops">Laptops</option>
+                    <option value="phones">Phones</option>
+                    <option value="tablets">Tablets</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="edit-price">Price (£)</label>
-                <input type="number" id="edit-price" name="price" step="1" required>
+                <input type="number" id="edit-price" name="price" step="0.01" required> <!-- Now we can add decimals -->
             </div>
 
             <div class="form-group">
@@ -197,6 +222,26 @@
             <div class="form-group">
                 <label for="edit-desc">Description</label>
                 <textarea id="edit-desc" name="description" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Technical Specifications</label>
+                <div id="edit-specs-container" class="specs-container">
+                    </div>
+                <button type="button" class="btn-add-spec" onclick="addEditSpecRow()">
+                    <i class="fa-solid fa-plus"></i> Add Specification
+                </button>
+            </div>
+
+            <div class="media-upload-group">
+                <input type="file" id="edit-product-image" name="image" accept="image/*" class="hidden-file-input">
+                <label for="edit-product-image" class="add-media-btn">
+                    <svg class="camera-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23 19V5H19L17.17 3H6.83L5 5H1V19H23ZM12 8C14.21 8 16 9.79 16 12C16 14.21 14.21 16 12 16C9.79 16 8 14.21 8 12C8 9.79 9.79 8 12 8Z" fill="#3B82F6"/>
+                    </svg>
+                    <span class="btn-text">Change picture</span>
+                </label>
+                <div id="edit-file-chosen" class="file-chosen-text">No new file chosen</div>
             </div>
 
             <div class="modal-actions">
@@ -220,7 +265,7 @@
             </div>
             <div class="form-group">
                 <label for="add-category">Category</label>
-                <select id="add-category" class="filter-input" style="width: 100%;" required>
+                <select id="add-category" name="category" class="filter-input" style="width: 100%;" required>
                     <option value="desktops">PCs</option>
                     <option value="laptops">Laptops</option>
                     <option value="phones">Phones</option>
@@ -228,7 +273,7 @@
                     <option value="accessories">Accessories</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label for="add-price">Price (£)</label>
                 <input type="number" id="add-price" name="price" step="1" required>
@@ -241,16 +286,30 @@
                 <label for="add-desc">Description</label>
                 <textarea id="add-desc" name="description" rows="3"></textarea>
             </div>
+            <div class="form-group">
+                <label>Technical Specifications</label>
+                <div id="specs-container" class="specs-container">
+                    <div class="spec-row">
+                        <input type="text" name="spec_names[]" placeholder="Spec (e.g. RAM)">
+                        <input type="text" name="spec_values[]" placeholder="Value (e.g. 16GB)">
+                        <button type="button" class="btn-remove-spec" onclick="this.parentElement.remove()">&times;</button>
+                    </div>
+                </div>
+                <button type="button" class="btn-add-spec" onclick="addSpecRow()">
+                    <i class="fa-solid fa-plus"></i> Add Specification
+                </button>
+            </div>
             <div class="media-upload-group">
-                <input type="file" id="review-media" name="media[]" accept="image/*,video/*" multiple class="hidden-file-input">
-                
-                <label for="review-media" class="add-media-btn">
+                <input type="file" id="product-image" name="image" accept="image/*" class="hidden-file-input">
+
+                <!-- now matches pathj -->
+                <label for="product-image" class="add-media-btn">
                     <svg class="camera-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M23 19V5H19L17.17 3H6.83L5 5H1V19H23ZM12 8C14.21 8 16 9.79 16 12C16 14.21 14.21 16 12 16C9.79 16 8 14.21 8 12C8 9.79 9.79 8 12 8Z" fill="#3B82F6"/>
                     </svg>
                     <span class="btn-text">Add picture</span>
                 </label>
-                
+
                 <div id="file-chosen-text" class="file-chosen-text">No file chosen</div>
                 </div>
             <div class="modal-actions">
@@ -271,7 +330,7 @@
                 students and customers across the UK.
             </p>
         </div>
-        
+
         <div class="footer-col">
             <h4>Quick Links</h4>
             <ul>
@@ -283,7 +342,7 @@
                 <li><a href="/account">My Account</a></li>
             </ul>
         </div>
-        
+
         <div class="footer-col">
             <h4>Contact Info</h4>
             <ul class="contact-list">
@@ -318,16 +377,16 @@
     document.querySelectorAll(".tab-button").forEach(button => {
         button.addEventListener("click", (e) => {
             document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
-            
+
             e.target.classList.add("active");
 
             activeCategory = e.target.dataset.category;
-            
-            
+
+
             applyFilters();
         });
     });
-    
+
     // Filters
     function applyFilters() {
         // Getting data
@@ -373,13 +432,13 @@
         document.getElementById('priceMax').value = '';
         document.getElementById('stockMin').value = '';
         document.getElementById('stockMax').value = '';
-        
+
         renderAllProducts(allProducts);
     }
 
     function renderAllProducts(products) {
         const grid = document.querySelector(".featured-grid");
-        
+
         grid.innerHTML = "";
 
         if (products.length === 0) {
@@ -429,13 +488,24 @@
         const product = allProducts.find(p => p.id === productId);
         if (!product) return;
 
-        
         document.getElementById('edit-product-id').value = product.id;
         document.getElementById('edit-name').value = product.name;
+        document.getElementById('edit-category').value = product.category;
         document.getElementById('edit-price').value = product.price;
         document.getElementById('edit-stock').value = product.stock_quantity;
-
         document.getElementById('edit-desc').value = product.description || '';
+
+        // Load current technical specs into the edit modal
+        const specsContainer = document.getElementById('edit-specs-container');
+        specsContainer.innerHTML = '';
+
+        if (product.specs && product.specs.length > 0) {
+            product.specs.forEach(spec => {
+                addEditSpecRow(spec.spec_name, spec.spec_value);
+            });
+        } else {
+            addEditSpecRow();
+        }
 
         document.getElementById('editProductModal').style.display = 'flex';
     }
@@ -445,7 +515,7 @@
         document.getElementById('editProductModal').style.display = 'none';
     }
 
-    // ADD PRODUCT LOGIC 
+    // ADD PRODUCT LOGIC
     function openAddModal() {
         document.getElementById('addProductForm').reset();
         document.getElementById('addProductModal').style.display = 'flex';
@@ -455,56 +525,103 @@
         document.getElementById('addProductModal').style.display = 'none';
     }
 
-    function submitNewProduct(event) {
-        event.preventDefault(); // Prevent page reload
-        
-        // Create a fake ID for now (highest current ID + 1)
-        const newId = allProducts.length > 0 ? Math.max(...allProducts.map(p => p.id)) + 1 : 1;
-        
-        const fileInput = document.getElementById('review-media');
-        let imageUrl = 'https://via.placeholder.com/200?text=No+Image';
-        
-        // temporary link to the image
-        if (fileInput.files && fileInput.files.length > 0) {
-            imageUrl = URL.createObjectURL(fileInput.files[0]);
+    // ADD PRODUCT LOGIC (NOW SAVES TO DATABASE)
+    async function submitNewProduct(event) {
+        event.preventDefault(); // Stop page refresh
+
+        // Getting form values
+        const name = document.getElementById('add-name').value;
+        const category = document.getElementById('add-category').value;
+        const price = document.getElementById('add-price').value;
+        const stock = document.getElementById('add-stock').value;
+        const description = document.getElementById('add-desc').value;
+        const specNames = Array.from(document.querySelectorAll('input[name="spec_names[]"]')).map(input => input.value);
+        const specValues = Array.from(document.querySelectorAll('input[name="spec_values[]"]')).map(input => input.value);
+
+        // File input
+        const fileInput = document.getElementById('product-image');
+
+        // Send image + data together
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('category', category);
+        formData.append('price', price);
+        formData.append('stock_quantity', stock);
+        formData.append('description', description);
+
+        // Add specs to form data
+        specNames.forEach((name, index) => {
+            formData.append('spec_names[]', name);
+            formData.append('spec_values[]', specValues[index] || '');
+        });
+
+        // If image selected → add it
+        if (fileInput.files.length > 0) {
+            formData.append('image', fileInput.files[0]);
         }
 
-        const newProduct = {
-            id: newId,
-            name: document.getElementById('add-name').value,
-            category: document.getElementById('add-category').value,
-            price: parseFloat(document.getElementById('add-price').value),
-            stock_quantity: parseInt(document.getElementById('add-stock').value),
-            description: document.getElementById('add-desc').value,
-            image_url: imageUrl,
-            stock_status: parseInt(document.getElementById('add-stock').value) > 0 ? 'in_stock' : 'out_of_stock'
-        };
-        //!!!!! Only adds the product visually !!!!!
-        allProducts.push(newProduct); // Add to our list
+        try {
+            // Sending data to Laravel backend
+            const response = await fetch('/admin-inventory/products', {
+                method: 'POST',
+                headers: {
+                    // CSRF token for Laravel security
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                },
+                body: formData
+            });
 
-        document.getElementById('file-chosen-text').textContent = 'No file chosen';
+            if (response.ok) {
+                // Close modal + refresh page to show new product
+                closeAddModal();
+                location.reload();
+            } else {
+                const errorText = await response.text();
+                console.error("Server response:", errorText);
+                alert("Error adding product. Check console.");
+            }
 
-        closeAddModal();
-        applyFilters();
-        alert("Product added successfully!");
+        } catch (error) {
+            console.error("Add product failed:", error);
+            alert("Something went wrong.");
+        }
     }
 
     //  DELETE PRODUCT LOGIC
-    function deleteProduct(productId) {
-        if (confirm("Are you sure you want to delete this product?")) {
-            // Find the index of the product and remove it
-            //!!!!!Now it only removes visually, not from the database!!!!!
-            const index = allProducts.findIndex(p => p.id === productId);
-            if (index > -1) {
-                allProducts.splice(index, 1); 
-                applyFilters(); 
+    // DELETE PRODUCT (REAL DATABASE DELETE)
+    async function deleteProduct(productId) {
+        if (!confirm("Are you sure you want to delete this product?")) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/admin-inventory/products/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    // CSRF protection
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                // Refresh page
+                location.reload();
+            } else {
+                const errorText = await response.text();
+                console.error(errorText);
+                alert("Failed to delete product.");
             }
+
+        } catch (error) {
+            console.error(error);
+            alert("Error deleting product.");
         }
     }
 
     // Adding images in add product
     document.addEventListener('DOMContentLoaded', function() {
-        const fileInput = document.getElementById('review-media');
+        const fileInput = document.getElementById('product-image');
         const fileText = document.getElementById('file-chosen-text');
 
         if(fileInput) {
@@ -517,6 +634,89 @@
                     fileText.textContent = 'No file chosen';
                 }
             });
+        }
+    });
+
+    function addSpecRow() {
+        const container = document.getElementById('specs-container');
+        const row = document.createElement('div');
+        row.className = 'spec-row';
+        row.innerHTML = `
+            <input type="text" name="spec_names[]" placeholder="Spec name">
+            <input type="text" name="spec_values[]" placeholder="Value">
+            <button type="button" class="btn-remove-spec" onclick="this.parentElement.remove()">&times;</button>
+        `;
+        container.appendChild(row);
+    }
+
+    function addEditSpecRow(name = '', value = '') {
+        const container = document.getElementById('edit-specs-container');
+        const row = document.createElement('div');
+        row.className = 'spec-row';
+        row.innerHTML = `
+            <input type="text" name="edit_spec_names[]" value="${name}" placeholder="Spec name">
+            <input type="text" name="edit_spec_values[]" value="${value}" placeholder="Value">
+            <button type="button" class="btn-remove-spec" onclick="this.parentElement.remove()">&times;</button>
+        `;
+        container.appendChild(row);
+    }
+
+    // EDIT PRODUCT (REAL DATABASE UPDATE)
+    document.getElementById('editProductForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Stop page refresh
+
+        const productId = document.getElementById('edit-product-id').value;
+
+        // Getting edited values
+        const formData = new FormData();
+        formData.append('name', document.getElementById('edit-name').value);
+        formData.append('category', document.getElementById('edit-category').value);
+        formData.append('price', document.getElementById('edit-price').value);
+        formData.append('stock_quantity', document.getElementById('edit-stock').value);
+        formData.append('description', document.getElementById('edit-desc').value);
+
+        // Getting edited specs
+        const editSpecNames = Array.from(document.querySelectorAll('input[name="edit_spec_names[]"]')).map(input => input.value);
+        const editSpecValues = Array.from(document.querySelectorAll('input[name="edit_spec_values[]"]')).map(input => input.value);
+
+        editSpecNames.forEach((name, index) => {
+            formData.append('spec_names[]', name);
+            formData.append('spec_values[]', editSpecValues[index] || '');
+        });
+
+        // Getting edited image if one was chosen
+        const editImageInput = document.getElementById('edit-product-image');
+        if (editImageInput.files.length > 0) {
+            formData.append('image', editImageInput.files[0]);
+        }
+
+        // Laravel PUT support through POST + _method
+        formData.append('_method', 'PUT');
+
+        try {
+            // Sending updated data to Laravel backend
+            const response = await fetch(`/admin-inventory/products/${productId}`, {
+                method: 'POST',
+                headers: {
+                    // CSRF token for Laravel security
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json'
+                },
+                body: formData
+            });
+
+            if (response.ok) {
+                closeEditModal();
+                location.reload(); // Refresh page to show updated product
+            } else {
+                const errorText = await response.text();
+                console.error(errorText);
+                alert("Failed to update product.");
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert("Error updating product.");
         }
     });
 

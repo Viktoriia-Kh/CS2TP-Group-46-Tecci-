@@ -15,6 +15,8 @@ class DisplayProductController extends Controller
             'images',
             'specs',
             'reviews'
+
+            
         ])->get();
 
         // Convert DB products

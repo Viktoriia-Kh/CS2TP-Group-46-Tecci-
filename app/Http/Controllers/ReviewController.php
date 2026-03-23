@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Review;
+use App\Models\ProductReview;
 
 class ReviewController extends Controller
 {
@@ -14,7 +14,7 @@ class ReviewController extends Controller
             'comment' => 'required|string|max:1000',
         ]);
 
-        Review::updateOrCreate(
+        ProductReview::updateOrCreate(
             [
                 'product_id' => $productId,
                 'user_id' => auth()->id() ?? 1,
