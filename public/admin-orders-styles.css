@@ -1,74 +1,73 @@
+/* ===================================================================
+   TECCI ADMIN ORDERS - PROFESSIONAL STYLES
+   Matches the polished design of the Inventory page
+   =================================================================== */
+
 /* Basic reset and default Styles */
-
-/* Using '*' selects every element */
-
 *, *::before, *::after {
-  box-sizing: border-box; /* This makes the width easier to work with */
-  margin: 0; /* This removes browser default spacing so you have full control */
+  box-sizing: border-box;
+  margin: 0;
   padding: 0;
 }
 
 /* BASE STYLES */
-
 body {
-  font-family: 'Signika';
+  font-family: 'Signika', sans-serif;
   background-color: #f5f7fb;
-  /* color: #ffffff; */
   line-height: 1.6;
 }
 
-img { /* This targets every image on the Wesbite */
-  max-width: 100%; /* This prevents the image overflowing from out of the container */
-  display: block; /* This allows for margin/padding around the image */
+img {
+  max-width: 100%;
+  display: block;
 }
 
-a { /* This controls the appearance of hyperlinks */
-  text-decoration: none; /* This removes the default blue underline on the links */
-  color: inherit; /* This makes the Link use same colour as parent the element */
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 ul {
-  list-style: none; /* This removes the default bullets */
+  list-style: none;
 }
 
 .container {
-  width: min(1200px, 100% - 32px); /* This sets the maximum width of the content, has consistent padding */
-  margin-inline: auto; /* This centres .container horizontally */
+  width: min(1200px, 100% - 32px);
+  margin-inline: auto;
 }
 
 /* HEADER & NAVBAR SECTION */
-
 .main-header {
   background-color: #03315b;
-  color: #ffffff; /* This sets the default text colour inside the Header to white */
+  color: #ffffff;
   border-bottom: 15px solid #085296;
-  position: sticky; /* This makes the header stick when scrolling */
-  top: 0; /* This tells the sticky element where to stick, which in this case is at the top of the screen */
-  z-index: 1000; /* This controls the stacking order, to prevent content from overlapping the header */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav-container {
-  display: flex; /* This turns the container into a flexbox row, allowing the logo, nav, and icons to sit horizontally */
-  align-items: center; 
-  justify-content: space-between; /* This pushes the Logo to the far left, Icons to the far right. Nav Menu in the middle: Creating a 3-Part Layout */
-  padding: 12px 0; /* This adds vertical spacing */
-  gap: 20px; /* This adds space between the 3 Sections inside the Nav */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  gap: 20px;
 }
 
-.header-left-group { /* This grous the Logo and Menu Button together */
+.header-left-group {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.admin-header-spacer { /* This fills the middle header space after removing the Search Bar */
+.admin-header-spacer {
   flex: 1;
 }
 
 .logo {
-  display: flex; /* This places the Logo and Text side by side */
-  align-items: center; 
-  gap: 9.6px; /* This adds space between Logo and Tecci Text */
+  display: flex;
+  align-items: center;
+  gap: 9.6px;
   text-transform: uppercase;
   font-weight: 700;
   font-size: 40px;
@@ -79,46 +78,20 @@ ul {
 }
 
 /* ADMIN HEADER CONTROLS (MENU) */
-
 .menu-btn {
-  background: transparent; /* This removes the defauly grey button background */
-  border: none; /* This removes the default button border */
+  background: transparent;
+  border: none;
   color: #ffffff;
   font-size: 20px;
-  cursor: pointer; /* This changes cursor to hand when hovering */
-  padding: 6px 8px; /* This adds clickable space around Icon */
-  border-radius: 8px; /* This creates rounded corners for hover background */
-  transition: background 0.15s ease, transform 0.15s ease; /* This creates a smooth animation when hoveing */
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .menu-btn:hover {
-  background: rgba(230, 243, 255, 0.12); /* This makes a light transparent background when hovering */
-  transform: translateY(-1px); /* This moves Button slightly upwards, for a lift effect */
-}
-
-.search-wrap {
-  display: flex; /* This places Icons and input inline */
-  align-items: center;
-  gap: 10px;
-  background: #ffffff;
-  color: #111827;
-  border-radius: 4px;
-  padding: 8px 10px; /* This is for internal spacing */
-  width: 100%;
-  max-width: 420px; /* This prevents the Search from becoming too wide */
-}
-
-.search-wrap i {
-  color: #03315b;
-  font-size: 14px;
-}
-
-.search-wrap input { /* This targets the Search Text Box */
-  border: none; /* This removes the browser border */
-  outline: none; /* This removes the highlight border on click */
-  width: 100%; 
-  font-family: inherit;
-  font-size: 14px;
+  background: rgba(230, 243, 255, 0.12);
+  transform: translateY(-1px);
 }
 
 .admin-top-icons {
@@ -128,53 +101,52 @@ ul {
   font-size: 19px;
 }
 
-.admin-top-icons a { /* This targets each clickable Icon link */
+.admin-top-icons a {
   padding: 2.4px;
-  transition: transform 0.15s ease, color 0.15s ease; /* This creates a smooth hover animation */
+  transition: transform 0.15s ease, color 0.15s ease;
 }
 
 .admin-top-icons a:hover {
-  transform: translateY(-1px); /* This creates a lift effect */
+  transform: translateY(-1px);
   color: #e6f3ff;
 }
 
 /* DASHBOARD LAYOUT (SIDEBAR + CONTENT) */
-
-.admin-shell { /* This controls how the Sidebar and Content sit next to each other */
-  display: flex; /* This makes the Sidebar and Content sit side-by-side horizontally instead of stacking vertically */
-  min-height: calc(100vh - 90px); /* This makes this area fill the screen height, minus 90px (header height), vh is viewport height */
+.admin-shell {
+  display: flex;
+  min-height: calc(100vh - 90px);
 }
 
 /* SIDEBAR */
-.admin-sidebar { /* This is for the left blue vertical Menu */
-  position: fixed; /* This means the Sidebar stays in place when scrolling, so it does not move with the page */
-  left: 0; /* This keeps the Sidebar to the left side of the screen */
-  top: 90px; /* This pushes the Sidebar down so it starts under the sticky Header */
-  margin-top: 0; /* This makes sure there is no accidental spacing */
-  height: calc(100vh - 90px); /* This ensures the Sidear fills full screen height minus the Header height */
+.admin-sidebar {
+  position: fixed;
+  left: 0;
+  top: 90px;
+  margin-top: 0;
+  height: calc(100vh - 90px);
   width: 270px;
   background: #03315b;
   color: #ffffff;
-  padding: 18px 18px 20px; /* This is for the spacing inside the Sidebar, 18px top, 18px left/right, 20px bottom */
-  overflow: auto; /* This makes sure that if the Sidebar content becomes taller than the screen, it scrolls insides itself without breaking layout */
-  transition: width 0.2s ease, transform 0.2s ease; /* This creates a smooth animation when collapsing Sidebar */
-  z-index: 900; /* This ensures it stays above content but below header */
+  padding: 18px 18px 20px;
+  overflow: auto;
+  transition: width 0.2s ease, transform 0.2s ease;
+  z-index: 900;
 }
 
 .admin-profile {
-  display: flex; /* This places Avatar and Text side by side */
+  display: flex;
   align-items: center;
-  gap: 12px; /* This is the space between Avatar and Text */
-  padding: 8px 4px 14px; /* This adds spacing arounf profile block */
+  gap: 12px;
+  padding: 8px 4px 14px;
 }
 
-.profile-avatar { /* This is for the circular white Icon container */
+.profile-avatar {
   width: 44px;
   height: 44px;
-  border-radius: 999px; /* This radius makes it a perfect circle */
+  border-radius: 999px;
   background: #ffffff;
   color: #03315b;
-  display: flex; /* This and the 3 lines below centres the Icon inside the circle */
+  display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
@@ -187,53 +159,53 @@ ul {
 
 .profile-role {
   font-size: 12px;
-  opacity: 0.85; /* This reduces visual importance */
+  opacity: 0.85;
 }
 
-.sidebar-logout { /* This targets the Logout link */
-  display: block; /* This makes it full width like a Button */
+.sidebar-logout {
+  display: block;
   background: #7fc0ff;
   color: #03315b;
   font-weight: 800;
   text-align: center;
   padding: 12px 10px;
-  border-radius: 999px; /* This makes the Logout Button into a pill shape */
-  margin: 10px 0 18px; /* This is for the spacing above and below */
+  border-radius: 999px;
+  margin: 10px 0 18px;
   letter-spacing: 0.5px;
 }
 
-.admin-nav { /* This is for the Sidebar links */
-  display: flex; /* This makes the links stack vertically */
+.admin-nav {
+  display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 8px; /* This is for the spacing above navigation */
+  margin-top: 8px;
 }
 
-.admin-nav a { /* This is for each specific link */
-  display: flex; /* This makes Text and Icon sit on the same row */
-  align-items: center;      
-  justify-content: space-between; /* This pushes the Text to the left, and Icons to the right */
-  padding: 8px 10px;             
+.admin-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
   border-radius: 10px;
   font-size: 18px;
-  transition: background 0.15s ease; /* This creates a smooth hover effect */
+  transition: background 0.15s ease;
 }
 
 .admin-nav a:hover {
-  background: rgba(230, 243, 255, 0.12); /* This creates a slight highlight when hovering */
+  background: rgba(230, 243, 255, 0.12);
 }
 
 .admin-nav a.active {
-  text-decoration: underline; /* This underlines the current page link */
-  text-underline-offset: 6px; /* This moves the underline slightly down for a cleaner look */
+  text-decoration: underline;
+  text-underline-offset: 6px;
 }
 
 .nav-text {
-  display: inline-block; /* This wraps text so it can be hidden separately during collapse */
+  display: inline-block;
 }
 
 .nav-ico {
-  display: inline-flex; /* This ensures the Icon stays centred */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 28px;
@@ -242,22 +214,22 @@ ul {
   opacity: 0.95;
 }
 
-/* COLLAPSED SIDE BAR STATE */
+/* COLLAPSED SIDEBAR STATE */
 body.sidebar-collapsed .admin-sidebar {
-  width: 90px; /* This shrinks the side bar from 270px to 90px*/
+  width: 90px;
 }
 
 body.sidebar-collapsed .nav-text {
-  display: none; /* This hides the text when the Sidebar collapses, but the Icons remain */
+  display: none;
 }
 
 body.sidebar-collapsed .admin-nav a {
-  justify-content: center; /* This centres the Icon when Sidebar is collapsed */
-  padding: 12px 0; 
+  justify-content: center;
+  padding: 12px 0;
 }
 
 body.sidebar-collapsed .profile-meta,
-body.sidebar-collapsed .sidebar-logout { /* This hides the Name and Logout Button Text when Sidebar collapses */
+body.sidebar-collapsed .sidebar-logout {
   font-size: 0;
   padding: 0;
   height: 0;
@@ -265,43 +237,45 @@ body.sidebar-collapsed .sidebar-logout { /* This hides the Name and Logout Butto
   overflow: hidden;
 }
 
-body.sidebar-collapsed .admin-profile { /* This targets .admin-profile only when the <body has the class sidebar-collpased */
+body.sidebar-collapsed .admin-profile {
   justify-content: center;
 }
 
 body.sidebar-collapsed .admin-nav {
-  margin-top: 18px; /* This increases to balance the vertical layout */
+  margin-top: 18px;
   gap: 14px;
 }
 
 /* CONTENT AREA OFFSET */
-.admin-content { /* This manually pushes content to the right since the Sidebar is fixed */
-  margin-left: 270px; /* This moves the content to the right of the Sidebar, otherwise content would sit underneath the Sidebar */
+.admin-content {
+  margin-left: 270px;
   width: 100%;
-  padding: 24px 0 48px; /* This is for the top and bottom spacing */
-  transition: margin-left 0.2s ease; /* This gives a smooth slide animation when Sidebar collapses */
+  padding: 24px 0 48px;
+  transition: margin-left 0.2s ease;
 }
 
 body.sidebar-collapsed .admin-content {
-  margin-left: 90px; /* This adjusts when Sidebar collapses */
+  margin-left: 90px;
 }
 
 .admin-content-inner {
-  width: min(980px, 100% - 32px); /* This shifts the full width content area to the right because of the Sidebar */
+  width: min(980px, 100% - 32px);
   margin-inline: auto;
 }
 
 .site-footer {
-  margin-left: 270px; /* This prevents the footer from going under the Sidebar */
+  margin-left: 270px;
   transition: margin-left 0.2s ease;
 }
 
 body.sidebar-collapsed .site-footer {
-  margin-left: 90px; /* This matches the collapsed width */
+  margin-left: 90px;
 }
 
+/* ===================================================================
+   PAGE HEADER & TITLE SECTION
+   =================================================================== */
 
-/* TITLES */
 .dash-title {
   margin: 8px 0 18px;
 }
@@ -318,30 +292,94 @@ body.sidebar-collapsed .site-footer {
   color: #03315b;
 }
 
+/* Title row with button */
 .orders-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* ===================================================================
+   BUTTONS - MATCHING INVENTORY STYLE
+   =================================================================== */
+
+/* Primary action button (Initiate New Order) */
+.btn-initiate-order {
+  background-color: #26639f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(38, 99, 159, 0.2);
+}
+
+.btn-initiate-order:hover {
+  background-color: #1a4977;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(38, 99, 159, 0.3);
+}
+
+.btn-initiate-order i {
+  font-size: 14px;
+}
+
+/* Back link styling */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #26639f;
+}
+
+.back-link i {
+  font-size: 13px;
+}
+
+/* ===================================================================
+   SEARCH BAR - MATCHING INVENTORY STYLE
+   =================================================================== */
+
+.orders-search-row {
   margin-bottom: 18px;
 }
 
-.orders-search-row { /* This is for the Search Row below the title */
-  margin-bottom: 18px;
-}
-
-.page-search-wrap { /* This is for the new search page search styling */
+.page-search-wrap {
   display: flex;
   align-items: center;
   gap: 10px;
   background: #ffffff;
   color: #111827;
   border: 2px solid #d8e6f4;
-  border-radius: 4px;
-  padding: 10px 12px;
+  border-radius: 8px;
+  padding: 12px 14px;
   width: 100%;
   max-width: 420px;
+  transition: border-color 0.2s ease;
+}
+
+.page-search-wrap:focus-within {
+  border-color: #26639f;
 }
 
 .page-search-wrap i {
   color: #03315b;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .page-search-wrap input {
@@ -351,15 +389,27 @@ body.sidebar-collapsed .site-footer {
   font-family: inherit;
   font-size: 16px;
   background: transparent;
+  color: #333;
 }
 
-/* ORDERS FILTER BAR */
+.page-search-wrap input::placeholder {
+  color: #999;
+}
+
+/* ===================================================================
+   FILTERS BAR - PROFESSIONAL LAYOUT
+   =================================================================== */
+
 .orders-filter-bar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 18px;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
+  background: #ffffff;
+  padding: 16px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .orders-filter-left {
@@ -367,6 +417,7 @@ body.sidebar-collapsed .site-footer {
   align-items: center;
   gap: 14px;
   flex-wrap: wrap;
+  flex: 1;
 }
 
 .orders-filter-right {
@@ -374,6 +425,7 @@ body.sidebar-collapsed .site-footer {
   justify-content: flex-end;
 }
 
+/* Filter select wrapper - custom dropdown styling */
 .filter-select-wrap {
   position: relative;
   display: inline-flex;
@@ -384,16 +436,21 @@ body.sidebar-collapsed .site-footer {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: #3aa0ff;
+  background: #26639f;
   color: #ffffff;
   border: none;
   border-radius: 8px;
   padding: 11px 42px 11px 16px;
   font-family: inherit;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  min-width: 146px;
+  min-width: 160px;
+  transition: background 0.2s ease;
+}
+
+.filter-select-wrap select:hover {
+  background: #1a4977;
 }
 
 .filter-select-wrap i {
@@ -401,44 +458,58 @@ body.sidebar-collapsed .site-footer {
   right: 14px;
   pointer-events: none;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .sort-select select {
-  min-width: 150px;
+  min-width: 180px;
 }
 
-/* ORDERS PANEL */
+/* ===================================================================
+   ORDERS TABLE PANEL - CARD DESIGN
+   =================================================================== */
+
 .orders-panel {
-  background: #0b5aa2;
-  border-radius: 10px;
-  padding: 18px 20px 22px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px 28px 28px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
 }
 
 .orders-table-wrap {
   overflow-x: auto;
+  border-radius: 8px;
 }
+
+/* ===================================================================
+   TABLE STYLING - CLEAN & MODERN
+   =================================================================== */
 
 .orders-table {
   width: 100%;
   border-collapse: collapse;
-  color: #e6f3ff;
-  font-size: 14px;
+  font-size: 15px;
   min-width: 720px;
 }
 
 .orders-table thead th {
-  color: #ffffff;
+  color: #03315b;
   font-weight: 700;
-  font-size: 15px;
-  padding: 6px 10px 14px;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 14px 12px;
+  border-bottom: 2px solid #e0e7f0;
+  text-align: left;
+  background: #f8fafb;
 }
 
 .orders-table tbody td {
-  padding: 14px 10px;
-  font-weight: 600;
-  color: #d9e8f5;
+  padding: 18px 12px;
+  font-weight: 500;
+  color: #333;
+  border-bottom: 1px solid #f0f3f7;
 }
 
 .orders-table tbody tr {
@@ -446,11 +517,17 @@ body.sidebar-collapsed .site-footer {
 }
 
 .orders-table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: #f8fafb;
 }
 
+.orders-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Checkbox column */
 .checkbox-col {
-  width: 34px;
+  width: 40px;
+  text-align: center;
 }
 
 .orders-table input[type="checkbox"] {
@@ -458,68 +535,214 @@ body.sidebar-collapsed .site-footer {
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
-  border: 2px solid #dcecff;
-  border-radius: 5px;
+  border: 2px solid #cbd5e0;
+  border-radius: 4px;
   background: transparent;
   cursor: pointer;
   position: relative;
+  transition: all 0.2s ease;
+}
+
+.orders-table input[type="checkbox"]:hover {
+  border-color: #26639f;
+}
+
+.orders-table input[type="checkbox"]:checked {
+  background: #26639f;
+  border-color: #26639f;
 }
 
 .orders-table input[type="checkbox"]:checked::after {
   content: "✓";
   position: absolute;
-  top: -3px;
+  top: -2px;
   left: 3px;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
 }
 
+/* Order number link */
+.order-number-link {
+  color: #26639f;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.order-number-link:hover {
+  color: #1a4977;
+  text-decoration: underline;
+}
+
+/* ===================================================================
+   STATUS PILLS - MODERN BADGES
+   =================================================================== */
+
 .status-pill {
   display: inline-block;
-  min-width: 92px;
+  min-width: 100px;
   text-align: center;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.status-paid {
-  background: #f1c40f;
+.status-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Status-specific colors */
+.status-pill.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fbbf24;
+}
+
+.status-pill.status-approved {
+  background: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #3b82f6;
+}
+
+.status-pill.status-shipped {
+  background: #e0e7ff;
+  color: #4338ca;
+  border: 1px solid #6366f1;
+}
+
+.status-pill.status-completed {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #10b981;
+}
+
+.status-pill.status-cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #ef4444;
+}
+
+/* View details link */
+.view-details-link {
+  font-size: 13px;
+  color: #26639f;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 10px;
+  transition: color 0.2s ease;
+}
+
+.view-details-link:hover {
+  color: #1a4977;
+  text-decoration: underline;
+}
+
+/* ===================================================================
+   PAGINATION STYLING
+   =================================================================== */
+
+.pagination-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 24px 20px 0;
+  margin-top: 10px;
+  border-top: 1px solid #f0f3f7;
+}
+
+.pagination-wrap svg {
+  width: 20px;
+  height: 20px;
+}
+
+.pagination-wrap nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pagination-wrap nav div:first-child {
+  display: none;
+}
+
+.pagination-wrap span,
+.pagination-wrap a {
+  padding: 10px 14px;
+  background: #f8fafb;
+  border: 1px solid #e0e7f0;
+  border-radius: 6px;
+  color: #03315b;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  min-width: 40px;
+  text-align: center;
+}
+
+.pagination-wrap a:hover {
+  background: #26639f;
   color: #ffffff;
+  border-color: #26639f;
+  transform: translateY(-1px);
 }
 
-.status-delivered {
-  background: #cc5a37;
+.pagination-wrap span[aria-current="page"] {
+  background: #26639f;
   color: #ffffff;
+  border-color: #26639f;
 }
 
-.status-completed {
-  background: #1cc95b;
-  color: #ffffff;
+/* ===================================================================
+   EMPTY STATE
+   =================================================================== */
+
+.empty-state {
+  text-align: center;
+  padding: 60px 40px;
+  color: #666;
 }
 
-/* FOOTER SECTION */
+.empty-state i {
+  font-size: 48px;
+  color: #cbd5e0;
+  margin-bottom: 16px;
+}
+
+.empty-state p {
+  font-size: 16px;
+  color: #718096;
+  margin-top: 12px;
+}
+
+/* ===================================================================
+   FOOTER SECTION
+   =================================================================== */
 
 .site-footer {
   background-color: #03315b;
-  color: #ffffff; /* This sets the default colour inside the Footer to white */
-  padding-top: 40px; /* This adds space to the top so the content is not stuck to the edge */
+  color: #ffffff;
+  padding-top: 40px;
   margin-top: 0;
 }
 
 .footer-inner {
-  display: grid; /* This enables the CSS Grid Layout */
-  grid-template-columns: 2fr 1.5fr 1.8fr; /* This creates 3 columns with different relative widths: First Column is 2 fractions, Second Column is 1.5 fractions. Third Column is 1.8 fractions */
-  gap: 40px; /* Space between the columns */
-  padding-bottom: 32px; /* This adds space below the columns, before the copyright bar */
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.8fr;
+  gap: 40px;
+  padding-bottom: 32px;
 }
 
 .footer-col h3,
 .footer-col h4 {
-  margin-bottom: 14px; /* This adds space from under the Headings to seperate them from the content */
+  margin-bottom: 14px;
 }
 
 .footer-col p {
@@ -528,42 +751,45 @@ body.sidebar-collapsed .site-footer {
 }
 
 .footer-col ul {
-  display: flex; /* This turns the UL into a flex container */
-  flex-direction: column; /* This aligns the list items vertically */
-  gap: 6px; /* This adds vertical spacing between list items */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .footer-col a {
-  font-size: 14px; 
+  font-size: 14px;
   color: #ffffff;
-  transition: color 0.15s ease; /* This adds a colour transition when hovering */
+  transition: color 0.15s ease;
 }
 
 .footer-col a:hover {
-  color: #dae6f2; /* When hovering, it becomes this colour */
+  color: #dae6f2;
 }
 
 .contact-list li {
-  display: flex; /* This places the Icons and text in a row */
-  align-items: center; /* This vertically aligns the Icon and text */
-  gap: 8px; /* Space between Icon and text */
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 14px;
   color: #ffffff;
 }
 
 .contact-list i {
-  font-size: 16px; /* This makes sure that each Icon is a consistent size */
+  font-size: 16px;
 }
 
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 14px 0 19px; /* This gives the text some space */
+  padding: 14px 0 19px;
   text-align: center;
   font-size: 13px;
   color: #ffffff;
 }
 
-/* RESPONSIVENESS */
+/* ===================================================================
+   RESPONSIVE DESIGN
+   =================================================================== */
+
 @media (max-width: 980px) {
   .dash-title h1 {
     font-size: 38px;
@@ -580,6 +806,17 @@ body.sidebar-collapsed .site-footer {
 
   .orders-filter-right {
     justify-content: flex-start;
+  }
+
+  .orders-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .btn-initiate-order {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -616,8 +853,8 @@ body.sidebar-collapsed .site-footer {
     font-size: 30px;
   }
 
-  .search-wrap {
-    max-width: 260px;
+  .page-search-wrap {
+    max-width: 100%;
   }
 
   .footer-inner {
@@ -641,38 +878,31 @@ body.sidebar-collapsed .site-footer {
   .orders-filter-left {
     flex-direction: column;
     align-items: stretch;
+    width: 100%;
   }
 
   .orders-filter-right {
     width: 100%;
   }
 
+  .filter-select-wrap {
+    width: 100%;
+  }
+
   .sort-select {
     width: 100%;
   }
-}
 
-.pagination-wrap svg {
-    width: 20px; 
-    height: 20px;
-}
+  .orders-table {
+    font-size: 14px;
+  }
 
-.pagination-wrap nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
+  .orders-table thead th {
+    padding: 12px 8px;
+    font-size: 12px;
+  }
 
-.pagination-wrap nav div:first-child {
-    display: none; 
-}
-
-.pagination-wrap span, .pagination-wrap a {
-    padding: 8px 12px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    color: #03315b;
-    text-decoration: none;
+  .orders-table tbody td {
+    padding: 14px 8px;
+  }
 }
