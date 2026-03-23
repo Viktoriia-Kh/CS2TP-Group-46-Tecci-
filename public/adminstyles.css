@@ -991,3 +991,12 @@ body.sidebar-collapsed .site-footer {
   border-color: #1e66ff;
   outline: none;
 }
+.pagination svg {
+  width: 16px;
+  height: 16px;
+}
+
+svg {
+  max-width: 20px;
+  max-height: 20px;
+}
