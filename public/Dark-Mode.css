@@ -1216,3 +1216,99 @@ body.dark-mode .orders-container p[style*="color: #666"] {
 body.dark-mode .orders-container a[style*="color: #005baf"] {
   color: #93c5fd !important;
 }
+
+
+/* =========================================
+   ORDER DETAILS PAGE DARK MODE
+========================================= */
+
+body.dark-mode .details-container {
+  background: #111827; /* This changes the main white order details box to a dark navy background */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); /* This helps the dark card still stand out from the dark page background */
+  color: #e2e8f0;
+}
+
+body.dark-mode .back-link {
+  color: #93c5fd; /* This makes the link a light blue, giving good contrast on a dark background */
+}
+
+body.dark-mode .back-link:hover {
+  color: #60a5fa; /* This changes the blue slightly on hover */
+}
+
+body.dark-mode .details-container h2 {
+  color: #f8fafc; /* This gives the badge a dark blue background */
+}
+
+body.dark-mode .details-container h3 {
+  border-bottom: 2px solid #3b82f6 !important; /* Since inline styles are very strong, !important helps this dark mode rule override those existing light-theme heading colours */
+  color: #f8fafc;
+}
+
+body.dark-mode .details-container h4 {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .details-container p {
+  color: #cbd5e1 !important;
+}
+
+/* ITEM ROWS */
+body.dark-mode .item-card {
+  border-bottom: 1px solid #334155 !important; /* This replaces the light divider with a dark mode border */
+}
+
+body.dark-mode .item-card img {
+  border: 1px solid #334155; /* This adds a slight border around images */
+}
+
+/* ORDER STATUS BADGE */
+body.dark-mode .status-badge {
+  background: rgba(37, 99, 235, 0.18);
+  color: #93c5fd;
+}
+
+/* RETURN BUTTON */
+body.dark-mode button[onclick*="toggleReturnForm"] { /* This means to select any button that has an onclick attribute containing the text toggleReturnForm */
+  background: #dc2626 !important; /* This sets the background colour of the Button */
+}
+
+body.dark-mode button[onclick*="toggleReturnForm"]:hover { /* This styles is applied when the user moves the mouse over the button */
+  background: #b91c1c !important;
+}
+
+/* RETURN FORM */
+body.dark-mode div[id^="return-form"] { /* This means to select any <div> that has an id starting with "return-form" */
+  background: #0f172a !important;
+  border: 1px dashed #334155 !important;
+}
+
+body.dark-mode div[id^="return-form"] label {
+  color: #f8fafc !important;
+}
+
+body.dark-mode div[id^="return-form"] select { /* This styles the dropdown menu */
+  background-color: #1e293b !important;
+  border: 1px solid #334155 !important;
+  color: #f8fafc !important;
+}
+
+/* RETURNS FORM BUTTONS */
+body.dark-mode div[id^="return-form"] button[type="submit"] {
+  background: #2563eb !important;
+}
+
+body.dark-mode div[id^="return-form"] button[type="submit"]:hover {
+  background: #1d4ed8 !important;
+}
+
+body.dark-mode div[id^="return-form"] button[type="button"] {
+  background: transparent !important;
+  border: 1px solid #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+/* TOTAL PRICE */
+body.dark-mode .details-container span[style*="color: #005baf"] { /* This fixes the Total Paid price colour */
+  color: #93c5fd !important;
+}
