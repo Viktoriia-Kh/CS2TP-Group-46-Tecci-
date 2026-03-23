@@ -169,4 +169,4 @@ if (form.style.display === 'none' || form.style.display === '') {
 }
 </script>
 
-<script src="Dark-Mode-Theme.js"></script>
+<script src="{{ asset('Dark-Mode-Theme.js') }}"></script>
