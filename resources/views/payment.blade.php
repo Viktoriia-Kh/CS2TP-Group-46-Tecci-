@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-  <meta charset="UTF-8" />
-  <title>Tecci | Secure Payment</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!--Links to HTML/CSS Files-->
-  <link rel="stylesheet" href="{{ asset('paymentstyle.css') }}" />
-  <link rel="stylesheet" href="{{ asset('common-styles.css') }}" />
-  <link rel="stylesheet" href="{{ asset('contactstyle.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/basket.css') }}" />
-  <!--Google Font-->
-  <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
-  <!--Font Awesome for Icons-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+@section('title', 'Secure Payment - Tecci')
 
-  <style>
-    .payment-grid {
+@section('content')
+
+{{-- Page-Specific Styles --}}
+<link rel="stylesheet" href="{{ asset('paymentstyles.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/basket.css') }}" />
+<link rel="stylesheet" href="{{ asset('Dark-Mode.css') }}" />
+
+<style>
+.payment-grid {
       display: grid;
       grid-template-columns: 1.5fr 1fr;
       gap: 30px;
@@ -123,56 +117,9 @@
         grid-template-columns: 1fr;
       }
     }
-  </style>
+</style>
 
-</head>
 
-<body>
-  <header class="main-header">
-    <div class="container nav-container">
-
-      <!-- Logo -->
-      <a href="/" class="logo">
-        <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
-        <span class="logo-text">TECCI</span>
-      </a>
-
-      <!--Navigation Menu-->
-      <nav class="main-nav">
-        <ul>
-          <li><a href="/" >Home</a></li>
-          <li><a href="about-us">About</a></li>
-          <li><a href="contact-us">Contact</a></li>
-          <li><a href="{{ route('products.index') }}">Products</a></li>
-        </ul>
-      </nav>
-
-      <!--Icons-->
-      <div class="nav-icons">
-        <a href="/my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
-        
-        {{-- Basket Icon with Badge --}}
-        <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
-          <i class="fa-solid fa-cart-shopping"></i>
-          
-          @php
-            use App\Models\BasketItem;
-            $basketCount = Auth::check() 
-              ? BasketItem::where('user_id', Auth::id())->sum('quantity')
-              : BasketItem::where('session_id', session()->getId())->sum('quantity');
-          @endphp
-          
-          @if($basketCount > 0)
-            <span class="cart-badge">{{ $basketCount }}</span>
-          @endif
-        </a>
-        
-        <a href="/account"><i class="fa-regular fa-user"></i></a>
-      </div>
-    </div>
-  </header>
-
-  <section class="hero">
 
     <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
       {{-- Progress Tracker --}}
@@ -341,55 +288,5 @@
       </div>
 
     </div>
-  </section>
 
-  <!--FOOTER-->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-col">
-        <h3>TECCI</h3>
-        <p>
-          Smart Tech at Smart Prices.<br>
-          Tecci makes premium devices accessible to<br>
-          students and customers across the UK.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="about-us">About</a></li>
-          <li><a href="contact-us">Contact</a></li>
-          <li><a href="{{ route('products.index') }}">Products</a></li>
-          <li><a href="{{ route('basket.index') }}">Basket</a></li>
-          <li><a href="login">My Account</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Contact Info</h4>
-        <ul class="contact-list">
-          <li>
-            <i class="fa-solid fa-location-dot"></i> 
-            <span>0121 555 0198</span><br><br>
-          </li>
-          <li>
-            <i class="fa-solid fa-phone"></i>
-            <span>Tecci_Queries@net.com</span><br><br>
-          </li>
-          <li>
-            <i class="fa-regular fa-envelope"></i>
-            <span>Birmingham, B4 7ET</span><br><br>
-          </li>
-        </ul>
-      </div>
-    </div> 
-    <div class="footer-bottom">
-      <p>&copy; 2025 Tecci. All rights reserved.</p>
-    </div>
-  </footer>
-
-</body>
-
-</html>
+  @endsection

@@ -848,3 +848,210 @@ body.dark-mode .badge-out-of-stock {
   background-color: #b91c1c;
   color: #ffffff;
 }
+
+/* =========================================
+   BASKET PAGE DARK MODE
+   ========================================= */
+
+/* Main text and header colors */
+body.dark-mode .basket-wrapper {
+  color: #e5e7eb;
+}
+
+body.dark-mode .basket-title,
+body.dark-mode .summary-title,
+body.dark-mode .delivery-header,
+body.dark-mode .payment-section h4 {
+  color: #7cc0ff; /* Matches the blue headers on the About/Login pages */
+}
+
+/* Darken the main white cards */
+body.dark-mode .basket-main-content,
+body.dark-mode .delivery-section,
+body.dark-mode .payment-section,
+body.dark-mode .order-summary-box,
+body.dark-mode .empty-basket-message {
+  background-color: #101827; /* Matches the Contact/Signup form cards */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(203, 213, 225, 0.1);
+}
+
+/* Table headers and item rows */
+body.dark-mode .basket-table-headers {
+  border-bottom: 2px solid #334155;
+  color: #94a3b8;
+}
+
+body.dark-mode .basket-item-row {
+  background-color: transparent !important; /* Strips away any stubborn white backgrounds */
+  border-bottom: 1px solid #334155;
+}
+
+body.dark-mode .basket-item-row .item-name {
+  color: #f8fafc !important; /* Forces the text to stay bright white */
+}
+
+body.dark-mode .item-col-price,
+body.dark-mode .price-text {
+  color: #93c5fd; /* Matches the product prices */
+}
+
+/* Quantity Box Inputs and Buttons */
+body.dark-mode .qty-box input {
+  background-color: #0f1f35;
+  color: #e5e7eb;
+  border: 1px solid rgba(203, 213, 225, 0.25);
+}
+
+body.dark-mode .ajax-qty-btn {
+  background-color: #1e293b;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .ajax-qty-btn:hover {
+  background-color: #334155;
+}
+
+/* Remove Item Link - Made a brighter red for dark mode contrast */
+body.dark-mode .remove-item-link {
+  color: #f87171; 
+}
+
+body.dark-mode .remove-item-link:hover {
+  color: #fca5a5;
+}
+
+/* Delivery Options */
+body.dark-mode .delivery-label {
+  color: #cbd5e1;
+}
+
+/* Promo Code Input */
+body.dark-mode .discount-container input {
+  background-color: #0f1f35;
+  color: #e5e7eb;
+  border: 1px solid rgba(203, 213, 225, 0.25);
+}
+
+body.dark-mode .discount-container input::placeholder {
+  color: #94a3b8;
+}
+
+/* Primary Action Buttons */
+body.dark-mode #apply-btn,
+body.dark-mode .btn-checkout-bottom,
+body.dark-mode .btn-continue-top {
+  background-color: #1d6dbd;
+  color: #ffffff;
+}
+
+body.dark-mode #apply-btn:hover,
+body.dark-mode .btn-checkout-bottom:hover,
+body.dark-mode .btn-continue-top:hover {
+  background-color: #165a9b;
+}
+
+/* Secondary Action Buttons */
+body.dark-mode .btn-continue-bottom {
+  background-color: #1e293b;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .btn-continue-bottom:hover {
+  background-color: #334155;
+}
+
+/* Progress Tracker at the top */
+body.dark-mode .checkout-progress-container {
+  color: #cbd5e1;
+}
+
+body.dark-mode .progress-step.active .step-icon {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .progress-step:not(.active) .step-icon {
+  background-color: #1e293b;
+  color: #94a3b8;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .progress-line {
+  background-color: #334155;
+}
+
+/* =========================================
+   PAYMENT / CHECKOUT PAGE DARK MODE
+   ========================================= */
+
+/* Force the main white cards to go dark */
+body.dark-mode .form-section,
+body.dark-mode .order-summary-box {
+  background-color: #101827 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid rgba(203, 213, 225, 0.1) !important;
+}
+
+/* Card Headers */
+body.dark-mode .form-section h3,
+body.dark-mode .order-summary-box h3 {
+  color: #7cc0ff !important;
+  border-bottom: 2px solid #334155 !important;
+}
+
+/* Form Labels */
+body.dark-mode .form-group label {
+  color: #cbd5e1 !important;
+}
+
+/* Input Fields */
+body.dark-mode .form-group input,
+body.dark-mode .form-group select {
+  background-color: #0f1f35 !important;
+  color: #e5e7eb !important;
+  border: 1px solid #334155 !important;
+}
+
+/* Order Summary Text (Overriding the hardcoded inline #333 and #666 colors) */
+body.dark-mode .order-summary-box p,
+body.dark-mode .summary-item,
+body.dark-mode .summary-item span {
+  color: #e5e7eb !important;
+}
+
+/* Product list divider lines */
+body.dark-mode .order-summary-box div[style*="border-bottom"] {
+  border-bottom: 1px solid #334155 !important;
+}
+
+/* Grand Total Line */
+body.dark-mode .summary-total {
+  border-top: 2px solid #334155 !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode .summary-total span {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .summary-total span:last-child {
+  color: #93c5fd !important; /* Bright blue for the final price */
+}
+
+/* Submit Button */
+body.dark-mode .submit-btn {
+  background-color: #1d6dbd !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .submit-btn:hover {
+  background-color: #165a9b !important;
+}
+
+/* Back to Basket Link */
+body.dark-mode .order-summary-box a {
+  color: #93c5fd !important;
+}
