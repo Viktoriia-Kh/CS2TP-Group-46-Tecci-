@@ -24,7 +24,7 @@ class AdminDashboardController extends Controller
             ->take(5)
             ->get();
 
-        $pendingOrders = \App\Models\Order::where('status', 'Pending')->latest()->get();
+         $pendingOrders = \App\Models\Order::whereIn('status', ['Placed', 'Pending', 'placed'])->latest()->get();
 
         $itemsOutOfStock = \App\Models\Inventory::where('quantity_available', '<=', 0)
             ->with('product')
