@@ -111,17 +111,15 @@
                 </div>
                 
                 @php
-                    $isOutOfStock = false;
-                    if ($product->inventory && $product->inventory->quantity_available <= 0) {
-                        $isOutOfStock = true;
-                    }
-                @endphp
-                
-                @if($isOutOfStock)
-                    <button disabled class="add-to-basket-btn" style="background-color: #999; cursor: not-allowed;" title="Out of Stock">Out of Stock</button>
-                @else
-                    <button onclick="addToBasketAjax({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ asset($product->image_url ?? 'images/laptop.jpg') }}', 1)" class="add-to-basket-btn">Add to Basket</button>
-                @endif
+                // Check the correct database fields matching your displayproduct page
+                $isInStock = ($product->stock_status === 'in_stock' || $product->stock_quantity > 0);
+               @endphp
+        
+               @if(!$isInStock)
+                <button disabled class="add-to-basket-btn" style="background-color: #999; cursor: not-allowed;" title="Out of Stock">Out of Stock</button>
+               @else
+                <button onclick="addToBasketAjax({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ asset($product->image_url ?? 'images/laptop.jpg') }}', 1)" class="add-to-basket-btn">Add to Basket</button>
+               @endif
             </div>
         </div>
 
@@ -465,7 +463,7 @@ function showToast(title, message, type = 'success', imageUrl = null) {
     toast.classList.remove('show');
     setTimeout(() => toast.remove(), 400); 
   }, 3000);
-}і
+}
 
 // Tech Specs / Reviews
 function openTab(evt, tabName) {
