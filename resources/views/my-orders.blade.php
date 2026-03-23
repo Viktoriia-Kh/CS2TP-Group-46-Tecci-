@@ -7,6 +7,7 @@
   <!--Links to HTML/CSS Files-->
   <link rel="stylesheet" href="{{ asset('common-style.css') }}" />
   <link rel="stylesheet" href="{{ asset('myordersstyle.css') }}" />
+  <link rel="stylesheet" href="{{ asset('Dark-Mode.css')}}">
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
@@ -123,3 +124,5 @@
 </body>
 
 </html>
+
+<script src="Dark-Mode-Theme.js"></script>
