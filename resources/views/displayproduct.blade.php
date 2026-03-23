@@ -304,7 +304,7 @@
           </li>
           <li>
             <i class="fa-solid fa-phone"></i> <!--fa-phone is a Phone Icon linked from Font Awesome-->
-            <span>Tecci_Queries@net.com</span><br><br>
+            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d29181e1e14222c08180f14180e3d131809531e1210">[email&#160;protected]</a></span><br><br>
           </li>
           <li>
             <i class="fa-regular fa-envelope"></i> <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
@@ -318,7 +318,7 @@
     </div>
   </footer>
 
-  <script>src="TP2_Tecci-Theme.js"</script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>src="TP2_Tecci-Theme.js"</script>
 
 </body>
 
@@ -486,7 +486,12 @@ function addToBasketAjax(productId, productName, productImage, quantity = 1) {
     body: JSON.stringify({ quantity: quantity })
   })
   .then(res => {
-      if (!res.ok) throw new Error('Network response was not ok');
+      if (!res.ok) {
+          // Handle stock validation errors from server
+          return res.json().then(errData => {
+              throw new Error(errData.message || 'Failed to add to basket');
+          });
+      }
       return res.json();
   })
   .then(data => {
@@ -515,7 +520,11 @@ function addToBasketAjax(productId, productName, productImage, quantity = 1) {
       }
     }
   })
-  .catch(err => console.error("Add to basket error:", err));
+  .catch(err => {
+      console.error("Add to basket error:", err);
+      // Show error toast when stock validation fails
+      showToast("Cannot Add to Basket", err.message, "error");
+  });
 }
 
 // Render products to the DOM
@@ -566,8 +575,12 @@ const isInStock = product.stock_status === 'in_stock' || product.stock_quantity 
           <p class="product-item-price">£${product.price.toFixed(2)}</p>
           
           <div class="cart-action-group" onclick="event.stopPropagation();">
-            <input type="number" id="qty-${product.id}" class="qty-input" value="1" min="1" max="99" title="Quantity">
-            <button type="button" class="add-to-cart-quick" onclick="addToBasketAjax(${product.id}, '${safeProductName}', '${product.image_url}', document.getElementById('qty-${product.id}').value)">Add to Basket</button>
+            <input type="number" id="qty-${product.id}" class="qty-input" value="1" min="1" max="99" title="Quantity" ${!isInStock ? 'disabled' : ''}>
+            <button type="button" class="add-to-cart-quick" 
+                    onclick="addToBasketAjax(${product.id}, '${safeProductName}', '${product.image_url}', document.getElementById('qty-${product.id}').value)" 
+                    ${!isInStock ? 'disabled style="background-color: #999; cursor: not-allowed;"' : ''}>
+              ${!isInStock ? 'Out of Stock' : 'Add to Basket'}
+            </button>
           </div>
         </div>
       </div>
@@ -606,8 +619,10 @@ function showToast(title, message, type = 'success', imageUrl = null) {
   
   container.appendChild(toast);
   
-  // Slide In using the new class (matches the basket's cubic-bezier bounce)
-  setTimeout(() => toast.classList.add('show'), 10);
+   // Slide In using the new class (matches the basket's cubic-bezier bounce)
+  setTimeout(() => {
+    toast.classList.add('show');
+  }, 10);
   
   // Slide Out & Delete
   setTimeout(() => {
@@ -616,6 +631,6 @@ function showToast(title, message, type = 'success', imageUrl = null) {
   }, 3000);
 }
 
-// Initialise display
+// Initialize the page by displaying all products on load
 displayProducts();
 </script>

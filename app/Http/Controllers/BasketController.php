@@ -65,8 +65,8 @@ class BasketController extends Controller
     /* Add Item To Basket */
     public function add($id, Request $request)
     {
-        // Find product in the DB
-        $product = Product::findOrFail($id);
+        // Find product in the DB with inventory relationship
+        $product = Product::with('inventory')->findOrFail($id);
         
         // Get quantity from request, default to 1 if not provided
         $quantity = (int) $request->input('quantity', 1);
@@ -74,6 +74,39 @@ class BasketController extends Controller
         // Validate quantity is at least 1
         if ($quantity < 1) {
             $quantity = 1;
+        }
+        
+        // STOCK VALIDATION - Check if product has inventory and is in stock
+        if ($product->inventory) {
+            $availableStock = $product->inventory->quantity_available;
+            
+            // Check if product is out of stock
+            if ($availableStock <= 0) {
+                $errorMessage = "Sorry, '{$product->name}' is currently out of stock.";
+                
+                if ($request->ajax() || $request->wantsJson()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errorMessage
+                    ], 400);
+                }
+                
+                return redirect()->back()->withErrors($errorMessage);
+            }
+            
+            // Check if requested quantity exceeds available stock
+            if ($quantity > $availableStock) {
+                $errorMessage = "Sorry, only {$availableStock} units of '{$product->name}' are available in stock.";
+                
+                if ($request->ajax() || $request->wantsJson()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errorMessage
+                    ], 400);
+                }
+                
+                return redirect()->back()->withErrors($errorMessage);
+            }
         }
         
         $identifier = $this->getBasketIdentifier();
