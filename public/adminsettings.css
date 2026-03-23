@@ -161,19 +161,6 @@ body {
     margin: 25px 0;
 }
 
-.sidebar-logout {
-  display: block;
-  background: #3aa0ff;
-  color: #03315b;
-  font-weight: 800;
-  text-align: center;
-  padding: 12px 10px;
-  border-radius: 999px;
-  margin: 10px 0 18px;
-  letter-spacing: 0.5px;
-}
-
-
 /* overriding default button style to make delete button stand out*/
 .delete-button{
     background-color: transparent !important;
@@ -348,5 +335,107 @@ body {
     align-items: center;
     gap: 20px; /* Space between the Bell, Envelope, and House */
     margin-left: auto; /* This acts as the "spacer" pushing them right */
+}
+
+/* SIDEBAR */
+.admin-sidebar { /* This is for the left blue vertical Menu */
+  position: fixed; /* This means the Sidebar stays in place when scrolling, so it does not move with the page */
+  left: 0; /* This keeps the Sidebar to the left side of the screen */
+  top: 90px; /* This pushes the Sidebar down so it starts under the sticky Header */
+  margin-top: 0; /* This makes sure there is no accidental spacing */
+  height: calc(100vh - 90px); /* This ensures the Sidear fills full screen height minus the Header height */
+  width: 270px;
+  background: #03315b;
+  color: #ffffff;
+  padding: 18px 18px 20px; /* This is for the spacing inside the Sidebar, 18px top, 18px left/right, 20px bottom */
+  overflow: auto; /* This makes sure that if the Sidebar content becomes taller than the screen, it scrolls insides itself without breaking layout */
+  transition: width 0.2s ease, transform 0.2s ease; /* This creates a smooth animation when collapsing Sidebar */
+  z-index: 900; /* This ensures it stays above content but below header */
+}
+
+.admin-shell { /* This controls how the Sidebar and Content sit next to each other */
+  display: flex; /* This makes the Sidebar and Content sit side-by-side horizontally instead of stacking vertically */
+  min-height: calc(100vh - 90px); /* This makes this area fill the screen height, minus 90px (header height), vh is viewport height */
+}
+
+.admin-profile {
+  display: flex; /* This places Avatar and Text side by side */
+  align-items: center;
+  gap: 12px; /* This is the space between Avatar and Text */
+  padding: 8px 4px 14px; /* This adds spacing arounf profile block */
+}
+
+.profile-avatar { /* This is for the circular white Icon container */
+  width: 44px;
+  height: 44px;
+  border-radius: 999px; /* This radius makes it a perfect circle */
+  background: #ffffff;
+  color: #03315b;
+  display: flex; /* This and the 3 lines below centres the Icon inside the circle */
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.profile-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.profile-role {
+  font-size: 12px;
+  opacity: 0.85; /* This reduces visual importance */
+}
+
+.sidebar-logout { /* This targets the Logout link */
+  display: block; /* This makes it full width like a Button */
+  background: #3aa0ff;
+  color: #03315b;
+  font-weight: 800;
+  text-align: center;
+  padding: 12px 10px;
+  border-radius: 999px; /* This makes the Logout Button into a pill shape */
+  margin: 10px 0 18px; /* This is for the spacing above and below */
+  letter-spacing: 0.5px;
+}
+
+.admin-nav { /* This is for the Sidebar links */
+  display: flex; /* This makes the links stack vertically */
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px; /* This is for the spacing above navigation */
+}
+
+.admin-nav a { /* This is for each specific link */
+  display: flex; /* This makes Text and Icon sit on the same row */
+  align-items: center;
+  justify-content: space-between; /* This pushes the Text to the left, and Icons to the right */
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 18px;
+  transition: background 0.15s ease; /* This creates a smooth hover effect */
+}
+
+.admin-nav a:hover {
+  background: rgba(230, 243, 255, 0.12); /* This creates a slight highlight when hovering */
+}
+
+.admin-nav a.active {
+  text-decoration: underline; /* This underlines the current page link */
+  text-underline-offset: 6px; /* This moves the underline slightly down for a cleaner look */
+}
+
+.nav-text {
+  display: inline-block; /* This wraps text so it can be hidden separately during collapse */
+}
+
+.nav-ico {
+  display: inline-flex; /* This ensures the Icon stays centred */
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  font-size: 18px;
+  color: #e6f3ff;
+  opacity: 0.95;
 }
 
