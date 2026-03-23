@@ -63,7 +63,7 @@
 
 
 
-        <a  href="admin-inventory">
+        <a  href="/admin-inventory">
           <span class="nav-text">Inventory</span>
           <span class="nav-ico"><i class="fa-solid fa-warehouse"></i></span> <!--fa-warehouse is a Warehouse Icon linked from Font Awesome-->
         </a>
