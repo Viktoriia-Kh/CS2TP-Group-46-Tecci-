@@ -451,12 +451,54 @@
 
 
 /* ================================
-   MOBILE RESPONSIVENESS
+   MOBILE & TABLET RESPONSIVENESS
 ================================== */
-@media (max-width: 900px) {
-    .basket-layout-grid { grid-template-columns: 1fr; } 
-    .basket-sidebar { position: static; margin-top: 30px; } 
-    .basket-item-row { grid-template-columns: 100px 1fr; gap: 20px; }
-    .item-col-price { grid-column: 2; text-align: left; margin-top: 10px; }
-    .basket-table-headers { display: none; }
+
+/* Tablets & Small Laptops (Stack the main columns) */
+@media (max-width: 1100px) {
+    .basket-layout-grid { 
+        grid-template-columns: 1fr; /* Stacks left and right columns */
+    } 
+    .basket-sidebar { 
+        position: static; /* Stops it from awkwardly floating when stacked */
+        margin-top: 10px; 
+    } 
+    .basket-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
+
+/* Mobile Phones (Compress the individual items) */
+@media (max-width: 768px) {
+    .basket-item-row { 
+        grid-template-columns: 100px 1fr; /* Shrinks the image column */
+        gap: 15px; 
+        padding: 15px;
+    }
+    .item-col-price { 
+        grid-column: 2; /* Moves price under the controls */
+        text-align: left; 
+        margin-top: 10px; 
+    }
+    .basket-table-headers { 
+        display: none; /* Hides the desktop table headers */
+    }
+    .basket-main-content {
+        padding: 20px 15px;
+    }
+    .basket-title {
+        font-size: 28px;
+    }
+    .free-delivery-text {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+    .payment-icons-grid {
+        gap: 10px;
+    }
+    .pay-icon {
+        font-size: 40px; /* Scales down payment icons */
+    }
 }
