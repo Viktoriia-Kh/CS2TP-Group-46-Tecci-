@@ -22,24 +22,25 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Products</a></li>
+                    <li><a href="/about-us">About</a></li>
+                    <li><a href="/contact-us">Contact</a></li>
+                    <li><a href="/displayproduct">Products</a></li>
 
                     <!--Added A Dark/Light Mode Toggle Button-->
+                
+                </ul>
+            </nav>
+
+            <div class="nav-icons">
+                <a href="/my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
+                <a href="/basket"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="/account"><i class="fa-regular fa-user"></i></a>
                 <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
                     <i class="fa-solid fa-moon"></i>
                     <!--fa-moon is a Moon Icon linked from Font Awesome-->
                     <!--class="theme-toggle" lets us style the button using CSS-->
                     <!--id="themeToggle" allows us to use this id in JavaScript-->
                 </button>
-                </ul>
-            </nav>
-
-            <div class="nav-icons">
-                <a href="#"><i class="fa fa-history" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="#"><i class="fa-regular fa-user"></i></a>
             </div>
         </div>
     </header>
@@ -123,4 +124,4 @@
 </body>
 </html>
 
-<script src="Dark-Mode-Theme.js"></script>
+<script src="{{ asset('Dark-Mode-Theme.js') }}"></script>
