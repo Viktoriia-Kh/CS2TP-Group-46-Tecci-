@@ -37,12 +37,7 @@
           <i class="fa-solid fa-bars"></i> <!--fa-bars is a Menu Icon linked from Font Awesome-->
         </a>
 
-        <div class="search-wrap"> <!--This is a wrapper for styling purpose of the Search Bar-->
-          <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
-          <i class="fa-solid fa-magnifying-glass"></i> <!--This creates a Magnifying Glass Icon which is just purely visual for now-->
-          <input type="text" placeholder="Search" aria-label="Search (visual only)">
-        </div>
-      </div>
+
 
       <!--Icons-->
       <div class="nav-icons admin-top-icons">
@@ -68,14 +63,11 @@
         </div>
       </div>
 
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form>
-
-<a class="sidebar-logout" href="#"
-   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-   LOGOUT
-</a>
+      {{-- logout button--}}
+            <form action="{{ route('logout')}}" method="POST">
+                @csrf
+                <button type="submit" class="sidebar-logout">LOGOUT</button>
+            </form>
 
       <!--NAV TEXT (SIDEBAR) + ICONS ON THE RIGHT-->
       <nav class="admin-nav">

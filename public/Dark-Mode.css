@@ -1218,9 +1218,7 @@ body.dark-mode .orders-container a[style*="color: #005baf"] {
 }
 
 
-/* =========================================
-   ORDER DETAILS PAGE DARK MODE
-========================================= */
+/* ORDER DETAILS PAGE DARK MODE */
 
 body.dark-mode .details-container {
   background: #111827; /* This changes the main white order details box to a dark navy background */
