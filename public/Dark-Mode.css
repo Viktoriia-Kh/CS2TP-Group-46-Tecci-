@@ -1486,3 +1486,107 @@ body.dark-mode .success-message {
   border: 1px solid #15803d;
   color: #bbf7d0;
 }
+
+/* VERIFY EMAIL PAGE DARK MODE */
+
+/* This CSS Styling has a similar structure to RESET + FORGOT PASSWORD PAGE DARK MODE */
+body.dark-mode.signup-page {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+/* MAIN VERIFY CARD */
+body.dark-mode .signup-card,
+body.dark-mode .verify-card {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  border-radius: 20px;
+}
+
+/* HEADING + INTRO TEXT */
+body.dark-mode .signup-header h1 {
+  color: #60a5fa;
+}
+
+body.dark-mode .signup-header p {
+  color: #cbd5e1;
+}
+
+body.dark-mode .signup-header strong {
+  color: #f8fafc;
+}
+
+/* SUCCESS ALERT */
+body.dark-mode .alert-success,
+body.dark-mode .success-message {
+  background-color: rgba(21, 128, 61, 0.2);
+  border: 1px solid #15803d;
+  color: #bbf7d0;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+/* VERIFY USER TEXT */
+body.dark-mode .verify-user {
+  color: #cbd5e1;
+}
+
+body.dark-mode .verify-user strong {
+  color: #f8fafc;
+}
+
+/* RESEND VERIFICATION BUTTON */
+body.dark-mode .signup-submit-btn {
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+}
+
+body.dark-mode .signup-submit-btn:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.28);
+}
+
+/* LOGOUT BUTTON */
+body.dark-mode .logout-btn {
+  color: #93c5fd;
+}
+
+body.dark-mode .logout-btn:hover {
+  color: #bfdbfe;
+  text-decoration: underline;
+}
+
+/* OPTIONAL ERROR STYLING */
+body.dark-mode .error-messages {
+  background-color: rgba(127, 29, 29, 0.25);
+  border: 1px solid #b91c1c;
+  color: #fecaca;
+}
+
+/* FOOTER STYLES STAY DARK */
+body.dark-mode .main-footer,
+body.dark-mode .site-footer {
+  background-color: #020617;
+  color: #f8fafc;
+}
+
+body.dark-mode .footer-col p,
+body.dark-mode .footer-col a,
+body.dark-mode .contact-list li,
+body.dark-mode .footer-bottom {
+  color: #cbd5e1;
+}
+
+body.dark-mode .footer-col a:hover {
+  color: #ffffff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  body.dark-mode .signup-card,
+  body.dark-mode .verify-card {
+    margin-inline: 16px;
+  }
+}
