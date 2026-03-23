@@ -1403,3 +1403,86 @@ body.dark-mode .logout-btn:hover {
 body.dark-mode .toggle-icon {
   color: #cbd5e1;
 }
+
+/* FORGOT PASSWORD PAGE DARK MODE */
+
+/* This CSS Styling has a very similar structure to RESET PASSWORD PAGE DARK MODE */
+body.dark-mode {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+/* MAIN RESET CARD */
+body.dark-mode .section-form {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+/* TITLE */
+body.dark-mode .section-form h2 {
+  color: #60a5fa;
+}
+
+/* SUB TEXT */
+body.dark-mode .welcome-sub-message {
+  color: #94a3b8;
+}
+
+/* LABELS */
+body.dark-mode .section-form label {
+  color: #f8fafc;
+}
+
+/* INPUT FIELD */
+body.dark-mode .section-form input {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+/* PLACEHOLDER TEXT */
+body.dark-mode .section-form input::placeholder {
+  color: #94a3b8;
+}
+
+/* INPUT FOCUS STATE */
+body.dark-mode .section-form input:focus {
+  border-color: #60a5fa;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(96,165,250,0.15);
+}
+
+/* SUBMIT BUTTON */
+body.dark-mode .section-form button {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .section-form button:hover {
+  background-color: #1d4ed8;
+}
+
+/* RETURN TO LOGIN LINK */
+body.dark-mode .signup-message a {
+  color: #93c5fd;
+}
+
+body.dark-mode .signup-message a:hover {
+  color: #bfdbfe;
+}
+
+/* ERROR MESSAGES */
+body.dark-mode .error-messages {
+  background-color: rgba(127,29,29,0.25);
+  border: 1px solid #b91c1c;
+  color: #fecaca;
+}
+
+/* SUCCESS MESSAGES */
+body.dark-mode .success-messages,
+body.dark-mode .success-message {
+  background-color: rgba(21,128,61,0.25);
+  border: 1px solid #15803d;
+  color: #bbf7d0;
+}
