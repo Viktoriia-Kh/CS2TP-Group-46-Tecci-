@@ -14,7 +14,9 @@ class LoginController extends Controller
     {
         // adding a check to see if the user is logged in already
         if(Auth::check()) {
-            return redirect()->intended('/account');
+            return Auth::user()->is_admin
+            ? redirect()->route('admin.dashboard')
+            : redirect('account');
         }
 
         // assigning variables
