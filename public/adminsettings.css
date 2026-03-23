@@ -18,7 +18,76 @@ body {
     align-items: center;
     padding-bottom: 60px;
 }
+.main-header {
+    background-color: #03315b;
+    border-bottom: 15px solid #085296;
+    width: 100%;
+}
 
+
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 78px; /* header height */
+}
+
+.admin-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* smaller gap between logo and menu */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    text-decoration: none;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.logo img {
+    height: 34x;   /* make logo image smaller */
+    width: auto;
+    display: block;
+}
+
+.logo-text {
+    font-size: 24px;   /* smaller TECCI text */
+    font-weight: 700;
+    line-height: 1;
+}
+
+.menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 20px; /* smaller burger icon */
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-top-icons {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: auto;
+}
+
+.admin-top-icons a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
 .account-header {
     text-align: center;
     margin-top: 5px;

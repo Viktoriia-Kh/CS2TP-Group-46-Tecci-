@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{{asset('admin-common-style.css')}}">
   <link rel="stylesheet" href="{{asset('adminsettings.css')}}">
   <link rel="stylesheet" href="{{asset('common-style.css')}}">
+  <link rel="stylesheet" href="{{asset('admincommonstyle.css')}}">
 
   <!--Google Font-->
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
@@ -19,35 +20,28 @@
 
 <body>
 
-<!--HEADER (REUSABLE)-->
 <header class="main-header">
-    <div class="container nav-container">
+  <div class="container nav-container">
 
-      <!--Logo-->
+    <div class="admin-header-controls">
       <a href="/" class="logo">
-        <!--Using this will make the Logo clickable and takes the user to the Home Page-->
         <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
-        <span class="logo-text">TECCI</span> <!--span is an inline element used for short text-->
+        <span class="logo-text">TECCI</span>
       </a>
 
-      <!--ADMIN HEADER CONTROLS (MENU + SEARCH)-->
-      <div class="admin-header-controls">
-        <a href="/admin-dashboard" class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
-          <!--id="menuBtn" connects to the JS, for it to work-->
-          <i class="fa-solid fa-bars"></i> <!--fa-bars is a Menu Icon linked from Font Awesome-->
-        </a>
-
-
-
-      <!--Icons-->
-      <div class="nav-icons admin-top-icons">
-        <a href="/admin-dashboard" aria-label="Notifications"><i class="fa-regular fa-bell"></i></a>  <!--fa-bell is a Bell Icon linked from Font Awesome-->
-        <a href="/admin/contacts" aria-label="Messages"><i class="fa-regular fa-envelope"></i></a>  <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
-        <a href="/" aria-label="Home"><i class="fa-solid fa-house"></i></a>  <!--fa-house is a House Icon linked from Font Awesome-->
-      </div>
-
+      <a href="/admin-dashboard" class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
+        <i class="fa-solid fa-bars"></i>
+      </a>
     </div>
-  </header>
+
+    <div class="admin-top-icons">
+      <a href="#"><i class="fa-regular fa-bell"></i></a>
+      <a href="#"><i class="fa-regular fa-envelope"></i></a>
+      <a href="/"><i class="fa-solid fa-house"></i></a>
+    </div>
+
+  </div>
+</header>
 
   <!--MAIN ADMIN LAYOUT-->
   <main class="admin-shell"> <!--This is a layout wrapper which contains the Sidebar and Content Area-->
