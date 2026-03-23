@@ -7,6 +7,7 @@
     {{-- Load specific styles for Basket --}}
     <link rel="stylesheet" href="common-style.css" />
     <link rel="stylesheet" href="{{ asset('css/basket.css') }}">
+    <link rel="stylesheet" href="{{ asset('Dark-Mode.css') }}"> 
 
     <div style="margin-top: 120px; min-height: 80vh; padding-bottom: 50px;">
 

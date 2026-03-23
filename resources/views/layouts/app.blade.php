@@ -85,6 +85,12 @@
                 
                 {{-- Login: Uses route('login') --}}
                 <a href="{{ route('login') }}"><i class="fa-regular fa-user"></i></a>
+                
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                </div>
+
             </div>
 
         </div>
@@ -139,6 +145,8 @@
             <p>&copy; {{ date('Y') }} Tecci. All rights reserved.</p>
         </div>
     </footer>
+
+<script src="{{ asset('Dark-Mode-Theme.js') }}"></script>
 
 </body>
 </html>
