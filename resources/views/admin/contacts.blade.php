@@ -51,12 +51,37 @@
       <a class="sidebar-logout" href="/">LOGOUT</a>
 
       <nav class="admin-nav">
-        <a href="/admin-dashboard">Dashboard</a>
-        <a href="/admin-orders">Orders</a>
-        <a href="/admin-inventory">Inventory</a>
-        <a href="/admin/customers">Customers</a>
-        <a class="active" href="{{ route('admin.contacts') }}">Contact Messages</a>
-        <a href="/admin-settings">Admin Settings</a>
+        <a  href="/admin-dashboard">
+          <span class="nav-text">Dashboard</span> <!--span will allow the text in the Sidebar to be hidden when it collapses, which is done in CSS-->
+          <span class="nav-ico"><i class="fa-solid fa-chart-line"></i></span> <!--fa-chart-line is a Chart Icon linked from Font Awesome-->
+        </a>
+
+        <a href="/admin-orders">
+          <span class="nav-text">Orders</span>
+          <span class="nav-ico"><i class="fa-solid fa-receipt"></i></span> <!--fa-receipt is a Receipt Icon linked from Font Awesome-->
+        </a>
+
+
+
+        <a  href="admin-inventory">
+          <span class="nav-text">Inventory</span>
+          <span class="nav-ico"><i class="fa-solid fa-warehouse"></i></span> <!--fa-warehouse is a Warehouse Icon linked from Font Awesome-->
+        </a>
+
+        <a href="/admin/customers">
+          <span class="nav-text">Customers</span>
+          <span class="nav-ico"><i class="fa-solid fa-user-group"></i></span> <!--fa-user-group is a User (Group) Icon linked from Font Awesome-->
+        </a>
+
+        <a class="active" href="{{ route('admin.contacts') }}">
+          <span class="nav-text">Contact Messages</span>
+          <span class="nav-ico"><i class="fa-solid fa-envelope"></i></span>
+        </a>
+
+        <a href="/admin-settings">
+          <span class="nav-text">Admin Settings</span>
+          <span class="nav-ico"><i class="fa-solid fa-gear"></i></span> <!--fa-gear is a Gear/Settings Icon linked from Font Awesome-->
+        </a>
       </nav>
     </aside>
 
@@ -175,14 +200,53 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-col">
-        <h3>TECCI</h3>
-        <p>Smart Tech at Smart Prices.</p>
-      </div>
+ <footer class="site-footer">
+    <div class="container footer-inner"> <!--footer-inner used to create multi-column layout-->
+        <div class="footer-col">
+            <h3>TECCI</h3>
+            <p>
+                Smart Tech at Smart Prices.<br>
+                Tecci makes premium devices accessible to<br>
+                students and customers across the UK.
+            </p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about-us">About</a></li>
+                <li><a href="/contact-us">Contact</a></li>
+                <li><a href="/displayproduct">Products</a></li>
+                <li><a href="/basket">Basket</a></li>
+                <li><a href="/account">My Account</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact Info</h4>
+            <ul class="contact-list">
+                <li>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <!--fa-loocation-dot is a Location Icon linked from Font Awesome-->
+                    <span>0121 555 0198</span><br><br>
+                </li>
+                <li>
+                    <i class="fa-solid fa-phone"></i> <!--fa-phone is a Phone Icon linked from Font Awesome-->
+                    <span>Tecci_Queries@net.com</span><br><br>
+                </li>
+                <li>
+                    <i class="fa-regular fa-envelope"></i>
+                    <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
+                    <span>Birmingham, B4 7ET</span><br><br>
+                </li>
+            </ul>
+        </div>
+    </div> <!--Closes <div class="container footer-inner"-->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Tecci. All rights reserved.</p>
     </div>
-  </footer>
+</footer>
 
 </body>
 </html>
