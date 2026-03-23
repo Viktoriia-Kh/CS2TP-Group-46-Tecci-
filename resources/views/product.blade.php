@@ -110,7 +110,16 @@
                     </span>
                 </div>
                 
+                @php
+                // Check the correct database fields matching your displayproduct page
+                $isInStock = ($product->stock_status === 'in_stock' || $product->stock_quantity > 0);
+               @endphp
+        
+               @if(!$isInStock)
+                <button disabled class="add-to-basket-btn" style="background-color: #999; cursor: not-allowed;" title="Out of Stock">Out of Stock</button>
+               @else
                 <button onclick="addToBasketAjax({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ asset($product->image_url ?? 'images/laptop.jpg') }}', 1)" class="add-to-basket-btn">Add to Basket</button>
+               @endif
             </div>
         </div>
 
@@ -348,7 +357,7 @@
           </li>
           <li>
             <i class="fa-solid fa-phone"></i> <!--fa-phone is a Phone Icon linked from Font Awesome-->
-            <span>Tecci_Queries@net.com</span><br><br>
+            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82d6e7e1e1ebddd3f7e7f0ebe7f1c2ece7f6ace1edef">[email&#160;protected]</a></span><br><br>
           </li>
           <li>
             <i class="fa-regular fa-envelope"></i> <!--fa-envelope is an Envelope Icon linked from Font Awesome-->
@@ -380,7 +389,12 @@ function addToBasketAjax(productId, productName, productImage, quantity = 1) {
     body: JSON.stringify({ quantity: quantity })
   })
   .then(res => {
-      if (!res.ok) throw new Error('Network response was not ok');
+      if (!res.ok) {
+          // Handle stock validation errors
+          return res.json().then(errData => {
+              throw new Error(errData.message || 'Failed to add to basket');
+          });
+      }
       return res.json();
   })
   .then(data => {
@@ -407,7 +421,11 @@ function addToBasketAjax(productId, productName, productImage, quantity = 1) {
       }
     }
   })
-  .catch(err => console.error("Add to basket error:", err));
+  .catch(err => {
+      console.error("Add to basket error:", err);
+      // Show error toast for stock issues
+      showToast("Cannot Add to Basket", err.message, "error");
+  });
 }
 
 // Toast Notification Function 
@@ -445,7 +463,7 @@ function showToast(title, message, type = 'success', imageUrl = null) {
     toast.classList.remove('show');
     setTimeout(() => toast.remove(), 400); 
   }, 3000);
-}і
+}
 
 // Tech Specs / Reviews
 function openTab(evt, tabName) {
