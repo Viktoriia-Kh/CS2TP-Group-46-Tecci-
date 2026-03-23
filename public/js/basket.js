@@ -105,7 +105,23 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('.ajax-qty-btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
-            // Pass the name from the data attribute
+
+            // Prevent increasing beyond max stock
+            if (this.dataset.action === 'increase') {
+                const productId = this.dataset.id;
+                const maxStock = parseInt(this.dataset.maxStock, 10) || 0;
+                
+                // Read the current quantity from the input box
+                const currentInput = document.getElementById(`qty-input-${productId}`);
+                const currentQty = parseInt(currentInput.value, 10) || 0;
+
+                if (currentQty >= maxStock) {
+                    showToast("Stock Limit Reached", `We only have ${maxStock} left in stock for ${this.dataset.name}!`, "error", this.dataset.image);
+                    return; // Stop the function here so the AJAX request is never sent
+                }
+            }
+
+            // Pass the data attributes to the AJAX function
             sendBasketUpdate(this.dataset.id, this.dataset.action, this.dataset.name, this.dataset.image);
         });
     });

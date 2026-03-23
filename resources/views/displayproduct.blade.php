@@ -338,6 +338,20 @@
 
 // Product data with categories and details
 const allProducts = @json($productsForJs);
+
+// Fetch current basket quantities into a JavaScript dictionary mapped by Product ID
+@php
+    $basketMap = [];
+    $basketItems = Auth::check() 
+        ? \App\Models\BasketItem::where('user_id', Auth::id())->get()
+        : \App\Models\BasketItem::where('session_id', session()->getId())->get();
+        
+    foreach($basketItems as $item) {
+        $basketMap[$item->product_id] = $item->quantity;
+    }
+@endphp
+let currentBasketMap = @json($basketMap);
+
 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -483,21 +497,40 @@ function filterAndDisplayProducts(searchTerm) {
   renderProducts(sorted);
 }
 
-// AJAX Add to Basket (NO PAGE REFRESH!)
-function addToBasketAjax(productId, productName, productImage, quantity = 1) {
+// AJAX Add to Basket (without page refresh)
+function addToBasketAjax(productId, productName, productImage, quantityString) {
+  const quantity = parseInt(quantityString, 10) || 1;
+
+  // 1. Find the product's max stock from the allProducts array
+  const productData = allProducts.find(p => p.id == productId);
+  const maxStock = productData ? (parseInt(productData.stock_quantity, 10) || 0) : 0;
+
+  // 2. See how many are already in the basket (default to 0 if not found)
+  let inBasket = parseInt(currentBasketMap[productId], 10) || 0;
+
+  // 3. Prevent adding more than what is in stock
+  if ((inBasket + quantity) > maxStock) {
+      if (inBasket > 0) {
+          showToast("Stock Limit Reached", `We only have ${maxStock} in stock. You already have ${inBasket} in your basket!`, "error");
+      } else {
+          showToast("Stock Limit Reached", `We only have ${maxStock} left in stock!`, "error");
+      }
+      return; // Stop the function completely!
+  }
+
+  // 4. If stock is okay, proceed with the fetch request
   fetch(`/add-to-basket/${productId}?quantity=${quantity}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'X-CSRF-TOKEN': csrfToken,
-      'X-Requested-With': 'XMLHttpRequest', // CRITICAL: Tells Laravel this is AJAX
-      'Accept': 'application/json'          // CRITICAL: Tells Laravel we want JSON back
+      'X-Requested-With': 'XMLHttpRequest', 
+      'Accept': 'application/json'          
     },
     body: JSON.stringify({ quantity: quantity })
   })
   .then(res => {
       if (!res.ok) {
-          // Handle stock validation errors from server
           return res.json().then(errData => {
               throw new Error(errData.message || 'Failed to add to basket');
           });
@@ -506,6 +539,9 @@ function addToBasketAjax(productId, productName, productImage, quantity = 1) {
   })
   .then(data => {
     if (data.success) {
+      // CRITICAL: Update our JS dictionary so they can't spam click!
+      currentBasketMap[productId] = inBasket + quantity;
+
       // Show toast with product image
       const message = quantity > 1
         ? `${quantity} × ${productName} added to your basket!`
@@ -517,9 +553,8 @@ function addToBasketAjax(productId, productName, productImage, quantity = 1) {
       const cartBadge = document.querySelector('.cart-badge');
       if (cartBadge) {
         cartBadge.innerText = data.totalQty;
-        cartBadge.style.display = 'flex';
+        cartBadge.style.display = 'inline-flex'; // changed to match standard styling
       } else {
-        // Create badge if it doesn't exist
         const cartIcon = document.querySelector('.cart-icon-wrapper');
         if (cartIcon) {
           const badge = document.createElement('span');
@@ -532,7 +567,6 @@ function addToBasketAjax(productId, productName, productImage, quantity = 1) {
   })
   .catch(err => {
       console.error("Add to basket error:", err);
-      // Show error toast when stock validation fails
       showToast("Cannot Add to Basket", err.message, "error");
   });
 }

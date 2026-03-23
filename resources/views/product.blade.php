@@ -112,7 +112,8 @@
                 
                 @php
                 // Check the correct database fields matching your displayproduct page
-                $isInStock = ($product->stock_status === 'in_stock' || $product->stock_quantity > 0);
+                // Allow adding if in_stock OR low_stock (only block out_of_stock)
+                $isInStock = ($product->stock_status !== 'out_of_stock');
                @endphp
         
                @if(!$isInStock)
@@ -376,8 +377,37 @@
   <script>
 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
+@php
+    // Calculate exactly how many of THIS specific product the user currently has in their basket
+    $inBasket = 0;
+    if(Auth::check()) {
+        $inBasket = \App\Models\BasketItem::where('user_id', Auth::id())
+                                          ->where('product_id', $product->id)
+                                          ->sum('quantity');
+    } else {
+        $inBasket = \App\Models\BasketItem::where('session_id', session()->getId())
+                                          ->where('product_id', $product->id)
+                                          ->sum('quantity');
+    }
+@endphp
+
+// Store those values in JavaScript
+let currentBasketQty = {{ $inBasket }};
+let maxStock = {{ $product->inventory->quantity_available ?? 0 }};
+
 // AJAX Add to Basket (NO PAGE REFRESH!)
 function addToBasketAjax(productId, productName, productImage, quantity = 1) {
+  
+  // THE FIX: Check if adding this would exceed available stock
+  if ((currentBasketQty + quantity) > maxStock) {
+      if (currentBasketQty > 0) {
+          showToast("Stock Limit Reached", `We only have ${maxStock} in stock. You already have ${currentBasketQty} in your basket!`, "error");
+      } else {
+          showToast("Stock Limit Reached", `We only have ${maxStock} left in stock!`, "error");
+      }
+      return; // Stop the code here so the request is never sent
+  }
+
   fetch(`/add-to-basket/${productId}?quantity=${quantity}`, {
     method: 'POST',
     headers: {
@@ -390,7 +420,6 @@ function addToBasketAjax(productId, productName, productImage, quantity = 1) {
   })
   .then(res => {
       if (!res.ok) {
-          // Handle stock validation errors
           return res.json().then(errData => {
               throw new Error(errData.message || 'Failed to add to basket');
           });
@@ -399,6 +428,9 @@ function addToBasketAjax(productId, productName, productImage, quantity = 1) {
   })
   .then(data => {
     if (data.success) {
+      // Update our local counter so they can't just spam-click the button!
+      currentBasketQty += quantity;
+
       const message = quantity > 1 
         ? `${quantity} × ${productName} added to your basket!`
         : `${productName} added to your basket!`;
@@ -423,7 +455,6 @@ function addToBasketAjax(productId, productName, productImage, quantity = 1) {
   })
   .catch(err => {
       console.error("Add to basket error:", err);
-      // Show error toast for stock issues
       showToast("Cannot Add to Basket", err.message, "error");
   });
 }
