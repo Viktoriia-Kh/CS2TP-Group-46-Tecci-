@@ -5,12 +5,170 @@
 <meta charset="UTF-8" />
 <title>Tecci | Orders Management</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- Updated CSS File -->
 <link rel="stylesheet" href="{{ asset('admin-orders-styles.css') }}">
 <!--Google Font-->
 <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
 <!--Font Awesome for Icons-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+/* BULK ACTIONS BAR STYLES */
+.bulk-actions-bar {
+  display: none; /* Hidden by default, shown by JavaScript when items selected */
+  position: sticky;
+  top: 105px; /* Below sticky header */
+  z-index: 800;
+  background: linear-gradient(135deg, #1a4977 0%, #26639f 100%);
+  padding: 16px 24px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(38, 99, 159, 0.3);
+  align-items: center;
+  justify-content: space-between;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bulk-actions-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.bulk-actions-left i {
+  font-size: 18px;
+  color: #7fc0ff;
+}
+
+.selected-count {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.bulk-actions-right {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.bulk-action-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bulk-action-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.bulk-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bulk-action-btn i {
+  font-size: 13px;
+}
+
+.bulk-action-btn.danger {
+  background: rgba(220, 53, 69, 0.2);
+  border-color: rgba(220, 53, 69, 0.4);
+}
+
+.bulk-action-btn.danger:hover {
+  background: rgba(220, 53, 69, 0.3);
+}
+
+/* Toast Notifications */
+.bulk-toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #ffffff;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateX(400px);
+  transition: all 0.3s ease;
+}
+
+.bulk-toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.bulk-toast-success {
+  border-left: 4px solid #28a745;
+  color: #155724;
+}
+
+.bulk-toast-success i {
+  color: #28a745;
+  font-size: 20px;
+}
+
+.bulk-toast-error {
+  border-left: 4px solid #dc3545;
+  color: #721c24;
+}
+
+.bulk-toast-error i {
+  color: #dc3545;
+  font-size: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bulk-actions-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+  
+  .bulk-actions-right {
+    width: 100%;
+  }
+  
+  .bulk-action-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -124,6 +282,33 @@
         </form>
       </div>
 
+      <!-- BULK ACTIONS BAR (Hidden by default, shown when items selected) -->
+      <div id="bulk-actions-bar" class="bulk-actions-bar">
+        <div class="bulk-actions-left">
+          <i class="fa-solid fa-check-circle"></i>
+          <span class="selected-count" id="selected-count">0</span>
+          <span>order(s) selected</span>
+        </div>
+        <div class="bulk-actions-right">
+          <button type="button" class="bulk-action-btn" id="bulk-mark-shipped">
+            <i class="fa-solid fa-truck"></i>
+            Mark as Shipped
+          </button>
+          <button type="button" class="bulk-action-btn" id="bulk-mark-completed">
+            <i class="fa-solid fa-check"></i>
+            Mark as Completed
+          </button>
+          <button type="button" class="bulk-action-btn" id="bulk-print">
+            <i class="fa-solid fa-print"></i>
+            Print Invoices
+          </button>
+          <button type="button" class="bulk-action-btn danger" id="bulk-cancel">
+            <i class="fa-solid fa-ban"></i>
+            Cancel Orders
+          </button>
+        </div>
+      </div>
+
       <!-- FILTERS BAR -->
       <form action="{{ route('admin.orders.index') }}" method="GET" class="orders-filter-bar">
         <div class="orders-filter-left">
@@ -173,7 +358,9 @@
           <table class="orders-table">
             <thead>
               <tr>
-                <th class="checkbox-col"></th>
+                <th class="checkbox-col">
+                  <input type="checkbox" id="select-all-orders" aria-label="Select all orders">
+                </th>
                 <th>Order</th>
                 <th>Customer</th>
                 <th>Status</th>
@@ -186,7 +373,10 @@
               @forelse($orders as $order)
                 <tr>
                   <td class="checkbox-col">
-                    <input type="checkbox" aria-label="Select order {{ $order->id }}">
+                    <input type="checkbox" 
+                           class="order-checkbox" 
+                           value="{{ $order->id }}" 
+                           aria-label="Select order {{ $order->id }}">
                   </td>
                   
                   <td>
@@ -298,8 +488,145 @@
   </div>
 </footer>
 
-<!--JavaScript for Sidebar Toggle-->
+<!--JavaScript-->
 <script src="{{ asset('TP2_Admin_Dashboard.js') }}"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Grab all our elements
+    const selectAllCheckbox = document.getElementById('select-all-orders');
+    const orderCheckboxes = document.querySelectorAll('.order-checkbox');
+    const bulkActionsBar = document.getElementById('bulk-actions-bar');
+    const selectedCountSpan = document.getElementById('selected-count');
+    
+    let selectedOrders = [];
+
+    // 2. UI Updater Function
+    function updateUI() {
+        if (selectedOrders.length > 0) {
+            if (bulkActionsBar) bulkActionsBar.style.display = 'flex';
+            if (selectedCountSpan) selectedCountSpan.textContent = selectedOrders.length;
+        } else {
+            if (bulkActionsBar) bulkActionsBar.style.display = 'none';
+        }
+
+        // Sync the Select All checkbox visually
+        if (selectAllCheckbox) {
+            selectAllCheckbox.checked = (selectedOrders.length > 0 && selectedOrders.length === orderCheckboxes.length);
+        }
+    }
+
+    // 3. Select All Logic
+    if (selectAllCheckbox) {
+        selectAllCheckbox.addEventListener('change', function(e) {
+            const isChecked = e.target.checked;
+            selectedOrders = []; // Reset array
+            
+            orderCheckboxes.forEach(function(checkbox) {
+                checkbox.checked = isChecked; // Visually check/uncheck
+                if (isChecked) {
+                    selectedOrders.push(checkbox.value); // Add to array
+                }
+            });
+            updateUI();
+        });
+    }
+
+    // 4. Individual Checkbox Logic
+    orderCheckboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function(e) {
+            const orderId = e.target.value;
+            if (e.target.checked) {
+                if (!selectedOrders.includes(orderId)) selectedOrders.push(orderId);
+            } else {
+                selectedOrders = selectedOrders.filter(id => id !== orderId);
+            }
+            updateUI();
+        });
+    });
+
+    // 5. Toast Notification Function
+    function showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `bulk-toast bulk-toast-${type}`;
+        toast.innerHTML = `
+            <i class="fa-solid fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${message}</span>
+        `;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.classList.add('show'), 10);
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    // 6. Action Button Logic
+    function setupBulkBtn(id, actionStr) {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        
+        btn.addEventListener('click', function(e) {
+            if (selectedOrders.length === 0) return;
+            
+            // Confirm with user
+            let actionName = actionStr.charAt(0).toUpperCase() + actionStr.slice(1);
+            if (!confirm(`Are you sure you want to mark ${selectedOrders.length} order(s) as ${actionName}?`)) {
+                return;
+            }
+
+            // Show loading state safely
+            const currentBtn = e.currentTarget;
+            const originalText = currentBtn.innerHTML;
+            currentBtn.disabled = true;
+            currentBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+
+            fetch('/admin-orders/bulk-action', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({
+                    action: actionStr,
+                    order_ids: selectedOrders
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('Success! ' + data.message, 'success');
+                    setTimeout(() => window.location.reload(), 1500);
+                } else {
+                    showToast('Error: ' + data.message, 'error');
+                    currentBtn.disabled = false;
+                    currentBtn.innerHTML = originalText;
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                showToast('A network error occurred.', 'error');
+                currentBtn.disabled = false;
+                currentBtn.innerHTML = originalText;
+            });
+        });
+    }
+
+    // Hook up the buttons
+    setupBulkBtn('bulk-mark-shipped', 'shipped');
+    setupBulkBtn('bulk-mark-completed', 'completed');
+    setupBulkBtn('bulk-cancel', 'cancelled');
+
+    // Print Button logic
+    const printBtn = document.getElementById('bulk-print');
+    if (printBtn) {
+        printBtn.addEventListener('click', function() {
+            if (selectedOrders.length === 0) return;
+            window.open('/admin-orders/print?ids=' + selectedOrders.join(','), '_blank', 'width=800,height=600');
+        });
+    }
+});
+</script>
 
 </body>
 </html>

@@ -9,6 +9,7 @@ use App\Models\Inventory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AdminOrderController extends Controller
 {
@@ -107,6 +108,125 @@ class AdminOrderController extends Controller
 
         return redirect()->back()->with('success', 'Order #' . $order->id . ' has been updated to ' . $newStatus . '. Stock levels have been updated automatically.');
     }
+
+    /**
+ * Handle bulk actions on multiple orders
+ */
+public function bulkAction(Request $request)
+{
+    try {
+        $validated = $request->validate([
+            'action' => 'required|in:shipped,completed,cancelled,print',
+            'order_ids' => 'required|array|min:1',
+            'order_ids.*' => 'exists:orders,id'
+        ]);
+
+        $action = $validated['action'];
+        $orderIds = $validated['order_ids'];
+        $successCount = 0;
+        $errors = [];
+
+        DB::beginTransaction();
+
+        foreach ($orderIds as $orderId) {
+            try {
+                $order = Order::findOrFail($orderId);
+                
+                switch ($action) {
+                    case 'shipped':
+                        // Only update if order is Pending or Approved
+                        if (in_array($order->status, ['Pending', 'Approved'])) {
+                            $order->status = 'Shipped';
+                            $order->save();
+                            $successCount++;
+                        } else {
+                            $errors[] = "Order #{$orderId} cannot be shipped (current status: {$order->status})";
+                        }
+                        break;
+
+                    case 'completed':
+                        // Only update if order is Shipped or Approved
+                        if (in_array($order->status, ['Shipped', 'Approved'])) {
+                            $order->status = 'Completed';
+                            $order->save();
+                            $successCount++;
+                        } else {
+                            $errors[] = "Order #{$orderId} cannot be completed (current status: {$order->status})";
+                        }
+                        break;
+
+                    case 'cancelled':
+                        // Can cancel from any non-completed status
+                        if ($order->status !== 'Completed' && $order->status !== 'Cancelled') {
+                            // Restore stock if order was approved/shipped
+                            if (in_array($order->status, ['Approved', 'Shipped'])) {
+                                foreach ($order->items as $item) {
+                                    if ($item->product && $item->product->inventory) {
+                                        $item->product->inventory->increment('quantity_available', $item->quantity);
+                                    }
+                                }
+                            }
+                            
+                            $order->status = 'Cancelled';
+                            $order->save();
+                            $successCount++;
+                        } else {
+                            $errors[] = "Order #{$orderId} cannot be cancelled (current status: {$order->status})";
+                        }
+                        break;
+                }
+            } catch (\Exception $e) {
+                $errors[] = "Error processing order #{$orderId}: " . $e->getMessage();
+                Log::error("Bulk action error for order {$orderId}", ['error' => $e->getMessage()]);
+            }
+        }
+
+        DB::commit();
+
+        // Build response message
+        $message = "{$successCount} order(s) updated successfully";
+        if (!empty($errors)) {
+            $message .= ". " . count($errors) . " order(s) had issues: " . implode('; ', array_slice($errors, 0, 3));
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => $message,
+            'updated_count' => $successCount,
+            'errors' => $errors
+        ]);
+
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        DB::rollBack();
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid request data',
+            'errors' => $e->errors()
+        ], 422);
+    } catch (\Exception $e) {
+        DB::rollBack();
+        Log::error('Bulk action failed', ['error' => $e->getMessage()]);
+        
+        return response()->json([
+            'success' => false,
+            'message' => 'An error occurred while processing bulk action: ' . $e->getMessage()
+        ], 500);
+    }
+}
+
+/**
+ * Generate print view for selected orders
+ */
+public function printOrders(Request $request)
+{
+    $orderIds = explode(',', $request->input('ids', ''));
+    $orders = Order::with(['items.product', 'user'])
+                   ->whereIn('id', $orderIds)
+                   ->get();
+
+    return view('admin-print-orders', compact('orders'));
+}
+
 
     /* View single order details */
     public function show($id)

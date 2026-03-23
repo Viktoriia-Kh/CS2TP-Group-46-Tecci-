@@ -262,6 +262,14 @@ Route::get('/admin/orders/{id}', [AdminOrderController::class, 'show'])->name('a
 Route::post('/admin/returns/{id}/approve', [App\Http\Controllers\AdminDashboardController::class, 'approveReturn'])
     ->name('admin.returns.approve');
 
+// Admin Orders: Bulk actions route
+Route::post('admin-orders/bulk-action', [AdminOrderController::class, 'bulkAction'])
+    ->name('admin.orders.bulkAction');
+
+// Admin Orders: Print orders route
+Route::get('admin-orders/print', [AdminOrderController::class, 'printOrders'])
+    ->name('admin.orders.print');
+
 // Reviews routee
 Route::post('/product/{product}/review', [ReviewController::class, 'store'])
     ->name('reviews.store');
