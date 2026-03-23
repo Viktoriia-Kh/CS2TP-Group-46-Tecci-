@@ -87,7 +87,7 @@
   <!--HERO SECTION-->
     <section class="hero">
     <div class="hero-slider"> <!--This wraps the fuller slider system-->
-        <div class="hero-track" id="heroTrack"> /<!--This is the moving strip that contains all slides-->
+        <div class="hero-track" id="heroTrack"> <!--This is the moving strip that contains all slides-->
 
             <!--SLIDE 1-->
             <div class="hero-slide"> <!--This creates one single slide inside the slider-->
