@@ -945,3 +945,68 @@ body.dark-mode .success-messages {
   color: #bbf7d0;
   border: 1px solid #15803d;
 }
+
+/* MY ORDERS PAGE DARK MODE= */
+
+body.dark-mode .orders-container {
+  background-color: transparent;
+}
+
+body.dark-mode .orders-container h2 {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .order-card {
+  background: #111827;
+  border-left: 6px solid #3b82f6;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .order-info h3 {
+  color: #f8fafc;
+}
+
+body.dark-mode .order-meta {
+  color: #94a3b8;
+}
+
+body.dark-mode .order-total {
+  color: #e2e8f0;
+}
+
+body.dark-mode .order-status {
+  color: #ffffff;
+}
+
+/* STATUS COLOURS IN DARK MODE */
+body.dark-mode .status-placed {
+  background: rgba(37, 99, 235, 0.18);
+  color: #93c5fd;
+}
+
+body.dark-mode .status-delivered {
+  background: rgba(22, 163, 74, 0.18);
+  color: #86efac;
+}
+
+body.dark-mode .btn-view {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .btn-view:hover {
+  background: #1d4ed8;
+}
+
+/* EMPTY STATE */
+body.dark-mode .orders-container i.fa-box-open {
+  color: #475569 !important;
+}
+
+body.dark-mode .orders-container p[style*="color: #666"] {
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .orders-container a[style*="color: #005baf"] {
+  color: #93c5fd !important;
+}
