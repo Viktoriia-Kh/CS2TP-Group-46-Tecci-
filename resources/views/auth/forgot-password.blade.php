@@ -5,6 +5,7 @@
         <title>Forgot Password</title>
         <link rel="stylesheet" href="loginstyle.css"> <!-- created a link to the stylesheet-->
         <link rel="stylesheet" href="common-style.css">
+        <link rel="stylesheet" href="{{ asset('Dark-Mode.css')}}">
         <!-- Google font -->
         <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
         <!-- Font awesome for icons-->
@@ -133,3 +134,5 @@
 </footer>
 </body>
 </html>
+
+<script src="Dark-Mode-Theme.js"></script>

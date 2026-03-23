@@ -128,4 +128,4 @@
     </div>
 </footer>
 
-<script src="Dark-Mode-Theme.js"></script>
+<script src="{{ asset('Dark-Mode-Theme.js') }}"></script>
