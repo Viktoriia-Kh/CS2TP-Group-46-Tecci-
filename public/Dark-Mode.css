@@ -475,3 +475,376 @@ body.dark-mode .signup-footer-text a {
 body.dark-mode .signup-footer-text a:hover {
   text-decoration: underline;
 }
+
+/* INDIVIDUAL PRODUCT PAGE DARK MODE */
+
+body.dark-mode .product-detail {
+  background-color: #0f172a; /* This changes the background of the product detail section to a very dark blue/navy colour */
+}
+
+body.dark-mode .product-header-row {
+  border-bottom: 2px solid #3b82f6; /* This gives the row at the top of the product section that contains the product name, price, and add-to-basket button, a brighter blue colour and makes the section divider more visible */
+}
+
+body.dark-mode .product-name {
+  color: #f8fafc; /* This makes the text colour lighter on a darker background */
+}
+
+body.dark-mode .price-value {
+  color: #93c5fd;
+}
+
+body.dark-mode .add-to-basket-btn { /* This keeps the button bright and clearly clickale/visible in Dark Mode */
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .add-to-basket-btn:hover {
+  background-color: #1d4ed8; /* When the users place the mouse over the button, the hover becomes a dark blue */
+}
+
+/* MAIN PRODUCT CONTENT */
+body.dark-mode .product-container {
+  background-color: #111827; /* This changes the inner-content panel to a dark grey-blue */
+}
+
+body.dark-mode .thumb {
+  border: 1px solid #334155;
+  background-color: #0f172a;
+}
+
+body.dark-mode .thumb:hover {
+  border-color: #60a5fa; /* This means that when the user hovers over a thumbnail, the border changes colour */
+}
+
+body.dark-mode .product-image-box {
+  background-color: #0f172a;
+  border: 4px solid #2563eb;
+}
+
+body.dark-mode .product-rating-box {
+  background-color: #1d4ed8;
+  color: #f8fafc;
+}
+
+body.dark-mode .right-column { /* This gives the product detail column on the right, a darker background and a stronger blue border */
+  background-color: #1e293b;
+  border: 4px solid #2563eb;
+}
+
+body.dark-mode .product-description-box h3 {
+  color: #f8fafc;
+}
+
+body.dark-mode .product-description-box p {
+  color: #cbd5e1;
+}
+
+/* Stock badges can stay similar, but polished for dark mode */
+body.dark-mode .badge-in-stock {
+  background-color: #15803d;
+  color: #ffffff;
+}
+
+body.dark-mode .badge-low-stock {
+  background-color: #ca8a04;
+  color: #ffffff;
+}
+
+body.dark-mode .badge-out-of-stock {
+  background-color: #b91c1c;
+  color: #ffffff;
+}
+
+/* TABS SECTION */
+body.dark-mode .tabs-nav {
+  border-bottom: 2px solid #334155; /* This gives a visible divider line between the tabs and the tab content area in dark mode */
+}
+
+body.dark-mode .tab-btn {
+  color: #94a3b8;
+}
+
+body.dark-mode .tab-btn:hover {
+  color: #f8fafc; /* This means that when hovering over a tab, the text becomes brighter */
+}
+
+body.dark-mode .tab-btn.active {
+  color: #f8fafc;
+  border-bottom: 3px solid #60a5fa;
+}
+
+body.dark-mode .tab-title {
+  color: #f8fafc;
+}
+
+/* SPECS TABLE */
+body.dark-mode .specs-table tr {
+  border-bottom: 1px solid #334155; /* This adds a subtle divider line between rows in dark mode */
+}
+
+body.dark-mode .specs-table tr:nth-child(even) {
+  background-color: #111827;
+}
+
+body.dark-mode .specs-table th.spec-name {
+  color: #cbd5e1; /* Thsi gives the label text a softer light colour so it contrasts with the value text */
+}
+
+body.dark-mode .specs-table td.spec-value {
+  color: #f8fafc; /* This makes values slightly brighter so they stand out from the labels */
+}
+
+body.dark-mode .no-data-msg {
+  color: #94a3b8;
+}
+
+/* REVIEWS AREA */
+body.dark-mode .review-item {
+  background-color: #1e293b; /* This gives each review its own slightly lighter dark background so it stands apart from the surrounding page */
+}
+
+body.dark-mode .reviewer-name {
+  color: #f8fafc;
+}
+
+body.dark-mode .review-date {
+  color: #94a3b8;
+}
+
+body.dark-mode .review-stars { /* This is for the displayed star rating in reviews */
+  color: #facc15;
+}
+
+body.dark-mode .review-text {
+  color: #cbd5e1;
+}
+
+body.dark-mode .review-divider {
+  border-top: 1px solid #334155;
+}
+
+/* REVIEW FORM */
+body.dark-mode .form-title {
+  color: #f8fafc; /* This keeps important headings bright and readable */
+}
+
+body.dark-mode .review-form label {
+  color: #e2e8f0;
+}
+
+body.dark-mode .star-icon {
+  stroke: #64748b; /* This gives the star outline a grey-blue colour */
+  fill: none; /* This makes the inside of the star transparent */
+}
+
+body.dark-mode .star-rating label:hover ~ label .star-icon,
+body.dark-mode .star-rating label:hover .star-icon,
+body.dark-mode .star-rating input:checked ~ label .star-icon {
+  fill: #facc15;
+  stroke: #facc15;
+}
+
+body.dark-mode .form-control { /* This gives form fields a dark background, light text, and visible border so they match the dark mode design */
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .form-control::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-mode .form-control:focus {
+  border-color: #60a5fa; /* This makes the active field stand out, helping usability and accessibility */
+}
+
+body.dark-mode .add-media-btn {
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+body.dark-mode .add-media-btn:hover {
+  background-color: #334155;
+}
+
+body.dark-mode .file-chosen-text {
+  color: #94a3b8;
+}
+
+body.dark-mode .submit-review-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .submit-review-btn:hover {
+  background-color: #1d4ed8; /* This provides interaction feedback and matches the hover behaviour of other buttons */
+}
+
+/* MAIN PRODUCTS PAGE DARK MODE */
+
+body.dark-mode .products-page {
+  background-color: #0f172a; /* This gives the full Products Page a dark navy background */
+}
+
+body.dark-mode .filters-sidebar {
+  background-color: #111827; /* This gives the sidebar a darker background */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .filter-section::-webkit-scrollbar-track { /* This tracks the custom scrollbar inside .filter-section */
+  background: rgba(255, 255, 255, 0.08); /* This makes the scrollbar track a very faint transparent white */
+}
+
+body.dark-mode .filter-section::-webkit-scrollbar-thumb {
+  background: #334155; /* This makes the scrollbar thumb a muted grey-blue so it is visible on dark mode without being too bright */
+}
+
+body.dark-mode .filter-section h3,
+body.dark-mode .filter-group h4 {
+  color: #f8fafc;
+}
+
+body.dark-mode .search-input {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155; /* This gives the input a visible border */
+}
+
+body.dark-mode .search-input::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-mode .search-box i {
+  color: #93c5fd;
+}
+
+body.dark-mode .filter-group {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2); /* This adds a divider line below each group, seperating filter sections visually */
+}
+
+body.dark-mode .price-slider {
+  background: linear-gradient(to right, #3b82f6, #3b82f6); /* This keeps the slider track visible and consistent with the Tecci blue theme */
+}
+
+body.dark-mode .price-range-display {
+  color: #cbd5e1;
+}
+
+body.dark-mode .checkbox-label {
+  color: #e2e8f0; /* This  keeps the slider track visible and consistent with the Tecci blue theme */
+}
+
+body.dark-mode .checkbox-label input[type="checkbox"] {
+  accent-color: #3b82f6;
+}
+
+body.dark-mode .confirm-filter-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .confirm-filter-btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* CATEGORY TABS */
+body.dark-mode .category-tabs {
+  background-color: #111827; /* This makes the tabs container match the rest of the dark interface */
+}
+
+body.dark-mode .tab-button {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+
+body.dark-mode .tab-button:hover { /* This makes the tabs container match the rest of the dark interface */
+  background-color: #334155;
+  color: #ffffff;
+}
+
+body.dark-mode .tab-button.active {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .sort-dropdown { /* This gives the dropdown a dark background, light text, visible border so it matches dark mode and remains readable */
+  background-color: #1e293b;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .sort-dropdown:hover {
+  background-color: #334155; /* This makes the dropdown slightly lighter when hovered */
+}
+
+/* FEATURED PRODUCTS AREA */
+body.dark-mode .featured-items-section {
+  background-color: #111827; /* This makes the products display area dark and distinct from the page background */
+}
+
+body.dark-mode .product-card-item {
+  background-color: #1e293b;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .product-card-item:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+body.dark-mode .product-image-placeholder {
+  background: #0f172a; /* This keeps the image area dark so it matches the rest of the card */
+}
+
+body.dark-mode .product-item-info {
+  color: #f8fafc; /* This sets a bright default text colour for product information */
+}
+
+body.dark-mode .product-item-name,
+body.dark-mode .product-item-info h4 {
+  color: #f8fafc;
+}
+
+body.dark-mode .product-short-desc {
+  color: #cbd5e1;
+}
+
+body.dark-mode .product-item-price {
+  color: #93c5fd;
+}
+
+/* QUANTITY + BUTTON */
+body.dark-mode .qty-input {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+body.dark-mode .qty-input:focus {
+  border-color: #60a5fa;
+}
+
+body.dark-mode .add-to-cart-quick {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body.dark-mode .add-to-cart-quick:hover {
+  background-color: #1d4ed8;
+}
+
+/* STOCK BADGES */
+body.dark-mode .badge-in-stock {
+  background-color: #15803d;
+  color: #ffffff;
+}
+
+body.dark-mode .badge-low-stock {
+  background-color: #ca8a04;
+  color: #ffffff;
+}
+
+body.dark-mode .badge-out-of-stock {
+  background-color: #b91c1c;
+  color: #ffffff;
+}

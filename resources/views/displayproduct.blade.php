@@ -318,12 +318,12 @@
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>src="TP2_Tecci-Theme.js"</script>
+  
 
 </body>
 
 </html>
-
+<script src="Dark-Mode-Theme.js"></script>
 <script>
 
 // Product data with categories and details

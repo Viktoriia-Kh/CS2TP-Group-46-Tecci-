@@ -7,9 +7,10 @@
   <!--Links to HTML/CSS Files-->
   <link rel="stylesheet" href="{{ asset('common-style.css') }}" />
   <link rel="stylesheet" href="{{ asset('product-style.css') }}">
-  <link rel="stylesheet" href="{{ asset('Dark-Mode.css')}}">
+ 
   {{-- Basket Badge CSS --}}
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('Dark-Mode.css') }}"/>
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
@@ -371,8 +372,9 @@
       <p>&copy; 2025 Tecci. All rights reserved.</p>
     </div>
   </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
-
+  
+</body>
+<script src="{{ asset('Dark-Mode-Theme.js') }}"></script>
   <script>
 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
@@ -529,4 +531,11 @@ document.addEventListener('DOMContentLoaded', function() {
       badgeClass = 'badge-in-stock';
   } 
 
-  const sto
+  const stockBox = document.getElementById('dynamic-stock-box');
+  if (stockBox) {
+      stockBox.innerHTML = `<span class="stock-badge ${badgeClass}">${badgeText}</span>`;
+  }
+});
+</script>
+
+</html>
