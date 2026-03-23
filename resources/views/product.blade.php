@@ -509,25 +509,26 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
   const product = {
       stock_status: "{{ $product->stock_status ?? 'out_of_stock' }}",
-      stock_quantity: parseInt("{{ $product->stock_quantity ?? 0 }}", 10) || 0
+      stock_quantity: parseInt("{{ $product->inventory->quantity_available ?? 0 }}", 10) || 0
   };
-
-  const isInStock = product.stock_status === 'in_stock' || product.stock_quantity > 0;
-  const isLowStock = product.stock_quantity > 0 && product.stock_quantity < 5;
 
   let badgeText;
   let badgeClass;
 
-  if (!isInStock) {
+  // Use stock_status first.
+  if (product.stock_status === 'out_of_stock') {
       badgeText = 'Out of Stock';
       badgeClass = 'badge-out-of-stock';
-  } else if (isLowStock) {
+  } else if (product.stock_status === 'low_stock') {
       badgeText = 'Low Stock';
       badgeClass = 'badge-low-stock';
-  } else {
+  } else if (product.stock_status === 'in_stock') {
       badgeText = 'In Stock';
       badgeClass = 'badge-in-stock';
-  } 
+  } else {
+      badgeText = 'Stock Unknown';
+      badgeClass = 'badge-out-of-stock';
+  }
 
   const stockBox = document.getElementById('dynamic-stock-box');
   if (stockBox) {
