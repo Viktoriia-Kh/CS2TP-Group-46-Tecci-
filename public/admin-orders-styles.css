@@ -331,6 +331,47 @@ body.sidebar-collapsed .site-footer {
   font-size: 14px;
 }
 
+/* Export to CSV Button */
+.btn-export-orders {
+  background: linear-gradient(135deg, #16a085 0%, #27ae60 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(22, 160, 133, 0.2);
+  text-decoration: none;
+}
+
+.btn-export-orders:hover {
+  background: linear-gradient(135deg, #138d75 0%, #229954 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(22, 160, 133, 0.3);
+}
+
+.btn-export-orders i {
+  font-size: 14px;
+}
+
+/* Responsive: Stack buttons on mobile */
+@media (max-width: 600px) {
+  .orders-title > div:last-child {
+    width: 100%;
+  }
+  
+  .btn-export-orders,
+  .btn-initiate-order {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
 /* Back link styling */
 .back-link {
   display: inline-flex;

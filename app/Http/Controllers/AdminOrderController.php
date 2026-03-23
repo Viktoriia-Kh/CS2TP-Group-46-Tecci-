@@ -227,6 +227,94 @@ public function printOrders(Request $request)
     return view('admin-print-orders', compact('orders'));
 }
 
+/**
+ * Export filtered orders to CSV
+ */
+public function export(Request $request)
+{
+    // Build query with same filters as index page
+    $query = Order::with(['items', 'user']);
+
+    // Apply same filters as the index page
+    if ($request->filled('search')) {
+        $searchTerm = $request->input('search');
+        $query->where('id', 'like', "%{$searchTerm}%")
+              ->orWhereHas('user', function($q) use ($searchTerm) {
+                  $q->where('name', 'like', "%{$searchTerm}%");
+              });
+    }
+
+    if ($request->filled('status_filter')) {
+        $query->where('status', $request->input('status_filter'));
+    }
+
+    if ($request->filled('price_filter')) {
+        $range = explode('-', $request->input('price_filter'));
+        if (count($range) == 2) {
+            $query->whereBetween('total_price', [(float)$range[0], (float)$range[1]]);
+        } elseif ($range[0] == '1000+') {
+            $query->where('total_price', '>=', 1000);
+        }
+    }
+
+    // Apply sorting
+    if ($request->has('sort')) {
+        if ($request->sort == 'price_asc') {
+            $query->orderBy('total_price', 'asc');
+        } elseif ($request->sort == 'date_desc') {
+            $query->orderBy('created_at', 'desc');
+        } elseif ($request->sort == 'date_asc') {
+            $query->orderBy('created_at', 'asc');
+        } elseif ($request->sort == 'price_desc') {
+            $query->orderBy('total_price', 'desc');
+        }
+    } else {
+        $query->orderBy('created_at', 'desc');
+    }
+
+    // Get all orders (no pagination for export)
+    $orders = $query->get();
+
+    // Build CSV content
+    $csv = "Order ID,Customer Name,Customer Email,Status,Total Price,Order Date,Items Count,Products Included\n";
+    
+    foreach ($orders as $order) {
+        $customerName = $order->user ? $order->user->name : 'Guest';
+        $customerEmail = $order->user ? $order->user->email : 'N/A';
+        $itemsCount = $order->items->count();
+        
+        // Format the date nicely so Excel doesn't hide or break it
+        $orderDate = $order->created_at ? $order->created_at->format('d/m/Y H:i') : 'N/A';
+        
+        // Loop through the order items and compile them into a readable list (e.g. "1x Laptop, 2x Mouse")
+        $productsArray = [];
+        foreach ($order->items as $item) {
+            $productsArray[] = $item->quantity . 'x ' . $item->product_name;
+        }
+        $productsString = implode(', ', $productsArray);
+        
+        // Escape fields with quotes so any accidental commas inside names or product lists don't break the columns
+        $customerName = '"' . str_replace('"', '""', $customerName) . '"';
+        $customerEmail = '"' . str_replace('"', '""', $customerEmail) . '"';
+        $productsString = '"' . str_replace('"', '""', $productsString) . '"';
+        $orderDate = '="' . $orderDate . '"'; 
+        
+        // Add the pound sign to the price and compile the row
+        $csv .= "{$order->id},{$customerName},{$customerEmail},{$order->status},£{$order->total_price},{$orderDate},{$itemsCount},{$productsString}\n";
+    }
+
+    // Generate filename with timestamp
+    $filename = 'orders_export_' . now()->format('Y-m-d_His') . '.csv';
+
+    // Return CSV file as download
+    return response($csv)
+        ->header('Content-Type', 'text/csv')
+        ->header('Content-Disposition', "attachment; filename=\"{$filename}\"")
+        ->header('Pragma', 'no-cache')
+        ->header('Expires', '0');
+}
+
+
 
     /* View single order details */
     public function show($id)

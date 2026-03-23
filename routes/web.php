@@ -246,6 +246,10 @@ Route::middleware(['auth', 'admin'])->group(function (){
 
 Route::get('admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
+// Admin Orders: Export orders to CSV
+Route::get('admin-orders/export', [AdminOrderController::class, 'export'])
+    ->name('admin.orders.export');
+
 // Admin Orders: Create and Save a New Order
 Route::get('admin-orders-create', [AdminOrderController::class, 'create'])->name('admin.orders.create');
 Route::post('admin-orders', [AdminOrderController::class, 'store'])->name('admin.orders.store');

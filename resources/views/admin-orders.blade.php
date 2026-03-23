@@ -257,17 +257,29 @@
   <section class="admin-content">
     <div class="admin-content-inner">
 
-      <!-- PAGE TITLE WITH ACTION BUTTON -->
-      <div class="dash-title orders-title">
-        <div>
-          <p class="dash-kicker">Hello Admin</p>
-          <h1>Orders</h1>
-        </div>
-        <a href="{{ route('admin.orders.create') }}" class="btn-initiate-order">
-          <i class="fa-solid fa-plus"></i>
-          Initiate New Order
-        </a>
-      </div>
+
+      <!-- PAGE TITLE WITH ACTION BUTTONS -->
+<div class="dash-title orders-title">
+  <div>
+    <p class="dash-kicker">Hello Admin</p>
+    <h1>Orders</h1>
+  </div>
+  <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+    <!-- Export Button -->
+    <a href="{{ route('admin.orders.export', request()->query()) }}" 
+       class="btn-export-orders"
+       title="Export current filtered results to CSV">
+      <i class="fa-solid fa-download"></i>
+      Export to CSV
+    </a>
+    
+    <!-- Initiate New Order Button -->
+    <a href="{{ route('admin.orders.create') }}" class="btn-initiate-order">
+      <i class="fa-solid fa-plus"></i>
+      Initiate New Order
+    </a>
+  </div>
+</div>
 
       <!-- SEARCH BAR -->
       <div class="orders-search-row">
