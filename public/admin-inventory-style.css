@@ -192,7 +192,7 @@ ul {
 
 .sidebar-logout { /* This targets the Logout link */
   display: block; /* This makes it full width like a Button */
-  background: #7fc0ff;
+  background: #3aa0ff;
   color: #03315b;
   font-weight: 800;
   text-align: center;

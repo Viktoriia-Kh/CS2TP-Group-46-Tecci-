@@ -114,14 +114,7 @@
 <h1>Hello Admin</h1>
 </div>
 
-<!--The Search Bar has been moved under the page heading-->
-<div class="dashboard-search-row"> <!--This is a wrapper for styling purpose of the Search Bar-->
-<div class="page-search-wrap">
-<!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
-<i class="fa-solid fa-magnifying-glass"></i> <!--This creates a Magnifying Glass Icon which is just purely visual for now-->
-<input type="text" placeholder="Search" aria-label="Search (visual only)">
-</div>
-</div>
+
 
 <!--TOP GRID: CARDS + ACTIVITY-->
 <div class="dash-top-grid">
