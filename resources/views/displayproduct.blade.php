@@ -5,10 +5,10 @@
   <meta charset="UTF-8" />
   <title>Tecci | Affordable Tech for Students</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   {{-- CSRF Token for AJAX requests --}}
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  
+
   <!--Links to HTML/CSS Files-->
   <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
   <link rel="stylesheet" href="common-style.css" />
@@ -25,8 +25,8 @@
     /* Toast Container - Positioned to match basket page */
     #toast-container {
         position: fixed;
-        top: 140px; 
-        right: 30px; 
+        top: 140px;
+        right: 30px;
         z-index: 99999;
         display: flex;
         flex-direction: column;
@@ -39,7 +39,7 @@
         background: white;
         min-width: 380px; /* Increased from 320px */
         padding: 20px 25px; /* Increased padding */
-        border-radius: 12px; 
+        border-radius: 12px;
         box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18); /* Stronger shadow */
         display: flex;
         align-items: center;
@@ -47,7 +47,7 @@
         position: relative;
         overflow: hidden;
         pointer-events: auto;
-        
+
         /* Snappy bounce animation */
         transform: translateX(120%);
         opacity: 0;
@@ -90,7 +90,7 @@
         width: 60px; /* Increased from 50px */
         height: 60px; /* Increased from 50px */
         object-fit: cover;
-        border-radius: 8px; 
+        border-radius: 8px;
         flex-shrink: 0;
         border: 1px solid #e5e7eb;
     }
@@ -140,14 +140,14 @@
       <!--Icons-->
       <div class="nav-icons">
         <a href="my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
-        
+
         {{-- Basket icon with dynamic badge count from database --}}
         <a href="{{ route('basket.index') }}" class="cart-icon-wrapper">
             <i class="fa-solid fa-cart-shopping"></i>
-            
+
             @php
                 use App\Models\BasketItem;
-                
+
                 // Get total quan`tity from database
                 if (Auth::check()) {
                     // For logged-in users
@@ -157,14 +157,24 @@
                     $basketCount = BasketItem::where('session_id', session()->getId())->sum('quantity');
                 }
             @endphp
-            
+
             {{-- Only show badge if there are items --}}
             @if($basketCount > 0)
                 <span class="cart-badge">{{ $basketCount }}</span>
             @endif
         </a>
-        
-        <a href="login"><i class="fa-regular fa-user"></i></a> <!--fa-user is a User Icon linked from Font Awesome-->
+
+        @if(Auth::check())
+            {{-- If logged in, check if they are an admin --}}
+            <a href="{{ Auth::user()->is_admin ? route('admin.dashboard') : url('account') }}">
+                <i class="fa-regular fa-user"></i>
+            </a>
+        @else
+            {{-- If not logged in, just go to the login page --}}
+            <a href="{{ url('login') }}">
+                <i class="fa-regular fa-user"></i>
+            </a>
+        @endif
 
         <!--Added A Dark/Light Mode Toggle Button-->
                 <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
@@ -184,7 +194,7 @@
       <aside class="filters-sidebar">
         <div class="filter-section">
           <h3>Filter</h3>
-          
+
           <!-- Search Bar -->
           <div class="search-box">
             <input type="text" placeholder="Search products..." class="search-input">
@@ -247,7 +257,7 @@
           <button class="tab-button" data-category="phones">Smartphones</button>
           <button class="tab-button" data-category="tablets">Tablets</button>
           <button class="tab-button" data-category="accessories">Accessories</button>
-          
+
           <!-- Sort Dropdown -->
           <div class="sort-container">
             <select class="sort-dropdown">
@@ -269,7 +279,7 @@
     </div>
   </main>
 
- 
+
   <!--FOOTER-->
   <footer class="site-footer">
     <div class="container footer-inner"> <!--footer-inner used to create multi-column layout-->
@@ -318,7 +328,7 @@
     </div>
   </footer>
 
-  
+
 
 </body>
 
@@ -336,7 +346,7 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
 
   if (categoryFromUrl && ["all", "desktops", "laptops", "phones", "tablets", "accessories"].includes(categoryFromUrl)) {
       currentCategory = categoryFromUrl;
-      
+
       // Update the active state of the buttons on page load
       document.addEventListener("DOMContentLoaded", () => {
           document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
@@ -389,7 +399,7 @@ document.querySelector(".confirm-filter-btn").addEventListener("click", () => {
   displayProducts();
 });
 
-// Applies star review functionalltiy 
+// Applies star review functionalltiy
   function renderStars(rating) {
     const rounded = Math.round(rating || 0);
     return '★'.repeat(rounded) + '☆'.repeat(5 - rounded);
@@ -436,7 +446,7 @@ function filterProducts(searchTerm = "") {
   // Sort products
   function sortProducts(products) {
     const sorted = [...products];
-    
+
     switch(currentSortOption) {
       case "price-low":
         sorted.sort((a, b) => a.price - b.price);
@@ -455,7 +465,7 @@ function filterProducts(searchTerm = "") {
         // Keep original order
         break;
     }
-    
+
     return sorted;
   }
 
@@ -497,12 +507,12 @@ function addToBasketAjax(productId, productName, productImage, quantity = 1) {
   .then(data => {
     if (data.success) {
       // Show toast with product image
-      const message = quantity > 1 
+      const message = quantity > 1
         ? `${quantity} × ${productName} added to your basket!`
         : `${productName} added to your basket!`;
-      
+
       showToast("Added to Basket", message, "success", productImage);
-      
+
       // Update header badge
       const cartBadge = document.querySelector('.cart-badge');
       if (cartBadge) {
@@ -557,7 +567,7 @@ const isInStock = product.stock_status === 'in_stock' || product.stock_quantity 
     } else {
         badgeText = 'In Stock';
         badgeClass = 'badge-in-stock';
-    } 
+    }
 
     // Escaping quotes for JS function call
     const safeProductName = product.name.replace(/'/g, "\\'");
@@ -573,11 +583,11 @@ const isInStock = product.stock_status === 'in_stock' || product.stock_quantity 
           ${renderStars(product.avg_rating)} (${product.review_count || 0})
           <p class="product-short-desc">${product.description || 'Smart tech device perfect for students.'}</p>
           <p class="product-item-price">£${product.price.toFixed(2)}</p>
-          
+
           <div class="cart-action-group" onclick="event.stopPropagation();">
             <input type="number" id="qty-${product.id}" class="qty-input" value="1" min="1" max="99" title="Quantity" ${!isInStock ? 'disabled' : ''}>
-            <button type="button" class="add-to-cart-quick" 
-                    onclick="addToBasketAjax(${product.id}, '${safeProductName}', '${product.image_url}', document.getElementById('qty-${product.id}').value)" 
+            <button type="button" class="add-to-cart-quick"
+                    onclick="addToBasketAjax(${product.id}, '${safeProductName}', '${product.image_url}', document.getElementById('qty-${product.id}').value)"
                     ${!isInStock ? 'disabled style="background-color: #999; cursor: not-allowed;"' : ''}>
               ${!isInStock ? 'Out of Stock' : 'Add to Basket'}
             </button>
@@ -600,13 +610,13 @@ function showToast(title, message, type = 'success', imageUrl = null) {
   }
 
   const toast = document.createElement('div');
-  toast.className = 'toast-notification'; 
-  
+  toast.className = 'toast-notification';
+
   const color = type === 'success' ? '#2ecc71' : '#e74c3c';
   const icon = type === 'success' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-exclamation-circle"></i>';
-  
+
   const imageHtml = imageUrl ? `<img src="${imageUrl}" class="toast-product-image" alt="Product">` : `<div class="toast-icon" style="color: ${color}">${icon}</div>`;
-  
+
   toast.style.borderLeft = `5px solid ${color}`;
   toast.innerHTML = `
     ${imageHtml}
@@ -616,18 +626,18 @@ function showToast(title, message, type = 'success', imageUrl = null) {
     </div>
     <div class="toast-progress" style="background-color: ${color}"></div>
   `;
-  
+
   container.appendChild(toast);
-  
+
    // Slide In using the new class (matches the basket's cubic-bezier bounce)
   setTimeout(() => {
     toast.classList.add('show');
   }, 10);
-  
+
   // Slide Out & Delete
   setTimeout(() => {
     toast.classList.remove('show');
-    setTimeout(() => toast.remove(), 400); 
+    setTimeout(() => toast.remove(), 400);
   }, 3000);
 }
 

@@ -7,6 +7,7 @@
   <!--Links to HTML/CSS Files-->
   <link rel="stylesheet" href="{{ asset('common-style.css') }}" />
   <link rel="stylesheet" href="{{ asset('myordersstyle.css') }}" />
+  <link rel="stylesheet" href="{{ asset('Dark-Mode.css')}}">
   <!--Google Font-->
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
   <!--Font Awesome for Icons-->
@@ -26,6 +27,14 @@
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="{{ route('products.index') }}">Products</a></li>
+                     <!--Added A Dark/Light Mode Toggle Button-->
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                    <!--fa-moon is a Moon Icon linked from Font Awesome-->
+                    <!--class="theme-toggle" lets us style the button using CSS-->
+                    <!--id="themeToggle" allows us to use this id in JavaScript-->
+                </button>
+
                 </ul>
             </nav>
         </div>
@@ -115,3 +124,5 @@
 </body>
 
 </html>
+
+<script src="Dark-Mode-Theme.js"></script>

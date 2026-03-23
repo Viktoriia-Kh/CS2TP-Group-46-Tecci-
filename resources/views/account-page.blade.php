@@ -35,11 +35,16 @@
                     <a href="/my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
                     <a href="{{ url('basket')}}"><i class="fa-solid fa-cart-shopping"></i></a>
 
-                    {{-- if the user is logged in, the profile icon should direct them to account page--}}
-                    @if(Auth::check())
-                        <a href="{{ url('account')}}"><i class="fa-regular fa-user"></i></a>
+                     @if(Auth::check())
+                        {{-- If logged in, check if they are an admin --}}
+                            <a href="{{ Auth::user()->is_admin ? route('admin.dashboard') : url('account') }}">
+                                <i class="fa-regular fa-user"></i>
+                            </a>
                     @else
-                        <a href="{{ url('login')}}"><i class="fa-regular fa-user"></i></a>
+                        {{-- If not logged in, just go to the login page --}}
+                            <a href="{{ url('login') }}">
+                                <i class="fa-regular fa-user"></i>
+                            </a>
                     @endif
 
                     <!--Added A Dark/Light Mode Toggle Button-->

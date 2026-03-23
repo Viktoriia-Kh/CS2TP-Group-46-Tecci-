@@ -6,13 +6,13 @@
   <title>Tecci | Admin Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Shared Admin CSS -->
- 
+
   <link rel="stylesheet" href="admin-inventory-style.css" />
   <!--Google Font-->
   <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet" />
   <!--Font Awesome for Icons-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  
+
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
@@ -33,7 +33,7 @@
       </a>
 
       <!--ADMIN HEADER CONTROLS (MENU + SEARCH)-->
-      
+
         <a href="/admin-dashboard" class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
           <!--id="menuBtn" connects to the JS, for it to work-->
           <i class="fa-solid fa-bars"></i> <!--fa-bars is a Menu Icon linked from Font Awesome-->
@@ -66,7 +66,14 @@
         </div>
       </div>
 
-      <a class="sidebar-logout" href="/">LOGOUT</a>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+
+<a class="sidebar-logout" href="#"
+   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+   LOGOUT
+</a>
 
       <!--NAV TEXT (SIDEBAR) + ICONS ON THE RIGHT-->
       <nav class="admin-nav">
@@ -80,7 +87,7 @@
           <span class="nav-ico"><i class="fa-solid fa-receipt"></i></span> <!--fa-receipt is a Receipt Icon linked from Font Awesome-->
         </a>
 
-        
+
 
         <a class="active" href="admin-inventory">
           <span class="nav-text">Inventory</span>
@@ -103,9 +110,9 @@
         </a>
       </nav>
     </aside>
-    
+
     <!--PAGE CONTENT (THIS PART CHANGES)-->
-    
+
     <section class="admin-content">
         <div class="admin-content-inner">
             <!-- PAGE TITLE -->
@@ -114,7 +121,7 @@
                <h1>Inventory</h1>
             </div>
 
-            <!--The Search Bar has been moved under the page heading-->  
+            <!--The Search Bar has been moved under the page heading-->
             <div class="inventory-search-row"> <!--This is a wrapper for styling purpose of the Search Bar-->
               <div class="page-search-wrap">
                 <!--fa-magnifying-glass is a Magnifying Glass Icon linked from Font Awesome-->
@@ -136,7 +143,7 @@
             </div>
 
             <div class="inventory-controls">
-            
+
             <div class="filter-group">
                 <label for="filterStatus">Status:</label>
                 <select id="filterStatus" class="filter-input" onchange="applyFilters()">
@@ -166,13 +173,13 @@
 
         </div>
 
-        
+
         <!-- PAGE CONTENT GOES HERE -->
         <div class="featured-items-section">
             <div class="featured-grid">
             </div>
         </div>
-        
+
     </section>
 
 </main>
@@ -266,7 +273,7 @@
                     <option value="accessories">Accessories</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label for="add-price">Price (£)</label>
                 <input type="number" id="add-price" name="price" step="1" required>
@@ -294,7 +301,7 @@
             </div>
             <div class="media-upload-group">
                 <input type="file" id="product-image" name="image" accept="image/*" class="hidden-file-input">
-                
+
                 <!-- now matches pathj -->
                 <label for="product-image" class="add-media-btn">
                     <svg class="camera-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -302,7 +309,7 @@
                     </svg>
                     <span class="btn-text">Add picture</span>
                 </label>
-                
+
                 <div id="file-chosen-text" class="file-chosen-text">No file chosen</div>
                 </div>
             <div class="modal-actions">
@@ -323,7 +330,7 @@
                 students and customers across the UK.
             </p>
         </div>
-        
+
         <div class="footer-col">
             <h4>Quick Links</h4>
             <ul>
@@ -335,7 +342,7 @@
                 <li><a href="/account">My Account</a></li>
             </ul>
         </div>
-        
+
         <div class="footer-col">
             <h4>Contact Info</h4>
             <ul class="contact-list">
@@ -370,16 +377,16 @@
     document.querySelectorAll(".tab-button").forEach(button => {
         button.addEventListener("click", (e) => {
             document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
-            
+
             e.target.classList.add("active");
 
             activeCategory = e.target.dataset.category;
-            
-            
+
+
             applyFilters();
         });
     });
-    
+
     // Filters
     function applyFilters() {
         // Getting data
@@ -425,13 +432,13 @@
         document.getElementById('priceMax').value = '';
         document.getElementById('stockMin').value = '';
         document.getElementById('stockMax').value = '';
-        
+
         renderAllProducts(allProducts);
     }
 
     function renderAllProducts(products) {
         const grid = document.querySelector(".featured-grid");
-        
+
         grid.innerHTML = "";
 
         if (products.length === 0) {
@@ -508,7 +515,7 @@
         document.getElementById('editProductModal').style.display = 'none';
     }
 
-    // ADD PRODUCT LOGIC 
+    // ADD PRODUCT LOGIC
     function openAddModal() {
         document.getElementById('addProductForm').reset();
         document.getElementById('addProductModal').style.display = 'flex';
@@ -531,7 +538,7 @@
         const specNames = Array.from(document.querySelectorAll('input[name="spec_names[]"]')).map(input => input.value);
         const specValues = Array.from(document.querySelectorAll('input[name="spec_values[]"]')).map(input => input.value);
 
-        // File input 
+        // File input
         const fileInput = document.getElementById('product-image');
 
         // Send image + data together
@@ -633,7 +640,7 @@
     function addSpecRow() {
         const container = document.getElementById('specs-container');
         const row = document.createElement('div');
-        row.className = 'spec-row'; 
+        row.className = 'spec-row';
         row.innerHTML = `
             <input type="text" name="spec_names[]" placeholder="Spec name">
             <input type="text" name="spec_values[]" placeholder="Value">

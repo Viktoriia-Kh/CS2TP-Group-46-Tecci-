@@ -68,11 +68,14 @@
         </div>
       </div>
 
-      {{-- logout button--}}
-            <form action="{{ route('logout')}}" method="POST">
-                @csrf
-                <button type="submit" class="sidebar-logout">LOGOUT</button>
-            </form>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+
+<a class="sidebar-logout" href="#"
+   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+   LOGOUT
+</a>
 
       <!--NAV TEXT (SIDEBAR) + ICONS ON THE RIGHT-->
       <nav class="admin-nav">
