@@ -29,13 +29,13 @@
         <img src="https://i.ibb.co/8tB48xb/Logo.png" alt="Tecci logo">
         <span class="logo-text">TECCI</span> <!--span is an inline element used for short text-->
       </a>
-      
+
       <a href="/admin-dashboard" class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
         <!--id="menuBtn" connects to the JS, for it to work-->
         <i class="fa-solid fa-bars"></i> <!--fa-bars is a Menu Icon linked from Font Awesome-->
       </a>
     </div>
-    
+
     <div class="admin-header-spacer"></div>
 
     <!--Icons-->
@@ -63,7 +63,14 @@
       </div>
     </div>
 
-    <a class="sidebar-logout" href="/">LOGOUT</a>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+
+<a class="sidebar-logout" href="#"
+   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+   LOGOUT
+</a>
 
     <!--NAV TEXT (SIDEBAR) + ICONS ON THE RIGHT-->
     <nav class="admin-nav">
@@ -193,7 +200,7 @@
           <form action="{{ route('admin.orders.updateStatus', $order->id) }}" method="POST" style="display:inline-block; margin-right: 10px;">
             @csrf
             @method('PUT')
-            <select name="status" onchange="this.form.submit()" 
+            <select name="status" onchange="this.form.submit()"
                     style="border:none; background:transparent; font-weight:bold; cursor:pointer;"
                     class="status-pill status-{{ strtolower($order->status) }}">
               <option value="Pending" {{ $order->status == 'Pending' ? 'selected' : '' }}>PENDING</option>
@@ -237,7 +244,7 @@
               students and customers across the UK.
           </p>
       </div>
-      
+
       <div class="footer-col">
           <h4>Quick Links</h4>
           <ul>
@@ -249,7 +256,7 @@
               <li><a href="/account">My Account</a></li>
           </ul>
       </div>
-      
+
       <div class="footer-col">
           <h4>Contact Info</h4>
           <ul class="contact-list">

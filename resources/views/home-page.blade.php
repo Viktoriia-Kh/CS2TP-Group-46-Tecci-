@@ -46,24 +46,34 @@
       <!--Icons-->
       <div class="nav-icons">
         <a href="my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
-        
+
         {{-- Basket Icon with Badge --}}
         <a href="basket" class="cart-icon-wrapper">
           <i class="fa-solid fa-cart-shopping"></i>
-          
+
           @php
             use App\Models\BasketItem;
-            $basketCount = Auth::check() 
+            $basketCount = Auth::check()
               ? BasketItem::where('user_id', Auth::id())->sum('quantity')
               : BasketItem::where('session_id', session()->getId())->sum('quantity');
           @endphp
-          
+
           @if($basketCount > 0)
             <span class="cart-badge">{{ $basketCount }}</span>
           @endif
         </a>
-        
-        <a href="login"><i class="fa-regular fa-user"></i></a>
+
+        @if(Auth::check())
+            {{-- If logged in, check if they are an admin --}}
+            <a href="{{ Auth::user()->is_admin ? route('admin.dashboard') : url('account') }}">
+                <i class="fa-regular fa-user"></i>
+            </a>
+        @else
+            {{-- If not logged in, just go to the login page --}}
+            <a href="{{ url('login') }}">
+                <i class="fa-regular fa-user"></i>
+            </a>
+        @endif
         <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
             <i class="fa-solid fa-moon"></i>
             <!--fa-moon is a Moon Icon linked from Font Awesome-->
@@ -78,7 +88,7 @@
     <section class="hero">
     <div class="hero-slider"> <!--This wraps the fuller slider system-->
         <div class="hero-track" id="heroTrack"> /<!--This is the moving strip that contains all slides-->
-            
+
             <!--SLIDE 1-->
             <div class="hero-slide"> <!--This creates one single slide inside the slider-->
                 <div class="container hero-inner">
@@ -204,7 +214,7 @@
     <div class="container">
       <h2>Shop All Products Now</h2>
       <div class="card-grid category-grid">
-        
+
         <a href="/displayproduct?category=desktops" class="category-card">
           <div class="category-icon">
             <i class="fa-solid fa-desktop"></i> <!--fa-desktop is a Desktop Icon linked from Font Awesome-->

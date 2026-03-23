@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+
 
 <head>
   <meta charset="UTF-8" />
@@ -49,24 +49,34 @@
       <!--Icons-->
       <div class="nav-icons">
         <a href="my-orders"><i class="fa fa-history" aria-hidden="true"></i></a>
-        
+
         {{-- Basket Icon with Badge --}}
         <a href="basket" class="cart-icon-wrapper">
           <i class="fa-solid fa-cart-shopping"></i>
-          
+
           @php
             use App\Models\BasketItem;
-            $basketCount = Auth::check() 
+            $basketCount = Auth::check()
               ? BasketItem::where('user_id', Auth::id())->sum('quantity')
               : BasketItem::where('session_id', session()->getId())->sum('quantity');
           @endphp
-          
+
           @if($basketCount > 0)
             <span class="cart-badge">{{ $basketCount }}</span>
           @endif
         </a>
-        
-        <a href="login"><i class="fa-regular fa-user"></i></a>
+
+        @if(Auth::check())
+            {{-- If logged in, check if they are an admin --}}
+            <a href="{{ Auth::user()->is_admin ? route('admin.dashboard') : url('account') }}">
+                <i class="fa-regular fa-user"></i>
+            </a>
+        @else
+            {{-- If not logged in, just go to the login page --}}
+            <a href="{{ url('login') }}">
+                <i class="fa-regular fa-user"></i>
+            </a>
+        @endif
 
         <!--Added A Dark/Light Mode Toggle Button-->
                 <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
