@@ -1,59 +1,138 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Tecci eCommerce Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel-based online marketplace with user authentication, product catalog, basket/checkout flow, order management, reviews, support chatbot, and admin dashboard.
 
-## About Laravel
+## Project Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Tecci is a full-featured eCommerce application built with Laravel 10 and includes:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Public catalog (product listing + details)
+- Shopping basket with quantity updates, discount code, and delivery options
+- User registration/login (email/password + Google OAuth)
+- Email verification, password reset flow
+- Authenticated checkout and order history
+- Customer account management
+- Product reviews and website reviews
+- Contact form with admin reply workflow
+- Chatbot FAQ categories
+- Admin panel for inventory, orders, customers, contacts, returns, and settings
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tech Tools
 
-## Learning Laravel
+- PHP 8.x
+- Laravel 10
+- Blade templates
+- MySQL (or compatible DB)
+- Bootstrap + custom CSS (public assets)
+- Laravel Auth + middleware for protected/admin routes
+- Socialite (Google login)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Important files & folders
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- `app/Models` - Eloquent models (Product, Order, User, BasketItem, etc.)
+- `app/Http/Controllers` - controllers (Basket, Checkout, Admin, Chatbot, etc.)
+- `routes/web.php` - application routes
+- `resources/views` - Blade views for frontend and admin pages
+- `public/` - publicly served assets (CSS, JS, images)
 
-## Laravel Sponsors
+## Setup and Installation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. Clone repository
 
-### Premium Partners
+```bash
+git clone https://github.com/<your-org>/CS2TP-Group-46-Tecci-.git
+cd CS2TP-Group-46-Tecci-
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. Install PHP dependencies
+
+```bash
+composer install
+```
+
+3. Copy `.env` file
+
+```bash
+copy .env.example .env
+```
+
+4. Generate app key
+
+```bash
+php artisan key:generate
+```
+
+5. Configure `.env` DB settings
+
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=tecci_db
+DB_USERNAME=root
+DB_PASSWORD=secret
+```
+
+6. Migrate and seed
+
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+7. Serve locally
+
+```bash
+php artisan serve
+```
+
+Open http://127.0.0.1:8000
+
+## Authentication and Admin
+
+- `GET /login`, `GET /signup`, `POST /logout`
+- OAuth: `GET /auth/google`, callback route
+- Email verification routes under `/email/verify`
+
+Admin routes require `auth` + `admin` middleware, configurable in `app/Http/Middleware`.
+
+## Key User Flows
+
+- Home: `/`
+- Product listing: `/displayproduct`
+- Product detail: `/product/{id}`
+- Basket: `/basket` + add/remove/decrease
+- Checkout: `/checkout`
+- My orders: `/my-orders`
+- Contact: `/contact-us`
+- Reviews: `/products/{productId}/reviews`
+
+## Admin Flows
+
+- Dashboard: `/admin-dashboard`
+- Orders: `/admin-orders` (create/update/status/export)
+- Inventory: `/admin-inventory`
+- Customers: `/admin/customers`
+- Contacts: `/admin/contacts`
+- Returns: `/admin/returns/{id}`
+- Admin Settings: `/admin-settings`
+
+## Development Notes
+
+- Chatbot endpoints:
+  - `/chatbot/categories`
+  - `/chatbot/categories/{category}/faqs`
+  - `/chatbot/faqs/{faq}`
+
+- Basket AJAX update: `/basket/update-ajax`
+- Apply discount: `/apply-discount`
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Fork project
+2. Create branch: `feature/your-feature`
+3. Commit changes
+4. Push and open PR
 
-## Code of Conduct
+Please follow existing coding style and test behavior for new features.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
